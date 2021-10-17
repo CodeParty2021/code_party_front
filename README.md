@@ -73,8 +73,8 @@ http://localhost:3000にアクセスするとReactのページが表示される
 最後にHappy hacking!が出てきたらOK
 ```
 
-## その他、メモ
-# nodist関連でなんかエラー出た時
+# その他、メモ
+## nodist関連でなんかエラー出た時
 - PATH not updated, original length x > 1024が出た時
  - 環境変数にC:\Program Files (x86)\Nodist\binを追加しましょう．
 - cb.apply is not a functionが出た時
@@ -82,7 +82,7 @@ http://localhost:3000にアクセスするとReactのページが表示される
 - そのほか
  - 頑張って調べて！
 
-# その他、nodistの参考
+## その他、nodistの参考
 https://qiita.com/satoyan419/items/56e0b5f35912b9374305
 
 以下、ReactのデフォルトREADME

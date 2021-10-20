@@ -1,6 +1,6 @@
-import hoge from './hoge';
+import hoge from "./hoge";
 
-test('test test', () => {
+test("test test", () => {
   expect(hoge()).toBe(true);
 });
 

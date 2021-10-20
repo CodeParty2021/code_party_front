@@ -1,4 +1,4 @@
-function hoge(){
+function hoge() {
   return true;
 }
 

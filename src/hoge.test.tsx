@@ -4,6 +4,6 @@ test("test test", () => {
   expect(hoge()).toBe(true);
 });
 
-test('failed test', () => {
+test("failed test", () => {
   expect(hoge()).toBe(false);
 });

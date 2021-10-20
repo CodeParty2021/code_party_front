@@ -1,7 +1,5 @@
 function hoge() {
-  
-  
-  return    true;
+  return true + hoge2;
 }
 
 export default hoge;

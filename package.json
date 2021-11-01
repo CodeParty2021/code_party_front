@@ -22,8 +22,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --check `src/**/*.{jsx,js,tsx,ts,css,scss,md,json}`",
-    "lint": "eslint 'src/**/*.{jsx,js,tsx,ts}'",
-    "lint:fix": "eslint --fix 'src/**/*.{jsx,js,tsx,ts}' && prettier --write .",
+    "lint": "eslint `src/**/*.{jsx,js,tsx,ts}`",
+    "lint:fix": "eslint --fix `src/**/*.{jsx,js,tsx,ts}` && prettier --write .",
     "format:fix": "prettier --write `src/**/*.{jsx,js,tsx,ts,css,scss,md,json}`",
     "typecheck": "yarn tsc --noEmit `src/*.{ts,tsx}`"
   },
@@ -55,5 +55,5 @@
     "jest-svg-transformer": "^1.0.0",
     "prettier": "^2.4.1",
     "ts-jest": "26.5.0"
-  }
+  },
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { Auth } from "./pages/Auth/Auth";
 import { Top } from "./pages/Top/Top";
 type Props = {};
@@ -8,12 +8,12 @@ type Props = {};
 export const App: React.FC<Props> = () => {
   return (
     <div>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Top />} />
-          <Route path="/Auth" element={<Auth />} />
+          <Route path="/auth" element={<Auth />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 };

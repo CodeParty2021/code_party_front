@@ -1,35 +1,48 @@
-# Node.jsのバージョン管理ツールの導入
-## Windowsユーザの場合
-### 事前準備
-node.jsを既にインストールしている場合は一度アンインストールしてください。
+# Node.js のバージョン管理ツールの導入
 
-### nodistの導入
+## Windows ユーザの場合
+
+### 事前準備
+
+node.js を既にインストールしている場合は一度アンインストールしてください。
+
+### nodist の導入
+
 https://github.com/nullivex/nodist/releasesからNodistSetup-vx.x.x.exeをダウンロード  
-（今回はv0.9.1をダウンロードしました）  
+（今回は v0.9.1 をダウンロードしました）
 
 ### いろいろインストール
-- Node.jsのインストール
+
+- Node.js のインストール
+
 ```
 > nodist + 16.11.0
 > nodist 16.11.0
 ```
-- npmのバージョン合わせ
+
+- npm のバージョン合わせ
+
 ```
 > nodist npm match
 ```
-- yarnのインストール  
+
+- yarn のインストール
+
 ```
 npm install -g yarn
 ```
-- gitのインストール  
-https://git-scm.com/ここからダウンロードしてインストール  
 
-## Macユーザの場合
-nodenvなるものをインストールするらしい。  
-ちげくんのScrapBoxを参考にインストールしてください。
+- git のインストール  
+  https://git-scm.com/ここからダウンロードしてインストール
+
+## Mac ユーザの場合
+
+nodenv なるものをインストールするらしい。  
+ちげくんの ScrapBox を参考にインストールしてください。
 https://scrapbox.io/chige12memo/Mac_book_%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89
 
 # 確認
+
 ```
 > node -v
 v16.11.0
@@ -48,25 +61,31 @@ npm WARN deprecated tar@2.2.2: This version of tar is no longer supported, and w
 ```
 
 # ダウンロード
+
 このリポジトリをクローン
+
 ```
 git clone https://github.com/CodeParty2021/code_party_front.git
 ```
 
 # パッケージのインストール
+
 このプロジェクトをクローンした後、プロジェクトルートディレクトリで以下を実行
+
 ```
 > yarn
 ```
 
 # ローカルサーバの起動
+
 ```
 > cd code_party_front
 code_party_front > yarn start
 http://localhost:3000にアクセスするとReactのページが表示される
 ```
 
-# Reactプロジェクト作成で実行したコマンド
+# React プロジェクト作成で実行したコマンド
+
 ```
 > npx create-react-app code_party_front --template typescript
 色々出てくる
@@ -74,18 +93,22 @@ http://localhost:3000にアクセスするとReactのページが表示される
 ```
 
 # その他、メモ
-## nodist関連でなんかエラー出た時
-- PATH not updated, original length x > 1024が出た時
- - 環境変数にC:\Program Files (x86)\Nodist\binを追加しましょう．
-- cb.apply is not a functionが出た時
- - nodist npm matchを実行しましょう。
-- そのほか
- - 頑張って調べて！
 
-## その他、nodistの参考
+## nodist 関連でなんかエラー出た時
+
+- PATH not updated, original length x > 1024 が出た時
+- 環境変数に C:\Program Files (x86)\Nodist\bin を追加しましょう．
+- cb.apply is not a function が出た時
+- nodist npm match を実行しましょう。
+- そのほか
+- 頑張って調べて！
+
+## その他、nodist の参考
+
 https://qiita.com/satoyan419/items/56e0b5f35912b9374305
 
-以下、ReactのデフォルトREADME
+以下、React のデフォルト README
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,12 +1,30 @@
+import { SignInScreen } from "components/SigninScreen/SignInScreen";
 import React from "react";
-import { firebaseConfig } from "../../config";
+import { useDispatch, useSelector } from "react-redux";
+
+import { increment, decrement } from "services/auth/auth";
+
+import { RootState } from "store";
 type Prop = {};
 
 export const Auth: React.FC<Prop> = () => {
-  console.log(firebaseConfig);
+  //サインインサインアウトで発火するメソッド
+
+  const dispatch = useDispatch();
+  // state の取得
+  const counter = useSelector((state: RootState) => state.counter.count);
+
   return (
     <div>
-      <h1>Auth</h1>
+      <div>
+        <h1>Auth</h1>
+        <h2>{counter}</h2>
+        <button onClick={() => dispatch(increment())} />
+        <button onClick={() => dispatch(decrement())} />
+      </div>
+      <div>
+        <SignInScreen></SignInScreen>
+      </div>
     </div>
   );
 };

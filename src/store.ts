@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "services/auth/auth";
+import authReducer from "services/auth/auth";
 
 export type RootState = {
-  counter: { count: number };
+  auth: { user: any };
 };
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    auth: authReducer,
   },
 });

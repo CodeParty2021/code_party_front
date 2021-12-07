@@ -1,19 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // createSlice() で actions と reducers を一気に生成
-const counterSlice = createSlice({
-  name: "counter", //識別用の名前
-  initialState: { count: 0 },
+const authSlice = createSlice({
+  name: "users", //識別用の名前
+  initialState: { user: undefined },
   reducers: {
-    increment: (state) => {
-      state.count += 1;
-    },
-    decrement: (state) => {
-      state.count -= 1;
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
   },
 });
 
-export const { increment, decrement } = counterSlice.actions;
+export const { setUser } = authSlice.actions;
 
-export default counterSlice.reducer;
+export default authSlice.reducer;

@@ -7,13 +7,17 @@ export type User = {
   photoUrl?: string;
 };
 
+export type UserState = {
+  user: User | null;
+};
+
 // createSlice() で actions と reducers を一気に生成
 const userSlice = createSlice({
   name: "users", //識別用の名前
-  initialState: null as User | null,
+  initialState: { user: null } as UserState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
-      state = action.payload;
+      state.user = action.payload;
       console.log(state);
     },
   },

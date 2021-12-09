@@ -44,6 +44,8 @@ export const SignInScreen: React.FC<Prop> = () => {
               axios
                 .get("http://localhost:3001/signin?id_token=" + idToken)
                 .then(() => {
+                  console.log("hello");
+                  console.log(user);
                   dispatch(
                     setUser({
                       idToken: idToken,

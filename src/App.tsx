@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 import { HashRouter, Route, Routes, Link } from "react-router-dom";
-import { User } from "services/user/user";
 import { RootState } from "store";
 
 import { Auth } from "./pages/Auth/Auth";
@@ -15,8 +14,9 @@ type Props = {};
 export const currentUser = React.createContext(undefined);
 
 export const App: React.FC<Props> = () => {
-  const user: User | null = useSelector((state: RootState) => state.user);
-  console.log(user);
+  const user = useSelector((state: RootState) => state.user.user);
+  console.log({ app: user });
+
   return (
     <div>
       <HashRouter>
@@ -33,7 +33,7 @@ export const App: React.FC<Props> = () => {
           </li>
         </ul>
         <h1>ログインユーザ</h1>
-        <div>{user != null ? user.displayName : "NULL"}</div>
+        <p>user={user?.displayName}</p>
       </HashRouter>
     </div>
   );

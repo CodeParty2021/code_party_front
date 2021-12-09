@@ -1,3 +1,4 @@
+import { SignOutButton } from "components/SignOutButton/SignOutButton";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -14,7 +15,7 @@ type Props = {};
 export const currentUser = React.createContext(undefined);
 
 export const App: React.FC<Props> = () => {
-  const user = useSelector((state: RootState) => state.user.user);
+  const { user, isLogin } = useSelector((state: RootState) => state.user);
 
   return (
     <div>
@@ -32,7 +33,8 @@ export const App: React.FC<Props> = () => {
           </li>
         </ul>
         <h1>ログインユーザ</h1>
-        <p>user={user?.displayName}</p>
+        <p>{user?.displayName}さん</p>
+        {isLogin && <SignOutButton />}
       </HashRouter>
     </div>
   );

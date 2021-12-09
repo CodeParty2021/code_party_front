@@ -20,13 +20,13 @@ const uiConfig = {
   ],
 };
 
-type Prop = {};
+type Props = {};
 type ErrorType = {
   flg: boolean;
   message: string | null;
 };
 
-export const SignInScreen: React.FC<Prop> = () => {
+export const SignInScreen: React.FC<Props> = () => {
   const [error, setError] = useState<ErrorType>({ flg: false, message: null }); // Local signed-in state.
   const dispatch = useDispatch();
   // https://scrapbox.io/frontend-akihito/Firebase_Auth_%E3%81%AEonAuthStateObserver%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6

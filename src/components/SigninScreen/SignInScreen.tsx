@@ -40,12 +40,9 @@ export const SignInScreen: React.FC<Prop> = () => {
             .getIdToken()
             .then((idToken: string) => {
               //promiseが戻り値のときはこういう書き方をする
-              console.log(idToken);
               axios
                 .get("http://localhost:3001/signin?id_token=" + idToken)
                 .then(() => {
-                  console.log("hello");
-                  console.log(user);
                   dispatch(
                     setUser({
                       idToken: idToken,
@@ -57,8 +54,8 @@ export const SignInScreen: React.FC<Prop> = () => {
                 });
             })
             .catch((error: any) => {
-              console.log(error);
               setError({ flg: true, message: "エラー" });
+              console.log(error);
             }); //jwtが返ってくる
           setError({ flg: true, message: "Done" });
         }

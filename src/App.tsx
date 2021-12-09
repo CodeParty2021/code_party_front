@@ -15,7 +15,6 @@ export const currentUser = React.createContext(undefined);
 
 export const App: React.FC<Props> = () => {
   const user = useSelector((state: RootState) => state.user.user);
-  console.log({ app: user });
 
   return (
     <div>

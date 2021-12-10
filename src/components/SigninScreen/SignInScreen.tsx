@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import { firebaseConfig } from "../../config";
-import axios from "axios";
-import { setUser } from "services/user/user";
-import { useDispatch } from "react-redux";
+import { firebaseConfig } from "config";
+import { signInAsync } from "services/user/user";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "store";
+import { useNavigate } from "react-router";
+import "firebase/compat/auth"; //これ消すとバグる謎
 
 //firebaseの初期化
 firebase.initializeApp(firebaseConfig);
@@ -27,41 +28,31 @@ type ErrorType = {
 };
 
 export const SignInScreen: React.FC<Props> = () => {
-  const [error, setError] = useState<ErrorType>({ flg: false, message: null }); // Local signed-in state.
+  const [error, setError] = useState<ErrorType>({ flg: false, message: null });
   const dispatch = useDispatch();
-  // https://scrapbox.io/frontend-akihito/Firebase_Auth_%E3%81%AEonAuthStateObserver%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
+  const isLogin = useSelector((state: RootState) => state.user.isLogin);
+  const unRegisterObserver = useSelector(
+    (state: RootState) => state.user.unRegisterObserver
+  );
+  if (isLogin) {
+    const navigate = useNavigate();
+    navigate("/");
+  }
+
+  //未ログイン
   useEffect(() => {
-    const unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged((user) => {
-        // onAuthStateChanged
-        if (user) {
-          user
-            .getIdToken()
-            .then((idToken: string) => {
-              //promiseが戻り値のときはこういう書き方をする
-              axios
-                .get("http://localhost:3001/signin?id_token=" + idToken)
-                .then(() => {
-                  dispatch(
-                    setUser({
-                      idToken: idToken,
-                      displayName: user.displayName as string,
-                      email: user.email as string,
-                      photoUrl: user.photoURL as string,
-                    })
-                  );
-                });
-            })
-            .catch((error: any) => {
-              setError({ flg: true, message: "エラー" });
-              console.log(error);
-            }); //jwtが返ってくる
-          setError({ flg: true, message: "Done" });
-        }
-      });
-    return () => unregisterAuthObserver();
-  }, []);
+    dispatch(signInAsync());
+    console.log("hello");
+    console.log(isLogin);
+
+    if (unRegisterObserver) {
+      console.log("認証成功");
+      return () => unRegisterObserver();
+    } else {
+      setError({ flg: true, message: "認証に失敗しました" });
+    }
+  }, [dispatch]);
+
   return (
     <div>
       <h1>My App</h1>

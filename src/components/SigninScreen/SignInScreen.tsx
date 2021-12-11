@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 
 const uiConfig = {
   signInFlow: "popup",
-  //signInSuccessUrl: "/",
+  signInSuccessUrl: "/",
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
@@ -40,14 +40,13 @@ export const SignInScreen: React.FC<Props> = () => {
     navigate("/");
   }
 
-  //未ログイン
   useEffect(() => {
     dispatch(signInAsync());
   }, [dispatch]);
 
+  //observer周りの処理
   useEffect(() => {
     if (unRegisterObserver) {
-      console.log("認証成功");
       return () => unRegisterObserver();
     } else {
       setError({ flg: true, message: "認証に失敗しました" });

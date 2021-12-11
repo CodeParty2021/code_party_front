@@ -42,10 +42,8 @@ export const { signIn, signOut, setUnRegisterObserver } = userSlice.actions;
 // RESTAPIの発行とgetRequestの呼び出しをする
 export const signInAsync = () => {
   return async (dispatch: any) => {
-    console.log("signInAsync");
     const unRegisterObserver = firebase.auth().onAuthStateChanged((user) => {
       // onAuthStateChanged
-      console.log("stateChanged");
       if (user) {
         user.getIdToken().then((idToken: string) => {
           // promiseが戻り値のときはこういう書き方をする
@@ -72,7 +70,6 @@ export const signInAsync = () => {
 
 export const signOutAsync = () => {
   return async (dispatch: any) => {
-    console.log("signOutAsync");
     firebase
       .auth()
       .signOut()

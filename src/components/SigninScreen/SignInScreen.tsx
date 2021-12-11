@@ -34,24 +34,25 @@ export const SignInScreen: React.FC<Props> = () => {
   const unRegisterObserver = useSelector(
     (state: RootState) => state.user.unRegisterObserver
   );
+
+  const navigate = useNavigate();
   if (isLogin) {
-    const navigate = useNavigate();
     navigate("/");
   }
 
   //未ログイン
   useEffect(() => {
     dispatch(signInAsync());
-    console.log("hello");
-    console.log(isLogin);
+  }, [dispatch]);
 
+  useEffect(() => {
     if (unRegisterObserver) {
       console.log("認証成功");
       return () => unRegisterObserver();
     } else {
       setError({ flg: true, message: "認証に失敗しました" });
     }
-  }, [dispatch]);
+  }, [unRegisterObserver]);
 
   return (
     <div>

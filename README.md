@@ -1,3 +1,29 @@
+# CodeParty フロントエンド
+
+# 環境構築
+
+1. ライブラリインストール
+
+```
+yarn
+```
+
+2. env ファイルの生成
+   .env ファイルを作成
+   中身は(こちら)[https://www.notion.so/ea4344dedbb444818cb1aad0f7b6b612?p=0590e625902c49dfbc33a76034650768]
+
+3. モックアップサーバーの起動
+
+```
+json-server -w db.json --port 3001
+```
+
+4. 起動
+
+```
+yarn start
+```
+
 # Node.js のバージョン管理ツールの導入
 
 ## Windows ユーザの場合

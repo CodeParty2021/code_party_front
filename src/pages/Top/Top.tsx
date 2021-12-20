@@ -8,8 +8,14 @@ export const Top: React.FC<Prop> = () => {
     <div>
       <h1>Top</h1>
       <ul>
-        <li> <Link to="/auth">認証</Link> </li>
-        <li> <Link to="/stage">ステージ</Link> </li>
+        <li>
+          {" "}
+          <Link to="/auth">認証</Link>{" "}
+        </li>
+        <li>
+          {" "}
+          <Link to="/stage">ステージ</Link>{" "}
+        </li>
       </ul>
     </div>
   );

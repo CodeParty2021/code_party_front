@@ -29,9 +29,7 @@ export const StageList: React.FC<Prop> = () => {
   return (
     <div>
       <h1>Stages</h1>
-      <ul>
-        {list}
-      </ul>
+      <ul>{list}</ul>
       <Link to="/">トップに戻る</Link>
     </div>
   );

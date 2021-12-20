@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { oneStageUpdateAsync } from "../../services/StageAPI/StageAPI";
@@ -13,22 +13,20 @@ export const Stage: React.FC<Prop> = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  var info : React.ReactElement;
+  var info: React.ReactElement;
 
-  if(id !== undefined){
+  if (id !== undefined) {
     var parsed = parseInt(id);
     //ステージ情報を取得
-    info = <StageDetail stage={stages.stageList[parsed]}></StageDetail>
+    info = <StageDetail stage={stages.stageList[parsed]}></StageDetail>;
 
     // ステージ情報を更新
     useEffect(() => {
       dispatch(oneStageUpdateAsync(parsed));
     }, [dispatch]);
-  }
-  else{//除外
-    info = <>
-      ステージ情報が見つかりませんでした．
-    </>
+  } else {
+    //除外
+    info = <>ステージ情報が見つかりませんでした．</>;
   }
 
   return (

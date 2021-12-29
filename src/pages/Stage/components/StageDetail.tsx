@@ -7,9 +7,10 @@ type Prop = {
 
 export const StageDetail: React.FC<Prop> = (props: Prop) => {
   if (props.stage === undefined) return <>情報が見つかりませんでした．</>;
+
   return (
     <>
-      ID:{props.stage.id}, NAME:{props.stage.name}, index:{" "}
+      ID:{props.stage.id}, NAME:{props.stage.name}, index:
       {props.stage.stage_index}, rule:{props.stage.rule}
     </>
   );

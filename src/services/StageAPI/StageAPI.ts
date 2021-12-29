@@ -35,7 +35,7 @@ export const { update, clear } = stageSlice.actions;
 export const stageUpdateAsync = () => {
   return async (dispatch: any) => {
     axios
-      .get(API_HOST + "/stageapi/stages/?format=json")
+      .get(API_HOST + "/stages/?format=json")
       .then((res) => {
         const stages: Stage[] = res.data;
         dispatch(update(stages));
@@ -47,7 +47,7 @@ export const stageUpdateAsync = () => {
 export const oneStageUpdateAsync = (id: number) => {
   return async (dispatch: any) => {
     axios
-      .get(API_HOST + "/stageapi/stages/" + id + "?format=json")
+      .get(API_HOST + "/stages/" + id + "?format=json")
       .then((res) => {
         const stage: Stage = res.data;
         dispatch(update([stage]));

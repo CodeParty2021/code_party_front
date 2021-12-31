@@ -10,11 +10,13 @@ yarn
 
 2. env ファイルの生成
 
-   .env ファイルを作成
+```
+vi .env
+```
 
-   中身は[こちら](https://www.notion.so/ea4344dedbb444818cb1aad0f7b6b612?p=0590e625902c49dfbc33a76034650768)
+中身は[こちら](https://www.notion.so/ea4344dedbb444818cb1aad0f7b6b612?p=0590e625902c49dfbc33a76034650768)をコピー(notion リンクなので未招待の人は Teru まで)
 
-3. モックアップサーバーの起動(別のターミなる推奨)
+3. モックアップサーバーの起動(別のターミナル推奨)
 
 ```bash
 $ cd mock_server

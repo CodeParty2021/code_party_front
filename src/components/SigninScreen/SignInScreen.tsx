@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
@@ -22,24 +22,21 @@ const uiConfig = {
 };
 
 type Props = {};
-type ErrorType = {
-  flg: boolean;
-  message: string | null;
-};
 
 export const SignInScreen: React.FC<Props> = () => {
-  const [error, setError] = useState<ErrorType>({ flg: false, message: null });
   const dispatch = useDispatch();
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
   const unRegisterObserver = useSelector(
     (state: RootState) => state.user.unRegisterObserver
   );
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //router
+
   if (isLogin) {
     navigate("/");
   }
 
+  //サインインのAsync
   useEffect(() => {
     dispatch(signInAsync());
   }, [dispatch]);
@@ -48,16 +45,12 @@ export const SignInScreen: React.FC<Props> = () => {
   useEffect(() => {
     if (unRegisterObserver) {
       return () => unRegisterObserver();
-    } else {
-      setError({ flg: true, message: "認証に失敗しました" });
     }
   }, [unRegisterObserver]);
 
   return (
     <div>
-      <h1>My App</h1>
-      <h3>{error && error.message}</h3>
-      <p>Please sign-in:</p>
+      <h1>Sign In</h1>
 
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
     </div>

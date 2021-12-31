@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import firebase from "firebase/compat/app";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export type User = {
-  idToken: string;
+  id: string;
   displayName: string;
   email: string;
-  photoUrl?: string;
+  picture?: string;
+  jwt: string; //これをheaderに入れてAPIやり取りする。
 };
 
 export type UserState = {
@@ -15,6 +16,20 @@ export type UserState = {
   unRegisterObserver: firebase.Unsubscribe | null;
 };
 
+type UserAuthResponse = {
+  // レスポンスの型
+  userInfo: {
+    displayName: string;
+    email: string;
+    id: string;
+    picture: string;
+  };
+  isCreated: boolean;
+};
+
+const isUserAuthResponse = (data: any): data is UserAuthResponse => {
+  return data !== undefined;
+};
 // createSlice() で actions と reducers を一気に生成
 // https://scrapbox.io/frontend-akihito/Firebase_Auth_%E3%81%AEonAuthStateObserver%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6
 
@@ -30,8 +45,8 @@ const userSlice = createSlice({
       state.unRegisterObserver = action.payload;
     },
     signOut: (state) => {
-      state.user = null;
       state.isLogin = false;
+      state.user = null;
     },
   },
 });
@@ -39,26 +54,41 @@ const userSlice = createSlice({
 // 今回追加したgetRequestもエクスポートする
 export const { signIn, signOut, setUnRegisterObserver } = userSlice.actions;
 
-// RESTAPIの発行とgetRequestの呼び出しをする
+// RESTAPIの実行とgetRequestの呼び出しをする
 export const signInAsync = () => {
+  //dispatch関数を返す
   return async (dispatch: any) => {
+    // unRegisterObserverメソッドはObserverを捨てる関数
     const unRegisterObserver = firebase.auth().onAuthStateChanged((user) => {
-      // onAuthStateChanged
       if (user) {
         user.getIdToken().then((idToken: string) => {
           // promiseが戻り値のときはこういう書き方をする
           axios
-            .get("http://localhost:3001/signin?id_token=" + idToken)
-            .then((res) => {
-              console.log(res);
-              dispatch(
-                signIn({
-                  idToken: idToken as string,
-                  displayName: user.displayName as string,
-                  email: user.email as string,
-                  photoUrl: user.photoURL as string,
-                })
-              );
+            .get("http://localhost:8000/users/auth", {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: "Bearer " + idToken,
+              },
+            })
+            .then((res: AxiosResponse<UserAuthResponse>) => {
+              console.log(res.data);
+              if (isUserAuthResponse(res.data)) {
+                const userInfo = res.data.userInfo;
+                dispatch(
+                  signIn({
+                    id: userInfo.id,
+                    displayName: userInfo.displayName,
+                    email: userInfo.email as string,
+                    picture: userInfo.picture,
+                    jwt: idToken,
+                  })
+                );
+                if (res.data.isCreated) {
+                  console.log("サインイン");
+                } else {
+                  console.log("ログイン");
+                }
+              }
             })
             .catch();
         });

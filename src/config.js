@@ -14,6 +14,7 @@ const Config = () => {
         appId: process.env.REACT_APP_FIREBASE_APPID,
         measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
       },
+      uri: process.env.REACT_APP_TEST_URI,
     };
   } else if (process.env.NODE_ENV === "production") {
     // production
@@ -27,6 +28,7 @@ const Config = () => {
         appId: process.env.REACT_APP_FIREBASE_APPID,
         measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
       },
+      uri: process.env.REACT_APP_PRO_URI,
     };
   }
   // development
@@ -40,7 +42,9 @@ const Config = () => {
       appId: process.env.REACT_APP_FIREBASE_APPID,
       measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
     },
+    uri: process.env.REACT_APP_DEV_URI,
   };
 };
 
 export const firebaseConfig = Config().firebase;
+export const uri = Config().uri;

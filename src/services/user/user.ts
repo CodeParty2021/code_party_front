@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import firebase from "firebase/compat/app";
 import axios, { AxiosResponse } from "axios";
-
+import { uri } from "config";
 export type User = {
   id: string;
   displayName: string;
   email: string;
-  picture?: string;
+  picture: string;
   jwt: string; //これをheaderに入れてAPIやり取りする。
 };
 
@@ -64,7 +64,7 @@ export const signInAsync = () => {
         user.getIdToken().then((idToken: string) => {
           // promiseが戻り値のときはこういう書き方をする
           axios
-            .get("http://localhost:8000/users/auth", {
+            .get(uri + "/users/auth", {
               headers: {
                 "Content-Type": "multipart/form-data",
                 Authorization: "Bearer " + idToken,

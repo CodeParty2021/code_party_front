@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //TODO:ホストURLを環境変数で設定したい
-const API_HOST = "http://localhost:8000";
+const API_HOST = "http://localhost:3001";
 
 export type Stage = {
   id: number;

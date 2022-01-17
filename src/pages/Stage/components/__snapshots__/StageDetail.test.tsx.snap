@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StageDetail /> Render StageDetail 1`] = `
+Array [
+  <React.Fragment>
+    ID:
+    0
+    , NAME:
+    テストステージ
+    , index:
+    3
+    , rule:
+    テキストテスト
+  </React.Fragment>,
+]
+`;
+
+exports[`<StageDetail /> Render StageDetail as undefined 1`] = `
+Array [
+  <React.Fragment>
+    情報が見つかりませんでした．
+  </React.Fragment>,
+]
+`;

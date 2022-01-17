@@ -7,6 +7,9 @@ import { RootState } from "store";
 
 import { Auth } from "./pages/Auth/Auth";
 import { Top } from "./pages/Top/Top";
+import { StageList } from "./pages/Stage/StageList";
+import { Stage } from "./pages/Stage/Stage";
+//import { Stage } from "./pages/Stage/Stage";
 type Props = {};
 
 // react router はこのページが参考になるよ
@@ -23,6 +26,8 @@ export const App: React.FC<Props> = () => {
         <Routes>
           <Route path="/" element={<Top />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/stage" element={<StageList />} />
+          <Route path="/stage/:id" element={<Stage />} />
         </Routes>
         <ul>
           <li>

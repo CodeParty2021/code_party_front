@@ -13,7 +13,7 @@ export type User = {
 export type UserState = {
   user: User | null;
   isLogin: boolean;
-  unRegisterObserver: firebase.Unsubscribe | null;
+  unRegisterObserver: firebase.Unsubscribe | null; // ログイン監視用のobserverのkill用メソッド
 };
 
 type UserAuthResponse = {
@@ -27,6 +27,12 @@ type UserAuthResponse = {
   isCreated: boolean;
 };
 
+type signInAction = { type: string; payload: User };
+type setUnRegisterObserverAction = {
+  type: string;
+  payload: firebase.Unsubscribe;
+};
+
 const isUserAuthResponse = (data: any): data is UserAuthResponse => {
   return data !== undefined;
 };
@@ -37,11 +43,11 @@ const userSlice = createSlice({
   name: "users", //識別用の名前
   initialState: { user: null, isLogin: false } as UserState,
   reducers: {
-    signIn: (state, action) => {
+    signIn: (state, action: signInAction) => {
       state.isLogin = true;
       state.user = action.payload;
     },
-    setUnRegisterObserver: (state, action) => {
+    setUnRegisterObserver: (state, action: setUnRegisterObserverAction) => {
       state.unRegisterObserver = action.payload;
     },
     signOut: (state) => {
@@ -71,7 +77,6 @@ export const signInAsync = () => {
               },
             })
             .then((res: AxiosResponse<UserAuthResponse>) => {
-              console.log(res.data);
               if (isUserAuthResponse(res.data)) {
                 const userInfo = res.data.userInfo;
                 dispatch(
@@ -85,8 +90,10 @@ export const signInAsync = () => {
                 );
                 if (res.data.isCreated) {
                   console.log("サインイン");
+                  //TODO: サインイン時の処理を書く
                 } else {
                   console.log("ログイン");
+                  //TODO: ログイン時の処理を書く
                 }
               }
             })

@@ -90,9 +90,11 @@ export const signInAsync = () => {
                 );
                 if (res.data.isCreated) {
                   console.log("サインイン");
+                  console.log(idToken);
                   //TODO: サインイン時の処理を書く
                 } else {
                   console.log("ログイン");
+                  console.log(idToken);
                   //TODO: ログイン時の処理を書く
                 }
               }

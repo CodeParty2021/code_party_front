@@ -5,7 +5,8 @@ import { Auth } from "./pages/Auth/Auth";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
 import { Stage } from "./pages/Stage/Stage";
-//import { Stage } from "./pages/Stage/Stage";
+import { Start } from "./pages/Start/Start";
+import { Login } from "./pages/Login/Login";
 type Props = {};
 
 export const App: React.FC<Props> = () => {
@@ -17,6 +18,8 @@ export const App: React.FC<Props> = () => {
           <Route path="/auth" element={<Auth />} />
           <Route path="/stage" element={<StageList />} />
           <Route path="/stage/:id" element={<Stage />} />
+          <Route path="/start" element={<Start />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </HashRouter>
     </div>

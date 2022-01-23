@@ -1,4 +1,11 @@
 {
+  "signin": [
+    {
+      "display_name": "teruteru",
+      "email": "sample@sample.com",
+      "id_token": "sampletoken"
+    }
+  ],
   "stages": [
     {
       "id": 0,

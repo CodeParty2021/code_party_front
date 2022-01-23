@@ -4,7 +4,6 @@ import { Auth } from "./Auth";
 describe("<Auth />", () => {
   it("auth snapshot test", () => {
     const wrapper = shallow(<Auth />);
-
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

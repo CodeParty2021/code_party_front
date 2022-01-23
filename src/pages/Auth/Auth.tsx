@@ -1,5 +1,4 @@
 import { SignInScreen } from "components/SignInScreen/SignInScreen";
-
 import React from "react";
 
 type Prop = {};
@@ -14,7 +13,7 @@ export const Auth: React.FC<Prop> = () => {
         <h1>Auth</h1>
       </div>
       <div>
-        <SignInScreen></SignInScreen>
+        <SignInScreen />
       </div>
     </div>
   );

@@ -75,14 +75,6 @@
     "moduleDirectories": [
       "node_modules",
       "src"
-    ],
-    "moduleNameMapper": {
-      "#loaders": "<rootDir>/src/loaders",
-      "#(.*)": [
-        "<rootDir>/src/embedded/path/$1",
-        "<rootDir>/src/$1",
-        "<rootDir>/src"
-      ]
-    }
+    ]
   }
 }

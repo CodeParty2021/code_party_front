@@ -70,5 +70,19 @@
     "json-server": "^0.17.0",
     "prettier": "^2.4.1",
     "ts-jest": "26.5.0"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "#loaders": "<rootDir>/src/loaders",
+      "#(.*)": [
+        "<rootDir>/src/embedded/path/$1",
+        "<rootDir>/src/$1",
+        "<rootDir>/src"
+      ]
+    }
   }
 }

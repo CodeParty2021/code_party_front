@@ -1,4 +1,4 @@
-import { SignInScreen } from "components/SignInScreen/SignInScreen";
+import { SignInScreen } from "../../../../components/SignInScreen/SignInScreen";
 import React from "react";
 
 type Props = {};

@@ -1,4 +1,4 @@
-import { SignInScreen } from "components/SigninScreen/SignInScreen";
+import { SignInScreen } from "components/SignInScreen/SignInScreen";
 
 import React from "react";
 

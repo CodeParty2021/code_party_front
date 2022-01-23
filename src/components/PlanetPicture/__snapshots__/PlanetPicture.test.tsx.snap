@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Auth /> PlanetPicture snapshot test 1`] = `
+Array [
+  <React.Fragment />,
+]
+`;

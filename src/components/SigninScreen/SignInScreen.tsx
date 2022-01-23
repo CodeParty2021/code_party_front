@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
+import { firebaseConfig } from "config";
 import { signInAsync } from "services/user/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
@@ -9,6 +10,8 @@ import { useNavigate } from "react-router";
 import "firebase/compat/auth"; //これ消すとバグる謎
 
 //firebaseの初期化
+firebase.initializeApp(firebaseConfig);
+
 type Props = {
   signInSuccessUrl?: string;
 };

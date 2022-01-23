@@ -1,6 +1,10 @@
+import { SignOutButton } from "components/SignOutButton/SignOutButton";
 import React from "react";
+import { useSelector } from "react-redux";
 
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes, Link } from "react-router-dom";
+import { RootState } from "store";
+
 import { Auth } from "./pages/Auth/Auth";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
@@ -9,7 +13,14 @@ import { Start } from "./pages/Start/Start";
 import { Login } from "./pages/Login/Login";
 type Props = {};
 
+// react router はこのページが参考になるよ
+// https://reffect.co.jp/react/react-router#Link
+
+export const currentUser = React.createContext(undefined);
+
 export const App: React.FC<Props> = () => {
+  const { user, isLogin } = useSelector((state: RootState) => state.user);
+
   return (
     <div>
       <HashRouter>
@@ -21,6 +32,17 @@ export const App: React.FC<Props> = () => {
           <Route path="/start" element={<Start />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <ul>
+          <li>
+            <Link to="/">Top</Link>
+          </li>
+          <li>
+            <Link to="/auth">Auth</Link>
+          </li>
+        </ul>
+        <h1>ログインユーザ</h1>
+        <p>{user?.displayName}さん</p>
+        {isLogin && <SignOutButton />}
       </HashRouter>
     </div>
   );

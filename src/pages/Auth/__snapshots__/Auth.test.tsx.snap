@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Auth /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      <h1>
+        Auth
+      </h1>
+    </div>
+    <div>
+      <SignInScreen />
+    </div>
+  </div>,
+]
+`;

@@ -19,11 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-<<<<<<< HEAD
     "baseUrl": "./src"
-=======
-    "baseUrl": "src",
->>>>>>> f29cb9bbb45540e9c7bf847e5b103585694561e1
   },
   "include": [
     "src"

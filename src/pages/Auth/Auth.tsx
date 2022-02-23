@@ -1,5 +1,4 @@
 import React from "react";
-
 import { SignInScreen } from "components/SigninScreen/SignInScreen";
 type Prop = {};
 

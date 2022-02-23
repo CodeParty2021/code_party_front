@@ -15,7 +15,7 @@ export const Top: React.FC<Prop> = () => {
         </li>
         <li>
           {" "}
-          <Link to="/stage">ステージ</Link>{" "}
+          <Link to="/stages">ステージ</Link>{" "}
         </li>
         <li>
           <Link to="/start">スタート画面</Link>

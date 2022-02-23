@@ -1,3 +1,44 @@
+# CodeParty フロントエンド
+
+# 環境構築
+
+1. ライブラリインストール
+
+```bash
+yarn
+```
+
+2. env ファイルの生成
+
+```
+vi .env
+```
+
+中身は[こちら](https://www.notion.so/ea4344dedbb444818cb1aad0f7b6b612?p=6c50632c787043b4a34d58680bf9a4fe)をコピー(notion リンクなので未招待の人は Teru まで)
+
+3. モックアップサーバーの起動(別のターミナル推奨)
+
+```bash
+$ cd mock_server
+$ json-server -w db.json --port 3001
+```
+
+4. 起動
+
+```bash
+yarn start
+```
+
+5. テスト
+
+```bash
+yarn test
+```
+
+スナップショットテストでエラーが出たときは内容を確認し問題がなければ u を押すことでスナップショットをアップデートできる。
+
+以上
+
 # Node.js のバージョン管理ツールの導入
 
 ## Windows ユーザの場合

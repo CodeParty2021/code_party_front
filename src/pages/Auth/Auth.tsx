@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SignInScreen } from "components/SignInScreen/SignInScreen";
+import { SignInScreen } from "components/SigninScreen/SignInScreen";
 type Prop = {};
 
 // firebaseの実装はこれを参考にした

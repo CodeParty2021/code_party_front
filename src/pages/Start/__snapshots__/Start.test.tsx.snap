@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Start /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      これはスタート画面です。
+    </div>
+    <PlanetPicture
+      color="yellow"
+      size={161}
+    />
+    <AnonymousLoginForm />
+    <button
+      onClick={[Function]}
+    >
+      ログインはこちら
+    </button>
+  </div>,
+]
+`;

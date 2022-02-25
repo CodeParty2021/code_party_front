@@ -1,9 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Auth } from "./Auth";
-describe("<Auth />", () => {
+import { FirebaseLoginForm } from "./FirebaseLoginForm";
+
+describe("<FirebaseLoginForm />", () => {
   it("auth snapshot test", () => {
-    const wrapper = shallow(<Auth />);
+    const wrapper = shallow(<FirebaseLoginForm />);
+
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

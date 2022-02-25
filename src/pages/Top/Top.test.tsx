@@ -1,9 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Auth } from "./Auth";
-describe("<Auth />", () => {
+import { Top } from "./Top";
+
+describe("<Top />", () => {
   it("auth snapshot test", () => {
-    const wrapper = shallow(<Auth />);
+    const wrapper = shallow(<Top />);
+
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

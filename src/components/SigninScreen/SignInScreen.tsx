@@ -12,18 +12,21 @@ import "firebase/compat/auth"; //これ消すとバグる謎
 //firebaseの初期化
 firebase.initializeApp(firebaseConfig);
 
-const uiConfig = {
-  signInFlow: "popup",
-  signInSuccessUrl: "/",
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
+type Props = {
+  signInSuccessUrl?: string;
 };
 
-type Props = {};
-
-export const SignInScreen: React.FC<Props> = () => {
+export const SignInScreen: React.FC<Props> = (props: Props) => {
+  // firebase ui のコンフィグ
+  const uiConfig = {
+    signInFlow: "popup",
+    signInSuccessUrl: props.signInSuccessUrl ? props.signInSuccessUrl : "/", // 成功後の遷移先
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+  };
+  console.log(uiConfig);
   const dispatch = useDispatch();
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
   const unRegisterObserver = useSelector(

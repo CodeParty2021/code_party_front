@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { useSelector, useDispatch } from "react-redux";
-import { SignInScreen } from "./SignInScreen";
+import { SignInScreen } from "components/SigninScreen/SignInScreen";
 import { UserState } from "../../services/user/user";
 import { BrowserRouter } from "react-router-dom";
 

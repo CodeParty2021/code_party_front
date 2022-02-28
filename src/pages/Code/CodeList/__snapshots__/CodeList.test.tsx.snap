@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CodeList /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      コードリスト
+    </div>
+    <ul>
+      <li>
+        コードA 
+        <Link
+          to="/free-cording"
+        >
+          編集
+        </Link>
+      </li>
+      <li>
+        コードB 
+        <Link
+          to="/free-cording"
+        >
+          編集
+        </Link>
+      </li>
+      <li>
+        コードC 
+        <Link
+          to="/free-cording"
+        >
+          編集
+        </Link>
+      </li>
+    </ul>
+    <div>
+      <Link
+        to="/codes"
+      />
+    </div>
+  </div>,
+]
+`;

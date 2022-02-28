@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 type Props = {};
 
-export const CasualBattleResult: React.FC<Props> = () => {
+export const CasualBattleGameWatch: React.FC<Props> = () => {
   return (
     <div>
       <div>結果</div>

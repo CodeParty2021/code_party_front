@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {};
 
-export const FreeCording: React.FC<Props> = () => {
+export const CodeCording: React.FC<Props> = () => {
   return (
     <div>
       <div>コーディング画面</div>

@@ -14,8 +14,8 @@ import { ModeSelect } from "pages/ModeSelect/ModeSelect";
 import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
-import { CasualBattleResult } from "pages/CasualBattle/GameWatch/GameWatch";
-import { FreeCording } from "pages/Code/Cording/Cording";
+import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
+import { CodeCording } from "pages/Code/Cording/Cording";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 type Props = {};
 
@@ -48,9 +48,9 @@ export const App: React.FC<Props> = () => {
           />
           <Route
             path="/casual-battle/result"
-            element={<CasualBattleResult />}
+            element={<CasualBattleGameWatch />}
           />
-          <Route path="/free-cording" element={<FreeCording />} />
+          <Route path="/free-cording" element={<CodeCording />} />
           <Route path="/codes" element={<CodeList />} />
         </Routes>
 

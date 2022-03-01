@@ -11,7 +11,7 @@ Array [
         コード選択
       </button>
       <Link
-        to="/running"
+        to="/casual-battle/result"
       >
         マッチ開始
       </Link>

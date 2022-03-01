@@ -12,7 +12,7 @@ Array [
       ルームを建てる
     </Link>
     <Link
-      to="/waiting-room"
+      to="/casual-battle/search-room"
     >
       ルームを探す
     </Link>

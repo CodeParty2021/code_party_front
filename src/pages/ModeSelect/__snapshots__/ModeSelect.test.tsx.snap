@@ -9,10 +9,15 @@ Array [
     <Link
       to="/stages"
     >
-      ロボット開発モード
+      チュートリアルモード
     </Link>
     <Link
-      to="/casual-battle-lobby"
+      to="/codes"
+    >
+      ガレージモード
+    </Link>
+    <Link
+      to="/casual-battle"
     >
       カジュアル対戦モード
     </Link>

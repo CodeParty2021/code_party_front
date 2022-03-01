@@ -7,8 +7,9 @@ export const ModeSelect: React.FC<Props> = () => {
   return (
     <div>
       <div>遊ぶモードを決める</div>
-      <Link to="/stages">ロボット開発モード</Link>
-      <Link to="/casual-battle-lobby">カジュアル対戦モード</Link>
+      <Link to="/stages">チュートリアルモード</Link>
+      <Link to="/codes">ガレージモード</Link>
+      <Link to="/casual-battle">カジュアル対戦モード</Link>
     </div>
   );
 };

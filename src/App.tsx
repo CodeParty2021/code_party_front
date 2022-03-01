@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 
 import { HashRouter, Route, Routes, Link } from "react-router-dom";
 import { RootState } from "store";
-
-import { Auth } from "./pages/Auth/Auth";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
 import { Stage } from "./pages/Stage/Stage";
@@ -32,7 +30,6 @@ export const App: React.FC<Props> = () => {
       <HashRouter>
         <Routes>
           <Route path="/" element={<Top />} />
-          <Route path="/auth" element={<Auth />} />
           <Route path="/stages" element={<StageList />} />
           <Route path="/stages/:id" element={<Stage />} />
           <Route path="/start" element={<Start />} />
@@ -65,16 +62,16 @@ export const App: React.FC<Props> = () => {
             <Link to="/">トップページ</Link>
           </li>
           <li>
-            <Link to="/auth">認証</Link>これ現在使ってない
-          </li>
-          <li>
             <Link to="/stages">ステージ選択画面</Link>
           </li>
           <li>
             <Link to="/start">ログイン画面</Link>
           </li>
           <li>
-            <Link to="/casual-battle">モード選択画面</Link>
+            <Link to="/mode-select">モード選択画面</Link>
+          </li>
+          <li>
+            <Link to="/casual-battle">カジュアルロビー画面</Link>
           </li>
           <li>
             <Link to="/casual-battle/waiting-room">待機招待画面</Link>

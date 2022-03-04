@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Top /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      What is CodeParty
+    </h1>
+    <Link
+      to="/start"
+    >
+      Lets Play
+    </Link>
+  </div>,
+]
+`;

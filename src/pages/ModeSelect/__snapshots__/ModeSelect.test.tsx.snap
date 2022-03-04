@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ModeSelect /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      遊ぶモードを決める
+    </div>
+    <Link
+      to="/stages"
+    >
+      チュートリアルモード
+    </Link>
+    <Link
+      to="/codes"
+    >
+      ガレージモード
+    </Link>
+    <Link
+      to="/casual-battle"
+    >
+      カジュアル対戦モード
+    </Link>
+  </div>,
+]
+`;

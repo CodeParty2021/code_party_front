@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignOutButton /> SignOutButton snapshot test 1`] = `
+Array [
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      SignOut
+    </button>
+  </div>,
+]
+`;

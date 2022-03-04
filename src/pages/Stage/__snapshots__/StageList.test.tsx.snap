@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StageList /> dispatches add stage action 1`] = `
+Array [
+  <div>
+    <h1>
+      Stages
+    </h1>
+    <ul>
+      <li>
+        <StageDetail
+          stage={
+            Object {
+              "id": 0,
+              "name": "テストステージ0",
+              "rule": "テストテキスト0",
+              "stage_index": 3,
+            }
+          }
+        />
+        <ForwardRef(Link)
+          to="/stage/0"
+        >
+          詳細を表示
+        </ForwardRef(Link)>
+      </li>
+      <li>
+        <StageDetail
+          stage={
+            Object {
+              "id": 1,
+              "name": "テストステージ1",
+              "rule": "テストテキスト1",
+              "stage_index": 10,
+            }
+          }
+        />
+        <ForwardRef(Link)
+          to="/stage/1"
+        >
+          詳細を表示
+        </ForwardRef(Link)>
+      </li>
+    </ul>
+    <ForwardRef(Link)
+      to="/"
+    >
+      トップに戻る
+    </ForwardRef(Link)>
+  </div>,
+]
+`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CasualBattleLobby /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      結果
+    </div>
+    <div>
+      aaa
+    </div>
+    <div>
+      <Link
+        to="/casual-battle/waiting-room"
+      >
+        ロビーに戻る
+      </Link>
+    </div>
+  </div>,
+]
+`;

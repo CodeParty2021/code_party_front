@@ -6,24 +6,8 @@ type Prop = {};
 export const Top: React.FC<Prop> = () => {
   return (
     <div>
-      <h1>開発用のTopページ</h1>
-      <p>ここに各ページのリンクを作ると便利</p>
-      <ul>
-        <li>
-          {" "}
-          <Link to="/auth">認証</Link>{" "}
-        </li>
-        <li>
-          {" "}
-          <Link to="/stages">ステージ</Link>{" "}
-        </li>
-        <li>
-          <Link to="/start">スタート画面</Link>
-        </li>
-        <li>
-          <Link to="/login">ログイン画面</Link>
-        </li>
-      </ul>
+      <h1>What is CodeParty</h1>
+      <Link to="/start">Lets Play</Link>
     </div>
   );
 };

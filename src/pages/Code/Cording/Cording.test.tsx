@@ -1,9 +1,11 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Auth } from "./Auth";
-describe("<Auth />", () => {
+import { CodeCording } from "./Cording";
+
+describe("<CodeCording />", () => {
   it("auth snapshot test", () => {
-    const wrapper = shallow(<Auth />);
+    const wrapper = shallow(<CodeCording />);
+
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

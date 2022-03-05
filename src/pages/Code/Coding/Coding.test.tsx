@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { CodeCording } from "./Cording";
+import { CodeCording } from "./Coding";
 
 describe("<CodeCording />", () => {
   it("auth snapshot test", () => {

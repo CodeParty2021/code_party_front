@@ -39,7 +39,7 @@ export const CodeList: React.FC<Props> = () => {
             );
           })}
         </div>
-        <Link to="/free-cording">新しくコードを追加する</Link>
+        <Link to="/free-coding">新しくコードを追加する</Link>
       </div>
     );
   } else {

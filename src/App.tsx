@@ -1,7 +1,6 @@
 import { SignOutButton } from "components/SignOutButton/SignOutButton";
 import React from "react";
 import { useSelector } from "react-redux";
-
 import { HashRouter, Route, Routes, Link } from "react-router-dom";
 import { RootState } from "store";
 import { Top } from "./pages/Top/Top";
@@ -47,8 +46,8 @@ export const App: React.FC<Props> = () => {
             path="/casual-battle/result"
             element={<CasualBattleGameWatch />}
           />
-          <Route path="/free-cording" element={<CodeCording />} />
           <Route path="/codes" element={<CodeList />} />
+          <Route path="/free-cording" element={<CodeCording />} />
         </Routes>
 
         <p> ==============</p>

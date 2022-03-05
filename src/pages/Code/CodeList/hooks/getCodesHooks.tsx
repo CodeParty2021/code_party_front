@@ -22,7 +22,6 @@ type Code = {
 
 export const useFetchCodes = () => {
   const { user } = useSelector((state: RootState) => state.user);
-
   const [res, setRes] = useState<IResponse>({
     data: null,
     error: null,

@@ -12,7 +12,7 @@ import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
-import { CodeCording } from "pages/Code/Cording/Cording";
+import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import PrivateOutlet from "utils/PrivateRoute";
 type Props = {};
@@ -50,8 +50,8 @@ export const App: React.FC<Props> = () => {
           <Route path="/codes" element={<PrivateOutlet />}>
             <Route element={<CodeList />} />
           </Route>
-          <Route path="/free-cording" element={<PrivateOutlet />}>
-            <Route element={<CodeCording />} />
+          <Route path="/free-coding" element={<PrivateOutlet />}>
+            <Route element={<CodeCoding />} />
           </Route>
         </Routes>
 
@@ -87,7 +87,7 @@ export const App: React.FC<Props> = () => {
             <Link to="/casual-battle/result">観戦画面</Link>
           </li>
           <li>
-            <Link to="/free-cording">フリーコーディング</Link>
+            <Link to="/free-coding">フリーコーディング</Link>
           </li>
           <li>
             <Link to="/codes">ガレージ画面（コード一覧)</Link>

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CodeCard /> auth snapshot test 1`] = `
+Array [
+  <styled.div>
+    <pre>
+      123
+    </pre>
+    <p>
+      UpdatedAt:
+      123
+       
+    </p>
+  </styled.div>,
+]
+`;

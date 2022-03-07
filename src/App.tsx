@@ -1,7 +1,6 @@
 import { SignOutButton } from "components/SignOutButton/SignOutButton";
 import React from "react";
 import { useSelector } from "react-redux";
-
 import { HashRouter, Route, Routes, Link } from "react-router-dom";
 import { RootState } from "store";
 import { Top } from "./pages/Top/Top";
@@ -13,8 +12,9 @@ import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
-import { CodeCording } from "pages/Code/Cording/Cording";
+import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
+import { PrivateRoute } from "utils/PrivateRoute";
 type Props = {};
 
 // react router はこのページが参考になるよ
@@ -47,8 +47,14 @@ export const App: React.FC<Props> = () => {
             path="/casual-battle/result"
             element={<CasualBattleGameWatch />}
           />
-          <Route path="/free-cording" element={<CodeCording />} />
-          <Route path="/codes" element={<CodeList />} />
+          <Route
+            path="/codes"
+            element={<PrivateRoute component={CodeList} />}
+          />
+          <Route
+            path="/free-coding"
+            element={<PrivateRoute component={CodeCoding} />}
+          />
         </Routes>
 
         <p> ==============</p>
@@ -83,7 +89,7 @@ export const App: React.FC<Props> = () => {
             <Link to="/casual-battle/result">観戦画面</Link>
           </li>
           <li>
-            <Link to="/free-cording">フリーコーディング</Link>
+            <Link to="/free-coding">フリーコーディング</Link>
           </li>
           <li>
             <Link to="/codes">ガレージ画面（コード一覧)</Link>

@@ -14,7 +14,7 @@ import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
-import PrivateOutlet from "utils/PrivateRoute";
+import { PrivateRoute } from "utils/PrivateRoute";
 type Props = {};
 
 // react router はこのページが参考になるよ
@@ -47,12 +47,14 @@ export const App: React.FC<Props> = () => {
             path="/casual-battle/result"
             element={<CasualBattleGameWatch />}
           />
-          <Route path="/codes" element={<PrivateOutlet />}>
-            <Route element={<CodeList />} />
-          </Route>
-          <Route path="/free-coding" element={<PrivateOutlet />}>
-            <Route element={<CodeCoding />} />
-          </Route>
+          <Route
+            path="/codes"
+            element={<PrivateRoute component={CodeList} />}
+          />
+          <Route
+            path="/free-coding"
+            element={<PrivateRoute component={CodeCoding} />}
+          />
         </Routes>
 
         <p> ==============</p>

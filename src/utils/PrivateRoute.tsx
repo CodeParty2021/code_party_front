@@ -1,10 +1,20 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 
-function PrivateOutlet() {
+type Props = {
+  component: React.ComponentType;
+  path?: string;
+};
+
+export const PrivateRoute: React.FC<Props> = ({
+  component: RouteComponent,
+}) => {
   const { isLogin } = useSelector((state: RootState) => state.user);
-  return isLogin ? <Outlet /> : <Navigate to="/start" />;
-}
-export default PrivateOutlet;
+  if (isLogin) {
+    return <RouteComponent />;
+  } else {
+    return <Navigate to="/start" />;
+  }
+};

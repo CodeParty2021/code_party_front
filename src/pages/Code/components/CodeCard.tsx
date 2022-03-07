@@ -17,9 +17,6 @@ const Card = styled.div`
 `;
 
 export const CodeCard: React.FC<Props> = (props: Props) => {
-  console.log("hellop");
-
-  console.log("card", props);
   return (
     <Card>
       <pre>{props.codeContent}</pre>

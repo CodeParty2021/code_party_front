@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { uri } from "config";
 
-interface IResponse {
-  data: Code[] | null;
+export type IResponse = {
+  data: CodeType[] | null;
   error: AxiosError | null;
   loading: boolean;
-}
+};
 
-type Code = {
+export type CodeType = {
   id: string;
   codeContent: string;
   language: string;
@@ -20,7 +20,7 @@ type Code = {
   step: string;
 };
 
-export const useFetchCodes = () => {
+export const useFetchCodes = (): IResponse => {
   const { user } = useSelector((state: RootState) => state.user);
   const [res, setRes] = useState<IResponse>({
     data: null,
@@ -41,13 +41,12 @@ export const useFetchCodes = () => {
           user: userID,
         },
       })
-      .then((response: AxiosResponse<Code[]>) => {
+      .then((response: AxiosResponse<CodeType[]>) => {
         setRes({ data: response.data, error: null, loading: false });
       })
       .catch((error: AxiosError) => {
         setRes({ data: null, error, loading: false });
       });
   };
-
   return res;
 };

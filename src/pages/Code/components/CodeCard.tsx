@@ -7,16 +7,18 @@ type Props = {
   updatedAt: string;
 };
 
+const Card = styled.div`
+  background-color: gray;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 600px;
+  color: white;
+`;
+
 export const CodeCard: React.FC<Props> = (props: Props) => {
   console.log("hellop");
-  const Card = styled.div`
-    background-color: gray;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    width: 600px;
-    color: white;
-  `;
+
   console.log("card", props);
   return (
     <Card>

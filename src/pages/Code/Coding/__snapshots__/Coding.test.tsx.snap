@@ -6,11 +6,7 @@ Array [
     <div>
       コーディング画面
     </div>
-    <div>
-      <button>
-        登録する
-      </button>
-    </div>
+    <div />
   </div>,
 ]
 `;

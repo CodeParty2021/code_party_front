@@ -4,17 +4,17 @@ import { useNavigate } from "react-router-dom";
 
 export type IResponse = {
   roomIdTextBoxValue: string;
-  roomIdTextBoxChangeHandler: any;  // (value: string) => void;にしたいけど，no-unused-varsにひっかかる．
+  roomIdTextBoxChangeHandler: any; // (value: string) => void;にしたいけど，no-unused-varsにひっかかる．
   enterBtnClickHandler: () => void;
 };
 
 export const useSearchRoomState = (): IResponse => {
-  const {room, enterRoom} = useRoomSync();
+  const { room, enterRoom } = useRoomSync();
   const [roomId, setRoomId] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(room.isEntered){
+    if (room.isEntered) {
       navigate("/casual-battle/waiting-room");
     }
   }, [room.isEntered]);

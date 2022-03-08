@@ -1,45 +1,66 @@
-import { child, DataSnapshot, get, push, set, update } from "firebase/database";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ActionsRef, exitRoom, MembersRef, RoomInfo, RoomInfoUpdate, RoomsRef, RoomState, startActionsDBSync, startMembersDBSync, startRoomDBSync, stopActionsDBSync, stopMembersDBSync, stopRoomDBSync, UserAction, UserActionUpdate, UserState, UserStateUpdate } from "services/RoomSync/RoomSync";
+import { child, DataSnapshot, get, push, set, update } from "firebase/database";
+
+import {
+  ActionsRef,
+  exitRoom,
+  MembersRef,
+  RoomInfo,
+  RoomInfoUpdate,
+  RoomsRef,
+  RoomState,
+  UserState,
+  UserStateUpdate,
+  startActionsDBSync,
+  startMembersDBSync,
+  startRoomDBSync,
+  stopActionsDBSync,
+  stopMembersDBSync,
+  stopRoomDBSync,
+  UserAction,
+  UserActionUpdate,
+} from "services/RoomSync/RoomSync";
 import { User } from "services/user/user";
 import { RootState } from "store";
 
 export const useRoomSync = () => {
   const room = useSelector((state: RootState) => state.room);
-  const {user} = useSelector((state: RootState) => state.user);
+  const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   return {
     room: room,
     isHost: useMemo(() => _isHost(room, user), [room, user]),
     createRoom: () => {
-      if(user) dispatch(_createRoomAsync("blank", user));
+      if (user) dispatch(_createRoomAsync("blank", user));
     },
     enterRoom: (roomId: string) => {
-      if(user) dispatch(_enterRoomAsync(roomId, user));
+      if (user) dispatch(_enterRoomAsync(roomId, user));
     },
     exitRoom: () => {
-      if(room.id && user) {
-        if(_isHost(room, user)){
-          dispatch(_exitRoomAsHostAsync(room.id, user.id, room.sortedKeysOfMembers));
+      if (room.id && user) {
+        if (_isHost(room, user)) {
+          dispatch(
+            _exitRoomAsHostAsync(room.id, user.id, room.sortedKeysOfMembers)
+          );
         } else {
           dispatch(_exitRoomAsync(room.id, user.id));
         }
       }
     },
     updateMember: (data: UserStateUpdate) => {
-      if(room.id && user) _updateMemberAsync(room.id, user.id, data);
+      if (room.id && user) _updateMemberAsync(room.id, user.id, data);
     },
     addAction: (data: UserAction) => {
-      if(room.id) _addActionAsync(room.id, data);
+      if (room.id) _addActionAsync(room.id, data);
     },
     updateAction: (id: string, data: UserActionUpdate) => {
-      if(room.id) _updateActionAsync(room.id, id, data);
+      if (room.id) _updateActionAsync(room.id, id, data);
     },
     removeAction: (id: string) => {
-      if(room.id) _removeActionAsync(room.id, id);
-    }
+      if (room.id) _removeActionAsync(room.id, id);
+    },
   };
 };
 
@@ -49,8 +70,8 @@ export const useRoomSync = () => {
  * @param user ユーザ
  * @returns true: ホストである，false: ホストでない
  */
- const _isHost = (room: RoomState, user?: User | null) => {
-  return (room.info && user && room.info.host == user.id) ? true : false;
+const _isHost = (room: RoomState, user?: User | null) => {
+  return room.info && user && room.info.host == user.id ? true : false;
 };
 
 /**
@@ -67,7 +88,7 @@ const _createRoomAsync = (roomName: string, user: User) => {
       state: "waiting",
     };
     await push(RoomsRef, roomInfo).then((data) => {
-      if(data.key){
+      if (data.key) {
         _initMemberAsync(data.key, user);
         dispatch(startRoomDBSync(data.key));
         dispatch(startMembersDBSync(data.key));
@@ -85,10 +106,10 @@ const _createRoomAsync = (roomName: string, user: User) => {
  */
 const _enterRoomAsync = (roomId: string, user: User) => {
   return async (dispatch: any) => {
-    if(roomId == "") return;
+    if (roomId == "") return;
     await get(child(RoomsRef, roomId)).then((ss: DataSnapshot) => {
       const data = ss.val();
-      if(data && ss.key) {
+      if (data && ss.key) {
         _initMemberAsync(ss.key, user);
         dispatch(startRoomDBSync(ss.key));
         dispatch(startMembersDBSync(ss.key));
@@ -122,10 +143,14 @@ const _exitRoomAsync = (roomId: string, userId: string) => {
  * @param memberKeys メンバーIDリスト
  * @returns dispatch用関数
  */
-const _exitRoomAsHostAsync = (roomId: string, userId: string, memberKeys: string[]) => {
+const _exitRoomAsHostAsync = (
+  roomId: string,
+  userId: string,
+  memberKeys: string[]
+) => {
   return async (dispatch: any) => {
     _moveHostNextAsync(roomId, userId, memberKeys);
-    if(memberKeys.length <= 1) _destroyRoomAsync(roomId);
+    if (memberKeys.length <= 1) _destroyRoomAsync(roomId);
     dispatch(_exitRoomAsync(roomId, userId));
   };
 };
@@ -136,8 +161,12 @@ const _exitRoomAsHostAsync = (roomId: string, userId: string, memberKeys: string
  * @param userId ホストID
  * @param memberKeys メンバーIDリスト
  */
-const _moveHostNextAsync = (roomId: string, hostId: string, memberKeys: string[]) => {
-  if(memberKeys && memberKeys.length >= 2) {
+const _moveHostNextAsync = (
+  roomId: string,
+  hostId: string,
+  memberKeys: string[]
+) => {
+  if (memberKeys && memberKeys.length >= 2) {
     const idx = memberKeys?.indexOf(hostId);
     _moveHostAsync(roomId, memberKeys[(idx + 1) % memberKeys.length]);
   }
@@ -148,7 +177,7 @@ const _moveHostNextAsync = (roomId: string, hostId: string, memberKeys: string[]
  * @param roomId ルームID
  * @param newHostId 新ホストID
  */
- const _moveHostAsync = async (roomId: string, newHostId: string) => {
+const _moveHostAsync = async (roomId: string, newHostId: string) => {
   await _updateRoomAsync(roomId, {
     host: newHostId,
   });
@@ -163,7 +192,7 @@ const _moveHostNextAsync = (roomId: string, hostId: string, memberKeys: string[]
  * @returns dispatch用関数
  */
 const _updateRoomAsync = async (roomId: string, roomInfo: RoomInfoUpdate) => {
-  if(roomId == "") return;
+  if (roomId == "") return;
   await update(child(RoomsRef, roomId), roomInfo);
 };
 
@@ -173,7 +202,7 @@ const _updateRoomAsync = async (roomId: string, roomInfo: RoomInfoUpdate) => {
  * @returns dispatch用関数
  */
 const _destroyRoomAsync = async (roomId: string) => {
-  if(roomId == "") return;
+  if (roomId == "") return;
   await set(child(RoomsRef, roomId), null);
   await set(child(MembersRef, roomId), null);
   await set(child(ActionsRef, roomId), null);
@@ -185,7 +214,11 @@ const _destroyRoomAsync = async (roomId: string) => {
  * @param user ユーザインスタンス
  * @param userState メンバー情報の初期値
  */
-const _initMemberAsync = async (roomId: string, user: User, userState: UserState = {displayName: user.displayName, ready: false}) => {
+const _initMemberAsync = async (
+  roomId: string,
+  user: User,
+  userState: UserState = { displayName: user.displayName, ready: false }
+) => {
   await _updateMemberAsync(roomId, user.id, userState);
 };
 
@@ -196,8 +229,12 @@ const _initMemberAsync = async (roomId: string, user: User, userState: UserState
  * @param userState メンバー情報
  * @returns dispatch用関数
  */
-const _updateMemberAsync = async (roomId: string, id: string, userState: UserStateUpdate) => {
-  if(roomId == "" || id == "") return;
+const _updateMemberAsync = async (
+  roomId: string,
+  id: string,
+  userState: UserStateUpdate
+) => {
+  if (roomId == "" || id == "") return;
   await update(child(MembersRef, `${roomId}/${id}`), userState);
 };
 
@@ -208,7 +245,7 @@ const _updateMemberAsync = async (roomId: string, id: string, userState: UserSta
  * @returns dispatch用関数
  */
 const _removeMemberAsync = async (roomId: string, id: string) => {
-  if(roomId == "" || id == "") return;
+  if (roomId == "" || id == "") return;
   await set(child(MembersRef, `${roomId}/${id}`), null);
 };
 
@@ -219,7 +256,7 @@ const _removeMemberAsync = async (roomId: string, id: string) => {
  * @returns dispatch用関数
  */
 const _addActionAsync = async (roomId: string, userAction: UserAction) => {
-  if(roomId == "") return;
+  if (roomId == "") return;
   await push(child(ActionsRef, roomId), userAction);
 };
 
@@ -230,8 +267,12 @@ const _addActionAsync = async (roomId: string, userAction: UserAction) => {
  * @param userAction アクション情報
  * @returns dispatch用関数
  */
-const _updateActionAsync = async (roomId: string, id: string, userAction: UserActionUpdate) => {
-  if(roomId == "" || id == "") return;
+const _updateActionAsync = async (
+  roomId: string,
+  id: string,
+  userAction: UserActionUpdate
+) => {
+  if (roomId == "" || id == "") return;
   await update(child(ActionsRef, `${roomId}/${id}`), userAction);
 };
 
@@ -242,6 +283,6 @@ const _updateActionAsync = async (roomId: string, id: string, userAction: UserAc
  * @returns dispatch用関数
  */
 const _removeActionAsync = async (roomId: string, id: string) => {
-  if(roomId == "" || id == "") return;
+  if (roomId == "" || id == "") return;
   await set(child(ActionsRef, `${roomId}/${id}`), null);
 };

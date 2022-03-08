@@ -123,10 +123,10 @@ export const signOutAsync = () => {
 export const setCallBackToSyncUser = () => {
   return async (dispatch: any) => {
     onAuthStateChanged(auth, (user) => {
-      if(user) {
+      if (user) {
         dispatch(signInAsync());
       }
-    })
+    });
   };
 };
 

@@ -8,7 +8,6 @@ import { signInAsync } from "services/user/user";
 import { RootState } from "store";
 import { auth } from "firebase_config";
 
-
 type Props = {
   signInSuccessUrl?: string;
 };

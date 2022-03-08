@@ -8,9 +8,9 @@ export type IResponse = {
     roomId: string;
     host: UserState;
     memberKeys: string[];
-    members: {[id: string]: UserState};
+    members: { [id: string]: UserState };
     actionKeys: string[];
-    actions: {[id: string]: UserAction};
+    actions: { [id: string]: UserAction };
   };
   isHost: boolean;
   readyBtnHandler: () => void;
@@ -20,7 +20,7 @@ export type IResponse = {
 };
 
 export const useWaitingRoomState = (): IResponse => {
-  const {room, isHost, updateMember, exitRoom} = useRoomSync();
+  const { room, isHost, updateMember, exitRoom } = useRoomSync();
   const [ready, setReady] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export const useWaitingRoomState = (): IResponse => {
   };
 
   useEffect(() => {
-    if(!room.isEntered) {
+    if (!room.isEntered) {
       navigate("/casual-battle");
     }
   }, [room.isEntered]);
@@ -42,16 +42,15 @@ export const useWaitingRoomState = (): IResponse => {
   }, [ready]);
 
   useEffect(() => {
-    if(isHost){
-      for(let key of Object.keys(room.members)){
-        if(!room.members[key].ready){
+    if (isHost) {
+      for (let key of Object.keys(room.members)) {
+        if (!room.members[key].ready) {
           setDisabled(true);
           return;
         }
       }
       setDisabled(false);
-    }
-    else{
+    } else {
       setDisabled(true);
       return;
     }
@@ -73,7 +72,10 @@ export const useWaitingRoomState = (): IResponse => {
   return {
     roomInfo: {
       roomId: room.id ? room.id : "",
-      host: (room.info && room.info.host in room.members) ? room.members[room.info.host] : dummyUser,
+      host:
+        room.info && room.info.host in room.members
+          ? room.members[room.info.host]
+          : dummyUser,
       memberKeys: room.sortedKeysOfMembers,
       members: room.members,
       actionKeys: room.sortedKeysOfActions,

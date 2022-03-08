@@ -8,7 +8,6 @@ import { UserState } from "services/user/user";
 import { Stages } from "services/StageAPI/StageAPI";
 import { RoomState } from "services/RoomSync/RoomSync";
 
-
 export type RootState = {
   user: UserState;
   stages: Stages;

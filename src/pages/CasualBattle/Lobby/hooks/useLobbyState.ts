@@ -8,11 +8,11 @@ export type IResponse = {
 };
 
 export const useLobbyState = (): IResponse => {
-  const {room, createRoom} = useRoomSync();
+  const { room, createRoom } = useRoomSync();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(room.isEntered) {
+  useEffect(() => {
+    if (room.isEntered) {
       navigate("/casual-battle/waiting-room");
     }
   }, [room.isEntered]);

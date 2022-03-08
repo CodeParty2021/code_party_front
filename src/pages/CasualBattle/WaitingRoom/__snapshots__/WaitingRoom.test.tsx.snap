@@ -10,60 +10,60 @@ Array [
       <button>
         コード選択
       </button>
-      <MatchStartButton />
+      <button
+        disabled={false}
+        id="start-btn"
+        onClick={[MockFunction]}
+      >
+        マッチ開始
+      </button>
     </div>
     <button
-      onClick={[Function]}
+      id="ready-btn"
+      onClick={[MockFunction]}
     >
       準備完了
     </button>
     <button
-      onClick={[Function]}
+      id="exit-btn"
+      onClick={[MockFunction]}
     >
       退出
     </button>
     <ul>
       <li>
+        Room ID: 
+        room id
+      </li>
+      <li>
         Host: 
-        
+        host user
       </li>
       <li>
         I am 
-        not
+        
          a host.
       </li>
       <li>
         Members:
       </li>
-      <ul />
-      <li>
-        room : 
-        <br />
-        <pre>
-          {
-  "id": "room id",
-  "isEntered": true,
-  "info": {
-    "name": "room name",
-    "host": "userid1",
-    "state": "waiting"
-  },
-  "members": {},
-  "sortedKeysOfMembers": [],
-  "actions": {},
-  "sortedKeysOfActions": [],
-  "isLogin": true,
-  "user": {
-    "id": "userid1",
-    "displayName": "user1",
-    "email": "useremail",
-    "picture": "picture url",
-    "jwt": "user jwt"
-  },
-  "unRegisterObserver": null
-}
-        </pre>
-      </li>
+      <ul>
+        <li>
+          host user
+           : 
+          準備中
+        </li>
+        <li>
+          user 1
+           : 
+          準備完了
+        </li>
+        <li>
+          user 2
+           : 
+          準備完了
+        </li>
+      </ul>
     </ul>
   </div>,
 ]

@@ -39,8 +39,8 @@
     "eject": "react-scripts eject",
     "format": "prettier --check src/**/*.{jsx,js,tsx,ts,css,scss,md,json}",
     "lint": "eslint src/**/*.{jsx,js,tsx,ts}",
-    "lint:fix": "eslint --fix src/**/*.{jsx,js,tsx,ts} && prettier --write .",
-    "format:fix": "prettier --write src/**/*.{jsx,js,tsx,ts,css,scss,md,json}"
+    "lint:fix": "eslint --fix src/**/*.{jsx,js,tsx,ts}",
+    "format:fix": "prettier --write src/**/*.{jsx,js,tsx,ts,css,scss,md,json}","fixall": "eslint --fix src/**/*.{jsx,js,tsx,ts} && prettier --write src/**/*.{jsx,js,tsx,ts,css,scss,md,json}"
   },
   "eslintConfig": {
     "extends": [

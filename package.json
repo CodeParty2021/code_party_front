@@ -35,6 +35,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "updateSnapshot": "react-scripts test --updateSnapshot",
     "eject": "react-scripts eject",
     "format": "prettier --check src/**/*.{jsx,js,tsx,ts,css,scss,md,json}",
     "lint": "eslint src/**/*.{jsx,js,tsx,ts}",

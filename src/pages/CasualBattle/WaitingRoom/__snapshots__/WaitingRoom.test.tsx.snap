@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CasualBattleWaitingRoom /> auth snapshot test 1`] = `
+exports[`<CasualBattleWaitingRoom /> snapshot test 1`] = `
 Array [
   <div>
     <div>
@@ -10,15 +10,61 @@ Array [
       <button>
         コード選択
       </button>
-      <Link
-        to="/casual-battle/result"
-      >
-        マッチ開始
-      </Link>
+      <MatchStartButton />
     </div>
-    <button>
+    <button
+      onClick={[Function]}
+    >
       準備完了
     </button>
+    <button
+      onClick={[Function]}
+    >
+      退出
+    </button>
+    <ul>
+      <li>
+        Host: 
+        
+      </li>
+      <li>
+        I am 
+        not
+         a host.
+      </li>
+      <li>
+        Members:
+      </li>
+      <ul />
+      <li>
+        room : 
+        <br />
+        <pre>
+          {
+  "id": "room id",
+  "isEntered": true,
+  "info": {
+    "name": "room name",
+    "host": "userid1",
+    "state": "waiting"
+  },
+  "members": {},
+  "sortedKeysOfMembers": [],
+  "actions": {},
+  "sortedKeysOfActions": [],
+  "isLogin": true,
+  "user": {
+    "id": "userid1",
+    "displayName": "user1",
+    "email": "useremail",
+    "picture": "picture url",
+    "jwt": "user jwt"
+  },
+  "unRegisterObserver": null
+}
+        </pre>
+      </li>
+    </ul>
   </div>,
 ]
 `;

@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
-
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
-import { firebaseConfig } from "config";
-import { signInAsync } from "services/user/user";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "store";
-import { useNavigate } from "react-router";
-import "firebase/compat/auth"; //これ消すとバグる謎
 
-//firebaseの初期化
-firebase.initializeApp(firebaseConfig);
+import { signInAsync } from "services/user/user";
+import { RootState } from "store";
+import { auth } from "firebase_config";
+
 
 type Props = {
   signInSuccessUrl?: string;
@@ -26,7 +23,6 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
   };
-  console.log(uiConfig);
   const dispatch = useDispatch();
   const isLogin = useSelector((state: RootState) => state.user.isLogin);
   const unRegisterObserver = useSelector(
@@ -55,7 +51,7 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
     <div>
       <h1>Sign In</h1>
 
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
     </div>
   );
 };

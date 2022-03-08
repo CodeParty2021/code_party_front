@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import firebase from "firebase/compat/app";
 import axios, { AxiosResponse } from "axios";
 import { uri } from "config";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "firebase_config";
 export type User = {
   id: string;
   displayName: string;
@@ -115,6 +117,16 @@ export const signOutAsync = () => {
       .then(() => {
         dispatch(signOut());
       });
+  };
+};
+
+export const setCallBackToSyncUser = () => {
+  return async (dispatch: any) => {
+    onAuthStateChanged(auth, (user) => {
+      if(user) {
+        dispatch(signInAsync());
+      }
+    })
   };
 };
 

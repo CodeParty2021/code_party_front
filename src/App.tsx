@@ -1,6 +1,6 @@
 import { SignOutButton } from "components/SignOutButton/SignOutButton";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { HashRouter, Route, Routes, Link } from "react-router-dom";
 import { RootState } from "store";
 import { Top } from "./pages/Top/Top";
@@ -15,6 +15,8 @@ import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
+import { setCallBackToSyncUser } from "services/user/user";
+
 type Props = {};
 
 // react router はこのページが参考になるよ
@@ -23,7 +25,12 @@ type Props = {};
 export const currentUser = React.createContext(undefined);
 
 export const App: React.FC<Props> = () => {
+  const dispatch = useDispatch();
   const { user, isLogin } = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    dispatch(setCallBackToSyncUser());
+  }, []);
 
   return (
     <div>

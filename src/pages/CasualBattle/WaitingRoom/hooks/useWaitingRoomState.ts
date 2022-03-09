@@ -1,6 +1,7 @@
-import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { UserState, UserAction } from "services/RoomSync/RoomSync";
 
 export type IResponse = {

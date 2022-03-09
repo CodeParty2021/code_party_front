@@ -17,7 +17,7 @@ export const useLobbyState = (): IResponse => {
     }
   }, [room.isEntered]);
 
-  const _roomcCreteBtnHandler = () => {
+  const _roomCreateBtnHandler = () => {
     createRoom();
   };
 
@@ -26,7 +26,7 @@ export const useLobbyState = (): IResponse => {
   };
 
   return {
-    roomCreateBtnHandler: _roomcCreteBtnHandler,
+    roomCreateBtnHandler: _roomCreateBtnHandler,
     roomSearchBtnHandler: _roomSearchBtnHandler,
   };
 };

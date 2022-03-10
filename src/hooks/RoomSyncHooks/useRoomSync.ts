@@ -33,7 +33,9 @@ export const useRoomSync = () => {
     room: room,
     isHost: useMemo(() => _isHost(room, user), [room, user]),
     createRoom: () => {
-      if (user) dispatch(_createRoomAsync("blank", user));
+      if (user){
+        dispatch(_createRoomAsync("blank", user));
+      }
     },
     enterRoom: (roomId: string) => {
       if (user) dispatch(_enterRoomAsync(roomId, user));
@@ -87,8 +89,10 @@ const _createRoomAsync = (roomName: string, user: User) => {
       host: user.id,
       state: "waiting",
     };
+    console.log(roomInfo);
     await push(RoomsRef, roomInfo).then((data) => {
       if (data.key) {
+        console.log(data);
         _initMemberAsync(data.key, user);
         dispatch(startRoomDBSync(data.key));
         dispatch(startMembersDBSync(data.key));

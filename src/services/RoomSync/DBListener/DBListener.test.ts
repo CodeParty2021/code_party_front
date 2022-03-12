@@ -20,6 +20,8 @@ import {
   stopRoomDBSync,
 } from "./DBListener";
 
+jest.mock("firebase/database");
+
 const childMock = child as jest.Mock;
 const onChildAddedMock = onChildAdded as jest.Mock;
 const onChildChangedMock = onChildChanged as jest.Mock;

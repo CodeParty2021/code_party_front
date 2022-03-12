@@ -14,6 +14,7 @@ import {
   removeActionAsync,
 } from "./DBOperator";
 
+jest.mock("firebase/database");
 jest.mock("../RoomSync");
 
 const refMock = ref as jest.Mock;

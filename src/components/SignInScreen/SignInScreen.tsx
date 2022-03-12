@@ -3,10 +3,11 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
+import { getAuth } from "firebase/auth";
 
+import "firebase_config";
 import { signInAsync } from "services/user/user";
 import { RootState } from "store";
-import { auth } from "firebase_config";
 
 type Props = {
   signInSuccessUrl?: string;
@@ -50,7 +51,7 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
     <div>
       <h1>Sign In</h1>
 
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={getAuth()} />
     </div>
   );
 };

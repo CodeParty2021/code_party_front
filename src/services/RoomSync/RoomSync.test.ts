@@ -1,3 +1,4 @@
+import { child, ref } from "firebase/database";
 import reducer, {
   RoomState,
   RoomInfo,
@@ -14,6 +15,14 @@ import reducer, {
   moveAction,
   removeAction,
 } from "./RoomSync";
+
+jest.mock("firebase/database");
+
+const refMock = ref as jest.Mock;
+const childMock = child as jest.Mock;
+
+refMock.mockImplementation((ref: any, path: string) => path);
+childMock.mockImplementation((ref: any, path: string) => `${ref}/${path}`);
 
 const initialState: RoomState = {
   id: undefined,

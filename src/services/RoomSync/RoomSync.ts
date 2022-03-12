@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ref, child } from "firebase/database";
+import { ref, child, getDatabase } from "firebase/database";
 import { Dispatch } from "redux";
+import "firebase_config";
 
-import { db } from "firebase_config";
 import { RootState } from "store";
 
-export const RootRef = ref(db, "/RoomApp");
+export const RootRef = ref(getDatabase(), "/RoomApp");
 export const RoomsRef = child(RootRef, "rooms");
 export const MembersRef = child(RootRef, "members");
 export const ActionsRef = child(RootRef, "actions");

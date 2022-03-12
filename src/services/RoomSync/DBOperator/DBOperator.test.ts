@@ -186,7 +186,10 @@ describe("Test Cases for Reducers of DBOperator", () => {
     it("正常系", async () => {
       await addActionAsync("roomId", actions["actionId"]);
       expect(pushMock).toBeCalledTimes(1);
-      expect(pushMock).lastCalledWith("/RoomApp/actions/roomId", actions["actionId"]);
+      expect(pushMock).lastCalledWith(
+        "/RoomApp/actions/roomId",
+        actions["actionId"]
+      );
     });
 
     it("異常系１（roomIdが空文字列の場合）", async () => {

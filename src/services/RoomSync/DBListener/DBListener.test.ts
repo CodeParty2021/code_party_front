@@ -128,9 +128,13 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(onChildMovedMock).toBeCalledTimes(1);
       expect(onChildRemovedMock).toBeCalledTimes(1);
       expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
-      expect(onChildChangedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildChangedMock.mock.calls[0][0]).toBe(
+        "/RoomApp/members/roomId"
+      ); //第一引数
       expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
-      expect(onChildRemovedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildRemovedMock.mock.calls[0][0]).toBe(
+        "/RoomApp/members/roomId"
+      ); //第一引数
     });
 
     it("異常系１（ルームIDが空文字列の場合）", async () => {
@@ -177,9 +181,13 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(onChildMovedMock).toBeCalledTimes(1);
       expect(onChildRemovedMock).toBeCalledTimes(1);
       expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
-      expect(onChildChangedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildChangedMock.mock.calls[0][0]).toBe(
+        "/RoomApp/actions/roomId"
+      ); //第一引数
       expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
-      expect(onChildRemovedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildRemovedMock.mock.calls[0][0]).toBe(
+        "/RoomApp/actions/roomId"
+      ); //第一引数
     });
 
     it("異常系１（ルームIDが空文字列の場合）", async () => {

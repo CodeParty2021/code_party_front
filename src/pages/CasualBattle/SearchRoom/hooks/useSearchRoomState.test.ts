@@ -1,4 +1,3 @@
-import React from "react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -21,15 +20,15 @@ const initialRoomState = {
 };
 
 const initialRoomSyncState = {
-  room: {...initialRoomState},
+  room: { ...initialRoomState },
   enterRoom: jest.fn(),
 };
 
-const navigateMock = {do: jest.fn()};
+const navigateMock = { do: jest.fn() };
 
 describe("useWaitingRoomState", () => {
   beforeEach(() => {
-    useRoomSyncMock.mockReturnValue({...initialRoomSyncState});
+    useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
     useNavigateMock.mockReturnValue(navigateMock.do);
   });
   afterEach(() => {
@@ -37,7 +36,7 @@ describe("useWaitingRoomState", () => {
   });
 
   it("render", () => {
-    const {result} = renderHook(() => useSearchRoomState());
+    const { result } = renderHook(() => useSearchRoomState());
     expect(result.current.roomIdTextBoxValue).toBe("");
   });
 
@@ -55,9 +54,9 @@ describe("useWaitingRoomState", () => {
   });
 
   it("exec roomIdTextBoxChangeHandler", () => {
-    const {result} = renderHook(() => useSearchRoomState());
-    const {roomIdTextBoxChangeHandler} = result.current;
-    act(()=>{
+    const { result } = renderHook(() => useSearchRoomState());
+    const { roomIdTextBoxChangeHandler } = result.current;
+    act(() => {
       roomIdTextBoxChangeHandler("typed value");
     });
     expect(result.current.roomIdTextBoxValue).toBe("typed value");
@@ -65,15 +64,15 @@ describe("useWaitingRoomState", () => {
 
   it("exec enterBtnClickHandler", () => {
     const spyEnterRoom = jest.spyOn(initialRoomSyncState, "enterRoom");
-    const {result} = renderHook(() => useSearchRoomState());
-    const {roomIdTextBoxChangeHandler} = result.current;
+    const { result } = renderHook(() => useSearchRoomState());
+    const { roomIdTextBoxChangeHandler } = result.current;
 
-    act(()=>{
+    act(() => {
       roomIdTextBoxChangeHandler("roomid");
     });
 
-    const {enterBtnClickHandler} = result.current;
-    act(()=>{
+    const { enterBtnClickHandler } = result.current;
+    act(() => {
       enterBtnClickHandler();
     });
 

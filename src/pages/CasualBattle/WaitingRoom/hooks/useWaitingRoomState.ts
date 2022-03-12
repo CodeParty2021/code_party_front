@@ -63,7 +63,6 @@ export const useWaitingRoomState = (): IResponse => {
 
   const _exitBtnHandler = () => {
     exitRoom();
-    navigate("/casual-battle");
   };
 
   const _startBtnHandler = () => {

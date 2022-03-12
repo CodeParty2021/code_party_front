@@ -1,26 +1,35 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { child, DataSnapshot, get, push, set, update } from "firebase/database";
 
 import {
-  RoomsRef,
-  MembersRef,
-  ActionsRef,
   RoomState,
-  RoomInfo,
-  RoomInfoUpdate,
-  UserState,
   UserStateUpdate,
   UserAction,
   UserActionUpdate,
+  ThunkResult,
+  RoomInfo,
   exitRoom,
-  startRoomDBSync,
-  startMembersDBSync,
-  startActionsDBSync,
-  stopRoomDBSync,
-  stopMembersDBSync,
-  stopActionsDBSync,
 } from "services/RoomSync/RoomSync";
+import {
+  addActionAsync,
+  destroyRoomAsync,
+  getRoomAsync,
+  initMemberAsync,
+  pushRoomAsync,
+  removeActionAsync,
+  removeMemberAsync,
+  updateActionAsync,
+  updateMemberAsync,
+  updateRoomAsync,
+} from "services/RoomSync/DBOperator/DBOperator";
+import {
+  startActionsDBSync,
+  startMembersDBSync,
+  startRoomDBSync,
+  stopActionsDBSync,
+  stopMembersDBSync,
+  stopRoomDBSync,
+} from "services/RoomSync/DBListener/DBListener";
 import { User } from "services/user/user";
 import { RootState } from "store";
 
@@ -31,37 +40,33 @@ export const useRoomSync = () => {
 
   return {
     room: room,
-    isHost: useMemo(() => _isHost(room, user), [room, user]),
+    isHost: useMemo(() => isHost(room, user), [room, user]),
     createRoom: () => {
-      if (user){
-        dispatch(_createRoomAsync("blank", user));
-      }
+      if (user) dispatch(createRoomAsync("blank", user));
     },
     enterRoom: (roomId: string) => {
-      if (user) dispatch(_enterRoomAsync(roomId, user));
+      if (user) dispatch(enterRoomAsync(roomId, user));
     },
     exitRoom: () => {
       if (room.id && user) {
-        if (_isHost(room, user)) {
-          dispatch(
-            _exitRoomAsHostAsync(room.id, user.id, room.sortedKeysOfMembers)
-          );
+        if (isHost(room, user)) {
+          dispatch(exitRoomAsHostAsync(user.id));
         } else {
-          dispatch(_exitRoomAsync(room.id, user.id));
+          dispatch(exitRoomAsync(user.id));
         }
       }
     },
     updateMember: (data: UserStateUpdate) => {
-      if (room.id && user) _updateMemberAsync(room.id, user.id, data);
+      if (room.id && user) updateMemberAsync(room.id, user.id, data);
     },
     addAction: (data: UserAction) => {
-      if (room.id) _addActionAsync(room.id, data);
+      if (room.id) addActionAsync(room.id, data);
     },
     updateAction: (id: string, data: UserActionUpdate) => {
-      if (room.id) _updateActionAsync(room.id, id, data);
+      if (room.id) updateActionAsync(room.id, id, data);
     },
     removeAction: (id: string) => {
-      if (room.id) _removeActionAsync(room.id, id);
+      if (room.id) removeActionAsync(room.id, id);
     },
   };
 };
@@ -72,7 +77,7 @@ export const useRoomSync = () => {
  * @param user ユーザ
  * @returns true: ホストである，false: ホストでない
  */
-const _isHost = (room: RoomState, user?: User | null) => {
+export const isHost = (room: RoomState, user?: User | null) => {
   return room.info && user && room.info.host == user.id ? true : false;
 };
 
@@ -82,23 +87,18 @@ const _isHost = (room: RoomState, user?: User | null) => {
  * @param user ホストユーザ
  * @returns dispatch用関数
  */
-const _createRoomAsync = (roomName: string, user: User) => {
-  return async (dispatch: any) => {
+export const createRoomAsync = (roomName: string, user: User): ThunkResult => {
+  return async (dispatch) => {
     const roomInfo: RoomInfo = {
       name: roomName,
       host: user.id,
       state: "waiting",
     };
-    console.log(roomInfo);
-    await push(RoomsRef, roomInfo).then((data) => {
-      if (data.key) {
-        console.log(data);
-        _initMemberAsync(data.key, user);
-        dispatch(startRoomDBSync(data.key));
-        dispatch(startMembersDBSync(data.key));
-        dispatch(startActionsDBSync(data.key));
-      }
-    });
+    const dbRef = await pushRoomAsync(roomInfo);
+    const key = dbRef.key;
+    if (key) {
+      dispatch(_enterRoomAsync(key, user));
+    }
   };
 };
 
@@ -108,18 +108,23 @@ const _createRoomAsync = (roomName: string, user: User) => {
  * @param user ルームに入るユーザ
  * @returns dispatch用関数
  */
-const _enterRoomAsync = (roomId: string, user: User) => {
+export const enterRoomAsync = (roomId: string, user: User): ThunkResult => {
   return async (dispatch: any) => {
     if (roomId == "") return;
-    await get(child(RoomsRef, roomId)).then((ss: DataSnapshot) => {
-      const data = ss.val();
-      if (data && ss.key) {
-        _initMemberAsync(ss.key, user);
-        dispatch(startRoomDBSync(ss.key));
-        dispatch(startMembersDBSync(ss.key));
-        dispatch(startActionsDBSync(ss.key));
-      }
-    });
+    const data = await getRoomAsync(roomId);
+    //部屋が存在したら入室処理
+    if (data) {
+      dispatch(_enterRoomAsync(roomId, user));
+    }
+  };
+};
+
+const _enterRoomAsync = (roomId: string, user: User): ThunkResult => {
+  return async (dispatch: any) => {
+    initMemberAsync(roomId, user);
+    dispatch(startRoomDBSync(roomId));
+    dispatch(startMembersDBSync(roomId));
+    dispatch(startActionsDBSync(roomId));
   };
 };
 
@@ -130,9 +135,10 @@ const _enterRoomAsync = (roomId: string, user: User) => {
  * @param userId 退出するユーザID
  * @returns dispatch用関数
  */
-const _exitRoomAsync = (roomId: string, userId: string) => {
-  return async (dispatch: any) => {
-    await _removeMemberAsync(roomId, userId);
+export const exitRoomAsync = (userId: string): ThunkResult => {
+  return async (dispatch: any, getState: any) => {
+    const roomId = getState().room.id;
+    await removeMemberAsync(roomId, userId);
     dispatch(stopRoomDBSync());
     dispatch(stopMembersDBSync());
     dispatch(stopActionsDBSync());
@@ -147,15 +153,16 @@ const _exitRoomAsync = (roomId: string, userId: string) => {
  * @param memberKeys メンバーIDリスト
  * @returns dispatch用関数
  */
-const _exitRoomAsHostAsync = (
-  roomId: string,
-  userId: string,
-  memberKeys: string[]
-) => {
-  return async (dispatch: any) => {
-    _moveHostNextAsync(roomId, userId, memberKeys);
-    if (memberKeys.length <= 1) _destroyRoomAsync(roomId);
-    dispatch(_exitRoomAsync(roomId, userId));
+export const exitRoomAsHostAsync = (userId: string): ThunkResult => {
+  return async (dispatch, getState) => {
+    const room = getState().room;
+    const roomId = room.id;
+    const memberKeys = room.sortedKeysOfMembers;
+    if (roomId) {
+      moveHostNextAsync(roomId, userId, memberKeys);
+      dispatch(exitRoomAsync(userId));
+      if (memberKeys.length <= 1) destroyRoomAsync(roomId);
+    }
   };
 };
 
@@ -165,14 +172,14 @@ const _exitRoomAsHostAsync = (
  * @param userId ホストID
  * @param memberKeys メンバーIDリスト
  */
-const _moveHostNextAsync = (
+export const moveHostNextAsync = async (
   roomId: string,
   hostId: string,
   memberKeys: string[]
 ) => {
   if (memberKeys && memberKeys.length >= 2) {
     const idx = memberKeys?.indexOf(hostId);
-    _moveHostAsync(roomId, memberKeys[(idx + 1) % memberKeys.length]);
+    await moveHostAsync(roomId, memberKeys[(idx + 1) % memberKeys.length]);
   }
 };
 
@@ -181,112 +188,8 @@ const _moveHostNextAsync = (
  * @param roomId ルームID
  * @param newHostId 新ホストID
  */
-const _moveHostAsync = async (roomId: string, newHostId: string) => {
-  await _updateRoomAsync(roomId, {
+export const moveHostAsync = async (roomId: string, newHostId: string) => {
+  await updateRoomAsync(roomId, {
     host: newHostId,
   });
-};
-
-// ---- Realtime DBへのset・update・push・removeファンクション群 ----- //
-
-/**
- * ルーム情報を更新する
- * @param roomId ルームID
- * @param roomInfo ルーム情報
- * @returns dispatch用関数
- */
-const _updateRoomAsync = async (roomId: string, roomInfo: RoomInfoUpdate) => {
-  if (roomId == "") return;
-  await update(child(RoomsRef, roomId), roomInfo);
-};
-
-/**
- * ルームを削除し、ルームに関連付いたメンバー・アクション情報をすべて削除する
- * @param roomId ルームID
- * @returns dispatch用関数
- */
-const _destroyRoomAsync = async (roomId: string) => {
-  if (roomId == "") return;
-  await set(child(RoomsRef, roomId), null);
-  await set(child(MembersRef, roomId), null);
-  await set(child(ActionsRef, roomId), null);
-};
-
-/**
- * メンバーの初期化をDBに送信する
- * @param roomId ルームID
- * @param user ユーザインスタンス
- * @param userState メンバー情報の初期値
- */
-const _initMemberAsync = async (
-  roomId: string,
-  user: User,
-  userState: UserState = { displayName: user.displayName, ready: false }
-) => {
-  await _updateMemberAsync(roomId, user.id, userState);
-};
-
-/**
- * メンバーの更新をDBに送信する
- * @param roomId ルームID
- * @param id メンバーID（ユーザID）
- * @param userState メンバー情報
- * @returns dispatch用関数
- */
-const _updateMemberAsync = async (
-  roomId: string,
-  id: string,
-  userState: UserStateUpdate
-) => {
-  if (roomId == "" || id == "") return;
-  await update(child(MembersRef, `${roomId}/${id}`), userState);
-};
-
-/**
- * メンバーの削除をDBに送信する
- * @param roomId ルームID
- * @param id メンバーID（ユーザID）
- * @returns dispatch用関数
- */
-const _removeMemberAsync = async (roomId: string, id: string) => {
-  if (roomId == "" || id == "") return;
-  await set(child(MembersRef, `${roomId}/${id}`), null);
-};
-
-/**
- * アクションの追加をDBに送信する
- * @param roomId ルームID
- * @param userAction アクション情報
- * @returns dispatch用関数
- */
-const _addActionAsync = async (roomId: string, userAction: UserAction) => {
-  if (roomId == "") return;
-  await push(child(ActionsRef, roomId), userAction);
-};
-
-/**
- * アクションの更新をDBに送信する
- * @param roomId ルームID
- * @param id アクションID
- * @param userAction アクション情報
- * @returns dispatch用関数
- */
-const _updateActionAsync = async (
-  roomId: string,
-  id: string,
-  userAction: UserActionUpdate
-) => {
-  if (roomId == "" || id == "") return;
-  await update(child(ActionsRef, `${roomId}/${id}`), userAction);
-};
-
-/**
- * アクションの削除をDBに送信する
- * @param roomId ルームID
- * @param id アクションID
- * @returns dispatch用関数
- */
-const _removeActionAsync = async (roomId: string, id: string) => {
-  if (roomId == "" || id == "") return;
-  await set(child(ActionsRef, `${roomId}/${id}`), null);
 };

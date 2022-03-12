@@ -1,4 +1,3 @@
-import React from "react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -21,15 +20,15 @@ const initialRoomState = {
 };
 
 const initialRoomSyncState = {
-  room: {...initialRoomState},
+  room: { ...initialRoomState },
   createRoom: jest.fn(),
 };
 
-const navigateMock = {do: jest.fn()};
+const navigateMock = { do: jest.fn() };
 
 describe("useWaitingRoomState", () => {
   beforeEach(() => {
-    useRoomSyncMock.mockReturnValue({...initialRoomSyncState});
+    useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
     useNavigateMock.mockReturnValue(navigateMock.do);
   });
   afterEach(() => {
@@ -56,8 +55,8 @@ describe("useWaitingRoomState", () => {
 
   it("exec roomCreateBtnHandler", () => {
     const spyCreateRoom = jest.spyOn(initialRoomSyncState, "createRoom");
-    const {result} = renderHook(() => useLobbyState());
-    const {roomCreateBtnHandler} = result.current;
+    const { result } = renderHook(() => useLobbyState());
+    const { roomCreateBtnHandler } = result.current;
     act(() => {
       roomCreateBtnHandler();
     });
@@ -66,8 +65,8 @@ describe("useWaitingRoomState", () => {
 
   it("exec roomSearchBtnHandler", () => {
     const spyNavigate = jest.spyOn(navigateMock, "do");
-    const {result} = renderHook(() => useLobbyState());
-    const {roomSearchBtnHandler} = result.current;
+    const { result } = renderHook(() => useLobbyState());
+    const { roomSearchBtnHandler } = result.current;
     act(() => {
       roomSearchBtnHandler();
     });

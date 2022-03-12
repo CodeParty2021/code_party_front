@@ -56,7 +56,6 @@ export const updateRoomAsync = async (
  * @returns dispatch用関数
  */
 export const destroyRoomAsync = async (roomId: string) => {
-  console.log("destroyRoomAsync", roomId);
   if (roomId == "") return;
   await set(child(RoomsRef, roomId), null);
   await set(child(MembersRef, roomId), null);

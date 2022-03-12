@@ -121,7 +121,6 @@ describe("useWaitingRoomState", () => {
 
     //それぞれ実行される．
     expect(spyExitRoom).toBeCalledTimes(1);
-    expect(spyNavigate).lastCalledWith("/casual-battle");
   });
 
   it("exec startBtnHandler", async () => {

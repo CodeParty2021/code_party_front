@@ -1,4 +1,4 @@
-import { child, get, push, set, update } from "firebase/database";
+import { child, get, push, ref, set, update } from "firebase/database";
 import { User } from "services/user/user";
 import { RoomInfo, UserAction, UserState } from "../RoomSync";
 import {
@@ -15,8 +15,8 @@ import {
 } from "./DBOperator";
 
 jest.mock("../RoomSync");
-jest.mock("firebase/database");
 
+const refMock = ref as jest.Mock;
 const childMock = child as jest.Mock;
 const getMock = get as jest.Mock;
 const pushMock = push as jest.Mock;
@@ -53,6 +53,7 @@ const roomInfo: RoomInfo = {
 
 describe("Test Cases for Reducers of DBAccesser", () => {
   beforeEach(() => {
+    refMock.mockImplementation((ref: any, path: string) => path);
     childMock.mockImplementation((ref: any, path: string) => {
       return `${ref}/${path}`;
     });

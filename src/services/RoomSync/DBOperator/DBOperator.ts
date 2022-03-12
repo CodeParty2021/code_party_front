@@ -18,7 +18,7 @@ export const getRoomAsync = async (roomId: string) => {
   if (roomId == "") return;
 
   //DBからGET
-  const ss = await get(child(RoomsRef, roomId));
+  const ss = await get(child(RoomsRef(), roomId));
   const data = ss.val();
 
   //データが存在しない場合はundefined
@@ -32,7 +32,7 @@ export const getRoomAsync = async (roomId: string) => {
 };
 
 export const pushRoomAsync = async (roomInfo: RoomInfo) => {
-  const dbRef = await push(RoomsRef, roomInfo);
+  const dbRef = await push(RoomsRef(), roomInfo);
   return dbRef;
 };
 
@@ -47,7 +47,7 @@ export const updateRoomAsync = async (
   roomInfo: RoomInfoUpdate
 ) => {
   if (roomId == "") return;
-  await update(child(RoomsRef, roomId), roomInfo);
+  await update(child(RoomsRef(), roomId), roomInfo);
 };
 
 /**
@@ -57,9 +57,9 @@ export const updateRoomAsync = async (
  */
 export const destroyRoomAsync = async (roomId: string) => {
   if (roomId == "") return;
-  await set(child(RoomsRef, roomId), null);
-  await set(child(MembersRef, roomId), null);
-  await set(child(ActionsRef, roomId), null);
+  await set(child(RoomsRef(), roomId), null);
+  await set(child(MembersRef(), roomId), null);
+  await set(child(ActionsRef(), roomId), null);
 };
 
 /**
@@ -89,7 +89,7 @@ export const updateMemberAsync = async (
   userState: UserStateUpdate
 ) => {
   if (roomId == "" || id == "") return;
-  await update(child(MembersRef, `${roomId}/${id}`), userState);
+  await update(child(MembersRef(), `${roomId}/${id}`), userState);
 };
 
 /**
@@ -100,7 +100,7 @@ export const updateMemberAsync = async (
  */
 export const removeMemberAsync = async (roomId: string, id: string) => {
   if (roomId == "" || id == "") return;
-  await set(child(MembersRef, `${roomId}/${id}`), null);
+  await set(child(MembersRef(), `${roomId}/${id}`), null);
 };
 
 /**
@@ -114,7 +114,7 @@ export const addActionAsync = async (
   userAction: UserAction
 ) => {
   if (roomId == "") return;
-  await push(child(ActionsRef, roomId), userAction);
+  await push(child(ActionsRef(), roomId), userAction);
 };
 
 /**
@@ -130,7 +130,7 @@ export const updateActionAsync = async (
   userAction: UserActionUpdate
 ) => {
   if (roomId == "" || id == "") return;
-  await update(child(ActionsRef, `${roomId}/${id}`), userAction);
+  await update(child(ActionsRef(), `${roomId}/${id}`), userAction);
 };
 
 /**
@@ -141,5 +141,5 @@ export const updateActionAsync = async (
  */
 export const removeActionAsync = async (roomId: string, id: string) => {
   if (roomId == "" || id == "") return;
-  await set(child(ActionsRef, `${roomId}/${id}`), null);
+  await set(child(ActionsRef(), `${roomId}/${id}`), null);
 };

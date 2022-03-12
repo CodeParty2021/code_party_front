@@ -8,6 +8,7 @@ import {
   onChildMoved,
   onChildRemoved,
   onValue,
+  ref,
 } from "firebase/database";
 import { RootState } from "store";
 import { AnyAction } from "redux";
@@ -22,6 +23,7 @@ import {
 
 jest.mock("firebase/database");
 
+const refMock = ref as jest.Mock;
 const childMock = child as jest.Mock;
 const onChildAddedMock = onChildAdded as jest.Mock;
 const onChildChangedMock = onChildChanged as jest.Mock;
@@ -60,6 +62,7 @@ const initialState: RootState = {
 describe("Test Cases for Reducers of DBListener", () => {
   let store = mockStore();
   beforeEach(async () => {
+    refMock.mockImplementation((ref: any, path: string) => path);
     childMock.mockImplementation((ref: any, path: string) => {
       return `${ref}/${path}`;
     });
@@ -87,7 +90,7 @@ describe("Test Cases for Reducers of DBListener", () => {
     it("正常系", async () => {
       await store.dispatch(startRoomDBSync("roomId"));
       expect(onValueMock).toBeCalledTimes(1);
-      expect(onValueMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
+      expect(onValueMock.mock.calls[0][0]).toBe("/RoomApp/rooms/roomId"); //第一引数
     });
 
     it("異常系１（ルームIDが空文字列の場合）", async () => {
@@ -124,10 +127,10 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(onChildChangedMock).toBeCalledTimes(1);
       expect(onChildMovedMock).toBeCalledTimes(1);
       expect(onChildRemovedMock).toBeCalledTimes(1);
-      expect(onChildAddedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
-      expect(onChildChangedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
-      expect(onChildMovedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
-      expect(onChildRemovedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
+      expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildChangedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildRemovedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
     });
 
     it("異常系１（ルームIDが空文字列の場合）", async () => {
@@ -173,10 +176,10 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(onChildChangedMock).toBeCalledTimes(1);
       expect(onChildMovedMock).toBeCalledTimes(1);
       expect(onChildRemovedMock).toBeCalledTimes(1);
-      expect(onChildAddedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
-      expect(onChildChangedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
-      expect(onChildMovedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
-      expect(onChildRemovedMock.mock.calls[0][0]).toBe("undefined/roomId"); //第一引数
+      expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildChangedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildRemovedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
     });
 
     it("異常系１（ルームIDが空文字列の場合）", async () => {

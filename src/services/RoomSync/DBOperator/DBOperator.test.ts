@@ -15,7 +15,6 @@ import {
 } from "./DBOperator";
 
 jest.mock("firebase/database");
-jest.mock("../RoomSync");
 
 const refMock = ref as jest.Mock;
 const childMock = child as jest.Mock;
@@ -52,7 +51,7 @@ const roomInfo: RoomInfo = {
   state: "waiting",
 };
 
-describe("Test Cases for Reducers of DBAccesser", () => {
+describe("Test Cases for Reducers of DBOperator", () => {
   beforeEach(() => {
     refMock.mockImplementation((ref: any, path: string) => path);
     childMock.mockImplementation((ref: any, path: string) => {
@@ -70,7 +69,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
       });
       const result = await getRoomAsync("roomId");
       expect(getMock).toBeCalledTimes(1);
-      expect(getMock).lastCalledWith("undefined/roomId");
+      expect(getMock).lastCalledWith("/RoomApp/rooms/roomId");
       expect(result).toEqual(roomInfo);
     });
 
@@ -95,7 +94,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
       pushMock.mockResolvedValue("reference");
       const result = await pushRoomAsync(roomInfo);
       expect(pushMock).toBeCalledTimes(1);
-      expect(pushMock).lastCalledWith(undefined, roomInfo);
+      expect(pushMock).lastCalledWith("/RoomApp/rooms", roomInfo);
       expect(result).toEqual("reference");
     });
   });
@@ -104,7 +103,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
     it("正常系", async () => {
       await updateRoomAsync("roomId", roomInfo);
       expect(updateMock).toBeCalledTimes(1);
-      expect(updateMock).lastCalledWith("undefined/roomId", roomInfo);
+      expect(updateMock).lastCalledWith("/RoomApp/rooms/roomId", roomInfo);
     });
 
     it("異常系１（roomIdが空文字列の場合）", async () => {
@@ -117,9 +116,9 @@ describe("Test Cases for Reducers of DBAccesser", () => {
     it("正常系", async () => {
       await destroyRoomAsync("roomId");
       expect(setMock).toBeCalledTimes(3);
-      expect(setMock.mock.calls[0]).toEqual(["undefined/roomId", null]);
-      expect(setMock.mock.calls[1]).toEqual(["undefined/roomId", null]);
-      expect(setMock.mock.calls[2]).toEqual(["undefined/roomId", null]);
+      expect(setMock.mock.calls[0]).toEqual(["/RoomApp/rooms/roomId", null]);
+      expect(setMock.mock.calls[1]).toEqual(["/RoomApp/members/roomId", null]);
+      expect(setMock.mock.calls[2]).toEqual(["/RoomApp/actions/roomId", null]);
     });
 
     it("異常系１（roomIdが空文字列の場合）", async () => {
@@ -132,7 +131,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
     it("正常系", async () => {
       await initMemberAsync("roomId", user);
       expect(updateMock).toBeCalledTimes(1);
-      expect(updateMock).lastCalledWith("undefined/roomId/" + user.id, {
+      expect(updateMock).lastCalledWith("/RoomApp/members/roomId/" + user.id, {
         displayName: user.displayName,
         ready: false,
       });
@@ -149,7 +148,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
       await updateMemberAsync("roomId", "userId", users["userId"]);
       expect(updateMock).toBeCalledTimes(1);
       expect(updateMock).lastCalledWith(
-        "undefined/roomId/userId",
+        "/RoomApp/members/roomId/userId",
         users["userId"]
       );
     });
@@ -169,7 +168,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
     it("正常系", async () => {
       await removeMemberAsync("roomId", "userId");
       expect(setMock).toBeCalledTimes(1);
-      expect(setMock).lastCalledWith("undefined/roomId/userId", null);
+      expect(setMock).lastCalledWith("/RoomApp/members/roomId/userId", null);
     });
 
     it("異常系１（roomIdが空文字列の場合）", async () => {
@@ -187,7 +186,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
     it("正常系", async () => {
       await addActionAsync("roomId", actions["actionId"]);
       expect(pushMock).toBeCalledTimes(1);
-      expect(pushMock).lastCalledWith("undefined/roomId", actions["actionId"]);
+      expect(pushMock).lastCalledWith("/RoomApp/actions/roomId", actions["actionId"]);
     });
 
     it("異常系１（roomIdが空文字列の場合）", async () => {
@@ -201,7 +200,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
       await updateActionAsync("roomId", "actionId", actions["actionId"]);
       expect(updateMock).toBeCalledTimes(1);
       expect(updateMock).lastCalledWith(
-        "undefined/roomId/actionId",
+        "/RoomApp/actions/roomId/actionId",
         actions["actionId"]
       );
     });
@@ -221,7 +220,7 @@ describe("Test Cases for Reducers of DBAccesser", () => {
     it("正常系", async () => {
       await removeActionAsync("roomId", "actionId");
       expect(setMock).toBeCalledTimes(1);
-      expect(setMock).lastCalledWith("undefined/roomId/actionId", null);
+      expect(setMock).lastCalledWith("/RoomApp/actions/roomId/actionId", null);
     });
 
     it("異常系１（roomIdが空文字列の場合）", async () => {

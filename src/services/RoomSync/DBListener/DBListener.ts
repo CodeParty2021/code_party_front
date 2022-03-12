@@ -43,7 +43,7 @@ export const startRoomDBSync = (roomId: string): ThunkResult => {
   return (dispatch: any) => {
     if (roomId == "") return;
     dispatch(
-      _startValueDBSync("rooms", child(RoomsRef, roomId), enterRoom, exitRoom)
+      _startValueDBSync("rooms", child(RoomsRef(), roomId), enterRoom, exitRoom)
     );
   };
 };
@@ -69,7 +69,7 @@ export const startMembersDBSync = (roomId: string): ThunkResult => {
     dispatch(
       _startListDBSync(
         "members",
-        child(MembersRef, roomId),
+        child(MembersRef(), roomId),
         addMember,
         updateMember,
         moveMember,
@@ -100,7 +100,7 @@ export const startActionsDBSync = (roomId: string): ThunkResult => {
     dispatch(
       _startListDBSync(
         "actions",
-        child(ActionsRef, roomId),
+        child(ActionsRef(), roomId),
         addAction,
         updateAction,
         moveAction,

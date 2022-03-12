@@ -5,10 +5,10 @@ import "firebase_config";
 
 import { RootState } from "store";
 
-export const RootRef = ref(getDatabase(), "/RoomApp");
-export const RoomsRef = child(RootRef, "rooms");
-export const MembersRef = child(RootRef, "members");
-export const ActionsRef = child(RootRef, "actions");
+export const RootRef = () => ref(getDatabase(), "/RoomApp");
+export const RoomsRef = () => child(RootRef(), "rooms");
+export const MembersRef = () => child(RootRef(), "members");
+export const ActionsRef = () => child(RootRef(), "actions");
 
 /**
  * ルーム情報

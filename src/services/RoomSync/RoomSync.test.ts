@@ -38,7 +38,7 @@ const roomId = "room id";
 const roomInfo: RoomInfo = {
   name: "room name",
   host: "userid1",
-  state: "waiting",
+  status: "waiting",
 };
 const user1: UserState = {
   displayName: "user1",

@@ -48,7 +48,7 @@ const actions: { [id: string]: UserAction } = {
 const roomInfo: RoomInfo = {
   name: "room's name",
   host: "userId",
-  state: "waiting",
+  status: "waiting",
 };
 
 describe("Test Cases for Reducers of DBOperator", () => {

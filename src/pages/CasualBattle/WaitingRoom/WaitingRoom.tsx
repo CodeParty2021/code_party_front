@@ -7,6 +7,7 @@ export const CasualBattleWaitingRoom: React.FC<Props> = () => {
   const {
     roomInfo,
     isHost,
+    status,
     readyBtnHandler,
     exitBtnHandler,
     startBtnDisabled,
@@ -35,13 +36,19 @@ export const CasualBattleWaitingRoom: React.FC<Props> = () => {
       <ul>
         <li>Room ID: {roomInfo.roomId}</li>
         <li>Host: {roomInfo.host.displayName}</li>
+        <li>Status: {status}</li>
         <li>I am {isHost ? "" : "not"} a host.</li>
         <li>Members:</li>
         <ul>
           {roomInfo.memberKeys.map((key) => (
             <li key={key}>
               {roomInfo.members[key].displayName} :{" "}
-              {roomInfo.members[key].ready ? "準備完了" : "準備中"}
+              {
+                roomInfo.members[key].status == "watching" ? "観戦中" :
+                roomInfo.members[key].status == "disconnect" ? "切断" :
+                roomInfo.members[key].status == "waiting" ? roomInfo.members[key].ready ? "準備完了" : "準備中" :
+                "No Status"
+              }
             </li>
           ))}
         </ul>

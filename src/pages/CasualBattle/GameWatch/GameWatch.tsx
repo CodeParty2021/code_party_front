@@ -1,16 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useGameWatchState } from "./hooks/useGameWatchState";
 
 type Props = {};
 
 export const CasualBattleGameWatch: React.FC<Props> = () => {
+  const {isAnalysing, exitBtnHandler} = useGameWatchState();
   return (
     <div>
       <div>結果</div>
-      <div>aaa</div>
       <div>
-        <Link to="/casual-battle/waiting-room">ロビーに戻る</Link>
+        {isAnalysing ? "解析中" : "観戦中"}
       </div>
+      <button onClick={exitBtnHandler}>退出</button>
     </div>
   );
 };

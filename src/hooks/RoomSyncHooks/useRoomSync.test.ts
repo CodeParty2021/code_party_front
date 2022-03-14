@@ -60,7 +60,7 @@ const actions: { [id: string]: UserAction } = {
 const initialRoomInfo: RoomInfo = {
   name: "room's name",
   host: "userid1",
-  state: "waiting",
+  status: "waiting",
 };
 
 const initialRoomState: RoomState = {

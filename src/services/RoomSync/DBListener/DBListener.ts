@@ -4,11 +4,13 @@ import {
 } from "@reduxjs/toolkit";
 import {
   child,
+  DatabaseReference,
   DataSnapshot,
   onChildAdded,
   onChildChanged,
   onChildMoved,
   onChildRemoved,
+  onDisconnect,
   onValue,
   Query,
   Unsubscribe,
@@ -29,6 +31,8 @@ import {
   ThunkResult,
   updateAction,
   updateMember,
+  UserState,
+  UserStateUpdate,
   ValueReducerArg,
 } from "../RoomSync";
 
@@ -87,6 +91,65 @@ export const stopMembersDBSync = (): ThunkResult => {
   return (dispatch: any) => {
     dispatch(_stopListDBSync("members"));
   };
+};
+
+/**
+ * 接続切断時にユーザ状態をセットする
+ * @param roomId ルームID
+ * @param userId ユーザID
+ * @param value セットするユーザ状態
+ * @returns なし
+ */
+export const setUserStateOnDisconnect = async (roomId: string, userId: string, value: UserState) => {
+  if(userId == "") return;
+  await _setValueOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value);
+};
+
+/**
+ * 接続切断時にユーザ状態を更新する
+ * @param roomId ルームID
+ * @param userId ユーザID
+ * @param value 更新するユーザ状態
+ * @returns なし
+ */
+export const updateUserStateOnDisconnect = async (roomId: string, userId: string, value: UserStateUpdate) => {
+  if(userId == "") return;
+  await _updateOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value);
+};
+
+/**
+ * 接続切断時にユーザ状態を削除する
+ * @param roomId ルームID
+ * @param userId ユーザID
+ * @returns なし
+ */
+export const removeUserStateOnDisconnect = async (roomId: string, userId: string) => {
+  if(userId == "") return;
+  await _removeOnDisconnect(child(MembersRef(), `${roomId}/${userId}`));
+};
+
+/**
+ * 接続切断時に優先度を使用してユーザ状態をセットする
+ * @param roomId ルームID
+ * @param userId ユーザID
+ * @param value 設定するユーザ状態
+ * @param priority 優先度
+ * @returns なし
+ */
+export const setUserStateWithPriorityOnDisconnect = async (roomId: string, userId: string, value: UserState, priority: string | number | null) => {
+  if(userId == "") return;
+  await _setWithPriorityOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value, priority);
+};
+
+/**
+ * 接続切断時にユーザ状態を変化させるリスナーを全て削除する
+ * @param roomId ルームID
+ * @param userId ユーザID
+ * @returns なし
+ */
+export const cancelUserStateOnDisconnect = async (roomId: string, userId: string, ) => {
+  if(userId == "") return;
+  await _cancelOnDisconnect(child(MembersRef(), `${roomId}/${userId}`));
 };
 
 /**
@@ -272,6 +335,7 @@ const _unsubscribeCallBackToSyncSingleData = (callbackKey: string) => {
 
 /**
  * リストデータを監視するコールバックを設定
+ * @param callbackKey コールバックキー
  * @param query データベースクエリ
  * @param childAddedCB 追加時のコールバック関数
  * @param childChangedCB 更新時のコールバック関数
@@ -315,6 +379,26 @@ const _unsubscribeCallBackToSyncListData = (callbackKey: string) => {
   _unsubscribe(callbackKey + "/changed");
   _unsubscribe(callbackKey + "/moved");
   _unsubscribe(callbackKey + "/removed");
+};
+
+const _setValueOnDisconnect = async (ref: DatabaseReference, value: any) => {
+  await onDisconnect(ref).set(value);
+};
+
+const _updateOnDisconnect = async (ref: DatabaseReference, value: any) => {
+  await onDisconnect(ref).update(value);
+};
+
+const _removeOnDisconnect = async (ref: DatabaseReference) => {
+  await onDisconnect(ref).remove();
+};
+
+const _setWithPriorityOnDisconnect = async (ref: DatabaseReference, value: any, priority: string | number | null) => {
+  await onDisconnect(ref).setWithPriority(value, priority);
+};
+
+const _cancelOnDisconnect = async (ref: DatabaseReference) => {
+  await onDisconnect(ref).cancel();
 };
 
 /**

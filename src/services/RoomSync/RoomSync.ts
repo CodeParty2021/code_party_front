@@ -17,7 +17,15 @@ export const ActionsRef = () => child(RootRef(), "actions");
 export type RoomInfo = {
   name: string;
   host: string;
-  state: "waiting" | "analyzing" | "watching";
+  /**
+   * - waiting: 待機画面に居る
+   * - watching: GameWatching画面にいる
+   * - result: GameWatching画面で結果を表示している
+   */
+  status: "waiting" | "watching";
+  analyzingResult?: {
+    jsonPath: string;
+  };
 };
 
 /**
@@ -26,6 +34,17 @@ export type RoomInfo = {
  */
 export type UserState = {
   displayName: string;
+  /**
+   * - waiting: 待機画面に居る
+   * - watching: GameWatching画面にいる
+   * - disconnect: 接続が切れた
+   */
+  status: "waiting" | "watching" | "disconnect";
+  /**
+   * 選択したコードのID
+   */
+  codeId?: string;
+  //for CasualBattle/WaitingRoom
   ready: boolean;
 };
 

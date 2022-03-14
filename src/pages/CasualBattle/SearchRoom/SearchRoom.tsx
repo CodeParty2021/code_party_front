@@ -1,16 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSearchRoomState } from "./hooks/useSearchRoomState";
 
 type Props = {};
 
 export const CasualBattleSearchRoom: React.FC<Props> = () => {
+  const {
+    roomIdTextBoxValue,
+    roomIdTextBoxChangeHandler,
+    enterBtnClickHandler,
+  } = useSearchRoomState();
+
   return (
     <div>
       <div>ルームIDを入力する</div>
-      <input></input>
-      <div>
-        <Link to="/casual-battle/waiting-room">ルームに入る</Link>
-      </div>
+      <input
+        id="roomid-textbox"
+        value={roomIdTextBoxValue}
+        onChange={(e) => roomIdTextBoxChangeHandler(e.target.value)}
+      ></input>
+      <button id="enter-btn" onClick={enterBtnClickHandler}>
+        ルームに入る
+      </button>
     </div>
   );
 };

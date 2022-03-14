@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CasualBattleWaitingRoom /> auth snapshot test 1`] = `
+exports[`<CasualBattleWaitingRoom /> snapshot test 1`] = `
 Array [
   <div>
     <div>
@@ -10,15 +10,64 @@ Array [
       <button>
         コード選択
       </button>
-      <Link
-        to="/casual-battle/result"
+      <button
+        disabled={false}
+        id="start-btn"
+        onClick={[MockFunction]}
       >
         マッチ開始
-      </Link>
+      </button>
     </div>
-    <button>
+    <button
+      id="ready-btn"
+      onClick={[MockFunction]}
+    >
       準備完了
     </button>
+    <button
+      id="exit-btn"
+      onClick={[MockFunction]}
+    >
+      退出
+    </button>
+    <ul>
+      <li>
+        Room ID: 
+        room id
+      </li>
+      <li>
+        Host: 
+        host user
+      </li>
+      <li>
+        I am 
+        
+         a host.
+      </li>
+      <li>
+        Members:
+      </li>
+      <ul>
+        <li>
+          host user
+           :
+           
+          準備中
+        </li>
+        <li>
+          user 1
+           :
+           
+          準備完了
+        </li>
+        <li>
+          user 2
+           :
+           
+          準備完了
+        </li>
+      </ul>
+    </ul>
   </div>,
 ]
 `;

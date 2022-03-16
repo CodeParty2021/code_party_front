@@ -2,14 +2,21 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
+import {
+  ResultType,
+  useFetchResult,
+} from "hooks/ResultAPIHooks/useFetchResult";
 
 export type IResponse = {
-  isAnalysing: boolean;
+  isAnalyzing: boolean;
+  analyzingError: boolean;
+  result?: ResultType;
   exitBtnHandler: () => void;
 };
 
 export const useGameWatchState = (): IResponse => {
   const { room, updateMember } = useRoomSync();
+  const { data: result, fetchResult } = useFetchResult();
   const navigate = useNavigate();
 
   //初期処理
@@ -18,12 +25,19 @@ export const useGameWatchState = (): IResponse => {
     updateMember({
       status: "watching",
     });
-    //シミュレーションの実行
   }, []);
 
+  // 何らかの理由でルームから出された場合はロビーに戻る
   useEffect(() => {
-    if(room.info?.analyzingResult) {
-      console.log("解析終了！");
+    if (!room.isEntered) {
+      navigate("/casual-battle");
+    }
+  }, [room.isEntered]);
+
+  //シミュレーション結果が更新されたら結果をフェッチする
+  useEffect(() => {
+    if (room.info?.analyzingResult?.resultId) {
+      fetchResult(room.info?.analyzingResult.resultId);
     }
   }, [room.info?.analyzingResult]);
 
@@ -32,7 +46,9 @@ export const useGameWatchState = (): IResponse => {
   };
 
   return {
-    isAnalysing: room.info?.analyzingResult == undefined,
+    isAnalyzing: !room.info?.analyzingResult?.resultId,
+    analyzingError: Boolean(room.info?.analyzingResult?.error),
+    result: result,
     exitBtnHandler: _exitBtnHandler,
   };
 };

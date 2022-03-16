@@ -43,7 +43,7 @@ import {
  * @param roomId ルームID
  * @returns dispatch関数
  */
-export const startRoomDBSync = (roomId: string): ThunkResult => {
+export const startRoomDBSync = (roomId: string): ThunkResult<void> => {
   return (dispatch: any) => {
     if (roomId == "") return;
     dispatch(
@@ -56,7 +56,7 @@ export const startRoomDBSync = (roomId: string): ThunkResult => {
  * ルーム情報の同期を終了する
  * @returns dispatch関数
  */
-export const stopRoomDBSync = (): ThunkResult => {
+export const stopRoomDBSync = (): ThunkResult<void> => {
   return (dispatch: any) => {
     dispatch(_stopValueDBSync("rooms"));
   };
@@ -67,7 +67,7 @@ export const stopRoomDBSync = (): ThunkResult => {
  * @param roomId ルームID
  * @returns dispatch用関数
  */
-export const startMembersDBSync = (roomId: string): ThunkResult => {
+export const startMembersDBSync = (roomId: string): ThunkResult<void> => {
   return (dispatch: any) => {
     if (roomId == "") return;
     dispatch(
@@ -87,7 +87,7 @@ export const startMembersDBSync = (roomId: string): ThunkResult => {
  * メンバーリストの同期を停止する
  * @returns dispatch用関数
  */
-export const stopMembersDBSync = (): ThunkResult => {
+export const stopMembersDBSync = (): ThunkResult<void> => {
   return (dispatch: any) => {
     dispatch(_stopListDBSync("members"));
   };
@@ -100,9 +100,16 @@ export const stopMembersDBSync = (): ThunkResult => {
  * @param value セットするユーザ状態
  * @returns なし
  */
-export const setUserStateOnDisconnect = async (roomId: string, userId: string, value: UserState) => {
-  if(userId == "") return;
-  await _setValueOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value);
+export const setUserStateOnDisconnect = async (
+  roomId: string,
+  userId: string,
+  value: UserState
+) => {
+  if (userId == "") return;
+  await _setValueOnDisconnect(
+    child(MembersRef(), `${roomId}/${userId}`),
+    value
+  );
 };
 
 /**
@@ -112,8 +119,12 @@ export const setUserStateOnDisconnect = async (roomId: string, userId: string, v
  * @param value 更新するユーザ状態
  * @returns なし
  */
-export const updateUserStateOnDisconnect = async (roomId: string, userId: string, value: UserStateUpdate) => {
-  if(userId == "") return;
+export const updateUserStateOnDisconnect = async (
+  roomId: string,
+  userId: string,
+  value: UserStateUpdate
+) => {
+  if (userId == "") return;
   await _updateOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value);
 };
 
@@ -123,8 +134,11 @@ export const updateUserStateOnDisconnect = async (roomId: string, userId: string
  * @param userId ユーザID
  * @returns なし
  */
-export const removeUserStateOnDisconnect = async (roomId: string, userId: string) => {
-  if(userId == "") return;
+export const removeUserStateOnDisconnect = async (
+  roomId: string,
+  userId: string
+) => {
+  if (userId == "") return;
   await _removeOnDisconnect(child(MembersRef(), `${roomId}/${userId}`));
 };
 
@@ -136,9 +150,18 @@ export const removeUserStateOnDisconnect = async (roomId: string, userId: string
  * @param priority 優先度
  * @returns なし
  */
-export const setUserStateWithPriorityOnDisconnect = async (roomId: string, userId: string, value: UserState, priority: string | number | null) => {
-  if(userId == "") return;
-  await _setWithPriorityOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value, priority);
+export const setUserStateWithPriorityOnDisconnect = async (
+  roomId: string,
+  userId: string,
+  value: UserState,
+  priority: string | number | null
+) => {
+  if (userId == "") return;
+  await _setWithPriorityOnDisconnect(
+    child(MembersRef(), `${roomId}/${userId}`),
+    value,
+    priority
+  );
 };
 
 /**
@@ -147,8 +170,11 @@ export const setUserStateWithPriorityOnDisconnect = async (roomId: string, userI
  * @param userId ユーザID
  * @returns なし
  */
-export const cancelUserStateOnDisconnect = async (roomId: string, userId: string, ) => {
-  if(userId == "") return;
+export const cancelUserStateOnDisconnect = async (
+  roomId: string,
+  userId: string
+) => {
+  if (userId == "") return;
   await _cancelOnDisconnect(child(MembersRef(), `${roomId}/${userId}`));
 };
 
@@ -157,7 +183,7 @@ export const cancelUserStateOnDisconnect = async (roomId: string, userId: string
  * @param roomId ルームID
  * @returns dispatch用関数
  */
-export const startActionsDBSync = (roomId: string): ThunkResult => {
+export const startActionsDBSync = (roomId: string): ThunkResult<void> => {
   return (dispatch: any) => {
     if (roomId == "") return;
     dispatch(
@@ -177,7 +203,7 @@ export const startActionsDBSync = (roomId: string): ThunkResult => {
  * アクションリストの同期を停止する
  * @returns dispatch用関数
  */
-export const stopActionsDBSync = (): ThunkResult => {
+export const stopActionsDBSync = (): ThunkResult<void> => {
   return (dispatch: any) => {
     dispatch(_stopListDBSync("actions"));
   };
@@ -201,7 +227,7 @@ const _startValueDBSync = (
   syncRef: Query,
   reducerFunc: _valueReducerFunc,
   removeReducerFunc?: _valueRemoveReducerFunc
-): ThunkResult => {
+): ThunkResult<void> => {
   return (dispatch: any) => {
     _setCallBackToSyncSingleData(callbackKey, syncRef, (ss: DataSnapshot) => {
       const data = ss.val();
@@ -218,7 +244,7 @@ const _startValueDBSync = (
   };
 };
 
-const _stopValueDBSync = (callbackKey: string): ThunkResult => {
+const _stopValueDBSync = (callbackKey: string): ThunkResult<void> => {
   return () => {
     _unsubscribeCallBackToSyncSingleData(callbackKey);
   };
@@ -246,7 +272,7 @@ const _startListDBSync = (
   updatedFunc: _listReducerFunc,
   movedFunc: _listReducerFunc,
   removedFunc: _listRemoveReducerFunc
-): ThunkResult => {
+): ThunkResult<void> => {
   return (dispatch: any) => {
     _setCallBackToSyncListData(
       callbackKey,
@@ -305,7 +331,7 @@ const _startListDBSync = (
  * @param callbackKey コールバックキー
  * @returns dispatch用関数
  */
-const _stopListDBSync = (callbackKey: string): ThunkResult => {
+const _stopListDBSync = (callbackKey: string): ThunkResult<void> => {
   return () => {
     _unsubscribeCallBackToSyncListData(callbackKey);
   };
@@ -393,7 +419,11 @@ const _removeOnDisconnect = async (ref: DatabaseReference) => {
   await onDisconnect(ref).remove();
 };
 
-const _setWithPriorityOnDisconnect = async (ref: DatabaseReference, value: any, priority: string | number | null) => {
+const _setWithPriorityOnDisconnect = async (
+  ref: DatabaseReference,
+  value: any,
+  priority: string | number | null
+) => {
   await onDisconnect(ref).setWithPriority(value, priority);
 };
 

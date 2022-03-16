@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ref, child, getDatabase } from "firebase/database";
-import { Dispatch } from "redux";
+import { AnyAction } from "redux";
 import "firebase_config";
+import { ThunkAction } from "redux-thunk";
 
 import { RootState } from "store";
 
@@ -24,7 +25,8 @@ export type RoomInfo = {
    */
   status: "waiting" | "watching";
   analyzingResult?: {
-    jsonPath: string;
+    resultId?: string;
+    error?: string;
   };
 };
 
@@ -104,14 +106,19 @@ type UserStatePayload = ListPayload<UserState>; // Member Payload
 type UserActionPayload = ListPayload<UserAction>; // Action Payload
 
 // ---- DBアップデート用タイプ ---- //
-export type RoomInfoUpdate = Partial<RoomInfo>; // Room Update
-export type UserStateUpdate = Partial<UserState>; // Member Update
-export type UserActionUpdate = Partial<UserAction>; // Action Update
+// null：値を削除，undefined：更新しない
+type nullable<T> = {
+  [P in keyof T]?: T[P] | undefined | null;
+};
+export type RoomInfoUpdate = nullable<RoomInfo>; // Room Update
+export type UserStateUpdate = nullable<UserState>; // Member Update
+export type UserActionUpdate = nullable<UserAction>; // Action Update
 
-export type ThunkResult = (
-  dispatch: Dispatch<any>,
-  getState: () => RootState
-) => Promise<any> | any;
+export type ThunkResult<R> = ThunkAction<R, RootState, undefined, AnyAction>;
+// export type ThunkResult = (
+//   dispatch: Dispatch<any>,
+//   getState: () => RootState
+// ) => Promise<any> | any;
 
 /**
  * 初期状態

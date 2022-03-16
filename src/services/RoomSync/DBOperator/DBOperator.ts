@@ -29,12 +29,18 @@ export const getRoomAsync = async (roomId: string) => {
   //データが存在しない場合はundefined
   if (!data) return;
 
-  return {
+  //ルーム情報にキャスト
+  const roomInfo: RoomInfo = {
     name: data.name,
     host: data.host,
-    status: data.state,
+    status: data.status,
     analyzingResult: data.analyzingResult,
-  } as RoomInfo;
+  };
+
+  //チェック
+  if (!roomInfo.name || !roomInfo.host || !roomInfo.status) return;
+
+  return roomInfo;
 };
 
 /**
@@ -80,7 +86,11 @@ export const destroyRoomAsync = async (roomId: string) => {
 export const initMemberAsync = async (
   roomId: string,
   user: User,
-  userState: UserState = { displayName: user.displayName, status: "waiting", ready: false }
+  userState: UserState = {
+    displayName: user.displayName,
+    status: "waiting",
+    ready: false,
+  }
 ) => {
   await updateMemberAsync(roomId, user.id, userState);
 };

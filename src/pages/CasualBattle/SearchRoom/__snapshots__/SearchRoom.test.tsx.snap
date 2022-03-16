@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CasualBattleWaitingRoom /> snapshot test 1`] = `
+exports[`<CasualBattleSearchRoom /> snapshot test 1`] = `
 Array [
   <div>
     <div>
@@ -12,6 +12,7 @@ Array [
       value="typed value"
     />
     <button
+      disabled={false}
       id="enter-btn"
       onClick={[MockFunction]}
     >

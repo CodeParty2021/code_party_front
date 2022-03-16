@@ -9,12 +9,13 @@ jest.mock("./hooks/useSearchRoomState");
 const useSelectorMock = useSearchRoomState as jest.Mock;
 
 const state: IResponse = {
+  enterBtnDisabled: false,
   enterBtnClickHandler: jest.fn(),
   roomIdTextBoxChangeHandler: jest.fn(),
   roomIdTextBoxValue: "typed value",
 };
 
-describe("<CasualBattleWaitingRoom />", () => {
+describe("<CasualBattleSearchRoom />", () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue({
       ...state,
@@ -32,17 +33,15 @@ describe("<CasualBattleWaitingRoom />", () => {
 
   it("enter button test", () => {
     const wrapper = shallow(<CasualBattleSearchRoom />);
-    const spy = jest.spyOn(state, "enterBtnClickHandler");
 
     const btn = wrapper.find("#enter-btn");
     btn.simulate("click");
 
-    expect(spy).toHaveBeenCalled();
+    expect(state.enterBtnClickHandler).toHaveBeenCalled();
   });
 
   it("room id text box test", () => {
     const wrapper = shallow(<CasualBattleSearchRoom />);
-    const spy = jest.spyOn(state, "roomIdTextBoxChangeHandler");
 
     const event = {
       target: {
@@ -53,6 +52,6 @@ describe("<CasualBattleWaitingRoom />", () => {
     const btn = wrapper.find("#roomid-textbox");
     btn.simulate("change", event);
 
-    expect(spy).toHaveBeenCalled();
+    expect(state.roomIdTextBoxChangeHandler).toHaveBeenCalled();
   });
 });

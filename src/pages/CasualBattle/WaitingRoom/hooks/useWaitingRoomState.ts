@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
+import { CodeType, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
 import { UserState, UserAction } from "services/RoomSync/RoomSync";
 
 export type IResponse = {
@@ -15,17 +16,33 @@ export type IResponse = {
   };
   isHost: boolean;
   status?: "waiting" | "watching";
+  ready: boolean;
+
   readyBtnHandler: () => void;
+  readyBtnDisabled: boolean;
   exitBtnHandler: () => void;
   startBtnDisabled: boolean;
   startBtnHandler: () => void;
+
+  code: {
+    codes: CodeType[];
+    loading: boolean;
+  };
+  selectedCodeId: string;
+  onChangeSelectedCodeId: (codeId: string) => void;
 };
 
 export const useWaitingRoomState = (): IResponse => {
-  const { room, isHost, updateRoomInfo, updateMember, exitRoom } = useRoomSync();
-  const [preRoomStatus, setPreRoomStatus] = useState<"waiting" | "watching">("watching");
+  const { room, isHost, updateRoomInfo, updateMember, exitRoom } =
+    useRoomSync();
+  const { data: codes = [], loading } = useFetchCodes();
+  const [preRoomStatus, setPreRoomStatus] = useState<"waiting" | "watching">(
+    "watching"
+  );
+  const [selectedCodeId, setSelectedCodeId] = useState("");
   const [ready, setReady] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
+  const [startBtnDisabled, setStartBtnDisabled] = useState(true);
   const navigate = useNavigate();
   const dummyUser: UserState = {
     displayName: "",
@@ -47,10 +64,18 @@ export const useWaitingRoomState = (): IResponse => {
     }
   }, [room.isEntered]);
 
+  // 準備ボタンの有効化
+  useEffect(() => {
+    //コードが選択されたら準備完了ボタンを押せるようにする
+    if (selectedCodeId != "") {
+      setReadyBtnDisabled(false);
+    }
+  }, [selectedCodeId]);
+
   // ルームステータスがwaitingからwatchingになったら観戦画面に遷移
   useEffect(() => {
-    if(room.info){
-      if (preRoomStatus == "waiting" && room.info.status == "watching"){
+    if (room.info) {
+      if (preRoomStatus == "waiting" && room.info.status == "watching") {
         navigate("/casual-battle/result");
       }
       setPreRoomStatus(room.info?.status);
@@ -61,6 +86,7 @@ export const useWaitingRoomState = (): IResponse => {
   useEffect(() => {
     updateMember({
       ready: ready,
+      codeId: selectedCodeId,
     });
   }, [ready]);
 
@@ -76,7 +102,7 @@ export const useWaitingRoomState = (): IResponse => {
             break;
           }
         }
-        setDisabled(newDisabled);
+        setStartBtnDisabled(newDisabled);
       }
 
       // 全員がWaitingRoomに返ってきたらroomの状態をwaitingに更新する
@@ -86,15 +112,16 @@ export const useWaitingRoomState = (): IResponse => {
           newRoomStatus = "watching";
         }
       }
-      if(newRoomStatus == "waiting" && room.info?.status == "watching") {
+      if (newRoomStatus == "waiting" && room.info?.status == "watching") {
         updateRoomInfo({
           status: "waiting",
+          analyzingResult: null,
         });
       }
     }
   }, [room.members, isHost]);
 
-  // ---- ボタンクリックイベント ---- //
+  // ---- イベントハンドラ ---- //
 
   const _readyBtnHandler = () => {
     setReady(!ready);
@@ -108,6 +135,10 @@ export const useWaitingRoomState = (): IResponse => {
     updateRoomInfo({
       status: "watching",
     });
+  };
+
+  const _onChangeSelectedCodeId = (codeId: string) => {
+    setSelectedCodeId(codeId);
   };
 
   return {
@@ -124,9 +155,19 @@ export const useWaitingRoomState = (): IResponse => {
     },
     isHost: isHost,
     status: room.info?.status,
+    ready: ready,
+
     readyBtnHandler: _readyBtnHandler,
+    readyBtnDisabled: readyBtnDisabled,
     exitBtnHandler: _exitBtnHandler,
-    startBtnDisabled: disabled,
+    startBtnDisabled: startBtnDisabled,
     startBtnHandler: _startBtnHandler,
+
+    code: {
+      codes: codes,
+      loading: loading,
+    },
+    selectedCodeId: selectedCodeId,
+    onChangeSelectedCodeId: _onChangeSelectedCodeId,
   };
 };

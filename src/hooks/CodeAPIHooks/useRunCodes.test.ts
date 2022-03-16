@@ -6,6 +6,8 @@ import { uri } from "config";
 import { useRunCodes } from "./useRunCodes";
 import { axiosWithIdToken } from "axios_config";
 
+jest.mock("firebase_config");
+
 describe("useRunCodes", () => {
   afterEach(() => {
     jest.resetAllMocks();

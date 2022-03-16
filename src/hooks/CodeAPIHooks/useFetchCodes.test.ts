@@ -9,6 +9,7 @@ import { uri } from "config";
 import { axiosWithIdToken } from "axios_config";
 
 jest.mock("react-redux");
+jest.mock("firebase_config");
 
 //参考記事: https://zenn.dev/bom_shibuya/articles/5c3ae7745c5e94
 

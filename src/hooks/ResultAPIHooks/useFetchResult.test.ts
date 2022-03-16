@@ -6,6 +6,8 @@ import { uri } from "config";
 import { useFetchResult } from "./useFetchResult";
 import { AxiosInstance } from "axios";
 
+jest.mock("firebase_config");
+
 describe("useFetchResult", () => {
   afterEach(() => {
     jest.resetAllMocks();

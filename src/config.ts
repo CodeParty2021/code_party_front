@@ -1,6 +1,6 @@
 //config.jsでの環境構築はこれがわかりやすい
 // https://qiita.com/zgmf_mbfp03/items/008436c5749d65f96e55
-
+// 環境変数を整えている
 const Config = () => {
   if (process.env.NODE_ENV === "test") {
     // test

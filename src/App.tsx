@@ -1,8 +1,6 @@
-import { SignOutButton } from "components/SignOutButton/SignOutButton";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HashRouter, Route, Routes, Link } from "react-router-dom";
-import { RootState } from "store";
+import { useDispatch } from "react-redux";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
 import { Stage } from "./pages/Stage/Stage";
@@ -16,6 +14,7 @@ import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
 import { setCallBackToSyncUser } from "services/user/user";
+import { RootingScreen } from "components/RootingScreen/RootingScreen";
 
 type Props = {};
 
@@ -26,8 +25,7 @@ export const currentUser = React.createContext(undefined);
 
 export const App: React.FC<Props> = () => {
   const dispatch = useDispatch();
-  const { user, isLogin } = useSelector((state: RootState) => state.user);
-
+  const isDev = process.env.NODE_ENV === "development";
   useEffect(() => {
     dispatch(setCallBackToSyncUser());
   }, []);
@@ -63,48 +61,7 @@ export const App: React.FC<Props> = () => {
             element={<PrivateRoute component={CodeCoding} />}
           />
         </Routes>
-
-        <p> ==============</p>
-        <h3>以下開発用画面</h3>
-
-        <a href="https://strap.app/app/board/jkJsgBr4NKM8IvxIYo8s">
-          画面名称はこちら
-        </a>
-        <ul>
-          <li>
-            <Link to="/">トップページ</Link>
-          </li>
-          <li>
-            <Link to="/stages">ステージ選択画面</Link>
-          </li>
-          <li>
-            <Link to="/start">ログイン画面</Link>
-          </li>
-          <li>
-            <Link to="/mode-select">モード選択画面</Link>
-          </li>
-          <li>
-            <Link to="/casual-battle">カジュアルロビー画面</Link>
-          </li>
-          <li>
-            <Link to="/casual-battle/waiting-room">待機招待画面</Link>
-          </li>
-          <li>
-            <Link to="/casual-battle/search-room">ルーム参加画面</Link>
-          </li>
-          <li>
-            <Link to="/casual-battle/result">観戦画面</Link>
-          </li>
-          <li>
-            <Link to="/free-coding">フリーコーディング</Link>
-          </li>
-          <li>
-            <Link to="/codes">ガレージ画面（コード一覧)</Link>
-          </li>
-        </ul>
-        <h1>ログインユーザ</h1>
-        <p>{user?.displayName}さん</p>
-        {isLogin && <SignOutButton />}
+        {isDev && <RootingScreen />}
       </HashRouter>
     </div>
   );

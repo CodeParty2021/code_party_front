@@ -30,22 +30,28 @@ const RightBox = styled.div`
 const Modal = styled.div<{ shown: boolean }>`
   position: absolute;
   z-index: 10;
-  top: 0;
-  left: 0;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: auto;
   visibility: ${({ shown }) => (shown ? "visible" : "hidden")};
-  background: white;
+  background: gray;
   border-radius: 8px;
   margin: 20px;
-  width: 100%;
+  padding: 8px;
 `;
 const CloseButton = styled.div`
   position: absolute;
-  width: 16px;
-  height: 16px;
-  top: 36px;
-  right: 16px;
+  width: 48px;
+  height: 32px;
+  top: -24px;
+  right: 0px;
   background: gray;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 `;
 
 export const CodeCoding: React.FC<Props> = () => {
@@ -67,14 +73,25 @@ export const CodeCoding: React.FC<Props> = () => {
     return editorRef.current?.getValue();
   }
   const loadJson = (json: string) => {
-    unityContext.send("JSONLoader", "LoadJSON", json);
+    //unityContext.send("JSONLoader", "LoadJSON", json);
+    unityContext.send("JSUnityConnector", "SetSimulationData", json);
+    unityContext.send("JSUnityConnector", "LoadStage", "SquarePaint");
   };
 
   useEffect(() => {
-    console.log(showUnity);
-    setShowUity(true);
+    setShowUity(json !== ""); //jsonがセットされている場合はUnityを表示する
     loadJson(json);
   }, [json]);
+
+  const [progression, setProgression] = useState(0);
+
+  console.log("progress", progression);
+  useEffect(() => {
+    unityContext.on("progress", function (progression) {
+      setProgression(progression);
+    });
+  }, []);
+
   return (
     <div>
       <div>コーディング画面</div>
@@ -96,6 +113,7 @@ export const CodeCoding: React.FC<Props> = () => {
                 onClick={() =>
                   put(getCode(), res.data?.step || "", res.data?.language || "")
                 }
+                
               >
                 実行する
               </button>

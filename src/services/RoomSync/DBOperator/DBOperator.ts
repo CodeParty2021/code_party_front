@@ -14,6 +14,11 @@ import {
 
 // ---- Realtime DBへのset・update・push・removeファンクション群 ----- //
 
+/**
+ * ルーム情報を取得する
+ * @param roomId ルームID
+ * @returns ルーム情報
+ */
 export const getRoomAsync = async (roomId: string) => {
   if (roomId == "") return;
 
@@ -24,13 +29,25 @@ export const getRoomAsync = async (roomId: string) => {
   //データが存在しない場合はundefined
   if (!data) return;
 
-  return {
+  //ルーム情報にキャスト
+  const roomInfo: RoomInfo = {
     name: data.name,
     host: data.host,
-    state: data.state,
-  } as RoomInfo;
+    status: data.status,
+    analyzingResult: data.analyzingResult,
+  };
+
+  //チェック
+  if (!roomInfo.name || !roomInfo.host || !roomInfo.status) return;
+
+  return roomInfo;
 };
 
+/**
+ * ルーム情報を追加する
+ * @param roomInfo ルーム情報
+ * @returns DB上のルームへの参照
+ */
 export const pushRoomAsync = async (roomInfo: RoomInfo) => {
   const dbRef = await push(RoomsRef(), roomInfo);
   return dbRef;
@@ -40,7 +57,6 @@ export const pushRoomAsync = async (roomInfo: RoomInfo) => {
  * ルーム情報を更新する
  * @param roomId ルームID
  * @param roomInfo ルーム情報
- * @returns dispatch用関数
  */
 export const updateRoomAsync = async (
   roomId: string,
@@ -53,7 +69,6 @@ export const updateRoomAsync = async (
 /**
  * ルームを削除し、ルームに関連付いたメンバー・アクション情報をすべて削除する
  * @param roomId ルームID
- * @returns dispatch用関数
  */
 export const destroyRoomAsync = async (roomId: string) => {
   if (roomId == "") return;
@@ -71,7 +86,11 @@ export const destroyRoomAsync = async (roomId: string) => {
 export const initMemberAsync = async (
   roomId: string,
   user: User,
-  userState: UserState = { displayName: user.displayName, ready: false }
+  userState: UserState = {
+    displayName: user.displayName,
+    status: "waiting",
+    ready: false,
+  }
 ) => {
   await updateMemberAsync(roomId, user.id, userState);
 };
@@ -81,7 +100,6 @@ export const initMemberAsync = async (
  * @param roomId ルームID
  * @param id メンバーID（ユーザID）
  * @param userState メンバー情報
- * @returns dispatch用関数
  */
 export const updateMemberAsync = async (
   roomId: string,
@@ -96,7 +114,6 @@ export const updateMemberAsync = async (
  * メンバーの削除をDBに送信する
  * @param roomId ルームID
  * @param id メンバーID（ユーザID）
- * @returns dispatch用関数
  */
 export const removeMemberAsync = async (roomId: string, id: string) => {
   if (roomId == "" || id == "") return;
@@ -107,7 +124,6 @@ export const removeMemberAsync = async (roomId: string, id: string) => {
  * アクションの追加をDBに送信する
  * @param roomId ルームID
  * @param userAction アクション情報
- * @returns dispatch用関数
  */
 export const addActionAsync = async (
   roomId: string,
@@ -122,7 +138,6 @@ export const addActionAsync = async (
  * @param roomId ルームID
  * @param id アクションID
  * @param userAction アクション情報
- * @returns dispatch用関数
  */
 export const updateActionAsync = async (
   roomId: string,
@@ -137,7 +152,6 @@ export const updateActionAsync = async (
  * アクションの削除をDBに送信する
  * @param roomId ルームID
  * @param id アクションID
- * @returns dispatch用関数
  */
 export const removeActionAsync = async (roomId: string, id: string) => {
   if (roomId == "" || id == "") return;

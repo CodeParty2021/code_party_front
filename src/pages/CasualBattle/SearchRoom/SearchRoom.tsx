@@ -7,6 +7,7 @@ export const CasualBattleSearchRoom: React.FC<Props> = () => {
   const {
     roomIdTextBoxValue,
     roomIdTextBoxChangeHandler,
+    enterBtnDisabled,
     enterBtnClickHandler,
   } = useSearchRoomState();
 
@@ -18,7 +19,11 @@ export const CasualBattleSearchRoom: React.FC<Props> = () => {
         value={roomIdTextBoxValue}
         onChange={(e) => roomIdTextBoxChangeHandler(e.target.value)}
       ></input>
-      <button id="enter-btn" onClick={enterBtnClickHandler}>
+      <button
+        id="enter-btn"
+        onClick={enterBtnClickHandler}
+        disabled={enterBtnDisabled}
+      >
         ルームに入る
       </button>
     </div>

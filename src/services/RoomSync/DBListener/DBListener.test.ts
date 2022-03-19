@@ -7,19 +7,26 @@ import {
   onChildChanged,
   onChildMoved,
   onChildRemoved,
+  onDisconnect,
   onValue,
   ref,
 } from "firebase/database";
 import { RootState } from "store";
 import { AnyAction } from "redux";
 import {
+  cancelUserStateOnDisconnect,
+  removeUserStateOnDisconnect,
+  setUserStateOnDisconnect,
+  setUserStateWithPriorityOnDisconnect,
   startActionsDBSync,
   startMembersDBSync,
   startRoomDBSync,
   stopActionsDBSync,
   stopMembersDBSync,
   stopRoomDBSync,
+  updateUserStateOnDisconnect,
 } from "./DBListener";
+import { UserState } from "../RoomSync";
 
 jest.mock("firebase/database");
 
@@ -30,16 +37,32 @@ const onChildChangedMock = onChildChanged as jest.Mock;
 const onChildMovedMock = onChildMoved as jest.Mock;
 const onChildRemovedMock = onChildRemoved as jest.Mock;
 const onValueMock = onValue as jest.Mock;
+const onDisconnectMock = onDisconnect as jest.Mock;
 
 const unsubscribeOnChildAdded = jest.fn();
 const unsubscribeonChildChanged = jest.fn();
 const unsubscribeonChildMoved = jest.fn();
 const unsubscribeonChildRemoved = jest.fn();
 const unsubscribeonValue = jest.fn();
+const disconnectFunc = {
+  set: jest.fn(),
+  update: jest.fn(),
+  remove: jest.fn(),
+  setWithPriority: jest.fn(),
+  cancel: jest.fn(),
+};
 
-type DispatchExts = ThunkDispatch<RootState, void, AnyAction>;
+type DispatchExts = ThunkDispatch<RootState, undefined, AnyAction>;
 const middlewares = [thunk];
 const mockStore = configureStore<RootState, DispatchExts>(middlewares);
+
+const users: { [id: string]: UserState } = {
+  userId: {
+    displayName: "user's name",
+    ready: true,
+    status: "waiting",
+  },
+};
 
 const initialState: RootState = {
   room: {
@@ -71,6 +94,7 @@ describe("Test Cases for Reducers of DBListener", () => {
     onChildMovedMock.mockReturnValue(unsubscribeonChildMoved);
     onChildRemovedMock.mockReturnValue(unsubscribeonChildRemoved);
     onValueMock.mockReturnValue(unsubscribeonValue);
+    onDisconnectMock.mockReturnValue(disconnectFunc);
     store = mockStore(initialState);
 
     //毎回コールバックをすべて削除する．
@@ -83,10 +107,6 @@ describe("Test Cases for Reducers of DBListener", () => {
   });
 
   describe("test of startRoomDBSync", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it("正常系", async () => {
       await store.dispatch(startRoomDBSync("roomId"));
       expect(onValueMock).toBeCalledTimes(1);
@@ -100,10 +120,6 @@ describe("Test Cases for Reducers of DBListener", () => {
   });
 
   describe("test of stopRoomDBSync", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it("正常系", async () => {
       await store.dispatch(startRoomDBSync("roomId"));
       await store.dispatch(stopRoomDBSync());
@@ -117,10 +133,6 @@ describe("Test Cases for Reducers of DBListener", () => {
   });
 
   describe("test of startMembersDBSync", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it("正常系", async () => {
       await store.dispatch(startMembersDBSync("roomId"));
       expect(onChildAddedMock).toBeCalledTimes(1);
@@ -147,10 +159,6 @@ describe("Test Cases for Reducers of DBListener", () => {
   });
 
   describe("test of stopMembersDBSync", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it("正常系", async () => {
       await store.dispatch(startMembersDBSync("roomId"));
       await store.dispatch(stopMembersDBSync());
@@ -170,10 +178,6 @@ describe("Test Cases for Reducers of DBListener", () => {
   });
 
   describe("test of startActionsDBSync", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it("正常系", async () => {
       await store.dispatch(startActionsDBSync("roomId"));
       expect(onChildAddedMock).toBeCalledTimes(1);
@@ -200,10 +204,6 @@ describe("Test Cases for Reducers of DBListener", () => {
   });
 
   describe("test of stopActionsDBSync", () => {
-    afterEach(() => {
-      jest.resetAllMocks();
-    });
-
     it("正常系", async () => {
       await store.dispatch(startActionsDBSync("roomId"));
       await store.dispatch(stopActionsDBSync());
@@ -219,6 +219,47 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(unsubscribeonChildChanged).toBeCalledTimes(0);
       expect(unsubscribeonChildMoved).toBeCalledTimes(0);
       expect(unsubscribeonChildRemoved).toBeCalledTimes(0);
+    });
+  });
+
+  describe("onDisconnectのテスト", () => {
+    it("setUserStateOnDisconnect", () => {
+      setUserStateOnDisconnect("roomId", "userId", users["userId"]);
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(disconnectFunc.set).lastCalledWith(users["userId"]);
+    });
+    it("updateUserStateOnDisconnect", () => {
+      updateUserStateOnDisconnect("roomId", "userId", {
+        displayName: "update user",
+        status: "disconnect",
+        codeId: null,
+      });
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(disconnectFunc.update).lastCalledWith({
+        displayName: "update user",
+        status: "disconnect",
+        codeId: null,
+      });
+    });
+    it("removeUserStateOnDisconnect", () => {
+      removeUserStateOnDisconnect("roomId", "userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(disconnectFunc.remove).toBeCalledTimes(1);
+    });
+    it("setUserStateWithPriorityOnDisconnect", () => {
+      setUserStateWithPriorityOnDisconnect(
+        "roomId",
+        "userId",
+        users["userId"],
+        1
+      );
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(disconnectFunc.setWithPriority).lastCalledWith(users["userId"], 1);
+    });
+    it("cancelUserStateOnDisconnect", () => {
+      cancelUserStateOnDisconnect("roomId", "userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(disconnectFunc.cancel).toBeCalledTimes(1);
     });
   });
 });

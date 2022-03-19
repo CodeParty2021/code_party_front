@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useLobbyState } from "./useLobbyState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 
-jest.mock("react-redux");
 jest.mock("react-router-dom");
 jest.mock("hooks/RoomSyncHooks/useRoomSync");
 
@@ -24,20 +23,21 @@ const initialRoomSyncState = {
   createRoom: jest.fn(),
 };
 
-const navigateMock = { do: jest.fn() };
+const navigateMock = jest.fn();
 
-describe("useWaitingRoomState", () => {
+describe("useLobbyState", () => {
   beforeEach(() => {
     useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
-    useNavigateMock.mockReturnValue(navigateMock.do);
+    useNavigateMock.mockReturnValue(navigateMock);
+    initialRoomSyncState.createRoom.mockResolvedValue({});
   });
   afterEach(() => {
     jest.resetAllMocks();
   });
 
   it("render", () => {
-    const result = renderHook(() => useLobbyState());
-    expect(result).toBeTruthy();
+    const { result } = renderHook(() => useLobbyState());
+    expect(result.current).toBeTruthy();
   });
 
   it("room.isEntered=trueでページ遷移", () => {
@@ -48,29 +48,28 @@ describe("useWaitingRoomState", () => {
         isEntered: true,
       },
     });
-    const spyNavigate = jest.spyOn(navigateMock, "do");
     renderHook(() => useLobbyState());
-    expect(spyNavigate).lastCalledWith("/casual-battle/waiting-room");
+    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
   });
 
   it("exec roomCreateBtnHandler", () => {
-    const spyCreateRoom = jest.spyOn(initialRoomSyncState, "createRoom");
     const { result } = renderHook(() => useLobbyState());
     const { roomCreateBtnHandler } = result.current;
+    expect(result.current.roomCreateBtnDisabled).toBe(false);
     act(() => {
       roomCreateBtnHandler();
     });
-    expect(spyCreateRoom).toBeCalledTimes(1);
+    expect(result.current.roomCreateBtnDisabled).toBe(true);
+    expect(initialRoomSyncState.createRoom).toBeCalledTimes(1);
   });
 
   it("exec roomSearchBtnHandler", () => {
-    const spyNavigate = jest.spyOn(navigateMock, "do");
     const { result } = renderHook(() => useLobbyState());
     const { roomSearchBtnHandler } = result.current;
     act(() => {
       roomSearchBtnHandler();
     });
-    expect(spyNavigate).toBeCalledTimes(1);
-    expect(spyNavigate).lastCalledWith("/casual-battle/search-room");
+    expect(navigateMock).toBeCalledTimes(1);
+    expect(navigateMock).lastCalledWith("/casual-battle/search-room");
   });
 });

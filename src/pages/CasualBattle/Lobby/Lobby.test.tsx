@@ -9,11 +9,12 @@ jest.mock("./hooks/useLobbyState");
 const useSelectorMock = useLobbyState as jest.Mock;
 
 const state: IResponse = {
+  roomCreateBtnDisabled: false,
   roomCreateBtnHandler: jest.fn(),
   roomSearchBtnHandler: jest.fn(),
 };
 
-describe("<CasualBattleWaitingRoom />", () => {
+describe("<CasualBattleLobby />", () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue({
       ...state,
@@ -31,21 +32,19 @@ describe("<CasualBattleWaitingRoom />", () => {
 
   it("room create button test", () => {
     const wrapper = shallow(<CasualBattleLobby />);
-    const spy = jest.spyOn(state, "roomCreateBtnHandler");
 
     const btn = wrapper.find("#create-btn");
     btn.simulate("click");
 
-    expect(spy).toHaveBeenCalled();
+    expect(state.roomCreateBtnHandler).toHaveBeenCalled();
   });
 
   it("room search button test", () => {
     const wrapper = shallow(<CasualBattleLobby />);
-    const spy = jest.spyOn(state, "roomSearchBtnHandler");
 
     const btn = wrapper.find("#search-btn");
     btn.simulate("click");
 
-    expect(spy).toHaveBeenCalled();
+    expect(state.roomSearchBtnHandler).toHaveBeenCalled();
   });
 });

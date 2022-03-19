@@ -35,6 +35,7 @@ const users: { [id: string]: UserState } = {
   userId: {
     displayName: "user's name",
     ready: true,
+    status: "waiting",
   },
 };
 
@@ -48,7 +49,7 @@ const actions: { [id: string]: UserAction } = {
 const roomInfo: RoomInfo = {
   name: "room's name",
   host: "userId",
-  state: "waiting",
+  status: "waiting",
 };
 
 describe("Test Cases for Reducers of DBOperator", () => {
@@ -134,6 +135,7 @@ describe("Test Cases for Reducers of DBOperator", () => {
       expect(updateMock).lastCalledWith("/RoomApp/members/roomId/" + user.id, {
         displayName: user.displayName,
         ready: false,
+        status: "waiting",
       });
     });
 

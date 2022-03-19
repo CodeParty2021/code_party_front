@@ -31,14 +31,17 @@ const users: { [id: string]: UserState } = {
   userid1: {
     displayName: "user1",
     ready: true,
+    status: "waiting",
   },
   userid2: {
     displayName: "user2",
     ready: false,
+    status: "watching",
   },
   userid3: {
     displayName: "user3",
     ready: true,
+    status: "disconnect",
   },
 };
 
@@ -60,7 +63,7 @@ const actions: { [id: string]: UserAction } = {
 const initialRoomInfo: RoomInfo = {
   name: "room's name",
   host: "userid1",
-  state: "waiting",
+  status: "waiting",
 };
 
 const initialRoomState: RoomState = {
@@ -125,12 +128,9 @@ describe("Test Cases for functions in useRoomSync", () => {
       expect(
         isHost(
           {
-            ...initialRoomState,
-            info: {
-              ...initialRoomInfo,
-              host: "hostUserId",
-            },
-          } as RoomState,
+            ...initialRoomInfo,
+            host: "hostUserId",
+          } as RoomInfo,
           {
             ...userState.user,
             id: "hostUserId",
@@ -143,12 +143,9 @@ describe("Test Cases for functions in useRoomSync", () => {
       expect(
         isHost(
           {
-            ...initialRoomState,
-            info: {
-              ...initialRoomInfo,
-              host: "hostUserId",
-            },
-          } as RoomState,
+            ...initialRoomInfo,
+            host: "hostUserId",
+          } as RoomInfo,
           {
             ...userState.user,
             id: "notHostUserId",
@@ -159,16 +156,10 @@ describe("Test Cases for functions in useRoomSync", () => {
 
     it("異常系（room.infoがない場合）", () => {
       expect(
-        isHost(
-          {
-            ...initialRoomState,
-            info: undefined,
-          } as RoomState,
-          {
-            ...userState.user,
-            id: "hostUserId",
-          } as User
-        )
+        isHost(undefined, {
+          ...userState.user,
+          id: "hostUserId",
+        } as User)
       ).toBeFalsy();
     });
 
@@ -176,12 +167,9 @@ describe("Test Cases for functions in useRoomSync", () => {
       expect(
         isHost(
           {
-            ...initialRoomState,
-            info: {
-              ...initialRoomInfo,
-              host: "hostUserId",
-            },
-          } as RoomState,
+            ...initialRoomInfo,
+            host: "hostUserId",
+          } as RoomInfo,
           undefined
         )
       ).toBeFalsy();

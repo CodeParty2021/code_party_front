@@ -3,38 +3,49 @@ import { useNavigate } from "react-router-dom";
 
 import { useWaitingRoomState } from "./useWaitingRoomState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
-import { UserState } from "services/RoomSync/RoomSync";
+import { IResponse, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
+import { RoomInfo, RoomState, UserState } from "services/RoomSync/RoomSync";
 
-jest.mock("react-redux");
 jest.mock("react-router-dom");
 jest.mock("hooks/RoomSyncHooks/useRoomSync");
+jest.mock("hooks/CodeAPIHooks/useFetchCodes");
 
 const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
+const useFetchCodesMock = useFetchCodes as jest.Mock;
 
 const users: { [id: string]: UserState } = {
   userid1: {
     displayName: "user1",
     ready: true,
+    status: "waiting",
   },
   userid2: {
     displayName: "user2",
     ready: false,
+    status: "watching",
   },
   userid3: {
     displayName: "user3",
     ready: true,
+    status: "waiting",
   },
 };
 
-const initialRoomState = {
+const initialRoomInfo: RoomInfo = {
+  host: "userid1",
+  name: "roomId",
+  status: "waiting",
+};
+
+const initialRoomState: RoomState = {
   id: "room id",
   isEntered: true,
-  info: {
-    host: "userid1",
-  },
+  info: initialRoomInfo,
   sortedKeysOfMembers: ["userid1"],
-  members: { userid1: users["userid1"] },
+  members: {
+    userid1: users["userid1"],
+  },
   sortedKeysOfActions: [],
   actions: {},
 };
@@ -44,14 +55,41 @@ const initialRoomSyncState = {
   isHost: true,
   updateMember: jest.fn(),
   exitRoom: jest.fn(),
+  updateRoomInfo: jest.fn(),
 };
 
-const navigateMock = { do: jest.fn() };
+const initialFetchCodesState: IResponse = {
+  data: [
+    {
+      id: "codeid1",
+      codeContent: "print('hello')",
+      createdAt: "2022-02-16T05:05:46.315585+09:00",
+      updatedAt: "2022-02-16T06:33:00.058575+09:00",
+      language: "1",
+      step: "15",
+      user: "userid1",
+    },
+    {
+      id: "codeid2",
+      codeContent: "alert('hello')",
+      createdAt: "2022-02-16T05:05:46.315585+09:00",
+      updatedAt: "2022-02-16T06:33:00.058575+09:00",
+      language: "2",
+      step: "15",
+      user: "userid1",
+    },
+  ],
+  loading: false,
+  update: jest.fn(),
+};
+
+const navigateMock = jest.fn();
 
 describe("useWaitingRoomState", () => {
   beforeEach(() => {
     useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
-    useNavigateMock.mockReturnValue(navigateMock.do);
+    useFetchCodesMock.mockReturnValue({ ...initialFetchCodesState });
+    useNavigateMock.mockReturnValue(navigateMock);
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -68,9 +106,15 @@ describe("useWaitingRoomState", () => {
       actions: {},
     });
     expect(result.current.isHost).toEqual(true);
+    expect(result.current.status).toEqual("waiting");
+    expect(result.current.ready).toEqual(false);
+    expect(result.current.code).toEqual({
+      codes: initialFetchCodesState.data,
+      loading: initialFetchCodesState.loading,
+    });
   });
 
-  it("room.isEntere:falseでページ遷移", () => {
+  it("room.isEnter=falseでページ遷移", () => {
     useRoomSyncMock.mockReturnValue({
       ...initialRoomSyncState,
       room: {
@@ -78,20 +122,54 @@ describe("useWaitingRoomState", () => {
         isEntered: false,
       },
     });
-    const spyNavigate = jest.spyOn(navigateMock, "do");
     renderHook(() => useWaitingRoomState());
-    expect(spyNavigate).lastCalledWith("/casual-battle");
+    expect(navigateMock).lastCalledWith("/casual-battle");
   });
 
-  it("exec readyBtnHandler", async () => {
-    const spyUpdateMember = jest.spyOn(initialRoomSyncState, "updateMember");
+  it("コードが選択されたら準備ボタンが有効化される", () => {
+    const { result } = renderHook(() => useWaitingRoomState());
+    const { onChangeSelectedCodeId } = result.current;
+    //実行前はボタンが無効化状態
+    expect(result.current.readyBtnDisabled).toBe(true);
+    act(() => {
+      onChangeSelectedCodeId("codeId1");
+    });
+    //実行後はボタンが有効化
+    expect(result.current.readyBtnDisabled).toBe(false);
+  });
+
+  it("ルームステータスがwaitingからwatchingになったら観戦画面に遷移", () => {
+    useRoomSyncMock.mockReturnValueOnce({
+      ...initialRoomSyncState,
+      room: {
+        ...initialRoomState,
+        info: {
+          ...initialRoomInfo,
+          status: "waiting",
+        },
+      },
+    });
+    useRoomSyncMock.mockReturnValueOnce({
+      ...initialRoomSyncState,
+      room: {
+        ...initialRoomState,
+        info: {
+          ...initialRoomInfo,
+          status: "watching",
+        },
+      },
+    });
+    renderHook(() => useWaitingRoomState());
+    expect(navigateMock).toBeCalledTimes(1);
+    expect(navigateMock).lastCalledWith("/casual-battle/result");
+  });
+
+  it("exec readyBtnHandler", () => {
     const { result } = renderHook(() => useWaitingRoomState());
 
     const { readyBtnHandler } = result.current;
 
-    //useEffectで一回実行される
-    expect(spyUpdateMember).toBeCalledTimes(1);
-    expect(spyUpdateMember).lastCalledWith({ ready: false });
+    const num = initialRoomSyncState.updateMember.mock.calls.length;
 
     //ボタン押下
     act(() => {
@@ -99,46 +177,131 @@ describe("useWaitingRoomState", () => {
     });
 
     //readyが変化しuseEffectが実行される
-    expect(spyUpdateMember).toBeCalledTimes(2);
-    expect(spyUpdateMember).lastCalledWith({ ready: true });
+    expect(initialRoomSyncState.updateMember).toBeCalledTimes(num + 1);
+    expect(initialRoomSyncState.updateMember).lastCalledWith({
+      ready: true,
+      codeId: "",
+    });
   });
 
-  it("exec exitBtnHandler", async () => {
-    const spyExitRoom = jest.spyOn(initialRoomSyncState, "exitRoom");
-    const spyNavigate = jest.spyOn(navigateMock, "do");
+  it("exec exitBtnHandler", () => {
     const { result } = renderHook(() => useWaitingRoomState());
 
     const { exitBtnHandler } = result.current;
 
     //一度も実行されていないことを確認
-    expect(spyExitRoom).not.toHaveBeenCalled();
-    expect(spyNavigate).not.toHaveBeenCalled();
+    expect(initialRoomSyncState.exitRoom).not.toHaveBeenCalled();
+    expect(navigateMock).not.toHaveBeenCalled();
 
     //ボタン押下
     act(() => {
       exitBtnHandler();
     });
 
-    //それぞれ実行される．
-    expect(spyExitRoom).toBeCalledTimes(1);
+    //実行される．
+    expect(initialRoomSyncState.exitRoom).toBeCalledTimes(1);
   });
 
-  it("exec startBtnHandler", async () => {
-    const spyNavigate = jest.spyOn(navigateMock, "do");
+  it("exec startBtnHandler", () => {
     const { result } = renderHook(() => useWaitingRoomState());
 
     const { startBtnHandler } = result.current;
 
-    //一度も実行されていないことを確認
-    expect(spyNavigate).not.toHaveBeenCalled();
+    //呼び出し回数を記録
+    const num = initialRoomSyncState.updateRoomInfo.mock.calls.length;
 
     //ボタン押下
     act(() => {
       startBtnHandler();
     });
 
-    //それぞれ実行される．
-    expect(spyNavigate).lastCalledWith("/casual-battle/result");
+    //実行される．
+    expect(initialRoomSyncState.updateRoomInfo).toBeCalledTimes(num + 1);
+    expect(initialRoomSyncState.updateRoomInfo).lastCalledWith({
+      status: "watching",
+    });
+  });
+
+  it("exec onChangeSelectedCodeId", () => {
+    const { result } = renderHook(() => useWaitingRoomState());
+
+    const { onChangeSelectedCodeId } = result.current;
+
+    //初期値を確認
+    expect(result.current.selectedCodeId).toBe("");
+
+    //ボタン押下
+    act(() => {
+      onChangeSelectedCodeId("codeid1");
+    });
+
+    //反映されたことを確認
+    expect(result.current.selectedCodeId).toBe("codeid1");
+  });
+
+  describe("ルームステータスのテスト", () => {
+    it("全員がWaitingRoomに戻ってきたらroomの状態をwaitingに更新する", () => {
+      useRoomSyncMock.mockReturnValue({
+        ...initialRoomSyncState,
+        room: {
+          ...initialRoomState,
+          info: {
+            ...initialRoomInfo,
+            status: "watching",
+          },
+          members: {
+            userid1: users["userid1"],
+            userid3: users["userid3"],
+          },
+          sortedKeysOfMembers: ["userid1", "userid3"],
+        } as RoomState,
+      });
+      renderHook(() => useWaitingRoomState());
+      expect(initialRoomSyncState.updateRoomInfo).lastCalledWith({
+        status: "waiting",
+        analyzingResult: null,
+      });
+    });
+
+    it("全員がWaitingRoomに戻って来ていない場合，roomの状態は更新されない", () => {
+      useRoomSyncMock.mockReturnValue({
+        ...initialRoomSyncState,
+        room: {
+          ...initialRoomState,
+          info: {
+            ...initialRoomInfo,
+            status: "watching",
+          },
+          members: {
+            userid1: users["userid1"],
+            userid3: users["userid2"],
+          },
+          sortedKeysOfMembers: ["userid1", "userid2"],
+        } as RoomState,
+      });
+      renderHook(() => useWaitingRoomState());
+      expect(initialRoomSyncState.updateRoomInfo).not.toHaveBeenCalled();
+    });
+
+    it("ルームステータスがwaitingの場合，roomの状態は更新されない", () => {
+      useRoomSyncMock.mockReturnValue({
+        ...initialRoomSyncState,
+        room: {
+          ...initialRoomState,
+          info: {
+            ...initialRoomInfo,
+            status: "waiting",
+          },
+          members: {
+            userid1: users["userid1"],
+            userid3: users["userid3"],
+          },
+          sortedKeysOfMembers: ["userid1", "userid3"],
+        } as RoomState,
+      });
+      renderHook(() => useWaitingRoomState());
+      expect(initialRoomSyncState.updateRoomInfo).not.toHaveBeenCalled();
+    });
   });
 
   describe("startBtnDisabled", () => {

@@ -38,15 +38,17 @@ const roomId = "room id";
 const roomInfo: RoomInfo = {
   name: "room name",
   host: "userid1",
-  state: "waiting",
+  status: "waiting",
 };
 const user1: UserState = {
   displayName: "user1",
   ready: false,
+  status: "waiting",
 };
 const user2: UserState = {
   displayName: "user1",
   ready: true,
+  status: "watching",
 };
 const action1: UserAction = {
   userId: "userid1",
@@ -146,6 +148,7 @@ describe("Test Cases for Reducers of RoomSync Service", () => {
           data: {
             displayName: "updated name",
             ready: false,
+            status: "watching",
           },
         })
       )
@@ -155,6 +158,7 @@ describe("Test Cases for Reducers of RoomSync Service", () => {
         userid1: {
           displayName: "updated name",
           ready: false,
+          status: "watching",
         },
       },
       sortedKeysOfMembers: ["userid1"],

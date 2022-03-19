@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
+import { CodeType, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
 import { UserState, UserAction } from "services/RoomSync/RoomSync";
 
 export type IResponse = {
@@ -14,48 +15,113 @@ export type IResponse = {
     actions: { [id: string]: UserAction };
   };
   isHost: boolean;
+  status?: "waiting" | "watching";
+  ready: boolean;
+
   readyBtnHandler: () => void;
+  readyBtnDisabled: boolean;
   exitBtnHandler: () => void;
   startBtnDisabled: boolean;
   startBtnHandler: () => void;
+
+  code: {
+    codes: CodeType[];
+    loading: boolean;
+  };
+  selectedCodeId: string;
+  onChangeSelectedCodeId: (codeId: string) => void;
 };
 
 export const useWaitingRoomState = (): IResponse => {
-  const { room, isHost, updateMember, exitRoom } = useRoomSync();
+  const { room, isHost, updateRoomInfo, updateMember, exitRoom } =
+    useRoomSync();
+  const { data: codes = [], loading } = useFetchCodes();
+  const [preRoomStatus, setPreRoomStatus] = useState<"waiting" | "watching">(
+    "watching"
+  );
+  const [selectedCodeId, setSelectedCodeId] = useState("");
   const [ready, setReady] = useState(false);
-  const [disabled, setDisabled] = useState(true);
+  const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
+  const [startBtnDisabled, setStartBtnDisabled] = useState(true);
   const navigate = useNavigate();
   const dummyUser: UserState = {
     displayName: "",
+    status: "disconnect",
     ready: false,
   };
 
+  // ユーザ状態を更新
+  useEffect(() => {
+    updateMember({
+      status: "waiting",
+    });
+  }, []);
+
+  // DB上で退出処理が完了したら退出
   useEffect(() => {
     if (!room.isEntered) {
       navigate("/casual-battle");
     }
   }, [room.isEntered]);
 
+  // 準備ボタンの有効化
+  useEffect(() => {
+    //コードが選択されたら準備完了ボタンを押せるようにする
+    if (selectedCodeId != "") {
+      setReadyBtnDisabled(false);
+    }
+  }, [selectedCodeId]);
+
+  // ルームステータスがwaitingからwatchingになったら観戦画面に遷移
+  useEffect(() => {
+    if (room.info) {
+      if (preRoomStatus == "waiting" && room.info.status == "watching") {
+        navigate("/casual-battle/result");
+      }
+      setPreRoomStatus(room.info?.status);
+    }
+  }, [room.info?.status]);
+
+  // ready状態をDBに反映
   useEffect(() => {
     updateMember({
       ready: ready,
+      codeId: selectedCodeId,
     });
   }, [ready]);
 
+  // ホストの処理
   useEffect(() => {
     if (isHost) {
+      if (room.info && room.info.status == "waiting") {
+        // 全員が準備完了になったら開始ボタンを有効にする
+        let newDisabled = false;
+        for (let key of Object.keys(room.members)) {
+          if (!room.members[key].ready) {
+            newDisabled = true;
+            break;
+          }
+        }
+        setStartBtnDisabled(newDisabled);
+      }
+
+      // 全員がWaitingRoomに返ってきたらroomの状態をwaitingに更新する
+      let newRoomStatus: "waiting" | "watching" = "waiting";
       for (let key of Object.keys(room.members)) {
-        if (!room.members[key].ready) {
-          setDisabled(true);
-          return;
+        if (room.members[key].status == "watching") {
+          newRoomStatus = "watching";
         }
       }
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-      return;
+      if (newRoomStatus == "waiting" && room.info?.status == "watching") {
+        updateRoomInfo({
+          status: "waiting",
+          analyzingResult: null,
+        });
+      }
     }
   }, [room.members, isHost]);
+
+  // ---- イベントハンドラ ---- //
 
   const _readyBtnHandler = () => {
     setReady(!ready);
@@ -66,7 +132,13 @@ export const useWaitingRoomState = (): IResponse => {
   };
 
   const _startBtnHandler = () => {
-    navigate("/casual-battle/result");
+    updateRoomInfo({
+      status: "watching",
+    });
+  };
+
+  const _onChangeSelectedCodeId = (codeId: string) => {
+    setSelectedCodeId(codeId);
   };
 
   return {
@@ -82,9 +154,20 @@ export const useWaitingRoomState = (): IResponse => {
       actions: room.actions,
     },
     isHost: isHost,
+    status: room.info?.status,
+    ready: ready,
+
     readyBtnHandler: _readyBtnHandler,
+    readyBtnDisabled: readyBtnDisabled,
     exitBtnHandler: _exitBtnHandler,
-    startBtnDisabled: disabled,
+    startBtnDisabled: startBtnDisabled,
     startBtnHandler: _startBtnHandler,
+
+    code: {
+      codes: codes,
+      loading: loading,
+    },
+    selectedCodeId: selectedCodeId,
+    onChangeSelectedCodeId: _onChangeSelectedCodeId,
   };
 };

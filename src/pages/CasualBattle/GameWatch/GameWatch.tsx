@@ -1,16 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useGameWatchState } from "./hooks/useGameWatchState";
+import { useRunSimulation } from "./hooks/useRunSimulation";
 
 type Props = {};
 
 export const CasualBattleGameWatch: React.FC<Props> = () => {
+  useRunSimulation();
+  const { isAnalyzing, analyzingError, result, exitBtnHandler } =
+    useGameWatchState();
+
   return (
     <div>
       <div>結果</div>
-      <div>aaa</div>
       <div>
-        <Link to="/casual-battle/waiting-room">ロビーに戻る</Link>
+        ステータス：
+        {analyzingError
+          ? "シミュレーションエラー"
+          : isAnalyzing
+          ? "解析中"
+          : "観戦中"}
       </div>
+      {result ? <div>{JSON.stringify(result)}</div> : undefined}
+      <button id="exit-btn" onClick={exitBtnHandler}>
+        退出
+      </button>
     </div>
   );
 };

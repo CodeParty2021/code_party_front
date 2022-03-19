@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useSearchRoomState } from "./useSearchRoomState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 
-jest.mock("react-redux");
 jest.mock("react-router-dom");
 jest.mock("hooks/RoomSyncHooks/useRoomSync");
 
@@ -24,12 +23,13 @@ const initialRoomSyncState = {
   enterRoom: jest.fn(),
 };
 
-const navigateMock = { do: jest.fn() };
+const navigateMock = jest.fn();
 
 describe("useWaitingRoomState", () => {
   beforeEach(() => {
     useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
-    useNavigateMock.mockReturnValue(navigateMock.do);
+    useNavigateMock.mockReturnValue(navigateMock);
+    initialRoomSyncState.enterRoom.mockResolvedValue({});
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -37,6 +37,7 @@ describe("useWaitingRoomState", () => {
 
   it("render", () => {
     const { result } = renderHook(() => useSearchRoomState());
+    expect(result.current).toBeTruthy();
     expect(result.current.roomIdTextBoxValue).toBe("");
   });
 
@@ -48,9 +49,8 @@ describe("useWaitingRoomState", () => {
         isEntered: true,
       },
     });
-    const spyNavigate = jest.spyOn(navigateMock, "do");
     renderHook(() => useSearchRoomState());
-    expect(spyNavigate).lastCalledWith("/casual-battle/waiting-room");
+    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
   });
 
   it("exec roomIdTextBoxChangeHandler", () => {
@@ -63,7 +63,6 @@ describe("useWaitingRoomState", () => {
   });
 
   it("exec enterBtnClickHandler", () => {
-    const spyEnterRoom = jest.spyOn(initialRoomSyncState, "enterRoom");
     const { result } = renderHook(() => useSearchRoomState());
     const { roomIdTextBoxChangeHandler } = result.current;
 
@@ -72,10 +71,11 @@ describe("useWaitingRoomState", () => {
     });
 
     const { enterBtnClickHandler } = result.current;
+    expect(result.current.enterBtnDisabled).toBe(false);
     act(() => {
       enterBtnClickHandler();
     });
-
-    expect(spyEnterRoom).lastCalledWith("roomid");
+    expect(result.current.enterBtnDisabled).toBe(true);
+    expect(initialRoomSyncState.enterRoom).lastCalledWith("roomid");
   });
 });

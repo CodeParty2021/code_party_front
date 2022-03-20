@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import { AxiosInstance } from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { useSelector } from "react-redux";
-import { UserState } from "services/user/user";
+import { LoginUserState } from "services/user/user";
 import { useFetchCodes } from "./useFetchCodes";
 
 import { uri } from "config";
@@ -13,7 +13,7 @@ jest.mock("firebase_config");
 
 //参考記事: https://zenn.dev/bom_shibuya/articles/5c3ae7745c5e94
 
-const useSelectorMock = useSelector as jest.Mock<UserState>;
+const useSelectorMock = useSelector as jest.Mock<LoginUserState>;
 
 // jest mockの第一引数にモジュールを入れることでモジュールをmockできます
 

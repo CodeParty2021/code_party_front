@@ -10,7 +10,7 @@ import {
   UserAction,
   UserState,
 } from "services/RoomSync/RoomSync";
-import { User, UserState as ServiceUserState } from "services/user/user";
+import { User, LoginUserState } from "services/user/user";
 import { RootState } from "store";
 
 import * as useRoomSyncModule from "./useRoomSync";
@@ -76,7 +76,7 @@ const initialRoomState: RoomState = {
   actions: { actionid1: actions["actionid1"] },
 };
 
-const userState: ServiceUserState = {
+const userState: LoginUserState = {
   isLogin: true,
   unRegisterObserver: null,
   user: {

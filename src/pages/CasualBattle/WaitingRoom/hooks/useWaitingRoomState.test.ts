@@ -4,12 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useWaitingRoomState } from "./useWaitingRoomState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { IResponse, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
-import {
-  exitRoom,
-  RoomInfo,
-  RoomState,
-  UserState,
-} from "services/RoomSync/RoomSync";
+import { RoomInfo, RoomState, UserState } from "services/RoomSync/RoomSync";
 import { useSelector } from "react-redux";
 
 jest.mock("react-router-dom");

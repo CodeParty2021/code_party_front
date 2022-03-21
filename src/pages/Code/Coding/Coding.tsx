@@ -63,7 +63,7 @@ export const CodeCoding: React.FC<Props> = () => {
     null
   ) as React.MutableRefObject<null | HTMLInputElement>;
 
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handleEditorDidMount(editor: any, _monaco: any) {
     editorRef.current = editor;
   }
@@ -113,7 +113,6 @@ export const CodeCoding: React.FC<Props> = () => {
                 onClick={() =>
                   put(getCode(), res.data?.step || "", res.data?.language || "")
                 }
-                
               >
                 実行する
               </button>

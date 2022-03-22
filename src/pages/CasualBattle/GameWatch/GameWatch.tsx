@@ -6,7 +6,7 @@ type Props = {};
 
 export const CasualBattleGameWatch: React.FC<Props> = () => {
   useRunSimulation();
-  const { isAnalyzing, analyzingError, result, exitBtnHandler } =
+  const { isAnalyzing, analyzingError, result, json, exitBtnHandler } =
     useGameWatchState();
 
   return (
@@ -21,6 +21,7 @@ export const CasualBattleGameWatch: React.FC<Props> = () => {
           : "観戦中"}
       </div>
       {result ? <div>{JSON.stringify(result)}</div> : undefined}
+      {json ? <div>{json}</div> : undefined}
       <button id="exit-btn" onClick={exitBtnHandler}>
         退出
       </button>

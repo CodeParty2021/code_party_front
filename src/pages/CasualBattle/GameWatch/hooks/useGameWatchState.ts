@@ -12,7 +12,7 @@ export type IResponse = {
   isAnalyzing: boolean;
   analyzingError: boolean;
   result?: ResultType;
-  json?:string;
+  json?: string;
   exitBtnHandler: () => void;
 };
 
@@ -44,7 +44,7 @@ export const useGameWatchState = (): IResponse => {
       fetchJson(room.info?.analyzingResult.resultId);
     }
   }, [room.info?.analyzingResult]);
- 
+
   const _exitBtnHandler = () => {
     navigate("/casual-battle/waiting-room");
   };
@@ -53,7 +53,7 @@ export const useGameWatchState = (): IResponse => {
     isAnalyzing: !room.info?.analyzingResult?.resultId,
     analyzingError: Boolean(room.info?.analyzingResult?.error),
     result: result,
-    json:json,
+    json: json,
     exitBtnHandler: _exitBtnHandler,
   };
 };

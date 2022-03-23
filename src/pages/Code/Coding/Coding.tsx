@@ -83,9 +83,9 @@ export const CodeCoding: React.FC<Props> = () => {
     loadJson(json);
   }, [json]);
 
-  const [progression, setProgression] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_progression, setProgression] = useState(0);
 
-  console.log("progress", progression);
   useEffect(() => {
     unityContext.on("progress", function (progression) {
       setProgression(progression);

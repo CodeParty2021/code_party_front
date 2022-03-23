@@ -72,7 +72,7 @@ export const useCode = (id: string | undefined) => {
         console.log(response);
         //レスポンスがあったらrunする
         axios
-          .get(`${uri}/codes/${id}/run`, {})
+          .get(`${uri}/codes/${id}/test`, {})
           .then((response: AxiosResponse<RunResponse>) => {
             console.log(response);
             axios

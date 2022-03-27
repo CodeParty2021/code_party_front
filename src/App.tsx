@@ -15,13 +15,12 @@ import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
 import { setCallBackToSyncUser } from "services/user/user";
 import { RootingScreen } from "components/RootingScreen/RootingScreen";
+import { CasualBattleInvitation } from "pages/CasualBattle/Invitation/Invitation";
 
 type Props = {};
 
 // react router はこのページが参考になるよ
 // https://reffect.co.jp/react/react-router#Link
-
-export const currentUser = React.createContext(undefined);
 
 export const App: React.FC<Props> = () => {
   const dispatch = useDispatch();
@@ -44,6 +43,10 @@ export const App: React.FC<Props> = () => {
             element={<CasualBattleWaitingRoom />}
           />
           <Route path="/casual-battle" element={<CasualBattleLobby />} />
+          <Route
+            path="/casual-battle/invitation/:roomId"
+            element={<CasualBattleInvitation />}
+          />
           <Route
             path="/casual-battle/search-room"
             element={<CasualBattleSearchRoom />}

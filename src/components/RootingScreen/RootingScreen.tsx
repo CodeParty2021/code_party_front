@@ -33,6 +33,9 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/casual-battle">カジュアルロビー画面</Link>
         </li>
         <li>
+          <Link to="/casual-battle/invitation">カジュアル対戦招待画面</Link>
+        </li>
+        <li>
           <Link to="/casual-battle/waiting-room">待機招待画面</Link>
         </li>
         <li>

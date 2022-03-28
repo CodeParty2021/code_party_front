@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { CodeType, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
 import { UserState, UserAction } from "services/RoomSync/RoomSync";
-
 export type IResponse = {
   roomInfo: {
     roomId: string;
+    invitationLink: string;
     host: UserState;
     memberKeys: string[];
     members: { [id: string]: UserState };
@@ -23,6 +23,8 @@ export type IResponse = {
   exitBtnHandler: () => void;
   startBtnDisabled: boolean;
   startBtnHandler: () => void;
+  isCopyBtnClicked: boolean;
+  invitationBtnHandler: () => void;
 
   code: {
     codes: CodeType[];
@@ -43,6 +45,7 @@ export const useWaitingRoomState = (): IResponse => {
   const [ready, setReady] = useState(false);
   const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
   const [startBtnDisabled, setStartBtnDisabled] = useState(true);
+  const [isCopyBtnClicked, setIsCopyBtnClicked] = useState(false);
   const navigate = useNavigate();
   const dummyUser: UserState = {
     displayName: "",
@@ -141,9 +144,22 @@ export const useWaitingRoomState = (): IResponse => {
     setSelectedCodeId(codeId);
   };
 
+  //invitationURLのコピーボタン
+  const _invitationBtnHandler = () => {
+    console.log(_invitationBtnHandler);
+    if (room.invitationLink) {
+      console.log("faafwe");
+      navigator.clipboard.writeText(room.invitationLink).then(() => {
+        console.log("aaa");
+        setIsCopyBtnClicked(true);
+      });
+    }
+  };
+
   return {
     roomInfo: {
       roomId: room.id ? room.id : "",
+      invitationLink: room.invitationLink ? room.invitationLink : "",
       host:
         room.info && room.info.host in room.members
           ? room.members[room.info.host]
@@ -156,13 +172,13 @@ export const useWaitingRoomState = (): IResponse => {
     isHost: isHost,
     status: room.info?.status,
     ready: ready,
-
     readyBtnHandler: _readyBtnHandler,
     readyBtnDisabled: readyBtnDisabled,
     exitBtnHandler: _exitBtnHandler,
     startBtnDisabled: startBtnDisabled,
     startBtnHandler: _startBtnHandler,
-
+    isCopyBtnClicked: isCopyBtnClicked,
+    invitationBtnHandler: _invitationBtnHandler,
     code: {
       codes: codes,
       loading: loading,

@@ -40,6 +40,7 @@ const initialRoomInfo: RoomInfo = {
 
 const initialRoomState: RoomState = {
   id: "room id",
+  invitationLink: "http://casual-room/invitation/roomId",
   isEntered: true,
   info: initialRoomInfo,
   sortedKeysOfMembers: ["userid1"],
@@ -99,6 +100,7 @@ describe("useWaitingRoomState", () => {
     const { result } = renderHook(() => useWaitingRoomState());
     expect(result.current.roomInfo).toEqual({
       roomId: "room id",
+      invitationLink: "http://casual-room/invitation/roomId",
       host: { ...users["userid1"] },
       memberKeys: ["userid1"],
       members: { userid1: users["userid1"] },
@@ -357,5 +359,9 @@ describe("useWaitingRoomState", () => {
       const { result } = renderHook(() => useWaitingRoomState());
       expect(result.current.startBtnDisabled).toBe(true);
     });
+  });
+
+  describe("isCopyBtnClicked", () => {
+    // TODO コピー部分のテストを書きたかったが難しかったため挫折...
   });
 });

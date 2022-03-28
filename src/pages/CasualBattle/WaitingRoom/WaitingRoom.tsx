@@ -14,6 +14,9 @@ export const CasualBattleWaitingRoom: React.FC<Props> = () => {
     exitBtnHandler,
     startBtnDisabled,
     startBtnHandler,
+    isCopyBtnClicked,
+    invitationBtnHandler,
+
     code,
     selectedCodeId,
     onChangeSelectedCodeId,
@@ -41,6 +44,18 @@ export const CasualBattleWaitingRoom: React.FC<Props> = () => {
       <button id="exit-btn" onClick={exitBtnHandler}>
         退出
       </button>
+      <div style={{ display: "flex" }}>
+        <input
+          type="text"
+          id="invitation-text"
+          value={roomInfo.invitationLink}
+          readOnly
+        ></input>
+        <button id="invitation-btn" onClick={invitationBtnHandler}>
+          招待リンクをコピーする
+        </button>
+        {isCopyBtnClicked && <p>コピーしました</p>}
+      </div>
       <ul>
         <li>Room ID: {roomInfo.roomId}</li>
         <li>Host: {roomInfo.host.displayName}</li>

@@ -28,6 +28,26 @@ Array [
     >
       退出
     </button>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <input
+        id="invitation-text"
+        readOnly={true}
+        type="text"
+        value="http://localhost:3000/#/casual-battle/invitation/-MzESfkdu9Xmu8pkOAw5"
+      />
+      <button
+        id="invitation-btn"
+        onClick={[MockFunction]}
+      >
+        招待リンクをコピーする
+      </button>
+    </div>
     <ul>
       <li>
         Room ID: 

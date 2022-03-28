@@ -146,11 +146,8 @@ export const useWaitingRoomState = (): IResponse => {
 
   //invitationURLのコピーボタン
   const _invitationBtnHandler = () => {
-    console.log(_invitationBtnHandler);
     if (room.invitationLink) {
-      console.log("faafwe");
       navigator.clipboard.writeText(room.invitationLink).then(() => {
-        console.log("aaa");
         setIsCopyBtnClicked(true);
       });
     }

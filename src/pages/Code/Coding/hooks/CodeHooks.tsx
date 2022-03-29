@@ -25,6 +25,17 @@ export type RunResponse = {
   unityURL: string;
   jsonId: string;
 };
+
+type JSONLog = {
+  turn: TurnState[];
+};
+type TurnState = {
+  players: PlayerState[];
+};
+type PlayerState = {
+  print: string;
+};
+
 export const useCode = (id: string | undefined) => {
   const { user } = useSelector((state: RootState) => state.user);
 
@@ -34,6 +45,7 @@ export const useCode = (id: string | undefined) => {
     loading: false,
   });
   const [json, setJson] = useState<string>("");
+  const [turnLog, setTurnLog] = useState<TurnState[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -77,9 +89,10 @@ export const useCode = (id: string | undefined) => {
             console.log(response);
             axios
               .get(`${uri}/results/${response.data.jsonId}/json/`, {})
-              .then((response: AxiosResponse) => {
+              .then((response: AxiosResponse<JSONLog>) => {
                 console.log(response);
                 setJson(JSON.stringify(response.data));
+                setTurnLog(response.data.turn);
               })
               .catch((error: AxiosError) => {
                 console.log(error);
@@ -120,5 +133,5 @@ export const useCode = (id: string | undefined) => {
       });
   };
 
-  return { res, put, json };
+  return { res, put, json, turnLog };
 };

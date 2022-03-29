@@ -53,16 +53,41 @@ const CloseButton = styled.div`
   font-weight: bold;
   text-align: center;
 `;
+const Log = styled.div`
+  width: 100%;
+  max-height: 100px;
+  overflow: auto;
+`;
+const LogItem = styled.div`
+  background: white;
+  margin: 2px 0;
+  display: flex;
+  padding: 8px;
+  border-radius: 8px;
+`;
 
+const TurnNum = styled.div`
+  &:after {
+    content: "";
+    width: 2px;
+    background: gray;
+    margin: 0 0 0 8px;
+  }
+  display: flex;
+  min-width: 32px;
+  justify-content: flex-end;
+`;
+const LogContent = styled.div`
+  margin: 0 0 0 8px;
+`;
 export const CodeCoding: React.FC<Props> = () => {
   const { id } = useParams();
-  const { res, put, json } = useCode(id);
+  const { res, put, json, turnLog } = useCode(id);
   const [showUnity, setShowUity] = useState(false);
-
+  console.log(turnLog);
   const editorRef = useRef(
     null
   ) as React.MutableRefObject<null | HTMLInputElement>;
-
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handleEditorDidMount(editor: any, _monaco: any) {
     editorRef.current = editor;
@@ -128,6 +153,21 @@ export const CodeCoding: React.FC<Props> = () => {
           unityContext={unityContext}
           style={{ width: "800px", height: "600px" }}
         />
+        <Log>
+          {turnLog.map((turn, index) => {
+            const log = turn.players[0].print;
+            if (log) {
+              return (
+                <LogItem key={index}>
+                  <TurnNum>
+                    <div>{index + 1}</div>
+                  </TurnNum>
+                  <LogContent>{log}</LogContent>
+                </LogItem>
+              );
+            }
+          })}
+        </Log>
       </Modal>
     </div>
   );

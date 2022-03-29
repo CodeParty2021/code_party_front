@@ -14,6 +14,7 @@ test("reducer test ( signIn and signOut ) ", () => {
     email: "sample@sample.com",
     picture: "sample.png",
     jwt: "token",
+    isAnonymous: false,
   };
 
   // login test
@@ -24,6 +25,7 @@ test("reducer test ( signIn and signOut ) ", () => {
       email: "sample@sample.com",
       picture: "sample.png",
       jwt: "token",
+      isAnonymous: false,
     },
     unRegisterObserver: null,
     isLogin: true,

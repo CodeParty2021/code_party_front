@@ -2,13 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import firebase from "firebase/compat/app";
 import axios, { AxiosResponse } from "axios";
 import { uri } from "config";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut as firebaseSignOut,
+  User as FirebaseUser,
+} from "firebase/auth";
 export type User = {
   id: string;
   displayName: string;
   email: string;
   picture: string;
   jwt: string; //これをheaderに入れてAPIやり取りする。
+  isAnonymous: boolean;
 };
 
 export type LoginUserState = {
@@ -62,70 +68,64 @@ const userSlice = createSlice({
 export const { signIn, signOut, setUnRegisterObserver } = userSlice.actions;
 
 // RESTAPIの実行とgetRequestの呼び出しをする
-export const signInAsync = () => {
+export const signInAsync = (user: FirebaseUser) => {
   //dispatch関数を返す
   return async (dispatch: any) => {
-    // unRegisterObserverメソッドはObserverを捨てる関数
-    const unRegisterObserver = firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        user.getIdToken().then((idToken: string) => {
-          // promiseが戻り値のときはこういう書き方をする
-          axios
-            .get(uri + "/users/auth", {
-              headers: {
-                "Content-Type": "multipart/form-data",
-                Authorization: "Bearer " + idToken,
-              },
-            })
-            .then((res: AxiosResponse<UserAuthResponse>) => {
-              if (isUserAuthResponse(res.data)) {
-                const userInfo = res.data.userInfo;
-                dispatch(
-                  signIn({
-                    id: userInfo.id,
-                    displayName: userInfo.displayName,
-                    email: userInfo.email as string,
-                    picture: userInfo.picture,
-                    jwt: idToken,
-                  })
-                );
-                if (res.data.isCreated) {
-                  console.log("サインイン");
-                  console.log(idToken);
-                  //TODO: サインイン時の処理を書く
-                } else {
-                  console.log("ログイン");
-                  console.log(idToken);
-                  //TODO: ログイン時の処理を書く
-                }
-              }
-            })
-            .catch();
-        });
-      }
+    user.getIdToken().then((idToken: string) => {
+      // promiseが戻り値のときはこういう書き方をする
+      axios
+        .get(uri + "/users/auth", {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + idToken,
+          },
+        })
+        .then((res: AxiosResponse<UserAuthResponse>) => {
+          if (isUserAuthResponse(res.data)) {
+            const userInfo = res.data.userInfo;
+            dispatch(
+              signIn({
+                id: userInfo.id,
+                displayName: userInfo.displayName,
+                email: userInfo.email as string,
+                picture: userInfo.picture,
+                jwt: idToken,
+                isAnonymous: user.isAnonymous,
+              })
+            );
+            if (res.data.isCreated) {
+              console.log("サインイン");
+              console.log(idToken);
+              //TODO: サインイン時の処理を書く
+            } else {
+              console.log("ログイン");
+              console.log(idToken);
+              //TODO: ログイン時の処理を書く
+            }
+          }
+        })
+        .catch();
     });
-    dispatch(setUnRegisterObserver(unRegisterObserver));
   };
 };
 
 export const signOutAsync = () => {
   return async (dispatch: any) => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        dispatch(signOut());
-      });
+    firebaseSignOut(getAuth()).then(() => {
+      dispatch(signOut());
+    });
   };
 };
 
 export const setCallBackToSyncUser = () => {
   return async (dispatch: any) => {
-    onAuthStateChanged(getAuth(), (user) => {
+    const observer = onAuthStateChanged(getAuth(), (user) => {
       if (user) {
-        dispatch(signInAsync());
+        console.log(user);
+        dispatch(signInAsync(user));
       }
     });
+    dispatch(setUnRegisterObserver(observer));
   };
 };
 

@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { CodeType, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
 import { UserState, UserAction } from "services/RoomSync/RoomSync";
+import { RootState } from "store";
+import { useSelector } from "react-redux";
+import { User } from "services/user/user";
 
 export type IResponse = {
+  user: User | null;
   roomInfo: {
     roomId: string;
     host: UserState;
@@ -23,7 +27,7 @@ export type IResponse = {
   exitBtnHandler: () => void;
   startBtnDisabled: boolean;
   startBtnHandler: () => void;
-
+  kickUserHandler: (userId: string) => void;
   code: {
     codes: CodeType[];
     loading: boolean;
@@ -33,8 +37,14 @@ export type IResponse = {
 };
 
 export const useWaitingRoomState = (): IResponse => {
-  const { room, isHost, updateRoomInfo, updateMember, exitRoom } =
-    useRoomSync();
+  const {
+    room,
+    isHost,
+    updateRoomInfo,
+    updateMember,
+    updateOtherMember,
+    exitRoom,
+  } = useRoomSync();
   const { data: codes = [], loading } = useFetchCodes();
   const [preRoomStatus, setPreRoomStatus] = useState<"waiting" | "watching">(
     "watching"
@@ -43,6 +53,8 @@ export const useWaitingRoomState = (): IResponse => {
   const [ready, setReady] = useState(false);
   const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
   const [startBtnDisabled, setStartBtnDisabled] = useState(true);
+  let { user } = useSelector((state: RootState) => state.user);
+
   const navigate = useNavigate();
   const dummyUser: UserState = {
     displayName: "",
@@ -104,7 +116,6 @@ export const useWaitingRoomState = (): IResponse => {
         }
         setStartBtnDisabled(newDisabled);
       }
-
       // 全員がWaitingRoomに返ってきたらroomの状態をwaitingに更新する
       let newRoomStatus: "waiting" | "watching" = "waiting";
       for (let key of Object.keys(room.members)) {
@@ -120,6 +131,17 @@ export const useWaitingRoomState = (): IResponse => {
       }
     }
   }, [room.members, isHost]);
+
+  // kick処理 member.status = kickingの場合そのユーザをキックする
+  useEffect(() => {
+    if (user) {
+      for (let key of Object.keys(room.members)) {
+        if (room.members[key].status == "kicking" && user.id == key) {
+          exitRoom();
+        }
+      }
+    }
+  }, [room.members]);
 
   // ---- イベントハンドラ ---- //
 
@@ -141,7 +163,12 @@ export const useWaitingRoomState = (): IResponse => {
     setSelectedCodeId(codeId);
   };
 
+  const _kickUserBtnHandler = (userId: string) => {
+    updateOtherMember(userId, { status: "kicking" });
+  };
+
   return {
+    user: user,
     roomInfo: {
       roomId: room.id ? room.id : "",
       host:
@@ -162,7 +189,7 @@ export const useWaitingRoomState = (): IResponse => {
     exitBtnHandler: _exitBtnHandler,
     startBtnDisabled: startBtnDisabled,
     startBtnHandler: _startBtnHandler,
-
+    kickUserHandler: _kickUserBtnHandler,
     code: {
       codes: codes,
       loading: loading,

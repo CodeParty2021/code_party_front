@@ -55,12 +55,24 @@ Array [
            :
            
           準備中
+          <button
+            id="kick-btn-host-user-id"
+            onClick={[Function]}
+          >
+            キックする
+          </button>
         </li>
         <li>
           user 1
            :
            
           観戦中
+          <button
+            id="kick-btn-user-id-1"
+            onClick={[Function]}
+          >
+            キックする
+          </button>
         </li>
         <li>
           user 2

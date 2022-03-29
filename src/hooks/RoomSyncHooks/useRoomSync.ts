@@ -89,6 +89,16 @@ export const useRoomSync = () => {
       if (room.id && user) await updateMemberAsync(room.id, user.id, data);
     },
     /**
+     * 入室中のルームでの他のユーザ情報を更新する
+     * @param userId ユーザID
+     */
+    updateOtherMember: async (userId: string, data: UserStateUpdate) => {
+      if (room.id) {
+        //TODO: ルーム内のユーザかチェック
+        await updateMemberAsync(room.id, userId, data);
+      }
+    },
+    /**
      * 入室中のルームでアクションを起こす
      * @param data アクション情報
      */

@@ -5,14 +5,17 @@ import { useWaitingRoomState } from "./useWaitingRoomState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { IResponse, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
 import { RoomInfo, RoomState, UserState } from "services/RoomSync/RoomSync";
+import { useSelector } from "react-redux";
 
 jest.mock("react-router-dom");
 jest.mock("hooks/RoomSyncHooks/useRoomSync");
 jest.mock("hooks/CodeAPIHooks/useFetchCodes");
+jest.mock("react-redux");
 
 const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
 const useFetchCodesMock = useFetchCodes as jest.Mock;
+const useSelectorMock = useSelector as jest.Mock;
 
 const users: { [id: string]: UserState } = {
   userid1: {
@@ -53,9 +56,10 @@ const initialRoomState: RoomState = {
 const initialRoomSyncState = {
   room: { ...initialRoomState },
   isHost: true,
-  updateMember: jest.fn(),
-  exitRoom: jest.fn(),
   updateRoomInfo: jest.fn(),
+  updateMember: jest.fn(),
+  updateOtherMember: jest.fn(),
+  exitRoom: jest.fn(),
 };
 
 const initialFetchCodesState: IResponse = {
@@ -90,6 +94,17 @@ describe("useWaitingRoomState", () => {
     useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
     useFetchCodesMock.mockReturnValue({ ...initialFetchCodesState });
     useNavigateMock.mockReturnValue(navigateMock);
+    useSelectorMock.mockReturnValue({
+      user: {
+        id: "userid1",
+        displayName: "ffawefae",
+        email: "feaeafa@fafe.com",
+        picture: "fewfawefaewf.png",
+        jwt: "feefawef390urjfo",
+      },
+      isLogin: false,
+      unRegisterObserver: null,
+    });
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -162,6 +177,42 @@ describe("useWaitingRoomState", () => {
     renderHook(() => useWaitingRoomState());
     expect(navigateMock).toBeCalledTimes(1);
     expect(navigateMock).lastCalledWith("/casual-battle/result");
+  });
+
+  it("自分がkickingのユーザならexecRoomが実行される", () => {
+    //自分はuserid1ユーザ
+    useRoomSyncMock.mockReturnValue({
+      ...initialRoomSyncState,
+      room: {
+        ...initialRoomState,
+        members: {
+          userid1: {
+            ...users["userid1"],
+            status: "kicking",
+          },
+        },
+      },
+    });
+    renderHook(() => useWaitingRoomState());
+    expect(initialRoomSyncState.exitRoom).toBeCalledTimes(1);
+  });
+
+  it("自分以外がkickingのユーザなら何もおこらない", () => {
+    //自分はuserid1ユーザ
+    useRoomSyncMock.mockReturnValue({
+      ...initialRoomSyncState,
+      room: {
+        ...initialRoomState,
+        members: {
+          userid2: {
+            ...users["userid2"],
+            status: "kicking",
+          },
+        },
+      },
+    });
+    renderHook(() => useWaitingRoomState());
+    expect(initialRoomSyncState.exitRoom).toBeCalledTimes(0);
   });
 
   it("exec readyBtnHandler", () => {
@@ -237,6 +288,36 @@ describe("useWaitingRoomState", () => {
 
     //反映されたことを確認
     expect(result.current.selectedCodeId).toBe("codeid1");
+  });
+
+  it("exec kickUserBtnHandler", () => {
+    const { result } = renderHook(() => useWaitingRoomState());
+
+    const { kickUserHandler } = result.current;
+
+    //呼び出し回数を記録
+    const num = initialRoomSyncState.updateOtherMember.mock.calls.length;
+
+    //初期値を確認
+    expect(result.current.roomInfo).toEqual({
+      roomId: "room id",
+      host: { ...users["userid1"] },
+      memberKeys: ["userid1"],
+      members: { userid1: users["userid1"] },
+      actionKeys: [],
+      actions: {},
+    });
+
+    //ボタン押下
+    act(() => {
+      kickUserHandler("codeid1");
+    });
+
+    //実行される．
+    expect(initialRoomSyncState.updateOtherMember).toBeCalledTimes(num + 1);
+    expect(initialRoomSyncState.updateOtherMember).lastCalledWith("codeid1", {
+      status: "kicking",
+    });
   });
 
   describe("ルームステータスのテスト", () => {

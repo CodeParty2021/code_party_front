@@ -18,6 +18,8 @@ const state: IResponse = {
   },
   roomInfo: {
     roomId: "room id",
+    invitationLink:
+      "http://localhost:3000/#/casual-battle/invitation/-MzESfkdu9Xmu8pkOAw5",
     host: {
       displayName: "host user",
       ready: false,
@@ -69,6 +71,8 @@ const state: IResponse = {
   exitBtnHandler: jest.fn(),
   startBtnDisabled: false,
   startBtnHandler: jest.fn(),
+  isCopyBtnClicked: false,
+  invitationBtnHandler: jest.fn(),
   kickUserHandler: jest.fn(),
   code: {
     codes: [
@@ -159,5 +163,14 @@ describe("<CasualBattleWaitingRoom />", () => {
     });
     expect(state.onChangeSelectedCodeId).toBeCalledTimes(1);
     expect(state.onChangeSelectedCodeId).lastCalledWith("selectedCodeId");
+  });
+
+  it("copy button test", () => {
+    const wrapper = shallow(<CasualBattleWaitingRoom />);
+
+    const btn = wrapper.find("#invitation-btn");
+    btn.simulate("click");
+
+    expect(state.invitationBtnHandler).toHaveBeenCalled();
   });
 });

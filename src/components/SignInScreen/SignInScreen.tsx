@@ -32,7 +32,7 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
   const navigate = useNavigate(); //router
 
   if (isLogin) {
-    navigate("/");
+    navigate(props.signInSuccessUrl ? props.signInSuccessUrl : "/");
   }
 
   //サインインのAsync

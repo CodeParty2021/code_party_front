@@ -12,6 +12,7 @@ export type IResponse = {
   user: User | null;
   roomInfo: {
     roomId: string;
+    invitationLink: string;
     host: UserState;
     memberKeys: string[];
     members: { [id: string]: UserState };
@@ -27,6 +28,8 @@ export type IResponse = {
   exitBtnHandler: () => void;
   startBtnDisabled: boolean;
   startBtnHandler: () => void;
+  isCopyBtnClicked: boolean;
+  invitationBtnHandler: () => void;
   kickUserHandler: (userId: string) => void;
   code: {
     codes: CodeType[];
@@ -53,8 +56,8 @@ export const useWaitingRoomState = (): IResponse => {
   const [ready, setReady] = useState(false);
   const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
   const [startBtnDisabled, setStartBtnDisabled] = useState(true);
+  const [isCopyBtnClicked, setIsCopyBtnClicked] = useState(false);
   let { user } = useSelector((state: RootState) => state.user);
-
   const navigate = useNavigate();
   const dummyUser: UserState = {
     displayName: "",
@@ -163,6 +166,14 @@ export const useWaitingRoomState = (): IResponse => {
     setSelectedCodeId(codeId);
   };
 
+  //invitationURLのコピーボタン
+  const _invitationBtnHandler = () => {
+    if (room.invitationLink) {
+      navigator.clipboard.writeText(room.invitationLink).then(() => {
+        setIsCopyBtnClicked(true);
+      });
+    }
+  };
   const _kickUserBtnHandler = (userId: string) => {
     updateOtherMember(userId, { status: "kicking" });
   };
@@ -171,6 +182,7 @@ export const useWaitingRoomState = (): IResponse => {
     user: user,
     roomInfo: {
       roomId: room.id ? room.id : "",
+      invitationLink: room.invitationLink ? room.invitationLink : "",
       host:
         room.info && room.info.host in room.members
           ? room.members[room.info.host]
@@ -183,12 +195,13 @@ export const useWaitingRoomState = (): IResponse => {
     isHost: isHost,
     status: room.info?.status,
     ready: ready,
-
     readyBtnHandler: _readyBtnHandler,
     readyBtnDisabled: readyBtnDisabled,
     exitBtnHandler: _exitBtnHandler,
     startBtnDisabled: startBtnDisabled,
     startBtnHandler: _startBtnHandler,
+    isCopyBtnClicked: isCopyBtnClicked,
+    invitationBtnHandler: _invitationBtnHandler,
     kickUserHandler: _kickUserBtnHandler,
     code: {
       codes: codes,

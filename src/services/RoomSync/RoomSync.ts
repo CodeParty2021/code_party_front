@@ -3,7 +3,6 @@ import { ref, child, getDatabase } from "firebase/database";
 import { AnyAction } from "redux";
 import "firebase_config";
 import { ThunkAction } from "redux-thunk";
-
 import { RootState } from "store";
 
 export const RootRef = () => ref(getDatabase(), "/RoomApp");
@@ -64,6 +63,7 @@ export type UserAction = {
  */
 export type RoomState = {
   id?: string;
+  invitationLink?: string;
   isEntered: boolean;
   info?: RoomInfo;
   members: { [id: string]: UserState };
@@ -125,6 +125,7 @@ export type ThunkResult<R> = ThunkAction<R, RootState, undefined, AnyAction>;
  */
 const initialState: RoomState = {
   id: undefined,
+  invitationLink: undefined,
   info: undefined,
   isEntered: false,
   members: {},
@@ -137,9 +138,9 @@ const roomSlice = createSlice({
   name: "room",
   initialState: { ...initialState } as RoomState,
   reducers: {
-    // room
     enterRoom: (state, action: RoomPayload) => {
       state.id = action.payload.id;
+      state.invitationLink = `${window.location.origin}/#/casual-battle/invitation/${state.id}`;
       state.info = action.payload.data;
       state.isEntered = true;
     },

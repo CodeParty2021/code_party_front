@@ -28,6 +28,26 @@ Array [
     >
       退出
     </button>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <input
+        id="invitation-text"
+        readOnly={true}
+        type="text"
+        value="http://localhost:3000/#/casual-battle/invitation/-MzESfkdu9Xmu8pkOAw5"
+      />
+      <button
+        id="invitation-btn"
+        onClick={[MockFunction]}
+      >
+        招待リンクをコピーする
+      </button>
+    </div>
     <ul>
       <li>
         Room ID: 
@@ -49,38 +69,36 @@ Array [
       <li>
         Members:
       </li>
-      <ul>
-        <li>
-          host user
-           :
-           
-          準備中
-          <button
-            id="kick-btn-host-user-id"
-            onClick={[Function]}
-          >
-            キックする
-          </button>
-        </li>
-        <li>
-          user 1
-           :
-           
-          観戦中
-          <button
-            id="kick-btn-user-id-1"
-            onClick={[Function]}
-          >
-            キックする
-          </button>
-        </li>
-        <li>
-          user 2
-           :
-           
-          切断
-        </li>
-      </ul>
+      <li>
+        host user
+         :
+         
+        準備中
+        <button
+          id="kick-btn-host-user-id"
+          onClick={[Function]}
+        >
+          キックする
+        </button>
+      </li>
+      <li>
+        user 1
+         :
+         
+        観戦中
+        <button
+          id="kick-btn-user-id-1"
+          onClick={[Function]}
+        >
+          キックする
+        </button>
+      </li>
+      <li>
+        user 2
+         :
+         
+        切断
+      </li>
     </ul>
     <div>
       <h3>

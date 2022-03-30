@@ -26,6 +26,7 @@ childMock.mockImplementation((ref: any, path: string) => `${ref}/${path}`);
 
 const initialState: RoomState = {
   id: undefined,
+  invitationLink: undefined,
   isEntered: false,
   info: undefined,
   members: {},
@@ -62,6 +63,7 @@ const action2: UserAction = {
 const enteredState: RoomState = {
   ...initialState,
   id: roomId,
+  invitationLink: "http://localhost/#/casual-battle/invitation/room id",
   isEntered: true,
   info: { ...roomInfo },
 };

@@ -9,6 +9,13 @@ jest.mock("./hooks/useWaitingRoomState");
 const useSelectorMock = useWaitingRoomState as jest.Mock;
 
 const state: IResponse = {
+  user: {
+    id: "user-id-2",
+    displayName: "user 2",
+    email: "email",
+    picture: "picture",
+    jwt: "fewaf",
+  },
   roomInfo: {
     roomId: "room id",
     invitationLink:
@@ -19,21 +26,21 @@ const state: IResponse = {
       status: "waiting",
       codeId: "hostCodeId",
     },
-    memberKeys: ["host user id", "user id 1", "user id 2"],
+    memberKeys: ["host-user-id", "user-id-1", "user-id-2"],
     members: {
-      "host user id": {
+      "host-user-id": {
         displayName: "host user",
         ready: false,
         status: "waiting",
         codeId: "hostCodeId1",
       },
-      "user id 1": {
+      "user-id-1": {
         displayName: "user 1",
         ready: true,
         status: "watching",
         codeId: "codeId1",
       },
-      "user id 2": {
+      "user-id-2": {
         displayName: "user 2",
         ready: true,
         status: "disconnect",
@@ -52,7 +59,7 @@ const state: IResponse = {
       },
       "action id 3": {
         actionId: 3,
-        userId: "user id 2",
+        userId: "user-id-2",
       },
     },
   },
@@ -66,7 +73,7 @@ const state: IResponse = {
   startBtnHandler: jest.fn(),
   isCopyBtnClicked: false,
   invitationBtnHandler: jest.fn(),
-
+  kickUserHandler: jest.fn(),
   code: {
     codes: [
       {
@@ -117,6 +124,15 @@ describe("<CasualBattleWaitingRoom />", () => {
     btn.simulate("click");
 
     expect(state.startBtnHandler).toHaveBeenCalled();
+  });
+
+  it("kick user button test", () => {
+    const wrapper = shallow(<CasualBattleWaitingRoom />);
+
+    const btn = wrapper.find("#kick-btn-user-id-1");
+    btn.simulate("click");
+
+    expect(state.kickUserHandler).toHaveBeenCalled();
   });
 
   it("exit button test", () => {

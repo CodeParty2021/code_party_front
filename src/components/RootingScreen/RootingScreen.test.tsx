@@ -2,11 +2,11 @@ import React from "react";
 import { shallow } from "enzyme";
 import { RootingScreen } from "./RootingScreen";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut, UserState } from "../../services/user/user";
+import { signOut, LoginUserState } from "../../services/user/user";
 
 jest.mock("react-redux");
 
-const useSelectorMock = useSelector as jest.Mock<UserState>;
+const useSelectorMock = useSelector as jest.Mock<LoginUserState>;
 const useDispatchMock = useDispatch as jest.Mock;
 
 describe("<RootingScreen />", () => {

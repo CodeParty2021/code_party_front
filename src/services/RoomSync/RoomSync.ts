@@ -40,7 +40,7 @@ export type UserState = {
    * - watching: GameWatching画面にいる
    * - disconnect: 接続が切れた
    */
-  status: "waiting" | "watching" | "disconnect";
+  status: "waiting" | "watching" | "disconnect" | "kicking";
   /**
    * 選択したコードのID
    */

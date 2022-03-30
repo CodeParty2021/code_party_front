@@ -16,8 +16,7 @@ type Code = {
 };
 
 export const CodeList: React.FC<Props> = () => {
-  const { data, error, loading } = useFetchCodes();
-  console.log(data, error, loading);
+  const { data, loading } = useFetchCodes();
   if (loading) {
     return <div>ロード中</div>;
   }

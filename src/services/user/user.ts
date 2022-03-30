@@ -11,7 +11,7 @@ export type User = {
   jwt: string; //これをheaderに入れてAPIやり取りする。
 };
 
-export type UserState = {
+export type LoginUserState = {
   user: User | null;
   isLogin: boolean;
   unRegisterObserver: firebase.Unsubscribe | null; // ログイン監視用のobserverのkill用メソッド
@@ -42,7 +42,7 @@ const isUserAuthResponse = (data: any): data is UserAuthResponse => {
 
 const userSlice = createSlice({
   name: "users", //識別用の名前
-  initialState: { user: null, isLogin: false } as UserState,
+  initialState: { user: null, isLogin: false } as LoginUserState,
   reducers: {
     signIn: (state, action: signInAction) => {
       state.isLogin = true;

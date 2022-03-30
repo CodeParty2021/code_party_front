@@ -11,8 +11,8 @@ import {
 export type User = {
   id: string;
   displayName: string;
-  email: string;
-  picture: string;
+  email?: string;
+  picture?: string;
   jwt: string; //これをheaderに入れてAPIやり取りする。
   isAnonymous: boolean;
 };
@@ -27,9 +27,9 @@ type UserAuthResponse = {
   // レスポンスの型
   userInfo: {
     displayName: string;
-    email: string;
+    email?: string | null;
     id: string;
-    picture: string;
+    picture?: string | null;
   };
   isCreated: boolean;
 };
@@ -87,8 +87,8 @@ export const signInAsync = (user: FirebaseUser) => {
               signIn({
                 id: userInfo.id,
                 displayName: userInfo.displayName,
-                email: userInfo.email as string,
-                picture: userInfo.picture,
+                email: userInfo.email ? userInfo.email : undefined,
+                picture: userInfo.picture ? userInfo.picture : undefined,
                 jwt: idToken,
                 isAnonymous: user.isAnonymous,
               })

@@ -303,6 +303,7 @@ describe("useWaitingRoomState", () => {
     //初期値を確認
     expect(result.current.roomInfo).toEqual({
       roomId: "room id",
+      invitationLink: "http://casual-room/invitation/roomId",
       host: { ...users["userid1"] },
       memberKeys: ["userid1"],
       members: { userid1: users["userid1"] },

@@ -6,7 +6,9 @@ Array [
     <div>
       コーディング画面
     </div>
-    <div />
+    <div>
+      <Description />
+    </div>
   </div>,
 ]
 `;

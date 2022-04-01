@@ -1,6 +1,6 @@
 import { Description } from "./components/Description/Description";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCode } from "./hooks/CodeHooks";
 
@@ -27,11 +27,31 @@ const LeftBox = styled.div`
 const RightBox = styled.div`
   width: 50%;
 `;
+const Modal = styled.div<{ shown: boolean }>`
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  visibility: ${({ shown }) => (shown ? "visible" : "hidden")};
+  background: white;
+  border-radius: 8px;
+  margin: 20px;
+  width: 100%;
+`;
+const CloseButton = styled.div`
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 36px;
+  right: 16px;
+  background: gray;
+  border-radius: 8px;
+`;
 
 export const CodeCoding: React.FC<Props> = () => {
   const { id } = useParams();
-  console.log(id);
   const { res, put, json } = useCode(id);
+  const [showUnity, setShowUity] = useState(false);
 
   const editorRef = useRef(
     null
@@ -51,6 +71,8 @@ export const CodeCoding: React.FC<Props> = () => {
   };
 
   useEffect(() => {
+    console.log(showUnity);
+    setShowUity(true);
     loadJson(json);
   }, [json]);
   return (
@@ -83,12 +105,13 @@ export const CodeCoding: React.FC<Props> = () => {
           {res.loading && res.loading}
         </RightBox>
       </FlexBox>
-      <div style={{ visibility: json === "" ? "hidden" : "visible" }}>
+      <Modal shown={showUnity}>
+        <CloseButton onClick={() => setShowUity(false)}>×</CloseButton>
         <Unity
           unityContext={unityContext}
           style={{ width: "800px", height: "600px" }}
         />
-      </div>
+      </Modal>
     </div>
   );
 };

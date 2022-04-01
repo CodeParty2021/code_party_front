@@ -7,7 +7,7 @@ Array [
       ログイン情報を入力して!
     </p>
     <SignInScreen
-      signInSuccessUrl="/#/mode-select"
+      signInSuccessUrl="/mode-select"
     />
   </div>,
 ]

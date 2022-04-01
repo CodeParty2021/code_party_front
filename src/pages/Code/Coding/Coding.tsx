@@ -21,11 +21,16 @@ const FlexBox = styled.div`
   display: flex;
 `;
 const LeftBox = styled.div`
-  scroll: auto;
+  overflow: auto;
   width: 50%;
+  height: 100vh;
 `;
 const RightBox = styled.div`
   width: 50%;
+  height: 100vh;
+  padding: 8px;
+  background: #b0c4de;
+  border-radius: 8px;
 `;
 const Modal = styled.div<{ shown: boolean }>`
   position: absolute;
@@ -119,8 +124,6 @@ export const CodeCoding: React.FC<Props> = () => {
 
   return (
     <div>
-      <div>コーディング画面</div>
-
       <FlexBox>
         <LeftBox>
           <Description />

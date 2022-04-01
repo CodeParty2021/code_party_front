@@ -114,7 +114,7 @@ export const useCode = (id: string | undefined) => {
       .post(
         `${uri}/codes/`,
         {
-          code_content: "初期コード",
+          code_content: "def select(field,my_pos,other_pos):\n  return 0",
           step: 1,
           language: 1,
         },

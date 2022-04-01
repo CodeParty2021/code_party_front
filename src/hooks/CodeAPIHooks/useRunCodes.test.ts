@@ -47,8 +47,8 @@ describe("useRunCodes", () => {
     console.log(mock.history["post"][0].params);
     expect(mock.history["post"][0].data).toEqual(
       JSON.stringify({
-        code: ["codeId1", "codeId2", "codeId3"]
+        code: ["codeId1", "codeId2", "codeId3"],
       })
-      );
+    );
   });
 });

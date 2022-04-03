@@ -17,7 +17,9 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
   // firebase ui のコンフィグ
   const uiConfig = {
     signInFlow: "popup",
-    signInSuccessUrl: props.signInSuccessUrl ? props.signInSuccessUrl : "/", // 成功後の遷移先
+    signInSuccessUrl: props.signInSuccessUrl
+      ? "/#" + props.signInSuccessUrl
+      : "/#", // 成功後の遷移先
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,

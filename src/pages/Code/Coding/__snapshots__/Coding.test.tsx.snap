@@ -3,9 +3,6 @@
 exports[`<CodeCoding /> auth snapshot test 1`] = `
 Array [
   <div>
-    <div>
-      コーディング画面
-    </div>
     <styled.div>
       <styled.div>
         <Description />

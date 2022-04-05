@@ -86,7 +86,7 @@ const LogContent = styled.div`
   margin: 0 0 0 8px;
 `;
 export const CodeCoding: React.FC<Props> = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //code_id
   const { res, put, json, turnLog } = useCode(id);
   const [showUnity, setShowUity] = useState(false);
   console.log(turnLog);
@@ -95,7 +95,7 @@ export const CodeCoding: React.FC<Props> = () => {
   ) as React.MutableRefObject<null | HTMLInputElement>;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function handleEditorDidMount(editor: any, _monaco: any) {
-    editorRef.current = editor;
+    editorRef.current = editor; //ここにeditorの内容が返ってくる
   }
   function getCode(): string {
     if (editorRef.current == null) throw "editorRefが初期化されてません";
@@ -121,7 +121,6 @@ export const CodeCoding: React.FC<Props> = () => {
       setProgression(progression);
     });
   }, []);
-
   return (
     <div>
       <FlexBox>

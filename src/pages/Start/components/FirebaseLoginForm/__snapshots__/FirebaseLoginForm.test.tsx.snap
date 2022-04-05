@@ -3,9 +3,6 @@
 exports[`<FirebaseLoginForm /> auth snapshot test 1`] = `
 Array [
   <div>
-    <p>
-      ログイン情報を入力して!
-    </p>
     <SignInScreen
       signInSuccessUrl="/mode-select"
     />

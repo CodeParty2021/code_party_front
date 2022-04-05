@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
@@ -16,6 +16,7 @@ import { PrivateRoute } from "utils/PrivateRoute";
 import { setCallBackToSyncUser } from "services/user/user";
 import { RootingScreen } from "components/RootingScreen/RootingScreen";
 import { CasualBattleInvitation } from "pages/CasualBattle/Invitation/Invitation";
+import { RootState } from "store";
 
 type Props = {};
 
@@ -23,10 +24,19 @@ type Props = {};
 // https://reffect.co.jp/react/react-router#Link
 
 export const App: React.FC<Props> = () => {
+  const unRegisterObserver = useSelector(
+    (state: RootState) => state.user.unRegisterObserver
+  );
   const dispatch = useDispatch();
   const isDev = process.env.NODE_ENV === "development";
+
+  // ログイン監視リスナーをセット
   useEffect(() => {
     dispatch(setCallBackToSyncUser());
+    // ページリロードやページから出るときにリスナーを削除
+    return () => {
+      if (unRegisterObserver) unRegisterObserver();
+    };
   }, []);
 
   return (

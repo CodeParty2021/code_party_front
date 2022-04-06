@@ -1,21 +1,14 @@
 import { Description } from "./components/Description/Description";
 
-import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useCode } from "./hooks/CodeHooks";
+import React from "react";
+import { useCodingState } from "./hooks/CodeHooks";
 
 import Editor from "@monaco-editor/react";
-import Unity, { UnityContext } from "react-unity-webgl";
+import Unity from "react-unity-webgl";
 import styled from "styled-components";
 
 type Props = {};
-//TODO:ここstepかstageごとに変更する必要あり
-const unityContext = new UnityContext({
-  loaderUrl: "unity/sp/web.loader.js",
-  dataUrl: "unity/sp/web.data.unityweb",
-  frameworkUrl: "unity/sp/web.framework.js.unityweb",
-  codeUrl: "unity/sp/web.wasm.unityweb",
-});
+
 const FlexBox = styled.div`
   width: 100%;
   display: flex;
@@ -70,7 +63,6 @@ const LogItem = styled.div`
   padding: 8px;
   border-radius: 8px;
 `;
-
 const TurnNum = styled.div`
   &:after {
     content: "";
@@ -85,42 +77,18 @@ const TurnNum = styled.div`
 const LogContent = styled.div`
   margin: 0 0 0 8px;
 `;
+
 export const CodeCoding: React.FC<Props> = () => {
-  const { id } = useParams(); //code_id
-  const { res, put, json, turnLog } = useCode(id);
-  const [showUnity, setShowUity] = useState(false);
-  console.log(turnLog);
-  const editorRef = useRef(
-    null
-  ) as React.MutableRefObject<null | HTMLInputElement>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function handleEditorDidMount(editor: any, _monaco: any) {
-    editorRef.current = editor; //ここにeditorの内容が返ってくる
-  }
-  function getCode(): string {
-    if (editorRef.current == null) throw "editorRefが初期化されてません";
-    // @ts-ignore
-    return editorRef.current?.getValue();
-  }
-  const loadJson = (json: string) => {
-    //unityContext.send("JSONLoader", "LoadJSON", json);
-    unityContext.send("JSUnityConnector", "SetSimulationData", json);
-    unityContext.send("JSUnityConnector", "LoadStage", "SquarePaint");
-  };
-
-  useEffect(() => {
-    setShowUity(json !== ""); //jsonがセットされている場合はUnityを表示する
-    loadJson(json);
-  }, [json]);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_progression, setProgression] = useState(0);
-
-  useEffect(() => {
-    unityContext.on("progress", function (progression) {
-      setProgression(progression);
-    });
-  }, []);
+  const {
+    res,
+    put,
+    turnLog,
+    handleEditorDidMount,
+    getCode,
+    setShowUnity,
+    showUnity,
+    unityContext,
+  } = useCodingState();
   return (
     <div>
       <FlexBox>
@@ -150,7 +118,7 @@ export const CodeCoding: React.FC<Props> = () => {
         </RightBox>
       </FlexBox>
       <Modal shown={showUnity}>
-        <CloseButton onClick={() => setShowUity(false)}>×</CloseButton>
+        <CloseButton onClick={() => setShowUnity(false)}>×</CloseButton>
         <Unity
           unityContext={unityContext}
           style={{ width: "800px", height: "600px" }}

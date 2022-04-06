@@ -1,11 +1,12 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import { UnityContext } from "react-unity-webgl";
 import { uri } from "config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export type IResponse = {
+export type APIState = {
   data: CodeType | null;
   error: AxiosError | null;
   loading: boolean;
@@ -36,10 +37,29 @@ type PlayerState = {
   print: string;
 };
 
-export const useCode = (id: string | undefined) => {
+export type IResponse = APIState & {
+  put: (content: string, step: string, language: string) => void;
+  turnLog: TurnState[];
+  handleEditorDidMount: (editor: any, _monaco: any) => void;
+  getCode: () => string;
+  setShowUnity: React.Dispatch<React.SetStateAction<boolean>>;
+  showUnity: boolean;
+  unityContext: UnityContext;
+};
+
+//TODO:ここstepかstageごとに変更する必要あり
+const unityContext = new UnityContext({
+  loaderUrl: "unity/sp/web.loader.js",
+  dataUrl: "unity/sp/web.data.unityweb",
+  frameworkUrl: "unity/sp/web.framework.js.unityweb",
+  codeUrl: "unity/sp/web.wasm.unityweb",
+});
+
+export const useCodingState = () => {
+  const { codeId } = useParams(); //code_id
   const { user } = useSelector((state: RootState) => state.user);
 
-  const [res, setRes] = useState<IResponse>({
+  const [res, setRes] = useState<APIState>({
     data: null,
     error: null,
     loading: false,
@@ -49,14 +69,47 @@ export const useCode = (id: string | undefined) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id) get();
+    if (codeId) get();
     else post();
   }, []);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_progression, setProgression] = useState(0);
+  useEffect(() => {
+    unityContext.on("progress", function (progression) {
+      setProgression(progression);
+    });
+  }, []);
+
+  const [showUnity, setShowUnity] = useState(false);
+  console.log(turnLog);
+  const editorRef = useRef(
+    null
+  ) as React.MutableRefObject<null | HTMLInputElement>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function handleEditorDidMount(editor: any, _monaco: any) {
+    editorRef.current = editor; //ここにeditorの内容が返ってくる
+  }
+  function getCode(): string {
+    if (editorRef.current == null) throw "editorRefが初期化されてません";
+    // @ts-ignore
+    return editorRef.current?.getValue();
+  }
+  const loadJson = (json: string) => {
+    //unityContext.send("JSONLoader", "LoadJSON", json);
+    unityContext.send("JSUnityConnector", "SetSimulationData", json);
+    unityContext.send("JSUnityConnector", "LoadStage", "SquarePaint");
+  };
+
+  useEffect(() => {
+    setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
+    loadJson(json);
+  }, [json]);
 
   const get = () => {
     setRes((prevState) => ({ ...prevState, loading: true }));
     axios
-      .get(`${uri}/codes/` + id, {})
+      .get(`${uri}/codes/` + codeId, {})
       .then((response: AxiosResponse<CodeType>) => {
         setRes({ data: response.data, error: null, loading: false });
       })
@@ -68,7 +121,7 @@ export const useCode = (id: string | undefined) => {
     setRes((prevState) => ({ ...prevState, loading: true }));
     axios
       .put(
-        `${uri}/codes/${id}/`,
+        `${uri}/codes/${codeId}/`,
         {
           code_content: content,
           step,
@@ -84,7 +137,7 @@ export const useCode = (id: string | undefined) => {
         console.log(response);
         //レスポンスがあったらrunする
         axios
-          .get(`${uri}/codes/${id}/test`, {})
+          .get(`${uri}/codes/${codeId}/test`, {})
           .then((response: AxiosResponse<RunResponse>) => {
             console.log(response);
             axios
@@ -133,5 +186,14 @@ export const useCode = (id: string | undefined) => {
       });
   };
 
-  return { res, put, json, turnLog };
+  return {
+    res,
+    put,
+    turnLog,
+    handleEditorDidMount,
+    getCode,
+    setShowUnity,
+    showUnity,
+    unityContext,
+  };
 };

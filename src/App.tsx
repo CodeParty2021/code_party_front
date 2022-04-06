@@ -64,7 +64,7 @@ export const App: React.FC<Props> = () => {
             element={<PrivateRoute component={CodeCoding} />}
           />
           <Route
-            path="/free-coding/:id"
+            path="/free-coding/:codeId"
             element={<PrivateRoute component={CodeCoding} />}
           />
         </Routes>

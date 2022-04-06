@@ -66,8 +66,6 @@ export const useFetchJson = (): IResponse => {
     await axiosWithIdToken
       .get(`/results/${resultId}/json`)
       .then((response: AxiosResponse<SquarePaintJson>) => {
-        console.log("fawewf");
-        console.log("result", response);
         setRes({ data: JSON.stringify(response.data), loading: false });
       })
       .catch((error: AxiosError) => {

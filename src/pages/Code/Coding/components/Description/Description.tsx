@@ -2,27 +2,27 @@ import React from "react";
 import styled from "styled-components";
 type Prop = {};
 
+const Table = styled.table`
+  text-align: center;
+  border-collapse: collapse;
+  th,
+  td {
+    border: 1px solid #595959;
+    width: 100px;
+    height: 100px;
+  }
+`;
+
+const Table_Robbot = styled.table`
+  text-align: center;
+  border-collapse: collapse;
+  th,
+  td {
+    border: 1px solid #595959;
+  }
+`;
+
 export const Description: React.FC<Prop> = () => {
-  const Table = styled.table`
-    text-align: center;
-    border-collapse: collapse;
-    th,
-    td {
-      border: 1px solid #595959;
-      width: 100px;
-      height: 100px;
-    }
-  `;
-
-  const Table_Robbot = styled.table`
-    text-align: center;
-    border-collapse: collapse;
-    th,
-    td {
-      border: 1px solid #595959;
-    }
-  `;
-
   return (
     <div>
       <h1>コーディングの説明</h1>

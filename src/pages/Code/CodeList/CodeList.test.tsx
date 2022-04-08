@@ -17,6 +17,7 @@ describe("<CodeList />", () => {
         email: "feaeafa@fafe.com",
         picture: "fewfawefaewf.png",
         jwt: "feefawef390urjfo",
+        isAnonymous: false,
       },
       isLogin: true,
       unRegisterObserver: null,

@@ -27,6 +27,7 @@ describe("useFetchCodes", () => {
         email: "feaeafa@fafe.com",
         picture: "fewfawefaewf.png",
         jwt: "feefawef390urjfo",
+        isAnonymous: false,
       },
       isLogin: false,
       unRegisterObserver: null,

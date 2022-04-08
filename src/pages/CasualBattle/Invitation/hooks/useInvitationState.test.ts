@@ -4,7 +4,7 @@ import { Params, useNavigate, useParams } from "react-router-dom";
 import { useInvitationState } from "./useInvitationState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { useSelector } from "react-redux";
-import { UserState } from "services/user/user";
+import { LoginUserState } from "services/user/user";
 
 jest.mock("react-redux");
 jest.mock("react-router-dom");
@@ -12,7 +12,7 @@ jest.mock("hooks/RoomSyncHooks/useRoomSync");
 
 const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
-const useSelectorMock = useSelector as jest.Mock<UserState>;
+const useSelectorMock = useSelector as jest.Mock<LoginUserState>;
 const useParamsMock = useParams as jest.Mock<Params<string>>;
 const initialRoomState = {
   isEntered: false,

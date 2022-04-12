@@ -1,7 +1,7 @@
 import { Description } from "./components/Description/Description";
 
 import React from "react";
-import { useCodingState } from "./hooks/CodeHooks";
+import { useCodingState } from "./hooks/useCodeHooks";
 
 import Editor from "@monaco-editor/react";
 import Unity from "react-unity-webgl";
@@ -80,65 +80,77 @@ const LogContent = styled.div`
 
 export const CodeCoding: React.FC<Props> = () => {
   const {
-    res,
-    put,
+    code,
+    error,
+    loading,
+    isCode,
+    execCode,
     turnLog,
     handleEditorDidMount,
-    getCode,
     setShowUnity,
     showUnity,
     unityContext,
   } = useCodingState();
-  return (
-    <div>
-      <FlexBox>
-        <LeftBox>
-          <Description />
-        </LeftBox>
-        <RightBox>
-          {res.data && (
+
+  if (loading) {
+    return <div>ロード中です</div>;
+  } else if (error) {
+    return (
+      <div>
+        <p>エラーが発生しました。再読込してください</p>
+        <p>{error}</p>
+      </div>
+    );
+  } else if (isCode(code)) {
+    return (
+      <div>
+        <FlexBox>
+          <LeftBox>
+            <Description />
+          </LeftBox>
+          <RightBox>
             <>
               <Editor
                 height="569px"
                 defaultLanguage="python"
-                defaultValue={res.data.codeContent}
+                defaultValue={code.codeContent}
                 onMount={handleEditorDidMount}
               />
-              <button
-                onClick={() =>
-                  put(getCode(), res.data?.step || "", res.data?.language || "")
-                }
-              >
-                実行する
-              </button>
+              <button onClick={() => execCode()}>実行する</button>
             </>
-          )}
-          {res.error && <>エラー</>}
-          {res.loading && res.loading}
-        </RightBox>
-      </FlexBox>
-      <Modal shown={showUnity}>
-        <CloseButton onClick={() => setShowUnity(false)}>×</CloseButton>
-        <Unity
-          unityContext={unityContext}
-          style={{ width: "800px", height: "600px" }}
-        />
-        <Log>
-          {turnLog.map((turn, index) => {
-            const log = turn.players[0].print;
-            if (log) {
-              return (
-                <LogItem key={index}>
-                  <TurnNum>
-                    <div>{index + 1}</div>
-                  </TurnNum>
-                  <LogContent>{log}</LogContent>
-                </LogItem>
-              );
-            }
-          })}
-        </Log>
-      </Modal>
-    </div>
-  );
+          </RightBox>
+        </FlexBox>
+        <Modal shown={showUnity}>
+          <CloseButton onClick={() => setShowUnity(false)}>×</CloseButton>
+          <Unity
+            unityContext={unityContext}
+            style={{ width: "800px", height: "600px" }}
+          />
+          <Log>
+            {turnLog.map((turn, index) => {
+              const log = turn.players[0].print;
+              if (log) {
+                return (
+                  <LogItem key={index}>
+                    <TurnNum>
+                      <div>{index + 1}</div>
+                    </TurnNum>
+                    <LogContent>{log}</LogContent>
+                  </LogItem>
+                );
+              }
+            })}
+          </Log>
+        </Modal>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        {loading}
+        {code}
+        {error}ノーリソースです
+      </div>
+    );
+  }
 };

@@ -16,7 +16,6 @@ export const CasualBattleGameWatch: React.FC<Props> = () => {
   useRunSimulation();
   const { isAnalyzing, analyzingError, result, json, exitBtnHandler } =
     useGameWatchState();
-
   const [progression, setProgression] = useState(0);
 
   const loadJson = (json: string) => {
@@ -26,6 +25,7 @@ export const CasualBattleGameWatch: React.FC<Props> = () => {
   };
 
   useEffect(() => {
+    // Unityロード時にprogressionが0=>1になる
     unityContext.on("progress", function (progression) {
       setProgression(progression);
     });

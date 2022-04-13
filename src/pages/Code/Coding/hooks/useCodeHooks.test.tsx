@@ -1,35 +1,31 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { useNavigate } from "react-router-dom";
+import { Params, useNavigate, useParams } from "react-router-dom";
 
 import { useCodingState } from "./useCodeHooks";
-import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
+import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
 
 jest.mock("react-router-dom");
-jest.mock("hooks/RoomSyncHooks/useRoomSync");
-
-const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
 
-const initialRoomState = {
-  isEntered: false,
-  sortedKeysOfMembers: [],
-  members: {},
-  sortedKeysOfActions: [],
-  actions: {},
-};
+jest.mock("hooks/CodeAPIHooks/useCodeAPI");
+const useCodeHooksMock = useCodeAPI as jest.Mock;
 
-const initialRoomSyncState = {
-  room: { ...initialRoomState },
-  enterRoom: jest.fn(),
+const useParamsMock = useParams as jest.Mock<Readonly<Params<string>>>;
+const initialState = {
+  loading: false,
+  error: false,
+  getCode: jest.fn(),
+  updateCode: jest.fn(),
+  createCode: jest.fn(),
+  testCode: jest.fn(),
 };
 
 const navigateMock = jest.fn();
 
 describe("useWaitingRoomState", () => {
   beforeEach(() => {
-    useRoomSyncMock.mockReturnValue({ ...initialRoomSyncState });
+    useCodeHooksMock.mockReturnValue({ ...initialState });
     useNavigateMock.mockReturnValue(navigateMock);
-    initialRoomSyncState.enterRoom.mockResolvedValue({});
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -37,45 +33,5 @@ describe("useWaitingRoomState", () => {
 
   it("render", () => {
     const { result } = renderHook(() => useCodingState());
-    expect(result.current).toBeTruthy();
-    expect(result.current.roomIdTextBoxValue).toBe("");
-  });
-
-  it("room.isEntered=trueでページ遷移", () => {
-    useRoomSyncMock.mockReturnValue({
-      ...initialRoomSyncState,
-      room: {
-        ...initialRoomState,
-        isEntered: true,
-      },
-    });
-    renderHook(() => useCodingState());
-    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
-  });
-
-  it("exec roomIdTextBoxChangeHandler", () => {
-    const { result } = renderHook(() => useSearchRoomState());
-    const { roomIdTextBoxChangeHandler } = result.current;
-    act(() => {
-      roomIdTextBoxChangeHandler("typed value");
-    });
-    expect(result.current.roomIdTextBoxValue).toBe("typed value");
-  });
-
-  it("exec enterBtnClickHandler", () => {
-    const { result } = renderHook(() => useSearchRoomState());
-    const { roomIdTextBoxChangeHandler } = result.current;
-
-    act(() => {
-      roomIdTextBoxChangeHandler("roomid");
-    });
-
-    const { enterBtnClickHandler } = result.current;
-    expect(result.current.enterBtnDisabled).toBe(false);
-    act(() => {
-      enterBtnClickHandler();
-    });
-    expect(result.current.enterBtnDisabled).toBe(true);
-    expect(initialRoomSyncState.enterRoom).lastCalledWith("roomid");
   });
 });

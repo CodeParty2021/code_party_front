@@ -7,10 +7,24 @@ Array [
       <styled.div>
         <Description />
       </styled.div>
-      <styled.div />
+      <styled.div>
+        <React.Fragment>
+          <Memo(Editor)
+            defaultLanguage="python"
+            defaultValue="print(aa);"
+            height="569px"
+            onMount={[MockFunction]}
+          />
+          <button
+            onClick={[Function]}
+          >
+            実行する
+          </button>
+        </React.Fragment>
+      </styled.div>
     </styled.div>
     <styled.div
-      shown={false}
+      shown={true}
     >
       <styled.div
         onClick={[Function]}
@@ -38,7 +52,28 @@ Array [
           }
         }
       />
-      <styled.div />
+      <styled.div>
+        <styled.div>
+          <styled.div>
+            <div>
+              1
+            </div>
+          </styled.div>
+          <styled.div>
+            aaa
+          </styled.div>
+        </styled.div>
+        <styled.div>
+          <styled.div>
+            <div>
+              2
+            </div>
+          </styled.div>
+          <styled.div>
+            aaa
+          </styled.div>
+        </styled.div>
+      </styled.div>
     </styled.div>
   </div>,
 ]

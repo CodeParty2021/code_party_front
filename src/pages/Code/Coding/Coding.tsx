@@ -91,7 +91,6 @@ export const CodeCoding: React.FC<Props> = () => {
     showUnity,
     unityContext,
   } = useCodingState();
-
   if (loading) {
     return <div>ロード中です</div>;
   } else if (error) {
@@ -145,12 +144,6 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   } else {
-    return (
-      <div>
-        {loading}
-        {code}
-        {error}ノーリソースです
-      </div>
-    );
+    return <div>ノーリソースです</div>;
   }
 };

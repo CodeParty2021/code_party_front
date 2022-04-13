@@ -1,4 +1,4 @@
-import { act, renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
 import { Params, useNavigate, useParams } from "react-router-dom";
 
 import { useCodingState } from "./useCodeHooks";
@@ -10,7 +10,6 @@ const useNavigateMock = useNavigate as jest.Mock;
 jest.mock("hooks/CodeAPIHooks/useCodeAPI");
 const useCodeHooksMock = useCodeAPI as jest.Mock;
 
-const useParamsMock = useParams as jest.Mock<Readonly<Params<string>>>;
 const initialState = {
   loading: false,
   error: false,
@@ -33,5 +32,7 @@ describe("useWaitingRoomState", () => {
 
   it("render", () => {
     const { result } = renderHook(() => useCodingState());
+    console.log(result);
+    //TODO: write test here
   });
 });

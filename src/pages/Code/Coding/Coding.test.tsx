@@ -22,7 +22,7 @@ const initialState: IResponse = {
   },
   error: undefined,
   loading: false,
-  isCode: (code) => true,
+  isCode: () => true,
   execCode: jest.fn(),
   turnLog: [
     {

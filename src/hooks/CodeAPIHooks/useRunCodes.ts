@@ -27,14 +27,14 @@ export const useRunCodes = (): IResponse => {
 
     setRes((prevState) => ({ ...prevState, loading: true }));
 
-    const params: { [key: string]: any } = {};
-    for (let i = 1; i < codeIds.length; i++) {
-      params[`p${i}`] = codeIds[i];
+    const params = [];
+    for (let i = 0; i < codeIds.length; i++) {
+      params.push(codeIds[i]);
     }
 
     axiosWithIdToken
-      .get(`/codes/${codeIds[0]}/run/`, {
-        params: params,
+      .post(`/codes/run/`, {
+        code: params,
       })
       .then((response: AxiosResponse<any>) => {
         setRes({ data: response.data, loading: false });

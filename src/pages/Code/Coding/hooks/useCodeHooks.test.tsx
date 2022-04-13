@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { Params, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useCodingState } from "./useCodeHooks";
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";

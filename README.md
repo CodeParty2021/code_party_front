@@ -1,7 +1,7 @@
 # CodeParty フロントエンド
 目次
 - [スタートアップ](#%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89)
-- [アイコンシステム](https://github.com/CodeParty2021/code_party_front/blob/feature/iconsystem/commands/IconImporter/README.md)
+- [アイコンシステム](/commands/IconImporter/README.md)
 
 # 環境構築
 

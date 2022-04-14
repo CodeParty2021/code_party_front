@@ -1,28 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 type Prop = {};
+const Table = styled.table`
+  text-align: center;
+  border-collapse: collapse;
+  th,
+  td {
+    border: 1px solid #595959;
+    width: 100px;
+    height: 100px;
+  }
+`;
 
+const Table_Robbot = styled.table`
+  text-align: center;
+  border-collapse: collapse;
+  th,
+  td {
+    border: 1px solid #595959;
+  }
+`;
 export const Description: React.FC<Prop> = () => {
-  const Table = styled.table`
-    text-align: center;
-    border-collapse: collapse;
-    th,
-    td {
-      border: 1px solid #595959;
-      width: 100px;
-      height: 100px;
-    }
-  `;
-
-  const Table_Robbot = styled.table`
-    text-align: center;
-    border-collapse: collapse;
-    th,
-    td {
-      border: 1px solid #595959;
-    }
-  `;
-
   return (
     <div>
       <h1>コーディングの説明</h1>
@@ -74,7 +72,7 @@ export const Description: React.FC<Prop> = () => {
             <td>action</td>
             <td>
               ロボットが次に行う行動 <br />{" "}
-              前進(0)、左に移動(1)、後退(2)、右に移動(3)、その場で待機(4)
+              前進(0)、右に移動(1)、後退(2)、左に移動(3)、その場で待機(4)
             </td>
             <td>int i</td>
           </tr>
@@ -88,37 +86,37 @@ export const Description: React.FC<Prop> = () => {
         <tbody>
           <tr>
             <td>Player2</td>
-            <td>(4,1)</td>
-            <td>(4,2)</td>
-            <td>(4,3)</td>
+            <td>(1,4)</td>
+            <td>(2,4)</td>
+            <td>(3,4)</td>
             <td>Player3</td>
           </tr>
           <tr>
-            <td>(3,0)</td>
-            <td>(3,1)</td>
-            <td>(3,2)</td>
-            <td>(3,3)</td>
-            <td>(3,4)</td>
-          </tr>
-          <tr>
-            <td>(2,0)</td>
-            <td>(2,1)</td>
-            <td>(2,2)</td>
-            <td>(2,3)</td>
-            <td>(2,4)</td>
-          </tr>
-          <tr>
-            <td>(1,0)</td>
-            <td>(1,1)</td>
-            <td>(1,2)</td>
+            <td>(0,3)</td>
             <td>(1,3)</td>
-            <td>(1,4)</td>
+            <td>(2,3)</td>
+            <td>(3,3)</td>
+            <td>(4,3)</td>
+          </tr>
+          <tr>
+            <td>(0,2)</td>
+            <td>(1,2)</td>
+            <td>(2,2)</td>
+            <td>(3,2)</td>
+            <td>(4,2)</td>
+          </tr>
+          <tr>
+            <td>(0,1)</td>
+            <td>(1,1)</td>
+            <td>(2,1)</td>
+            <td>(3,1)</td>
+            <td>(4,1)</td>
           </tr>
           <tr>
             <td>あなた</td>
-            <td>(0,1)</td>
-            <td>(0,2)</td>
-            <td>(0,3)</td>
+            <td>(1,0)</td>
+            <td>(2,0)</td>
+            <td>(3,0)</td>
             <td>Player1</td>
           </tr>
         </tbody>

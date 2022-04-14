@@ -6,17 +6,20 @@ import {
   ResultType,
   useFetchResult,
 } from "hooks/ResultAPIHooks/useFetchResult";
+import { useFetchJson } from "hooks/ResultAPIHooks/useFetchJson";
 
 export type IResponse = {
   isAnalyzing: boolean;
   analyzingError: boolean;
   result?: ResultType;
+  json?: string;
   exitBtnHandler: () => void;
 };
 
 export const useGameWatchState = (): IResponse => {
   const { room, updateMember } = useRoomSync();
   const { data: result, fetchResult } = useFetchResult();
+  const { data: json, fetchJson } = useFetchJson();
   const navigate = useNavigate();
 
   //初期処理
@@ -38,6 +41,7 @@ export const useGameWatchState = (): IResponse => {
   useEffect(() => {
     if (room.info?.analyzingResult?.resultId) {
       fetchResult(room.info?.analyzingResult.resultId);
+      fetchJson(room.info?.analyzingResult.resultId);
     }
   }, [room.info?.analyzingResult]);
 
@@ -49,6 +53,7 @@ export const useGameWatchState = (): IResponse => {
     isAnalyzing: !room.info?.analyzingResult?.resultId,
     analyzingError: Boolean(room.info?.analyzingResult?.error),
     result: result,
+    json: json,
     exitBtnHandler: _exitBtnHandler,
   };
 };

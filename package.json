@@ -43,7 +43,10 @@
     "lint:fix": "eslint --fix src/**/*.{jsx,js,tsx,ts}",
     "format:fix": "prettier --write src/**/*.{jsx,js,tsx,ts,css,scss,md,json}",
     "fixall": "eslint --fix src/**/*.{jsx,js,tsx,ts} && prettier --write src/**/*.{jsx,js,tsx,ts,css,scss,md,json}",
-    "fixallmac": "eslint --fix 'src/**/*.{jsx,js,tsx,ts}' && prettier --write 'src/**/*.{jsx,js,tsx,ts,css,scss,md,json}'"
+    "fixallmac": "eslint --fix 'src/**/*.{jsx,js,tsx,ts}' && prettier --write 'src/**/*.{jsx,js,tsx,ts,css,scss,md,json}'",
+    "icon:help": "node commands/IconImporter/IconImporter.js -h",
+    "icon:import" : "node commands/IconImporter/IconImporter.js -s src/components/icons/ -i",
+    "icon:importAll": "node commands/IconImporter/IconImporter.js -s src/components/icons/"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +73,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/redux-mock-store": "^1.0.3",
     "@types/styled-components": "^5.1.24",
+    "@types/yargs": "^17.0.10",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint-config-prettier": "^8.3.0",
@@ -80,6 +84,7 @@
     "json-server": "^0.17.0",
     "prettier": "^2.4.1",
     "redux-mock-store": "^1.5.4",
-    "ts-jest": "26.5.0"
+    "ts-jest": "26.5.0",
+    "yargs": "^17.4.1"
   }
 }

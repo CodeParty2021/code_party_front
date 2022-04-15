@@ -21,8 +21,8 @@ describe("useRunCodes", () => {
         jsonId: "resultJsonId",
       },
     ];
-    const url = `${uri}/codes/codeId1/run/`;
-    mock.onGet(url).reply(200, mockResponseDeta); // モックAPIを定義
+    const url = `${uri}/codes/run/`;
+    mock.onPost(url).reply(200, mockResponseDeta); // モックAPIを定義
 
     //実行
     const { result, waitForNextUpdate } = renderHook(() => useRunCodes());
@@ -43,10 +43,12 @@ describe("useRunCodes", () => {
     expect(result.current.error).toEqual(undefined);
     expect(result.current.loading).toEqual(false);
 
-    expect(mock.history["get"][0].url).toEqual("/codes/codeId1/run/");
-    expect(mock.history["get"][0].params).toEqual({
-      p1: "codeId2",
-      p2: "codeId3",
-    });
+    expect(mock.history["post"][0].url).toEqual("/codes/run/");
+    console.log(mock.history["post"][0].params);
+    expect(mock.history["post"][0].data).toEqual(
+      JSON.stringify({
+        code: ["codeId1", "codeId2", "codeId3"],
+      })
+    );
   });
 });

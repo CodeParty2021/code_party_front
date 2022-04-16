@@ -5,17 +5,17 @@ import {
 } from "./components/IconPrototype/IconPrototype";
 
 type Props = {
-  size?: 16;
+  size?: 16 | 32;
 } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
-const HogeHoge: React.FC<Props> = ({ size = 16, ...props }) => {
+const Adjust: React.FC<Props> = ({ size = 16, ...props }) => {
   return (
     <IconPrototype
-      filename={`${IconsDir()}/hoge_hoge_${size}.svg`}
+      filename={`${IconsDir()}/adjust_${size}.svg`}
       size={`${size}px`}
       {...props}
     />
   );
 };
 
-export default HogeHoge;
+export default Adjust;

@@ -8,14 +8,14 @@ type Props = {
   size?: 16 | 32;
 } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
-const Adjust: React.FC<Props> = ({ size = 16, ...props }) => {
+const AdjustValiation1: React.FC<Props> = ({ size = 16, ...props }) => {
   return (
     <IconPrototype
-      filename={`${IconsDir()}/adjust_${size}.svg`}
+      filename={`${IconsDir()}/adjust_valiation1_${size}.svg`}
       size={`${size}px`}
       {...props}
     />
   );
 };
 
-export default Adjust;
+export default AdjustValiation1;

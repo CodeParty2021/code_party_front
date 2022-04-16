@@ -195,7 +195,7 @@ const createAIconComponentWithSaving = (
   }
 
   const { sizes, ext } = icons[iconName];
-  const fileName = `${iconName}.tsx`;
+  const fileName = `${createIconComponentName(iconName)}.tsx`;
   const filePath = path.join(targetDir, fileName);
 
   // 既にファイルが存在したらスキップ
@@ -248,11 +248,11 @@ const createIconCode = (iconName, sizes, ext) => {
       IconsDir,
     } from "./components/IconPrototype/IconPrototype";
 
-    type Prop = {
+    type Props = {
       size?: ${sizes.join(" | ")};
     } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
-    const ${componentName}: React.FC<Prop> = ({
+    const ${componentName}: React.FC<Props> = ({
       size = ${sizes[0]},
       ...props
     }) => {

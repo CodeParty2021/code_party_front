@@ -1,3 +1,5 @@
-export { default as Adjust } from "./adjust";
-export { default as ShuffleValidation1 } from "./Shuffle_validation1";
-export { default as ShuffleValidation2 } from "./Shuffle_validation2";
+export { default as Adjust } from "./Adjust";
+export { default as HogeHoge } from "./HogeHoge";
+export { default as Icon123abc } from "./Icon123abc";
+export { default as ShuffleValidation1 } from "./ShuffleValidation1";
+export { default as ShuffleValidation2 } from "./ShuffleValidation2";

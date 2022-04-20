@@ -1,16 +1,23 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useNavigate } from "react-router-dom";
+import { Params, useNavigate, useParams } from "react-router-dom";
 
 import { useCodingState } from "./useCodeHooks";
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
+import { act } from "react-dom/test-utils";
+import { axiosWithIdToken } from "axios_config";
+import { editor } from "monaco-editor";
 
 jest.mock("react-router-dom");
+jest.mock("react-unity-webgl");
+
 const useNavigateMock = useNavigate as jest.Mock;
+
+const useParamsMock = useParams as jest.Mock<Params<string>>;
 
 jest.mock("hooks/CodeAPIHooks/useCodeAPI");
 const useCodeHooksMock = useCodeAPI as jest.Mock;
 
-const initialState = {
+let initialState = {
   loading: false,
   error: false,
   getCode: jest.fn(),
@@ -21,18 +28,93 @@ const initialState = {
 
 const navigateMock = jest.fn();
 
-describe("useWaitingRoomState", () => {
+describe("useCodeHooksTest", () => {
   beforeEach(() => {
+    // 各関数の戻り値設定
+    initialState.getCode.mockReturnValue(
+      new Promise((resolve) =>
+        resolve({
+          id: "123",
+          codeContent: "print('hello')",
+          language: "python",
+          updatedAt: "20220303",
+          createdAt: "20220303",
+          user: "teru",
+          step: "1",
+        })
+      )
+    );
+    initialState.updateCode.mockReturnValue(
+      new Promise((resolve) =>
+        resolve({
+          codeContent: "print('hello')",
+          language: "python",
+          step: "1",
+        })
+      )
+    );
+    initialState.createCode.mockReturnValue({
+      id: "123",
+      codeContent: "print('hello')",
+      language: "python",
+      updatedAt: "20220303",
+      createdAt: "20220303",
+      user: "teru",
+      step: "1",
+    });
+
+    initialState.testCode.mockReturnValue({
+      unityURL: "string",
+      jsonId: "string",
+    });
+
     useCodeHooksMock.mockReturnValue({ ...initialState });
+
     useNavigateMock.mockReturnValue(navigateMock);
+    useParamsMock.mockReturnValue({
+      codeId: "123",
+    });
   });
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it("render", () => {
-    const { result } = renderHook(() => useCodingState());
-    console.log(result);
-    //TODO: write test here
+  it("render", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useCodingState());
+    await waitForNextUpdate();
+    expect(result.current.code).toEqual({
+      id: "123",
+      codeContent: "print('hello')",
+      language: "python",
+      updatedAt: "20220303",
+      createdAt: "20220303",
+      user: "teru",
+      step: "1",
+    });
+    expect(result.current.error).toEqual(false);
+    expect(result.current.loading).toEqual(false);
+    expect(result.current.turnLog).toEqual([]); // execされるまではから
+    expect(result.current.showUnity).toEqual(false); //コード実行されるまではfalse
+  });
+
+  it("test isCode", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useCodingState());
+    await waitForNextUpdate();
+
+    const trueCode = {
+      id: "123",
+      codeContent: "print('hello')",
+      language: "python",
+      updatedAt: "20220303",
+      createdAt: "20220303",
+      user: "teru",
+      step: "1",
+    };
+    expect(result.current.isCode(trueCode)).toEqual(true);
+    expect(result.current.isCode(undefined)).toEqual(false);
+  });
+
+  it("test execCode", async () => {
+    //TODO 頑張ってテストかく
   });
 });

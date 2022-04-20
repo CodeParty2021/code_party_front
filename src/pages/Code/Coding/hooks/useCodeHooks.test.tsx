@@ -3,10 +3,6 @@ import { Params, useNavigate, useParams } from "react-router-dom";
 
 import { useCodingState } from "./useCodeHooks";
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
-import { act } from "react-dom/test-utils";
-import { axiosWithIdToken } from "axios_config";
-import { editor } from "monaco-editor";
-
 jest.mock("react-router-dom");
 jest.mock("react-unity-webgl");
 
@@ -115,6 +111,6 @@ describe("useCodeHooksTest", () => {
   });
 
   it("test execCode", async () => {
-    //TODO 頑張ってテストかく
+    //TODO うまくかけなかったので断念...テスト書く
   });
 });

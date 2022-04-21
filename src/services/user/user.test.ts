@@ -1,8 +1,8 @@
-import reducer, { signIn, signOut, User, UserState } from "./user";
+import reducer, { signIn, signOut, User, LoginUserState } from "./user";
 
 test("reducer test ( signIn and signOut ) ", () => {
   // define the initial state
-  const previousState: UserState = {
+  const previousState: LoginUserState = {
     user: null,
     isLogin: false,
     unRegisterObserver: null,

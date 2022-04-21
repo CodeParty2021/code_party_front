@@ -15,6 +15,7 @@ const state: IResponse = {
     email: "email",
     picture: "picture",
     jwt: "fewaf",
+    isAnonymous: false,
   },
   roomInfo: {
     roomId: "room id",

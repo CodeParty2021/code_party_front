@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+
 type Prop = {};
+
 const Table = styled.table`
   text-align: center;
   border-collapse: collapse;
@@ -20,6 +22,7 @@ const Table_Robbot = styled.table`
     border: 1px solid #595959;
   }
 `;
+
 export const Description: React.FC<Prop> = () => {
   return (
     <div>

@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> snapshot test 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 48px;
+  padding-right: 48px;
+  background: #2F364D;
+  border-radius: 24px;
+}
+
+.c2 > *:not(:first-of-type) {
+  margin: 10px 0;
+}
+
+.c0:hover .c2.c2 {
+  background: #495067;
+}
+
+.c3 {
+  font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline;
+  text-align: left;
+  font-size: 24px;
+  color: #FFF;
+  font-weight: normal;
+  line-height: 150%;
+}
+
+.c4 {
+  font-weight: bold;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-bottom: 8px;
+  background: #1A1B1F;
+  border-radius: 24px;
+  position: relative;
+}
+
+.c1:hover {
+  background: #2F364D;
+}
+
+<button
+  className="c0 c1"
+  disabled={false}
+>
+  <div
+    className="c2"
+    spacing="10px"
+    wrap="nowrap"
+  >
+    <div
+      className="c3 c4"
+      color="#FFF"
+      display="inline"
+      fontSize="24px"
+      fontWeight="normal"
+    >
+      ボタン
+    </div>
+  </div>
+</button>
+`;

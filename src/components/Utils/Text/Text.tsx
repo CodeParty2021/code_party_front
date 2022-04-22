@@ -11,7 +11,7 @@ export type TextProps = {
   lineHeight?: CSS.Properties["lineHeight"];
 } & MixableProps;
 
-export const Text = styled.div<TextProps>`
+export const Text = styled.span<TextProps>`
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -8,7 +8,7 @@ export const HFrame = styled.div<Props>`
   ${(p) =>
     Flex({
       display: "flex",
-      direction: "column",
+      direction: "row",
       alignItems: p.alignItems,
       justifyContent: p.justifyContent,
       wrap: p.wrap,

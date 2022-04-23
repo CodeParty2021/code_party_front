@@ -9,6 +9,7 @@ export type TextProps = {
   color?: CSS.Properties["color"];
   fontWeight?: CSS.Properties["fontWeight"];
   lineHeight?: CSS.Properties["lineHeight"];
+  whiteSpace?: CSS.Properties["whiteSpace"];
 } & MixableProps;
 
 export const Text = styled.span<TextProps>`
@@ -16,12 +17,13 @@ export const Text = styled.span<TextProps>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  display: ${(props) => props.display};
-  text-align: ${(props) => props.textAlign};
-  font-size: ${(props) => props.fontSize};
-  color: ${(props) => props.color};
-  font-weight: ${(props) => props.fontWeight};
-  line-height: ${(props) => props.lineHeight};
+  display: ${(p) => p.display};
+  text-align: ${(p) => p.textAlign};
+  font-size: ${(p) => p.fontSize};
+  color: ${(p) => p.color};
+  font-weight: ${(p) => p.fontWeight};
+  line-height: ${(p) => p.lineHeight};
+  white-space: ${(p) => p.whiteSpace};
 
   ${(p) => Mixable({ mixin: p.mixin })}
 `;
@@ -33,4 +35,5 @@ Text.defaultProps = {
   color: "#2F364D",
   fontWeight: "normal",
   lineHeight: "160%",
+  whiteSpace: "normal",
 };

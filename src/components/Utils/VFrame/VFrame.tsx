@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Flex, FlexProps } from "styles/Flex/Flex";
 import { Mixable, MixableProps } from "styles/Mixable/Mixable";
 
-type Props = Omit<FlexProps, "display" | "direction"> & MixableProps;
+export type VFrameProps = Omit<FlexProps, "direction"> & MixableProps;
 
-export const VFrame = styled.div<Props>`
+export const VFrame = styled.div<VFrameProps>`
   ${(p) =>
     Flex({
-      display: "flex",
+      display: p.display,
       direction: "column",
       alignItems: p.alignItems,
       justifyContent: p.justifyContent,

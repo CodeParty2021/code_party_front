@@ -70,9 +70,6 @@ export const Button: React.FC<Props> = ({
         Padding({ bottom: bottomPadding }),
         Shape({ bg: bottomColor, radius: radius }),
         Hover({ mixin: [Shape({ bg: hoverBottomColor })] }),
-        css`
-          position: relative;
-        `,
       ]}
     >
       <HFrame
@@ -90,6 +87,7 @@ export const Button: React.FC<Props> = ({
           color="#FFF"
           fontSize={fontSize}
           lineHeight="150%"
+          whiteSpace="nowrap"
           mixin={[status == "disabled" ? opacity : undefined]}
         >
           {value}

@@ -23,14 +23,23 @@ export const Flex = ({
   flex-wrap: ${wrap};
   align-items: ${alignItems};
   justify-content: ${justifyContent};
+  padding: 0;
+  gap: ${spacing};
 
-  & > *:not(:first-of-type) {
-    ${!spacing
-      ? undefined
-      : direction == "column"
-      ? "margin: " + spacing + " 0;"
-      : direction == "row"
-      ? "margin: 0 " + spacing + ";"
-      : undefined}
+  & > * {
+    flex-grow: 0;
+    flex-shrink: 0;
   }
+
+  ${!spacing ? undefined : css`
+    @supports not (gap: ${spacing}) {
+      & > *:not(:first-child) {
+        ${direction == "column"
+          ? `margin-top: ${spacing}`
+          : direction == "row"
+          ? `margin-left: ${spacing}`
+          : undefined}
+      }
+    }
+  `}
 `;

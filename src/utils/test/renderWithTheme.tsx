@@ -1,21 +1,19 @@
 import React from "react";
-import { mount, render, shallow } from "enzyme";
+import { render, shallow } from "enzyme";
 import { ThemeProvider } from "styled-components";
 import { TestTheme } from "styles/Themes/TestTheme";
 import "jest-styled-components";
 
-export const mountWithTheme = (
-  children: React.ReactNode,
+export const renderWithTheme = (
+  tree: React.ReactElement,
   theme = TestTheme
 ) => {
-  console.log(children, mount, ThemeProvider, TestTheme);
-  return mount(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
+  return render(<ThemeProvider theme={theme}>{tree}</ThemeProvider>);
 };
 
-export const renderWithTheme = (children: React.ReactNode, theme = TestTheme) =>
-  render(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
-
 export const shallowWithTheme = (
-  children: React.ReactNode,
+  tree: React.ReactElement,
   theme = TestTheme
-) => shallow(<ThemeProvider theme={theme}>{children}</ThemeProvider>);
+) => {
+  return shallow(<ThemeProvider theme={theme}>{tree}</ThemeProvider>);
+};

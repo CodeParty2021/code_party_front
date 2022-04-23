@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { Flex, FlexProps } from "styles/Flex/Flex";
 import { Mixable, MixableProps } from "styles/Mixable/Mixable";
 
-type Props = Omit<FlexProps, "display" | "direction"> & MixableProps;
+export type HFrameProps = Omit<FlexProps, "direction"> & MixableProps;
 
-export const HFrame = styled.div<Props>`
+export const HFrame = styled.div<HFrameProps>`
   ${(p) =>
     Flex({
-      display: "flex",
+      display: p.display,
       direction: "row",
       alignItems: p.alignItems,
       justifyContent: p.justifyContent,

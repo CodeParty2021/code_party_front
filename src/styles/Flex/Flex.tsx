@@ -31,15 +31,17 @@ export const Flex = ({
     flex-shrink: 0;
   }
 
-  ${!spacing ? undefined : css`
-    @supports not (gap: ${spacing}) {
-      & > *:not(:first-child) {
-        ${direction == "column"
-          ? `margin-top: ${spacing}`
-          : direction == "row"
-          ? `margin-left: ${spacing}`
-          : undefined}
-      }
-    }
-  `}
+  ${!spacing
+    ? undefined
+    : css`
+        @supports not (gap: ${spacing}) {
+          & > *:not(:first-child) {
+            ${direction == "column"
+              ? `margin-top: ${spacing}`
+              : direction == "row"
+              ? `margin-left: ${spacing}`
+              : undefined}
+          }
+        }
+      `}
 `;

@@ -29,6 +29,7 @@ const user: User = {
   email: "user@test.com",
   picture: "http://test.com/userpic.png",
   jwt: "usersjwt",
+  isAnonymous: false,
 };
 
 const users: { [id: string]: UserState } = {

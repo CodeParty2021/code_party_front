@@ -85,6 +85,7 @@ const userState: LoginUserState = {
     email: "test@test.com",
     picture: "user pic",
     jwt: "user jwt",
+    isAnonymous: false,
   },
 };
 

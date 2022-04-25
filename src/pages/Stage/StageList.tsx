@@ -21,7 +21,7 @@ export const StageList: React.FC<Prop> = () => {
     list.push(
       <li key={key}>
         <StageDetail stage={value}></StageDetail>
-        <Link to={"/stage/" + value.id}>詳細を表示</Link>
+        <Link to={"/stages/" + value.id}>詳細を表示</Link>
       </li>
     );
   });

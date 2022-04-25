@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React , { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { oneStageUpdateAsync } from "../../services/StageAPI/StageAPI";
-import StageDetail from "./components/StageDetail";
+import StageDetail from "../../pages/Stage/components/StageDetail";
 
-type Prop = {};
+type Props = {};
 
-export const Stage: React.FC<Prop> = () => {
+export const StepList: React.FC<Props> = () => {
   const stages = useSelector((state: RootState) => state.stages);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -26,17 +26,18 @@ export const Stage: React.FC<Prop> = () => {
     }, [dispatch]);
   } else {
     //除外
-    info = <>ステージ情報が見つかりませんでした．</>;
+    info = <>ステージ情報が見つかりませんでした</>;
   }
 
   return (
     <div>
-      <h1>1Stage詳細</h1>
-      <ul>
-        <li>{info}</li>
-        <Link to={"/stages/"+ id +"/steplist/"}>stepに進む</Link>
-      </ul>
-      <Link to="/stage">ステージ一覧に戻る</Link>
+      <h1>{info}</h1>
+      <h2>Steplist!</h2>
+      <div>
+        step1
+
+      </div>
+      <Link to={"/stage/"+ id}>ステージ一覧に戻る</Link>
     </div>
   );
 };

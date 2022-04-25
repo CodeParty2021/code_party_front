@@ -5,6 +5,8 @@ import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
 import { Stage } from "./pages/Stage/Stage";
 import { Start } from "./pages/Start/Start";
+import { Step } from "./pages/Step/Step";
+import { StepList} from "./pages/Step/StepList";
 import { ModeSelect } from "pages/ModeSelect/ModeSelect";
 import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
@@ -46,6 +48,8 @@ export const App: React.FC<Props> = () => {
           <Route path="/" element={<Top />} />
           <Route path="/stages" element={<StageList />} />
           <Route path="/stages/:id" element={<Stage />} />
+          <Route path="/stages/:id/step" element={<StepList />} />
+          <Route path="/stages/:id/step/:id" element={<Step />} />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
           <Route

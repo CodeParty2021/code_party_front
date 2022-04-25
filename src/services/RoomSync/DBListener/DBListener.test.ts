@@ -75,6 +75,9 @@ const initialState: RootState = {
   stages: {
     stageList: [],
   },
+  steps: {
+    stepList: [],
+  },
   user: {
     isLogin: false,
     unRegisterObserver: null,

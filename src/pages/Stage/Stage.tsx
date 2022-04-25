@@ -34,7 +34,7 @@ export const Stage: React.FC<Prop> = () => {
       <h1>1Stage詳細</h1>
       <ul>
         <li>{info}</li>
-        <Link to={"/stages/"+ id +"/steplist/"}>stepに進む</Link>
+        <Link to={"/stages/"+ id +"/step/"}>stepに進む</Link>
       </ul>
       <Link to="/stage">ステージ一覧に戻る</Link>
     </div>

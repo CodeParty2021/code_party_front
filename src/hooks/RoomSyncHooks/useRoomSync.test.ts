@@ -94,6 +94,9 @@ const initialState: RootState = {
   stages: {
     stageList: [],
   },
+  steps: {
+    stepList: [],
+  },
   user: { ...userState },
 };
 

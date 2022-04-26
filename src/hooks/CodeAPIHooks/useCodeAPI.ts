@@ -43,6 +43,16 @@ export type CreateCodeResponseType = CodeType;
 export type TestCodeResponseType = {
   unityURL: string;
   jsonId: string;
+  json:JSONLog;
+};
+export type JSONLog = {
+  turn: TurnState[];
+};
+export type TurnState = {
+  players: PlayerState[];
+};
+export type PlayerState = {
+  print: string;
 };
 
 export const useCodeAPI = (): IResponse => {

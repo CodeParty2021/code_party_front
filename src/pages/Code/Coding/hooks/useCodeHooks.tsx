@@ -101,16 +101,17 @@ export const useCodingState = () => {
     return editorRef.current?.getValue();
   }
 
-  useEffect(() => {
-    setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
-    loadJson(json);
-  }, [json]);
-
+  //unityにjsonを送る
   const loadJson = (json: string) => {
     //unityContext.send("JSONLoader", "LoadJSON", json);
     unityContext.send("JSUnityConnector", "SetSimulationData", json);
     unityContext.send("JSUnityConnector", "LoadStage", "SquarePaint");
   };
+
+  useEffect(() => {
+    setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
+    loadJson(json);
+  }, [json]);
 
   const execCode = async () => {
     const inputCode = getInputCode();

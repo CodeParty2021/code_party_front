@@ -43,7 +43,7 @@ export type CreateCodeResponseType = CodeType;
 export type TestCodeResponseType = {
   unityURL: string;
   jsonId: string;
-  json:JSONLog;
+  json: JSONLog;
 };
 export type JSONLog = {
   turn: TurnState[];

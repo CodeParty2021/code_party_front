@@ -42,7 +42,6 @@ export type CreateCodeResponseType = CodeType;
 
 export type TestCodeResponseType = {
   unityURL: string;
-  jsonId: string;
   json: JSONLog;
 };
 export type JSONLog = {

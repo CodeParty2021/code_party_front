@@ -48,8 +48,8 @@ export const App: React.FC<Props> = () => {
           <Route path="/" element={<Top />} />
           <Route path="/stages" element={<StageList />} />
           <Route path="/stages/:id" element={<Stage />} />
-          <Route path="/stages/:id/step" element={<StepList />} />
-          <Route path="/stages/:id/step/:id" element={<Step />} />
+          <Route path="/stages/:id/steps" element={<StepList />} />
+          <Route path="/stages/:id/steps/:id" element={<Step />} />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
           <Route

@@ -35,7 +35,7 @@ export const { update, clear } = stepSlice.actions;
 export const stepUpdateAsync = () => {
   return async (dispatch: any) => {
     axios
-      .get(API_HOST + "/stages/:id/step/?format=json")
+      .get(API_HOST + "/stages/:id/steps/?format=json/")
       .then((res) => {
         const steps: Step[] = res.data;
         dispatch(update(steps));
@@ -47,7 +47,7 @@ export const stepUpdateAsync = () => {
 export const oneStepUpdateAsync = (id: number) => {
   return async (dispatch: any) => {
     axios
-      .get(API_HOST + "/stages/:id/step/" + id + "?format=json")
+      .get(API_HOST + "/stages/:id/steps/" + id + "/?format=json/")
       .then((res) => {
         const step: Step = res.data;
         dispatch(update([step]));

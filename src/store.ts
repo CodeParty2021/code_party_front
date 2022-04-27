@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 
 import userReducer from "services/user/user";
 import stageReducer from "services/StageAPI/StageAPI";
-import stepReducer from "services/StageAPI/StageAPI";
+import stepReducer from "services/StepAPI/StepAPI";
 import roomReducer from "services/RoomSync/RoomSync";
 import { LoginUserState } from "services/user/user";
 import { Stages } from "services/StageAPI/StageAPI";

@@ -17,7 +17,7 @@ export const StepList: React.FC<Props> = () => {
 
   var info: React.ReactElement;
   var list: React.ReactElement[] = [];
-
+  
   useEffect(() => {
     dispatch(stepUpdateAsync());
   }, [dispatch]);
@@ -26,11 +26,10 @@ export const StepList: React.FC<Props> = () => {
     list.push(
       <li key={key}>
         <StepDetail step={value}></StepDetail>
-        <Link to={"/stages/"+ id +"/step/" + value.id}>詳細を表示</Link>
+        <Link to={"/stages/"+ 0 +"/steps/" + value.id}>詳細を表示</Link>
       </li>
     );
   });
-
 
   if (id !== undefined) {
     var parsed = parseInt(id);
@@ -51,12 +50,8 @@ export const StepList: React.FC<Props> = () => {
     <div>
       <h1>{info}</h1>
       <h2>Steplist!</h2>
-      <ul>{list}</ul>
-      <div>
-        step1
-
-      </div>
-      <Link to={"/stage/"+ id}>ステージ一覧に戻る</Link>
+      <li>{list}</li>
+      <Link to={"/stage/"}>ステージ一覧に戻る</Link>
     </div>
   );
 };

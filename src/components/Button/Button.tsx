@@ -21,9 +21,6 @@ export const Button: React.FC<Props> = ({
     >
       <div className="frame">
         {icon == "left" && <div>icon</div>}
-        {/* <Bold {...buttonTextProps(styleProps)}>
-          {value}
-        </Bold> */}
         <span>{value}</span>
         {icon == "right" && <div>icon</div>}
       </div>

@@ -1,13 +1,14 @@
 import { createGlobalStyle } from "styled-components";
+import { Regular } from "styles/Fonts/Base/Regular";
 
 type Props = {};
 
 export const GlobalStyle = createGlobalStyle<Props>`
   body {
-    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    // Base Font
+    ${Regular}
 
+    // Base Color
     background-color: ${(p) => p.theme.color.base};
   }
 `;

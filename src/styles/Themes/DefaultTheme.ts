@@ -1,8 +1,13 @@
+/**
+ * デフォルトテーマ
+ */
 export const DefaultTheme = {
   color: {
     base: "#F5F5F5",
     main: "#6074FF",
 
+    plainWhite: "#FFF",
+    white: "#F5F5F5",
     lightBlack: "#2F364D",
     lightBlackShadow: "#1A1B1F",
     gray: "#495067",

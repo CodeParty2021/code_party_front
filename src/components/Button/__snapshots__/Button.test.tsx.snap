@@ -1,67 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Button /> snapshot test 1`] = `
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  padding: 0;
-  gap: 10px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  padding-left: 48px;
-  padding-right: 48px;
-  background: #2F364D;
-  border-radius: 24px;
-}
-
-.c2 > * {
-  -webkit-box-flex: 0;
-  -webkit-flex-grow: 0;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-
-.c0:hover .c2.c2 {
-  background: #495067;
-}
-
-.c3 {
-  font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: inline;
-  text-align: left;
-  font-size: 24px;
-  color: #FFF;
-  font-weight: normal;
-  line-height: 150%;
-  white-space: nowrap;
-}
-
-.c4 {
-  font-weight: bold;
-}
-
-.c1 {
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -69,9 +9,6 @@ exports[`<Button /> snapshot test 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -80,49 +17,67 @@ exports[`<Button /> snapshot test 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 0;
-  padding-bottom: 8px;
+  font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+  color: #FFF;
   background: #1A1B1F;
   border-radius: 24px;
+  padding-bottom: 8px;
+  font-size: 24px;
 }
 
-.c1 > * {
-  -webkit-box-flex: 0;
-  -webkit-flex-grow: 0;
-  -ms-flex-positive: 0;
-  flex-grow: 0;
-  -webkit-flex-shrink: 0;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
+.c0 .frame {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
-.c1:hover {
+.c0 .frame {
   background: #2F364D;
 }
 
+.c0:hover {
+  background: #2F364D;
+}
+
+.c0:hover .frame {
+  background: #495067;
+}
+
+.c0 .frame {
+  border-radius: 24px;
+  padding: 16px 48px;
+  gap: 10px;
+}
+
 @supports not (gap:10px) {
-  .c2 > *:not(:first-child) {
-    margin-left: 10px;
+  .c0 .frame > *:not(:first-child) {
+    margin-top: 10px;
   }
 }
 
 <button
-  class="c0 c1"
+  class="c0"
+  color="black"
 >
   <div
-    class="c2"
-    spacing="10px"
-    wrap="nowrap"
+    class="frame"
   >
-    <span
-      class="c3 c4"
-      color="#FFF"
-      display="inline"
-      font-size="24px"
-      font-weight="normal"
-    >
-      ボタン
-    </span>
+    <span />
   </div>
 </button>
 `;

@@ -15,7 +15,7 @@ Default.args = {
   color: "black",
   size: "M",
   status: "default",
-  icon: "null",
+  icon: null,
   value: "Button",
 };
 

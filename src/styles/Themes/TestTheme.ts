@@ -10,6 +10,8 @@ export const TestTheme: typeof DefaultTheme = {
     base: "#F5F5F5",
     main: "#6074FF",
 
+    plainWhite: "#FFF",
+    white: "#FFF",
     lightBlack: "#2F364D",
     lightBlackShadow: "#1A1B1F",
     gray: "#495067",

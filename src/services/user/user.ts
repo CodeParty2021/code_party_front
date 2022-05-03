@@ -67,6 +67,10 @@ const userSlice = createSlice({
 // 今回追加したgetRequestもエクスポートする
 export const { signIn, signOut, setUnRegisterObserver } = userSlice.actions;
 
+export function isUser(user: User | null): user is User {
+  return user?.id !== undefined;
+}
+
 // RESTAPIの実行とgetRequestの呼び出しをする
 export const signInAsync = (user: FirebaseUser) => {
   //dispatch関数を返す

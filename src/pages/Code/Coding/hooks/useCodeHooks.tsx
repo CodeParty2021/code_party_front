@@ -1,24 +1,11 @@
-import { AxiosResponse } from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { UnityContext } from "react-unity-webgl";
-import { uri } from "config";
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosWithIdToken } from "axios_config";
-import { useCodeAPI, CodeType } from "hooks/CodeAPIHooks/useCodeAPI";
+import { useCodeAPI, CodeType, TurnState } from "hooks/CodeAPIHooks/useCodeAPI";
 
 export type RunResponse = {
   unityURL: string;
   jsonId: string;
-};
-
-type JSONLog = {
-  turn: TurnState[];
-};
-type TurnState = {
-  players: PlayerState[];
-};
-type PlayerState = {
-  print: string;
 };
 
 export type IResponse = {
@@ -117,13 +104,9 @@ export const useCodingState = () => {
     if (isCode(code)) {
       setCode({ ...code, codeContent: inputCode });
       await updateCode(code.id, code.codeContent, code.step, code.language);
-      const { jsonId } = await testCode(code.id);
-      axiosWithIdToken
-        .get(`${uri}/results/${jsonId}/json/`, {})
-        .then((response: AxiosResponse<JSONLog>) => {
-          setJson(JSON.stringify(response.data));
-          setTurnLog(response.data.turn);
-        });
+      const { json } = await testCode(code.id);
+      setJson(JSON.stringify(json));
+      setTurnLog(json.turn);
     }
   };
 

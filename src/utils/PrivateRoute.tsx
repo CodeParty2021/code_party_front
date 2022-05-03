@@ -5,16 +5,17 @@ import { RootState } from "store";
 
 type Props = {
   component: React.ComponentType;
-  path?: string;
+  redirectUrl?: string;
 };
 
 export const PrivateRoute: React.FC<Props> = ({
   component: RouteComponent,
+  redirectUrl, // していなければstartページに遷移する
 }) => {
   const { isLogin } = useSelector((state: RootState) => state.user);
   if (isLogin) {
     return <RouteComponent />;
   } else {
-    return <Navigate to="/start" />;
+    return <Navigate to={redirectUrl || "/start"} />;
   }
 };

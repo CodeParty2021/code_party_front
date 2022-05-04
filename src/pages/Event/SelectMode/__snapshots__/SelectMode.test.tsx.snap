@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventSelectMode /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      <h3>
+        1.くんれんモード
+      </h3>
+    </button>
+    <Link
+      to="/event/select-ai"
+    >
+      <button>
+        <h3>
+          2.たいせんモード
+        </h3>
+      </button>
+    </Link>
+  </div>,
+]
+`;

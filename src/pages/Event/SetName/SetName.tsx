@@ -1,5 +1,5 @@
 import React from "react";
-import { useSetNameState } from "./useSetNameState";
+import { useSetNameState } from "./hooks/useSetNameState";
 
 type Props = {};
 

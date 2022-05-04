@@ -10,11 +10,14 @@ export const EventSelectAI: React.FC<Props> = () => {
   }
   return (
     <div>
-      <button onClick={() => beginTrainHandler("2")}>
-        <h3>ロボ１</h3>
-      </button>
       <button onClick={() => beginTrainHandler("3")}>
-        <h3>ロボ２</h3>
+        <h3>ロボ1</h3>
+      </button>
+      <button onClick={() => beginTrainHandler("4")}>
+        <h3>ロボ2</h3>
+      </button>
+      <button onClick={() => beginTrainHandler("5")}>
+        <h3>ロボ3</h3>
       </button>
     </div>
   );

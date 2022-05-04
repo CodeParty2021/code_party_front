@@ -26,10 +26,17 @@ LargeBlue.args = {
   size: "L",
 };
 
-export const SmallPink = Template.bind({});
-SmallPink.args = {
+export const MediumPink = Template.bind({});
+MediumPink.args = {
   ...Default.args,
   color: "pink",
+  size: "M",
+};
+
+export const SmallGreen = Template.bind({});
+SmallGreen.args = {
+  ...Default.args,
+  color: "green",
   size: "S",
 };
 

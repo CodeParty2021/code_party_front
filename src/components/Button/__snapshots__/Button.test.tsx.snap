@@ -17,10 +17,8 @@ exports[`<Button /> snapshot test 1`] = `
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  font-family: "Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: bold;
+  font-weight: 700;
+  line-height: 150%;
   color: #FFF;
   background: #1A1B1F;
   border-radius: 24px;

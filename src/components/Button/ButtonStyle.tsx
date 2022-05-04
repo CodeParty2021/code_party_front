@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
+import { button } from "styles/colors";
+import { FONT_WEIGHT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
-import { Bold } from "styles/Fonts/Base/Bold";
 
 export type ButtonStyleProps = {
-  color?: "black" | "blue" | "pink";
+  color?: "black" | "blue" | "pink" | "green";
   size?: "S" | "M" | "L";
   status?: "default" | "disabled";
 };
@@ -15,8 +16,9 @@ const defaultStyle = css`
   justify-content: center;
 
   // font
-  ${Bold}
-  color: ${({ theme }) => theme.color.plainWhite};
+  font-weight: ${FONT_WEIGHT.BOLD};
+  line-height: 150%;
+  color: ${button.font};
 
   .frame {
     display: flex;
@@ -27,29 +29,36 @@ const defaultStyle = css`
 `;
 
 const blackStyle = css`
-  background: ${(p) => p.theme.color.lightBlackShadow};
+  background: ${button.black.side};
   .frame {
-    background: ${(p) => p.theme.color.lightBlack};
+    background: ${button.black.surface};
   }
   &:hover {
-    background: ${(p) => p.theme.color.grayShadow};
+    background: ${button.black.hover.side};
     .frame {
-      background: ${(p) => p.theme.color.gray};
+      background: ${button.black.hover.surface};
     }
   }
 `;
 
 const blueStyle = css`
-  background: ${(p) => p.theme.color.blueShadow};
+  background: ${button.blue.side};
   .frame {
-    background: ${(p) => p.theme.gradation.bluePurple};
+    background: ${button.blue.surface};
   }
 `;
 
 const pinkStyle = css`
-  background: ${(p) => p.theme.color.pinkShadow};
+  background: ${button.pink.side};
   .frame {
-    background: ${(p) => p.theme.gradation.pinkOrange};
+    background: ${button.pink.surface};
+  }
+`;
+
+const greenStyle = css`
+  background: ${button.green.side};
+  .frame {
+    background: ${button.green.surface};
   }
 `;
 
@@ -90,17 +99,17 @@ const lStyle = css`
 `;
 
 const disabledStyle = css`
-  background: ${(p) => p.theme.color.lightGrayShadow};
+  background: ${button.disabled.side};
   .frame {
-    background: ${(p) => p.theme.color.lightGray};
+    background: ${button.disabled.surface};
     & > * {
       opacity: 0.2;
     }
   }
   &:hover {
-    background: ${(p) => p.theme.color.lightGrayShadow};
+    background: ${button.disabled.side};
     .frame {
-      background: ${(p) => p.theme.color.lightGray};
+      background: ${button.disabled.surface};
     }
   }
 `;
@@ -111,6 +120,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   ${({ color }) => color == "black" && blackStyle}
   ${({ color }) => color == "blue" && blueStyle}
   ${({ color }) => color == "pink" && pinkStyle}
+  ${({ color }) => color == "green" && greenStyle}
 
   ${({ size }) => size == "S" && sStyle}
   ${({ size }) => size == "M" && mStyle}

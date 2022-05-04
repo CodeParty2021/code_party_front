@@ -24,9 +24,7 @@ export const FlexGap = ({ gap, direction = "column" }: FlexGapProps) => css`
     & > *:not(:first-child) {
       ${direction == "column"
         ? `margin-top: ${gap}`
-        : direction == "row"
-        ? `margin-left: ${gap}`
-        : undefined}
+        : direction == "row" && `margin-left: ${gap}`}
     }
   }
 `;

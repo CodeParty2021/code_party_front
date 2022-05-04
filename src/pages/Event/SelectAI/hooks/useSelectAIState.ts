@@ -14,9 +14,9 @@ export type IResponse = {
 export const useSelectAIState = (): IResponse => {
   const { user } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
-
   const { loading, error, createCode, getCodesFilterStepIdAndUserId } =
     useCodeAPI();
+
   //該当ステップにユーザのコードが存在していればそれをロードするなければ新しく作ってそれをロードする
   const _beginTrainHandler = async (stepId: string) => {
     let codeId: string;

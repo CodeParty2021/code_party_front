@@ -20,16 +20,13 @@ export const useSelectModeState = (): IResponse => {
     useCodeAPI();
   //該当ステップにユーザのコードが存在していればそれをロードするなければ新しく作ってそれをロードする
   const _beginTrainHandler = async () => {
-    console.log(_beginTrainHandler);
     let codeId: string;
-    console.log("isUser(user)", isUser(user));
-    console.log(user);
+
     if (isUser(user)) {
       const codes = await getCodesFilterStepIdAndUserId(
         EVENT1ON1_STEP_ID,
         user.id
       ); //TODO エラー処理
-      console.log("getCodesFilterStepIdAndUserId", codes);
       if (codes.length >= 1) {
         codeId = codes[0].id;
       } else {
@@ -38,7 +35,6 @@ export const useSelectModeState = (): IResponse => {
           EVENT1ON1_STEP_ID,
           "1"
         );
-        console.log("createCode:" + JSON.stringify(code));
         codeId = code.id;
       }
 

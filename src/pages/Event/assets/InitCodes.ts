@@ -1,6 +1,6 @@
 export const EVENT1ON1_INIT_CODE = `
 # 0=>まえにすすむ、1=>みぎにすすむ、2=>ひだりにすすむ、3=>うえに進む、4=>そのままとまる
-def select(turn_num, _,_,_):
+def select(turn_num, field, my_pos, other_pos):
   meirei = {
     1: 4,
     2: 4,

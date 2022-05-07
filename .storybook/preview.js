@@ -1,4 +1,5 @@
-import "../src/index.css";  // 追加
+import { GlobalStyle } from "../src/styles/GlobalStyle/GlobalStyle";
+import "ress";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -9,3 +10,12 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  (Story) => (
+    <>
+      <GlobalStyle />
+      <Story />
+    </>
+  ),
+];

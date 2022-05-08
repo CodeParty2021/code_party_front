@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import firebase from "firebase/compat/app";
 import axios, { AxiosResponse } from "axios";
 import { uri } from "config";
@@ -61,11 +61,19 @@ const userSlice = createSlice({
       state.isLogin = false;
       state.user = null;
     },
+    updateUserDisplayName: (state, action: PayloadAction<string>) => {
+      if (isUser(state.user)) {
+        state.user.displayName = action.payload;
+      } else {
+        console.log("userReduxError: No user in updateDisplayName");
+      }
+    },
   },
 });
 
 // 今回追加したgetRequestもエクスポートする
-export const { signIn, signOut, setUnRegisterObserver } = userSlice.actions;
+export const { signIn, signOut, setUnRegisterObserver, updateUserDisplayName } =
+  userSlice.actions;
 
 export function isUser(user: User | null): user is User {
   return user?.id !== undefined;

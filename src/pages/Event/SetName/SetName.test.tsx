@@ -8,6 +8,8 @@ jest.mock("./hooks/useSetNameState");
 const useSetNameStateMock = useSetNameState as jest.Mock;
 
 const initialState: IResponse = {
+  loading: false,
+  error: undefined,
   nameInputRef: { current: null },
   startBtnHandler: jest.fn(),
 };

@@ -23,14 +23,12 @@ export const useSetNameState = (): IResponse => {
   const _changeNameHandler = () => {
     if (nameInputRef.current?.value) {
       updateDisplayName(nameInputRef.current.value).then((response) => {
-        console.log(response.displayName);
         dispatch(updateUserDisplayName(response.displayName));
         navigate("/event/select-mode");
       });
     } else {
       setErrorDisplay("値を入力してください");
     }
-    console.log(nameInputRef.current?.value);
   };
   return {
     loading,

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSetNameState } from "./useSetNameState";
 import { useDispatch } from "react-redux";
 import { useUserAPI } from "hooks/UserAPIHooks/userAPIHooks";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 jest.mock("react-redux");
 jest.mock("react-router-dom");

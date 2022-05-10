@@ -5,17 +5,17 @@ import {
 } from "./components/IconPrototype/IconPrototype";
 
 type Props = {
-  size?: 16 | 32;
+  size?: 16;
 } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
-const AdjustValiation1: React.FC<Props> = ({ size = 16, ...props }) => {
+const Times: React.FC<Props> = ({ size = 16, ...props }) => {
   return (
     <IconPrototype
-      filename={`${IconsDir()}/adjust_valiation1_${size}.svg`}
+      filename={`${IconsDir()}/times_${size}.svg`}
       size={`${size}px`}
       {...props}
     />
   );
 };
 
-export default AdjustValiation1;
+export default Times;

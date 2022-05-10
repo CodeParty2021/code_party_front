@@ -5,17 +5,17 @@ import {
 } from "./components/IconPrototype/IconPrototype";
 
 type Props = {
-  size?: 16;
+  size?: 32;
 } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
-const Icon123abc: React.FC<Props> = ({ size = 16, ...props }) => {
+const TriangleBottom: React.FC<Props> = ({ size = 32, ...props }) => {
   return (
     <IconPrototype
-      filename={`${IconsDir()}/123abc_${size}.svg`}
+      filename={`${IconsDir()}/triangle_bottom_${size}.svg`}
       size={`${size}px`}
       {...props}
     />
   );
 };
 
-export default Icon123abc;
+export default TriangleBottom;

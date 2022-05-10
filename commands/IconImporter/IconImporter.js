@@ -145,8 +145,9 @@ const getIconComponentInfo = async (targetDir) => {
       // svgファイルに絞り込み
       return (
         fs.statSync(path.join(targetDir, file)).isFile() &&
-        /.*\.tsx$/.test(file) &&
-        file != "index.ts"
+        /.*\.tsx$/.test(file)
+        && file != "index.ts"
+        && !(/^.*\.stories\.tsx$/.test(file))
       );
     })
     .map((file) => {
@@ -196,7 +197,9 @@ const createAIconComponentWithSaving = (
 
   const { sizes, ext } = icons[iconName];
   const fileName = `${createIconComponentName(iconName)}.tsx`;
+  const storyName = `${createIconComponentName(iconName)}.stories.tsx`;
   const filePath = path.join(targetDir, fileName);
+  const storyPath = path.join(targetDir, storyName);
 
   // 既にファイルが存在したらスキップ
   if (!overwrite && fs.existsSync(filePath)) {
@@ -207,6 +210,12 @@ const createAIconComponentWithSaving = (
   // コード生成・保存
   const code = createIconCode(iconName, sizes, ext);
   fs.writeFile(filePath, code, { flag: overwrite ? "w" : "wx" }, (err) => {
+    if (err) throw err;
+  });
+
+  // ストーリ生成・保存
+  const story = createIconStory(iconName);
+  fs.writeFile(storyPath, story, { flag: overwrite ? "w" : "wx" }, (err) => {
     if (err) throw err;
   });
 
@@ -284,6 +293,36 @@ const createIconIndex = (iconFileNames) => {
     .join("\n");
   return prettier.format(code, prettierrc);
 };
+
+const createIconStory = (iconName) => {
+  const componentName = createIconComponentName(iconName);
+  const code = `
+    import React from "react";
+    import { ComponentMeta, ComponentStory } from "@storybook/react";
+    import { ${componentName} } from "./index";
+
+    export default {
+      title: "Icons/${componentName}",
+      component: ${componentName},
+    } as ComponentMeta<typeof ${componentName}>;
+
+    const Template: ComponentStory<typeof ${componentName}> = (args) => <${componentName} {...args} />;
+
+    export const Default = Template.bind({});
+    Default.args = {
+      display: "inline-block",
+      wrapper: "svg",
+      fill: "#252525",
+    };
+
+    export const Orange = Template.bind({});
+    Orange.args = {
+      ...Default.args,
+      fill: "#FF5500",
+    };
+  `;
+  return prettier.format(code, prettierrc);
+}
 
 /**
  * パスカルケースでアイコンコンポーネント名を作成

@@ -5,17 +5,17 @@ import {
 } from "./components/IconPrototype/IconPrototype";
 
 type Props = {
-  size?: 32;
+  size?: 16;
 } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
-const ShuffleValidation2: React.FC<Props> = ({ size = 32, ...props }) => {
+const Lock: React.FC<Props> = ({ size = 16, ...props }) => {
   return (
     <IconPrototype
-      filename={`${IconsDir()}/Shuffle_validation2_${size}.svg`}
+      filename={`${IconsDir()}/lock_${size}.svg`}
       size={`${size}px`}
       {...props}
     />
   );
 };
 
-export default ShuffleValidation2;
+export default Lock;

@@ -39,6 +39,16 @@ yarn test
 
 以上
 
+# Storybook について
+
+StoryBook を利用することで UI コンポーネントを確認することができる。
+
+以下のコマンドで起動
+
+```
+yarn storybook
+```
+
 # Node.js のバージョン管理ツールの導入
 
 ## Windows ユーザの場合

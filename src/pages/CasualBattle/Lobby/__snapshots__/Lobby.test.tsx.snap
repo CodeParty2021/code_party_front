@@ -1,21 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CasualBattleLobby /> auth snapshot test 1`] = `
+exports[`<CasualBattleLobby /> snapshot test 1`] = `
 Array [
   <div>
     <div>
       ルーム待機画面
     </div>
-    <Link
-      to="/casual-battle/waiting-room"
+    <button
+      disabled={false}
+      id="create-btn"
+      onClick={[MockFunction]}
     >
       ルームを建てる
-    </Link>
-    <Link
-      to="/casual-battle/search-room"
+    </button>
+    <button
+      id="search-btn"
+      onClick={[MockFunction]}
     >
       ルームを探す
-    </Link>
+    </button>
   </div>,
 ]
 `;

@@ -1,55 +1,47 @@
 import React, { useEffect } from "react";
-
+import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
-import { firebaseConfig } from "config";
-import { signInAsync } from "services/user/user";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "store";
-import { useNavigate } from "react-router";
-import "firebase/compat/auth"; //これ消すとバグる謎
+import * as firebaseui from "firebaseui";
+import { getAuth, signInWithCredential } from "firebase/auth";
 
-//firebaseの初期化
-firebase.initializeApp(firebaseConfig);
+import "firebase_config";
+import { RootState } from "store";
 
 type Props = {
   signInSuccessUrl?: string;
 };
 
 export const SignInScreen: React.FC<Props> = (props: Props) => {
+  const isLogin = useSelector((state: RootState) => state.user.isLogin);
+  const navigate = useNavigate(); //router
+  const auth = getAuth();
+  const redirectUrl = props.signInSuccessUrl ? props.signInSuccessUrl : "/";
+
   // firebase ui のコンフィグ
-  const uiConfig = {
+  const uiConfig: firebaseui.auth.Config = {
+    autoUpgradeAnonymousUsers: true,
     signInFlow: "popup",
-    signInSuccessUrl: props.signInSuccessUrl ? props.signInSuccessUrl : "/", // 成功後の遷移先
+    signInSuccessUrl: "/#" + redirectUrl, // 成功後の遷移先
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
+    callbacks: {
+      signInSuccessWithAuthResult: () => true,
+      signInFailure: async (error: firebaseui.auth.AuthUIError) => {
+        console.log(error);
+        await signInWithCredential(getAuth(), error.credential);
+      },
+    },
   };
-  console.log(uiConfig);
-  const dispatch = useDispatch();
-  const isLogin = useSelector((state: RootState) => state.user.isLogin);
-  const unRegisterObserver = useSelector(
-    (state: RootState) => state.user.unRegisterObserver
-  );
 
-  const navigate = useNavigate(); //router
-
-  if (isLogin) {
-    navigate("/");
-  }
-
-  //サインインのAsync
   useEffect(() => {
-    dispatch(signInAsync());
-  }, [dispatch]);
-
-  //observer周りの処理
-  useEffect(() => {
-    if (unRegisterObserver) {
-      return () => unRegisterObserver();
+    if (isLogin && auth.currentUser && !auth.currentUser?.isAnonymous) {
+      navigate(redirectUrl);
     }
-  }, [unRegisterObserver]);
+  }, [isLogin, auth.currentUser?.isAnonymous]);
 
   return (
     <div>

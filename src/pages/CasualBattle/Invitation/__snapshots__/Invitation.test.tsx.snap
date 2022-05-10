@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CasualBattleInvitation /> snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      次のルームに招待されています。
+    </h1>
+    <p>
+      RoomID:
+      sampleID
+    </p>
+    <button
+      disabled={true}
+      id="enter-btn"
+      onClick={[MockFunction]}
+    >
+      入場する
+    </button>
+  </div>,
+]
+`;

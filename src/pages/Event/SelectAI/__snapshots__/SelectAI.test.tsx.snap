@@ -24,6 +24,13 @@ Array [
         ロボ3
       </h3>
     </button>
+    <button
+      onClick={[Function]}
+    >
+      <h3>
+        ロボ4
+      </h3>
+    </button>
   </div>,
 ]
 `;

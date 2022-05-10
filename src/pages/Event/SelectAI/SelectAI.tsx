@@ -19,6 +19,9 @@ export const EventSelectAI: React.FC<Props> = () => {
       <button onClick={() => beginTrainHandler("5")}>
         <h3>ロボ3</h3>
       </button>
+      <button onClick={() => beginTrainHandler("6")}>
+        <h3>ロボ4</h3>
+      </button>
     </div>
   );
 };

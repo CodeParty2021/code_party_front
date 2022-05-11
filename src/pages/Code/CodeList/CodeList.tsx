@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { CodeCard } from "../components/CodeCard";
 import { useFetchCodes } from "./hooks/getCodesHooks";
 
@@ -16,16 +15,16 @@ type Code = {
 };
 
 export const CodeList: React.FC<Props> = () => {
-  const { data, loading } = useFetchCodes();
+  const { codes, loading, newCodeButtonHandler } = useFetchCodes();
   if (loading) {
     return <div>ロード中</div>;
   }
-  if (data) {
+  if (codes) {
     return (
       <div>
         <h1>コード一覧</h1>
         <div>
-          {data.map((code: Code) => {
+          {codes.map((code: Code) => {
             return (
               <CodeCard
                 key={code.id}
@@ -36,7 +35,7 @@ export const CodeList: React.FC<Props> = () => {
             );
           })}
         </div>
-        <Link to="/free-coding">新しくコードを追加する</Link>
+        <button onClick={newCodeButtonHandler}>新しくコードを追加する</button>
       </div>
     );
   } else {

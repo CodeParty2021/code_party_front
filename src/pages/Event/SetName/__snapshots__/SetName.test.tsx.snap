@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventSelectMode /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      おなまえをおしえてね
+    </h1>
+    <p />
+    <input
+      type="text"
+    />
+    <button
+      onClick={[MockFunction]}
+    >
+      けってい
+    </button>
+  </div>,
+]
+`;

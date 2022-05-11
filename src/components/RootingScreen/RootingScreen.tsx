@@ -51,6 +51,21 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/codes">ガレージ画面（コード一覧)</Link>
         </li>
       </ul>
+      <h1>イベント系のページ</h1>
+      <ul>
+        <li>
+          <Link to="/event">トップページ</Link>
+        </li>
+        <li>
+          <Link to="/event/select-mode">モード選択</Link>
+        </li>
+        <li>
+          <Link to="/event/set-name">名前設定</Link>
+        </li>
+        <li>
+          <Link to="/event/select-ai">対戦相手の選択</Link>
+        </li>
+      </ul>
       <h1>ログインユーザ</h1>
       <p>{user?.displayName}さん</p>
       {isLogin && <SignOutButton />}

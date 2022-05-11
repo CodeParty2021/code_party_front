@@ -31,7 +31,6 @@ const unityContext = new UnityContext({
 
 export const useCodingState = () => {
   const { codeId } = useParams<string>(); //code_id
-  console.log(codeId);
   const { error, getCode, updateCode, createCode, testCode } = useCodeAPI(); //api通信用カスタムフック
   const [loading, setLoading] = useState<boolean>(false);
   const [json, setJson] = useState<string>("");
@@ -75,7 +74,6 @@ export const useCodingState = () => {
   }, []);
 
   const [showUnity, setShowUnity] = useState(false);
-  console.log(turnLog);
   const editorRef = useRef(
     null
   ) as React.MutableRefObject<null | HTMLInputElement>;
@@ -101,9 +99,12 @@ export const useCodingState = () => {
 
   const execCode = async () => {
     const inputCode = getInputCode();
+    console.log("inputCode:", inputCode);
+    console.log("setCode:", { ...code, codeContent: inputCode });
     if (isCode(code)) {
       setCode({ ...code, codeContent: inputCode });
-      await updateCode(code.id, code.codeContent, code.step, code.language);
+      console.log("code:", code);
+      await updateCode(code.id, inputCode, code.step, code.language);
       const { json } = await testCode(code.id);
       setJson(JSON.stringify(json));
       setTurnLog(json.turn);

@@ -87,7 +87,7 @@ export const CodeCoding: React.FC<Props> = () => {
     execCode,
     turnLog,
     handleEditorDidMount,
-    setShowUnity,
+    closeEditorButtonHandler,
     showUnity,
     unityContext,
   } = useCodingState();
@@ -120,7 +120,9 @@ export const CodeCoding: React.FC<Props> = () => {
           </RightBox>
         </FlexBox>
         <Modal shown={showUnity}>
-          <CloseButton onClick={() => setShowUnity(false)}>×</CloseButton>
+          <CloseButton onClick={() => closeEditorButtonHandler()}>
+            ×
+          </CloseButton>
           <Unity
             unityContext={unityContext}
             style={{ width: "800px", height: "600px" }}

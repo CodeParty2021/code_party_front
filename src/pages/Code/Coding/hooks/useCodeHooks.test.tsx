@@ -31,8 +31,7 @@ describe("useWaitingRoomState", () => {
   });
 
   it("render", () => {
-    const { result } = renderHook(() => useCodingState());
-    console.log(result);
+    renderHook(() => useCodingState());
     //TODO: write test here
   });
 });

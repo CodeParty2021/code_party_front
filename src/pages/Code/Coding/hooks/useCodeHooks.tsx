@@ -16,7 +16,7 @@ export type IResponse = {
   execCode: (content: string, step: string, language: string) => void;
   turnLog: TurnState[];
   handleEditorDidMount: (editor: any, _monaco: any) => void;
-  setShowUnity: React.Dispatch<React.SetStateAction<boolean>>;
+  closeEditorButtonHandler: () => void;
   showUnity: boolean;
   unityContext: UnityContext;
 };
@@ -73,7 +73,8 @@ export const useCodingState = () => {
     });
   }, []);
 
-  const [showUnity, setShowUnity] = useState(false);
+  const [showUnity, setShowUnity] = useState(false); // unityの表示フラグ
+
   const editorRef = useRef(
     null
   ) as React.MutableRefObject<null | HTMLInputElement>;
@@ -86,24 +87,28 @@ export const useCodingState = () => {
     // @ts-ignore
     return editorRef.current?.getValue();
   }
+
   const loadJson = (json: string) => {
     //unityContext.send("JSONLoader", "LoadJSON", json);
     unityContext.send("ReactUnityConnector", "SetSimulationData", json);
     unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
   };
 
+  // jsonに値が入ればunity描画、空が入ればunity非表示
   useEffect(() => {
     setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
     loadJson(json);
   }, [json]);
 
+  // unityモーダルを閉じる
+  const _closeEditorButtonHandler = () => {
+    setJson("");
+  };
+
   const execCode = async () => {
     const inputCode = getInputCode();
-    console.log("inputCode:", inputCode);
-    console.log("setCode:", { ...code, codeContent: inputCode });
     if (isCode(code)) {
       setCode({ ...code, codeContent: inputCode });
-      console.log("code:", code);
       await updateCode(code.id, inputCode, code.step, code.language);
       const { json } = await testCode(code.id);
       setJson(JSON.stringify(json));
@@ -119,7 +124,7 @@ export const useCodingState = () => {
     execCode,
     turnLog,
     handleEditorDidMount,
-    setShowUnity,
+    closeEditorButtonHandler: _closeEditorButtonHandler,
     showUnity,
     unityContext,
   };

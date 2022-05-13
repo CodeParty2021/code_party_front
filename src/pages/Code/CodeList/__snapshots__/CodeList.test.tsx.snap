@@ -3,7 +3,15 @@
 exports[`<CodeList /> auth snapshot test 1`] = `
 Array [
   <div>
-    ログインが必要です
+    <h1>
+      コード一覧
+    </h1>
+    <div />
+    <button
+      onClick={[Function]}
+    >
+      新しくコードを追加する
+    </button>
   </div>,
 ]
 `;

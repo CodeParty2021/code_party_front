@@ -20,8 +20,8 @@ export const CasualBattleGameWatch: React.FC<Props> = () => {
 
   const loadJson = (json: string) => {
     //unityContext.send("JSONLoader", "LoadJSON", json);
-    unityContext.send("JSUnityConnector", "SetSimulationData", json);
-    unityContext.send("JSUnityConnector", "LoadStage", "SquarePaint");
+    unityContext.send("ReactUnityConnector", "SetSimulationData", json);
+    unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
   };
 
   useEffect(() => {

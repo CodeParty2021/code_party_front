@@ -4,7 +4,14 @@ export const EVENT1ON1_INIT_CODE = `
 #     ↑
 # 3 ← 4 → 1
 #     ↓
-#     5
+#     2
+#
+# 0 => 上にすすむよ!
+# 1 => 右にすすむよ!
+# 2 => 下にすすむよ!
+# 3 => 左にすすむよ!
+# 4 => そのまま止まるよ！
+
 def select(turn_num, field, my_pos, other_pos):
   meirei = {
     1: 4,

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IconPrototype /> snapshot test 1`] = `
+Array [
+  <Styled(ReactSVG)
+    beforeInjection={[Function]}
+    display="block"
+    size={16}
+    src="icons/adjust_16.svg"
+    wrapper="span"
+  />,
+]
+`;

@@ -1,5 +1,10 @@
 export const EVENT1ON1_INIT_CODE = `
-# 0=>上にすすむ、1=>右にすすむ、2=>下にすすむ、3=>左に進む、4=>そのままとまる
+# ロボットは4番の位置にいて、次のターンそれぞれの番号のところにいどうするよ！
+#     0
+#     ↑
+# 3 ← 4 → 1
+#     ↓
+#     5
 def select(turn_num, field, my_pos, other_pos):
   meirei = {
     1: 4,

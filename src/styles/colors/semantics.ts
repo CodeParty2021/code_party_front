@@ -1,4 +1,14 @@
-import { BLUE_50, GREEN_70, GREEN_80, PINK_60, PURPLE_60 } from "./colorful";
+import {
+  BLUE_50,
+  BLUE_GREEN_70,
+  BLUE_GREEN_80,
+  LIGHT_BLUE_20,
+  PINK_20,
+  PINK_60,
+  PURPLE_20,
+  PURPLE_60,
+  YELLOW_20,
+} from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
   BLUE_GRAY_30,
@@ -7,6 +17,7 @@ import {
   BLUE_GRAY_70,
   BLUE_GRAY_80,
   GRAY_10,
+  GRAY_20,
   WHITE,
 } from "./monotone";
 
@@ -34,11 +45,19 @@ export const button = {
     side: PINK_60,
   },
   green: {
-    surface: GREEN_70,
-    side: GREEN_80,
+    surface: BLUE_GREEN_70,
+    side: BLUE_GREEN_80,
   },
   disabled: {
     surface: BLUE_GRAY_30,
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const star = {
+  pink: PINK_20,
+  yellow: YELLOW_20,
+  purple: PURPLE_20,
+  blue: LIGHT_BLUE_20,
+  gray: GRAY_20,
+};

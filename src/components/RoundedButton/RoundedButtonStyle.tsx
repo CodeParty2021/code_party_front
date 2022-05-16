@@ -5,6 +5,7 @@ import { FlexGap } from "styles/FlexGap/FlexGap";
 export type RoundedButtonStyleProps = {};
 
 type LocalStyleProps = {
+  icon?: "left" | "right" | null;
   status?: "default" | "disabled";
 };
 
@@ -14,7 +15,8 @@ const defaultStyle = css`
   justify-content: center;
   align-items: center;
   ${FlexGap({ gap: "8px", direction: "row" })}
-  padding: 4px 12px 4px 16px;
+
+  height: 40px;
 
   background: ${roundedButton.bg};
   border: 1px solid ${roundedButton.border};
@@ -23,6 +25,18 @@ const defaultStyle = css`
   color: ${roundedButton.font};
   font-size: 16px;
   line-height: 160%;
+`;
+
+const nullStyle = css`
+  padding: 4px 16px 4px 16px;
+`;
+
+const leftStyle = css`
+  padding: 4px 16px 4px 12px;
+`;
+
+const rightStyle = css`
+  padding: 4px 12px 4px 16px;
 `;
 
 const disabledStyle = css`
@@ -41,9 +55,14 @@ export const RoundedButtonStyle = styled.button<
   RoundedButtonStyleProps & LocalStyleProps
 >`
   ${defaultStyle}
-
+  ${({ icon }) => icon === null && nullStyle}
+  ${({ icon }) => icon === "left" && leftStyle}
+  ${({ icon }) => icon === "right" && rightStyle}
   ${({ status }) => status != "disabled" && hoverStyle}
   ${({ status }) => status == "disabled" && disabledStyle}
 `;
 
-RoundedButtonStyle.defaultProps = {};
+RoundedButtonStyle.defaultProps = {
+  status: "default",
+  icon: null,
+};

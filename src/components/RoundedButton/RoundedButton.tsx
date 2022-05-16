@@ -26,6 +26,7 @@ export const RoundedButton: React.FC<Props> = ({
       disabled={disabled}
       {...styleProps}
       status={disabled ? "disabled" : "default"}
+      icon={icon}
     >
       {icon == "left" && <ArrowLeft size={16} fill={roundedButton.font} />}
       <span>{value}</span>

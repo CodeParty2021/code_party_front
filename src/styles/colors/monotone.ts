@@ -1,6 +1,7 @@
 export const WHITE = "#FFF";
 
 export const GRAY_10 = "#F5F5F5";
+export const GRAY_20 = "#DBDBDB";
 
 export const BLUE_GRAY_30 = "#9299AF";
 export const BLUE_GRAY_40 = "#8B92A9";

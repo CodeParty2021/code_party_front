@@ -4,6 +4,7 @@ export const GREEN_70 = "#47C98B";
 export const GREEN_80 = "#2F8C7C";
 
 export const BLUE_50 = "#4462FF";
+export const BLUE_47 = "#5E67F5";
 
 export const PURPLE_50 = "#9D7AFF";
 export const PURPLE_60 = "#6A5ABC";

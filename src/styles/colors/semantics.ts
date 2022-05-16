@@ -1,4 +1,11 @@
-import { BLUE_50, GREEN_70, GREEN_80, PINK_60, PURPLE_60 } from "./colorful";
+import {
+  BLUE_47,
+  BLUE_50,
+  GREEN_70,
+  GREEN_80,
+  PINK_60,
+  PURPLE_60,
+} from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
   BLUE_GRAY_30,
@@ -7,6 +14,7 @@ import {
   BLUE_GRAY_70,
   BLUE_GRAY_80,
   GRAY_10,
+  GRAY_20,
   WHITE,
 } from "./monotone";
 
@@ -42,3 +50,18 @@ export const button = {
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const modeSelectCard = {
+  bg: GRAY_10,
+  border: GRAY_20,
+  font: BLUE_GRAY_70,
+  hover: {
+    bg: BLUE_47,
+    border: BLUE_47,
+    font: WHITE,
+  },
+  hoverInfo: {
+    bg: BLUE_GRAY_60,
+    font: GRAY_10,
+  },
+};

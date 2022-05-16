@@ -1,4 +1,6 @@
+import { ArrowLeft, ArrowRight } from "components/icons";
 import React from "react";
+import { roundedButton } from "styles/colors";
 import {
   RoundedButtonStyle,
   RoundedButtonStyleProps,
@@ -25,9 +27,9 @@ export const RoundedButton: React.FC<Props> = ({
       {...styleProps}
       status={disabled ? "disabled" : "default"}
     >
-      {icon == "left" && <div>icon</div>}
+      {icon == "left" && <ArrowLeft size={16} fill={roundedButton.font} />}
       <span>{value}</span>
-      {icon == "right" && <div>icon</div>}
+      {icon == "right" && <ArrowRight size={16} fill={roundedButton.font} />}
     </RoundedButtonStyle>
   );
 };

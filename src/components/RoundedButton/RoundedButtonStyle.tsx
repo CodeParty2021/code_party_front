@@ -22,7 +22,7 @@ const defaultStyle = css`
 
   color: ${roundedButton.font};
   font-size: 16px;
-  vertical-align: center;
+  line-height: 160%;
 `;
 
 const disabledStyle = css`

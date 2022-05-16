@@ -8,7 +8,7 @@ Array [
     </div>
     <PlanetPicture
       color="yellow"
-      size={161}
+      size="161px"
     />
   </div>,
 ]
@@ -22,7 +22,7 @@ Array [
     </div>
     <PlanetPicture
       color="yellow"
-      size={161}
+      size="161px"
     />
     <FirebaseLoginForm />
   </div>,
@@ -37,7 +37,7 @@ Array [
     </div>
     <PlanetPicture
       color="yellow"
-      size={161}
+      size="161px"
     />
     <AnonymousLoginForm />
   </div>,
@@ -52,7 +52,7 @@ Array [
     </div>
     <PlanetPicture
       color="yellow"
-      size={161}
+      size="161px"
     />
     <AnonymousLoginForm />
     <FirebaseLoginForm />

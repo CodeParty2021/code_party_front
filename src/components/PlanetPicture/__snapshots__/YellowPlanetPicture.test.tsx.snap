@@ -4,9 +4,9 @@ exports[`<YellowPlanetPicture /> YellowPlanetPicture snapshot test 1`] = `
 Array [
   <svg
     fill="none"
-    height={160}
+    height="160px"
     viewBox="0 0 161 161"
-    width={160}
+    width="160px"
     xmlns="http://www.w3.org/2000/svg"
   >
     <rect

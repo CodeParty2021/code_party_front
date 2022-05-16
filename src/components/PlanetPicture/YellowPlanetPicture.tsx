@@ -1,7 +1,8 @@
+import { Properties } from "csstype";
 import React from "react";
 
 type Props = {
-  size: number;
+  size: Properties["width"];
 };
 
 export const YellowPlanetPicture: React.FC<Props> = (props: Props) => {

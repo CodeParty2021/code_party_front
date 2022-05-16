@@ -13,7 +13,7 @@ export const Start: React.FC<Props> = () => {
     <div>
       <div>これはスタート画面です。</div>
 
-      <PlanetPicture size={161} color="yellow" />
+      <PlanetPicture size="161px" color="yellow" />
 
       {anonymousLoginFormDisplay ? <AnonymousLoginForm /> : undefined}
       {firebaseLoginFormDisplay ? <FirebaseLoginForm /> : undefined}

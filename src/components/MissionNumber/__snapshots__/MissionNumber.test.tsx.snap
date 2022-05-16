@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MissionNumber /> snapshot test 1`] = `
+.c0 {
+  font-family: "851Gkktt";
+  font-size: 30px;
+  width: 50px;
+  height: 59px;
+  position: relative;
+}
+
+.c0 > span {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+<div
+  class="c0"
+>
+  <span>
+    1
+  </span>
+</div>
+`;

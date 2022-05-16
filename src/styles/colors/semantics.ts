@@ -1,4 +1,11 @@
-import { BLUE_50, GREEN_70, GREEN_80, PINK_60, PURPLE_60 } from "./colorful";
+import {
+  BLUE_45,
+  BLUE_50,
+  GREEN_70,
+  GREEN_80,
+  PINK_60,
+  PURPLE_60,
+} from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
   BLUE_GRAY_30,
@@ -42,3 +49,8 @@ export const button = {
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const iconButton = {
+  bg: WHITE,
+  icon: BLUE_45,
+};

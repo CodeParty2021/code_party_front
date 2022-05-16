@@ -2,6 +2,8 @@ export const WHITE = "#FFF";
 
 export const GRAY_10 = "#F5F5F5";
 
+export const BLUE_GRAY_10 = "#F1F3F8";
+export const BLUE_GRAY_15 = "#E1E3EB";
 export const BLUE_GRAY_30 = "#9299AF";
 export const BLUE_GRAY_40 = "#8B92A9";
 export const BLUE_GRAY_60 = "#495067";

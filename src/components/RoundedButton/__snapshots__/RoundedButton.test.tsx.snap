@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RoundedButton /> snapshot test 1`] = `
+.c0 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 16px;
+  background: #F1F3F8;
+  border: 1px solid #E1E3EB;
+  border-radius: 40px;
+  color: #2F364D;
+  font-size: 16px;
+  vertical-align: center;
+}
+
+.c0:hover {
+  border-color: #6074FF;
+}
+
+@supports not (gap:8px) {
+  .c0 > *:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+<button
+  class="c0"
+>
+  <div>
+    icon
+  </div>
+  <span>
+    次へ
+  </span>
+</button>
+`;

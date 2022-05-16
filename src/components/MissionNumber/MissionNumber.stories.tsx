@@ -8,19 +8,21 @@ export default {
   component: MissionNumber,
 } as ComponentMeta<typeof MissionNumber>;
 
-const Template: ComponentStory<typeof MissionNumber> = (args) => <MissionNumber {...args} />;
+const Template: ComponentStory<typeof MissionNumber> = (args) => (
+  <MissionNumber {...args} />
+);
 
 export const One = Template.bind({});
 One.args = {
-  number: 1
+  number: 1,
 };
 
 export const Two = Template.bind({});
 Two.args = {
-  number: 2
+  number: 2,
 };
 
 export const Three = Template.bind({});
 Three.args = {
-  number: 3
+  number: 3,
 };

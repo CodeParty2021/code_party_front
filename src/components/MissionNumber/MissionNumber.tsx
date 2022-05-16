@@ -1,21 +1,19 @@
 import React from "react";
-import { MissionNumberStyle, MissionNumberStyleProps } from "./MissionNumberStyle";
+import {
+  MissionNumberBGStyle,
+  MissionNumberStyle,
+  MissionNumberStyleProps,
+} from "./MissionNumberStyle";
 
 type Props = MissionNumberStyleProps & {
   number: number;
 };
 
-export const MissionNumber: React.FC<Props> = ({
-  number,
-  ...styleProps
-}) => {
+export const MissionNumber: React.FC<Props> = ({ number, ...styleProps }) => {
   return (
-    <MissionNumberStyle
-      {...styleProps}
-    >
-      <span>
-        {number}
-      </span>
+    <MissionNumberStyle {...styleProps}>
+      <MissionNumberBGStyle src="/img/mission_number_bg.svg" wrapper="svg" />
+      <span>{number}</span>
     </MissionNumberStyle>
   );
 };

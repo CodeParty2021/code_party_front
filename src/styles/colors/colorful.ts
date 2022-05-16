@@ -1,7 +1,9 @@
 export const ORANGE_50 = "#FF895E";
 
-export const GREEN_70 = "#47C98B";
-export const GREEN_80 = "#2F8C7C";
+export const GREEN_70 = "#5FC322";
+
+export const BLUE_GREEN_70 = "#47C98B";
+export const BLUE_GREEN_80 = "#2F8C7C";
 
 export const BLUE_50 = "#4462FF";
 

@@ -4,7 +4,6 @@ import { ReactSVG } from "react-svg";
 
 export type PlanetPictureStyleProps = {
   size?: Properties["width"];
-  color?: "pink" | "orange" | "blue";
 };
 
 const defaultStyle = css``;
@@ -21,6 +20,5 @@ export const PlanetPictureStyle = styled(ReactSVG)<PlanetPictureStyleProps>`
 `;
 
 PlanetPictureStyle.defaultProps = {
-  color: "yellow",
   size: "161px",
 };

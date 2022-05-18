@@ -9,6 +9,10 @@ import {
   PINK_45,
   PINK_60,
   PURPLE_60,
+  PINK_20,
+  YELLOW_20,
+  PURPLE_20,
+  LIGHT_BLUE_20,
 } from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
@@ -21,6 +25,7 @@ import {
   BLUE_GRAY_75,
   BLUE_GRAY_80,
   GRAY_10,
+  GRAY_20,
   WHITE,
 } from "./monotone";
 
@@ -56,6 +61,14 @@ export const button = {
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const star = {
+  pink: PINK_20,
+  yellow: YELLOW_20,
+  purple: PURPLE_20,
+  blue: LIGHT_BLUE_20,
+  gray: GRAY_20,
+};
 
 export const algo = {
   turquoise: LIGHT_BLUE_60,

@@ -3,10 +3,9 @@ import {
   PlanetPictureStyle,
   PlanetPictureStyleProps,
 } from "./PlanetPictureStyle";
-import { YellowPlanetPicture } from "./YellowPlanetPicture";
 
 type Props = PlanetPictureStyleProps & {
-  color: "blue" | "pink" | "orange" | "yellow";
+  color: "blue" | "pink" | "orange";
 };
 
 //特定のplanetを描画する
@@ -35,5 +34,11 @@ export const PlanetPicture: React.FC<Props> = ({ color, ...styleProps }) => {
         {...styleProps}
       />
     );
-  return <YellowPlanetPicture size={styleProps.size} />;
+  return (
+    <PlanetPictureStyle
+      src="/img/planet_blue.svg"
+      wrapper="svg"
+      {...styleProps}
+    />
+  );
 };

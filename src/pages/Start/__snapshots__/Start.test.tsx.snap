@@ -7,7 +7,7 @@ Array [
       これはスタート画面です。
     </div>
     <PlanetPicture
-      color="yellow"
+      color="blue"
       size="161px"
     />
   </div>,
@@ -21,7 +21,7 @@ Array [
       これはスタート画面です。
     </div>
     <PlanetPicture
-      color="yellow"
+      color="blue"
       size="161px"
     />
     <FirebaseLoginForm />
@@ -36,7 +36,7 @@ Array [
       これはスタート画面です。
     </div>
     <PlanetPicture
-      color="yellow"
+      color="blue"
       size="161px"
     />
     <AnonymousLoginForm />
@@ -51,7 +51,7 @@ Array [
       これはスタート画面です。
     </div>
     <PlanetPicture
-      color="yellow"
+      color="blue"
       size="161px"
     />
     <AnonymousLoginForm />

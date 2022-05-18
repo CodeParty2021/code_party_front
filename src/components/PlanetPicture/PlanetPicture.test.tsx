@@ -4,7 +4,7 @@ import { PlanetPicture } from "./PlanetPicture";
 
 describe("<PlanetPicture />", () => {
   it("PlanetPicture snapshot test", () => {
-    const wrapper = shallow(<PlanetPicture color="yellow" size="161px" />);
+    const wrapper = shallow(<PlanetPicture color="blue" size="161px" />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });

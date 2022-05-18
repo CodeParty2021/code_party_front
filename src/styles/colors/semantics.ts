@@ -1,19 +1,32 @@
 import {
+  BLUE_45,
   BLUE_50,
   BLUE_GREEN_70,
   BLUE_GREEN_80,
-  GREEN_70,
+  LIGHT_BLUE_60,
+  ORANGE_60,
+  GREEN_60,
+  PINK_45,
   PINK_60,
   PURPLE_60,
+  PINK_20,
+  YELLOW_20,
+  PURPLE_20,
+  LIGHT_BLUE_20,
+  GREEN_70,
 } from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
+  BLUE_GRAY_10,
+  BLUE_GRAY_15,
   BLUE_GRAY_30,
   BLUE_GRAY_40,
   BLUE_GRAY_60,
   BLUE_GRAY_70,
+  BLUE_GRAY_75,
   BLUE_GRAY_80,
   GRAY_10,
+  GRAY_20,
   WHITE,
 } from "./monotone";
 
@@ -53,4 +66,38 @@ export const button = {
 export const iconCircle = {
   bg: GREEN_70,
   icon: WHITE,
+};
+
+export const star = {
+  pink: PINK_20,
+  yellow: YELLOW_20,
+  purple: PURPLE_20,
+  blue: LIGHT_BLUE_20,
+  gray: GRAY_20,
+};
+
+export const algo = {
+  turquoise: LIGHT_BLUE_60,
+  leaf: GREEN_60,
+  orange: ORANGE_60,
+  magenta: PINK_45,
+};
+
+export const roundedButton = {
+  font: BLUE_GRAY_70,
+  bg: BLUE_GRAY_10,
+  border: BLUE_GRAY_15,
+  hover: {
+    border: BLUE_45,
+  },
+};
+
+export const missionNumber = {
+  font: GRAY_10,
+  bg: BLUE_GRAY_75,
+};
+
+export const iconButton = {
+  bg: WHITE,
+  icon: BLUE_45,
 };

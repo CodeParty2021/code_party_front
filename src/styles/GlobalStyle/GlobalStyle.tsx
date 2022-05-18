@@ -15,4 +15,11 @@ export const GlobalStyle = createGlobalStyle<Props>`
     // Base Color
     background-color: ${global.base};
   }
+
+  @font-face {
+    font-family: "851Gkktt";
+    font-style: normal;
+    font-weight: normal;
+    src: local("851Gkktt"), url("/fonts/851Gkktt.woff2") format("woff");
+  }
 `;

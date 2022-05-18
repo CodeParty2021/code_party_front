@@ -9,6 +9,7 @@ export const BLUE_GREEN_80 = "#2F8C7C";
 export const LIGHT_BLUE_60 = "#35C4D4";
 
 export const BLUE_50 = "#4462FF";
+export const BLUE_45 = "#6074FF";
 
 export const PURPLE_50 = "#9D7AFF";
 export const PURPLE_60 = "#6A5ABC";

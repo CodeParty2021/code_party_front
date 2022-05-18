@@ -1,20 +1,26 @@
 import {
+  BLUE_45,
   BLUE_50,
   BLUE_GREEN_70,
   BLUE_GREEN_80,
-  GREEN_60,
   LIGHT_BLUE_60,
   ORANGE_60,
+  GREEN_60,
+  GREEN_70,
+  GREEN_80,
   PINK_45,
   PINK_60,
   PURPLE_60,
 } from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
+  BLUE_GRAY_10,
+  BLUE_GRAY_15,
   BLUE_GRAY_30,
   BLUE_GRAY_40,
   BLUE_GRAY_60,
   BLUE_GRAY_70,
+  BLUE_GRAY_75,
   BLUE_GRAY_80,
   GRAY_10,
   WHITE,
@@ -58,4 +64,18 @@ export const algo = {
   leaf: GREEN_60,
   orange: ORANGE_60,
   magenta: PINK_45,
+};
+
+export const roundedButton = {
+  font: BLUE_GRAY_70,
+  bg: BLUE_GRAY_10,
+  border: BLUE_GRAY_15,
+  hover: {
+    border: BLUE_45,
+  },
+};
+
+export const missionNumber = {
+  font: GRAY_10,
+  bg: BLUE_GRAY_75,
 };

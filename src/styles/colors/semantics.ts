@@ -78,8 +78,8 @@ export const missionNumber = {
   bg: BLUE_GRAY_75,
 };
 export const setName = {
-  modal:{
+  modal: {
     border: WHITE,
-    font:BLUE_GRAY_60
-  }
+    font: BLUE_GRAY_60,
+  },
 } as const;

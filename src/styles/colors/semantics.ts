@@ -14,6 +14,7 @@ import {
   BLUE_GRAY_40,
   BLUE_GRAY_60,
   BLUE_GRAY_70,
+  BLUE_GRAY_75,
   BLUE_GRAY_80,
   GRAY_10,
   WHITE,
@@ -59,4 +60,9 @@ export const roundedButton = {
   hover: {
     border: BLUE_45,
   },
+};
+
+export const missionNumber = {
+  font: GRAY_10,
+  bg: BLUE_GRAY_75,
 };

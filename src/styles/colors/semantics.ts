@@ -90,3 +90,8 @@ export const missionNumber = {
   font: GRAY_10,
   bg: BLUE_GRAY_75,
 };
+
+export const iconButton = {
+  bg: WHITE,
+  icon: BLUE_45,
+};

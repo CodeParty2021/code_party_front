@@ -6,8 +6,6 @@ import {
   LIGHT_BLUE_60,
   ORANGE_60,
   GREEN_60,
-  GREEN_70,
-  GREEN_80,
   PINK_45,
   PINK_60,
   PURPLE_60,

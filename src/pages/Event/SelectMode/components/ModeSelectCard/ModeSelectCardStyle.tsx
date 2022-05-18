@@ -123,7 +123,7 @@ export const ModeSelectCardStyle = styled.button<
 ModeSelectCardStyle.defaultProps = {};
 
 const convexHoverStyle = css`
-  ${ModeSelectCardStyle}:hover & {
+  ${ModeSelectCardStyle}:hover && {
     fill: ${modeSelectCard.hover.bg};
   }
 `;

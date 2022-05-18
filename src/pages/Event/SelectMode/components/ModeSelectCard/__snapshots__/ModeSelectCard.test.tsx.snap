@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ModeSelectCard /> snapshot test 1`] = `
-.c4 {
+.c3 {
   display: inline-block;
   width: 64px;
   height: 64px;
 }
 
-.c4 > span,
-.c4 > div,
-.c4 > svg {
+.c3 > span,
+.c3 > div,
+.c3 > svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -101,7 +101,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   border: 8px solid #5E67F5;
 }
 
-.c3 {
+.c2 {
   width: 184px;
   height: 53px;
   position: absolute;
@@ -113,7 +113,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   fill: #F5F5F5;
 }
 
-.c0:hover .c2 {
+.c0:hover .c2.c2 {
   fill: #5E67F5;
 }
 
@@ -134,7 +134,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
       src="/img/modeselectcard_solo.png"
     />
     <svg
-      class="c2 c3"
+      class="c2"
       xlink="http://www.w3.org/1999/xlink"
       xmlns="http://www.w3.org/2000/svg"
     />
@@ -143,7 +143,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
     class="modeselectcard_container_main"
   >
     <span
-      class="c4"
+      class="c3"
       display="inline-block"
     />
     <span

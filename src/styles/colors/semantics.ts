@@ -1,6 +1,15 @@
-import { BLUE_50, GREEN_70, GREEN_80, PINK_60, PURPLE_60 } from "./colorful";
+import {
+  BLUE_45,
+  BLUE_50,
+  GREEN_70,
+  GREEN_80,
+  PINK_60,
+  PURPLE_60,
+} from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
+  BLUE_GRAY_10,
+  BLUE_GRAY_15,
   BLUE_GRAY_30,
   BLUE_GRAY_40,
   BLUE_GRAY_60,
@@ -43,6 +52,15 @@ export const button = {
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const roundedButton = {
+  font: BLUE_GRAY_70,
+  bg: BLUE_GRAY_10,
+  border: BLUE_GRAY_15,
+  hover: {
+    border: BLUE_45,
+  },
+};
 
 export const missionNumber = {
   font: GRAY_10,

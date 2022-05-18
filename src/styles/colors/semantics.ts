@@ -1,8 +1,12 @@
 import {
   BLUE_45,
   BLUE_50,
-  GREEN_70,
-  GREEN_80,
+  BLUE_GREEN_70,
+  BLUE_GREEN_80,
+  LIGHT_BLUE_60,
+  ORANGE_60,
+  GREEN_60,
+  PINK_45,
   PINK_60,
   PURPLE_60,
 } from "./colorful";
@@ -44,14 +48,21 @@ export const button = {
     side: PINK_60,
   },
   green: {
-    surface: GREEN_70,
-    side: GREEN_80,
+    surface: BLUE_GREEN_70,
+    side: BLUE_GREEN_80,
   },
   disabled: {
     surface: BLUE_GRAY_30,
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const algo = {
+  turquoise: LIGHT_BLUE_60,
+  leaf: GREEN_60,
+  orange: ORANGE_60,
+  magenta: PINK_45,
+};
 
 export const roundedButton = {
   font: BLUE_GRAY_70,

@@ -14,6 +14,7 @@ import {
   PURPLE_20,
   LIGHT_BLUE_20,
   GREEN_70,
+  BLUE_47,
 } from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
@@ -62,6 +63,21 @@ export const button = {
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const modeSelectCard = {
+  bg: GRAY_10,
+  border: GRAY_20,
+  font: BLUE_GRAY_70,
+  hover: {
+    bg: BLUE_47,
+    border: BLUE_47,
+    font: WHITE,
+  },
+  hoverInfo: {
+    bg: BLUE_GRAY_60,
+    font: GRAY_10,
+  },
+};
 
 export const iconCircle = {
   bg: GREEN_70,

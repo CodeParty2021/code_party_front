@@ -13,6 +13,7 @@ export const LIGHT_BLUE_20 = "#7ED1E3";
 export const LIGHT_BLUE_60 = "#35C4D4";
 
 export const BLUE_50 = "#4462FF";
+export const BLUE_47 = "#5E67F5";
 export const BLUE_45 = "#6074FF";
 
 export const PURPLE_20 = "#D377FF";

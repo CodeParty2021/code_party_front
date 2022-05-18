@@ -5,6 +5,7 @@ exports[`<RoundedButton /> snapshot test 1`] = `
   display: inline-block;
   width: 16px;
   height: 16px;
+  fill: #2F364D;
 }
 
 .c1 > span,
@@ -58,6 +59,7 @@ exports[`<RoundedButton /> snapshot test 1`] = `
   <span
     class="c1"
     display="inline-block"
+    fill="#2F364D"
   />
   <span>
     次へ

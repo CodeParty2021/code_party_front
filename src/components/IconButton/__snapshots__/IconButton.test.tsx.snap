@@ -15,6 +15,7 @@ exports[`<IconButton /> snapshot test 1`] = `
   display: inline-block;
   width: 24px;
   height: 24px;
+  fill: #6074FF;
 }
 
 .c1 > span,
@@ -31,6 +32,7 @@ exports[`<IconButton /> snapshot test 1`] = `
   <span
     class="c1"
     display="inline-block"
+    fill="#6074FF"
   />
 </button>
 `;

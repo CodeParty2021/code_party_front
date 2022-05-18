@@ -13,6 +13,7 @@ import {
   YELLOW_20,
   PURPLE_20,
   LIGHT_BLUE_20,
+  GREEN_70,
 } from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
@@ -61,6 +62,11 @@ export const button = {
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const iconCircle = {
+  bg: GREEN_70,
+  icon: WHITE,
+};
 
 export const star = {
   pink: PINK_20,

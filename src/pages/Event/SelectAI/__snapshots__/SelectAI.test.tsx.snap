@@ -38,6 +38,11 @@ Array [
         最強ロボ
       </h3>
     </button>
+    <button
+      onClick={[Function]}
+    >
+      戻る
+    </button>
   </div>,
 ]
 `;

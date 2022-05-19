@@ -81,4 +81,25 @@ describe("useStartState", () => {
     expect(navigateMock).toBeCalledTimes(1);
     expect(navigateMock).lastCalledWith("/free-coding/123/");
   });
+
+  test("戻るボタンの実行", async () => {
+    const apiState = initialUseCodeAPIState;
+    apiState.getCodesFilterStepIdAndUserId.mockReturnValue([]);
+    apiState.createCode.mockReturnValue({
+      id: "123",
+      codeContent: "print('hello');",
+      language: "1",
+      updatedAt: "20220303",
+      createdAt: "20220303",
+      user: "userid1",
+      step: "2",
+    });
+
+    const { result } = renderHook(() => useSelectAIState());
+
+    const { backButtonHandler } = result.current;
+    backButtonHandler();
+    expect(navigateMock).toBeCalledTimes(1);
+    expect(navigateMock).lastCalledWith("/event/select-mode");
+  });
 });

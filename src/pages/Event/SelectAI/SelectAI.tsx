@@ -4,7 +4,7 @@ import { useSelectAIState } from "./hooks/useSelectAIState";
 type Props = {};
 
 export const EventSelectAI: React.FC<Props> = () => {
-  const { loading, beginTrainHandler } = useSelectAIState();
+  const { loading, beginTrainHandler, backButtonHandler } = useSelectAIState();
   if (loading) {
     return <div>ロード中</div>;
   }
@@ -25,6 +25,7 @@ export const EventSelectAI: React.FC<Props> = () => {
       <button onClick={() => beginTrainHandler("7")}>
         <h3>最強ロボ</h3>
       </button>
+      <button onClick={backButtonHandler}>戻る</button>
     </div>
   );
 };

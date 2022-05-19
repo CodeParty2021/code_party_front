@@ -1,5 +1,6 @@
 import { Star } from "components/Star/Star";
 import styled, { css } from "styled-components";
+import { GRAY_10, GRAY_20 } from "styles/colors";
 
 export type StarBackgroundStyleProps = {};
 
@@ -10,17 +11,17 @@ const defaultStyle = css`
   background-image: linear-gradient(
       0deg,
       transparent calc(100% - 1px),
-      #dbdbdb calc(100% - 1px)
+      ${GRAY_20} calc(100% - 1px)
     ),
     linear-gradient(
       90deg,
       transparent calc(100% - 1px),
-      #dbdbdb calc(100% - 1px)
+      ${GRAY_20} calc(100% - 1px)
     );
   background-size: 64px 64px;
   background-repeat: repeat;
   background-position: 0 0;
-  background-color: #f5f5f5;
+  background-color: ${GRAY_10};
   z-index: -2;
 `;
 

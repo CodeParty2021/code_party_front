@@ -81,4 +81,23 @@ describe("useSelectModeState", () => {
     expect(navigateMock).toBeCalledTimes(1);
     expect(navigateMock).lastCalledWith("/free-coding/123/");
   });
+  test("訓練モードが実行できる", async () => {
+    const apiState = initialUseCodeAPIState;
+    apiState.getCodesFilterStepIdAndUserId.mockReturnValue([]); //該当なし時はから配列が帰る
+    apiState.createCode.mockReturnValue({
+      id: "123",
+      codeContent: "print('hello');",
+      language: "1",
+      updatedAt: "20220303",
+      createdAt: "20220303",
+      user: "userid1",
+      step: "2",
+    });
+    const { result } = renderHook(() => useSelectModeState());
+
+    const { beginBattleHandler } = result.current;
+    await beginBattleHandler();
+    expect(navigateMock).toBeCalledTimes(1);
+    expect(navigateMock).lastCalledWith("/event/select-ai");
+  });
 });

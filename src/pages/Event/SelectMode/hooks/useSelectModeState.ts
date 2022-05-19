@@ -10,6 +10,7 @@ export type IResponse = {
   loading: boolean;
   error: string | undefined;
   beginTrainHandler: () => void;
+  beginBattleHandler: () => void;
 };
 
 export const useSelectModeState = (): IResponse => {
@@ -41,9 +42,15 @@ export const useSelectModeState = (): IResponse => {
       navigate(`/free-coding/${codeId}/`);
     }
   };
+
+  const _beginBattleHandler = () => {
+    navigate("/event/select-ai");
+  };
+
   return {
     loading: loading,
     error: error,
     beginTrainHandler: _beginTrainHandler,
+    beginBattleHandler: _beginBattleHandler,
   };
 };

@@ -2,23 +2,19 @@
 
 exports[`<EventSelectMode /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <button
-      onClick={[Function]}
-    >
-      <h3>
-        1.くんれんモード
-      </h3>
-    </button>
-    <Link
-      to="/event/select-ai"
-    >
-      <button>
-        <h3>
-          2.たいせんモード
-        </h3>
-      </button>
-    </Link>
-  </div>,
+  <styled.div>
+    <styled.div>
+      <ModeSelectCard
+        mode="solo"
+        onClick={[Function]}
+      />
+    </styled.div>
+    <styled.div>
+      <ModeSelectCard
+        mode="battle"
+        onClick={[Function]}
+      />
+    </styled.div>
+  </styled.div>,
 ]
 `;

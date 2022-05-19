@@ -9,6 +9,7 @@ export type IResponse = {
   loading: boolean;
   error: string | undefined;
   beginTrainHandler: (stepId: string) => void;
+  backButtonHandler: () => void;
 };
 
 export const useSelectAIState = (): IResponse => {
@@ -31,9 +32,15 @@ export const useSelectAIState = (): IResponse => {
       navigate(`/free-coding/${codeId}/`);
     }
   };
+
+  const _backButtonHandler = () => {
+    navigate(`/event/select-mode`);
+  };
+
   return {
     loading: loading,
     error: error,
     beginTrainHandler: _beginTrainHandler,
+    backButtonHandler: _backButtonHandler,
   };
 };

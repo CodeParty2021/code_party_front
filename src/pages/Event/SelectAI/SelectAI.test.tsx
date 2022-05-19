@@ -11,6 +11,7 @@ const initialState: IResponse = {
   loading: false,
   error: undefined,
   beginTrainHandler: () => {},
+  backButtonHandler: () => {},
 };
 
 describe("<EventSelectAI />", () => {

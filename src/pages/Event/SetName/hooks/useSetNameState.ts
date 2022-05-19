@@ -9,6 +9,8 @@ export type IResponse = {
   error: string | undefined;
   nameInputRef: RefObject<HTMLInputElement>;
   startBtnHandler: () => void;
+  nameInputHandler: () => void;
+  btnDisabled: boolean;
 };
 
 export const useSetNameState = (): IResponse => {
@@ -17,6 +19,7 @@ export const useSetNameState = (): IResponse => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const { error, loading, updateDisplayName } = useUserAPI();
   const [errorDisplay, setErrorDisplay] = useState<string | undefined>();
+  const [btnDisabled, setBtnDisabled] = useState<boolean>(true);
   useEffect(() => {
     setErrorDisplay(error);
   }, [error]);
@@ -30,10 +33,19 @@ export const useSetNameState = (): IResponse => {
       setErrorDisplay("値を入力してください");
     }
   };
+  const nameInputHandler = () => {
+    if (nameInputRef.current?.value === "") {
+      setBtnDisabled(true);
+    } else {
+      setBtnDisabled(false);
+    }
+  };
   return {
     loading,
     error: errorDisplay,
     nameInputRef,
     startBtnHandler: _changeNameHandler,
+    nameInputHandler,
+    btnDisabled,
   };
 };

@@ -112,6 +112,12 @@ export const missionNumber = {
   font: GRAY_10,
   bg: BLUE_GRAY_75,
 };
+export const setName = {
+  modal: {
+    border: WHITE,
+    font: BLUE_GRAY_60,
+  },
+} as const;
 
 export const iconButton = {
   bg: WHITE,

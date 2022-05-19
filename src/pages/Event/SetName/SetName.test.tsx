@@ -12,6 +12,8 @@ const initialState: IResponse = {
   error: undefined,
   nameInputRef: { current: null },
   startBtnHandler: jest.fn(),
+  btnDisabled: true,
+  nameInputHandler: jest.fn(),
 };
 
 describe("<EventSelectMode />", () => {

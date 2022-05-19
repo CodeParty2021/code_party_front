@@ -2,19 +2,33 @@
 
 exports[`<EventSelectMode /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <h1>
-      おなまえをおしえてね
-    </h1>
-    <p />
-    <input
-      type="text"
-    />
-    <button
-      onClick={[MockFunction]}
-    >
-      けってい
-    </button>
-  </div>,
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        <span>
+          はじめて遊ぶ
+        </span>
+      </styled.div>
+      <styled.div>
+        <Styled(AlgoHead) />
+        <Styled(ReactSVG)
+          src="/img/balloon.svg"
+        />
+        <styled.div>
+          名前を教えてほしい！
+        </styled.div>
+      </styled.div>
+      <styled.input
+        onChange={[MockFunction]}
+        type="text"
+      />
+      <Button
+        color="pink"
+        onClick={[MockFunction]}
+        status="disabled"
+        value="けってい"
+      />
+    </styled.div>
+  </styled.div>,
 ]
 `;

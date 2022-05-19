@@ -14,9 +14,10 @@ import {
 
 type Props = StarBackgroundStyleProps & {};
 
-export const StarBackground: React.FC<Props> = ({ ...styleProps }) => {
+export const StarBackground: React.FC<Props> = ({ children,...styleProps }) => {
   return (
     <StarBackgroundStyle {...styleProps}>
+      {children}
       <Star1 color="purple" />
       <Star2 color="purple" />
       <Star3 color="yellow" />

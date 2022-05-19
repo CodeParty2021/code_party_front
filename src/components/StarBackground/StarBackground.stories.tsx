@@ -9,9 +9,7 @@ export default {
 } as ComponentMeta<typeof StarBackground>;
 
 const Template: ComponentStory<typeof StarBackground> = (args) => (
-  <div style={{ width: "1920px", height: "1080px" }}>
-    <StarBackground {...args} />
-  </div>
+  <StarBackground {...args} />
 );
 
 export const Default = Template.bind({});

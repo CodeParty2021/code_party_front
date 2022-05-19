@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> snapshot test 1`] = `
+.c1 {
+  width: 38px;
+  height: 38px;
+  fill: #D377FF;
+}
+
+.c4 {
+  width: 38px;
+  height: 38px;
+  fill: #FFC047;
+}
+
+.c7 {
+  width: 38px;
+  height: 38px;
+  fill: #FE839F;
+}
+
+.c10 {
+  width: 38px;
+  height: 38px;
+  fill: #7ED1E3;
+}
+
+.c0 {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient( 0deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) ), linear-gradient( 90deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) );
+  background-size: 64px 64px;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-color: #F5F5F5;
+  z-index: -2;
+}
+
+.c2 {
+  position: absolute;
+  z-index: -1;
+  left: 7.55%;
+  right: 90.48%;
+  top: 21.94%;
+  bottom: 74.55%;
+}
+
+.c3 {
+  position: absolute;
+  z-index: -1;
+  left: 32.34%;
+  right: 65.69%;
+  top: 56.76%;
+  bottom: 39.74%;
+}
+
+.c5 {
+  position: absolute;
+  z-index: -1;
+  left: 30.16%;
+  right: 67.88%;
+  top: 8.33%;
+  bottom: 88.17%;
+}
+
+.c6 {
+  position: absolute;
+  z-index: -1;
+  left: 71.08%;
+  right: 26.95%;
+  top: 84.38%;
+  bottom: 12.13%;
+}
+
+.c8 {
+  position: absolute;
+  z-index: -1;
+  left: 89.45%;
+  right: 8.58%;
+  top: 38.76%;
+  bottom: 57.74%;
+}
+
+.c9 {
+  position: absolute;
+  z-index: -1;
+  left: 58.39%;
+  right: 39.64%;
+  top: 31.67%;
+  bottom: 64.83%;
+}
+
+.c11 {
+  position: absolute;
+  z-index: -1;
+  left: 22.69%;
+  right: 75.34%;
+  top: 85.68%;
+  bottom: 10.82%;
+}
+
+.c12 {
+  position: absolute;
+  z-index: -1;
+  left: 6.56%;
+  right: 91.47%;
+  top: 60.28%;
+  bottom: 36.22%;
+}
+
+<div
+  class="c0"
+>
+  <svg
+    class="c1 c2"
+    color="purple"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c1 c3"
+    color="purple"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c4 c5"
+    color="yellow"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c4 c6"
+    color="yellow"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c7 c8"
+    color="pink"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c1 c9"
+    color="purple"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c10 c11"
+    color="blue"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <svg
+    class="c7 c12"
+    color="pink"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+</div>
+`;

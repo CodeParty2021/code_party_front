@@ -5,6 +5,7 @@ Array [
   <Styled(ReactSVG)
     beforeInjection={[Function]}
     display="block"
+    fill="red"
     size={16}
     src="icons/adjust_16.svg"
     wrapper="span"

@@ -11,6 +11,7 @@ const initialState: IResponse = {
   loading: false,
   error: undefined,
   beginTrainHandler: () => {},
+  beginBattleHandler: () => {},
 };
 
 describe("<EventSelectMode />", () => {

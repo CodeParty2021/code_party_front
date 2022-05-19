@@ -1,19 +1,27 @@
+import { Button } from "components/Button/Button";
 import React from "react";
 import { useTopState } from "./hooks/useTopState";
+import { ButtonBox, CenterBox, LogoStyle, TopStyle } from "./TopStyle";
 
 type Props = {};
 
 export const EventTop: React.FC<Props> = () => {
   const { anonymousLoginBtnDisabled, anonymousLoginBtnHandler } = useTopState();
   return (
-    <div>
-      <h1>EventTopページ</h1>
-      <button
-        disabled={anonymousLoginBtnDisabled}
-        onClick={anonymousLoginBtnHandler}
-      >
-        いざスタート！
-      </button>
-    </div>
+    <TopStyle>
+      <CenterBox>
+        <LogoStyle src="./logo454.png" />
+        <ButtonBox>
+          <Button
+            color="pink"
+            icon={null}
+            onClick={anonymousLoginBtnHandler}
+            size="L"
+            status={anonymousLoginBtnDisabled ? "disabled" : "default"}
+            value="いざスタート！"
+          />
+        </ButtonBox>
+      </CenterBox>
+    </TopStyle>
   );
 };

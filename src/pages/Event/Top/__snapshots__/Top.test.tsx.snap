@@ -2,16 +2,22 @@
 
 exports[`<EventSelectMode /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <h1>
-      EventTopページ
-    </h1>
-    <button
-      disabled={false}
-      onClick={[MockFunction]}
-    >
-      いざスタート！
-    </button>
-  </div>,
+  <styled.div>
+    <styled.div>
+      <styled.img
+        src="./logo454.png"
+      />
+      <styled.div>
+        <Button
+          color="pink"
+          icon={null}
+          onClick={[MockFunction]}
+          size="L"
+          status="default"
+          value="いざスタート！"
+        />
+      </styled.div>
+    </styled.div>
+  </styled.div>,
 ]
 `;

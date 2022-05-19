@@ -34,6 +34,13 @@ Array [
     <button
       onClick={[Function]}
     >
+      <h3>
+        最強ロボ
+      </h3>
+    </button>
+    <button
+      onClick={[Function]}
+    >
       戻る
     </button>
   </div>,

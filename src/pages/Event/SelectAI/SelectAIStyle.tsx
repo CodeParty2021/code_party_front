@@ -1,6 +1,5 @@
 import { IconButton } from "components/IconButton/IconButton";
 import { PlanetPicture } from "components/PlanetPicture/PlanetPicture";
-import { StarBackground } from "components/StarBackground/StarBackground";
 import styled from "styled-components";
 import { FONT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
@@ -69,10 +68,4 @@ export const Planet = styled(PlanetPicture)`
   height: 87px;
   left: -43px;
   top: 0px;
-`;
-
-export const Background = styled(StarBackground)`
-  position: absolute;
-  top: 0;
-  left: 0;
 `;

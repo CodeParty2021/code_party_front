@@ -17,9 +17,10 @@ export const SetNameModal = styled.div`
   position: relative;
   width: 984px;
   height: 532px;
+  backdrop-filter: blur(8px);
 
-  background: linear-gradient(239.43deg, #f5f5f5 0.81%, #f7f4ff 100%);
-  background-blend-mode: multiply;
+  /*background: linear-gradient(239.43deg, #f5f5f5 0.81%, #f7f4ff 100%);
+  background-blend-mode: multiply;*/
   border: 8px solid ${WHITE};
   backdrop-filter: blur(8px);
 
@@ -105,7 +106,7 @@ export const NameInput = styled.input`
   width: 453px;
   height: 64px;
 
-  background: #f5f5f5;
+  background: ${WHITE};
   border-radius: 8px;
 
   font-family: ${FONT.NOTO_SANS};

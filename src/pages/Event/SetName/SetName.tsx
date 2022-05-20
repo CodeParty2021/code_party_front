@@ -1,5 +1,6 @@
 import { Button } from "components/Button/Button";
 import React from "react";
+import { Background } from "../components/Background";
 import { useSetNameState } from "./hooks/useSetNameState";
 import {
   AlgoBox,
@@ -24,28 +25,31 @@ export const EventSetName: React.FC<Props> = () => {
     return <div>ロード中</div>;
   }
   return (
-    <SetNameStyle>
-      <SetNameModal>
-        <ModalTitle>
-          <span>はじめて遊ぶ</span>
-        </ModalTitle>
-        <AlgoBox>
-          <AlgoHeadMini />
-          <Balloon src="/img/balloon.svg" />
-          <Message>名前を教えてほしい！</Message>
-        </AlgoBox>
-        <NameInput
-          ref={nameInputRef}
-          type="text"
-          onChange={nameInputHandler}
-        ></NameInput>
-        <Button
-          onClick={startBtnHandler}
-          color="pink"
-          value="けってい"
-          status={btnDisabled ? "disabled" : "default"}
-        />
-      </SetNameModal>
-    </SetNameStyle>
+    <>
+      <SetNameStyle>
+        <SetNameModal>
+          <ModalTitle>
+            <span>はじめて遊ぶ</span>
+          </ModalTitle>
+          <AlgoBox>
+            <AlgoHeadMini />
+            <Balloon src="/img/balloon.svg" />
+            <Message>名前を教えてほしい！</Message>
+          </AlgoBox>
+          <NameInput
+            ref={nameInputRef}
+            type="text"
+            onChange={nameInputHandler}
+          ></NameInput>
+          <Button
+            onClick={startBtnHandler}
+            color="pink"
+            value="けってい"
+            status={btnDisabled ? "disabled" : "default"}
+          />
+        </SetNameModal>
+      </SetNameStyle>
+      <Background />
+    </>
   );
 };

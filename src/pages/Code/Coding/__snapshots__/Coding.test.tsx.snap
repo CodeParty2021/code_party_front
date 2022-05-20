@@ -68,11 +68,11 @@ Array [
           close={true}
           defaultLanguage="python"
           defaultValue="print(aa);"
-          height="984px"
+          height="90vh"
           onMount={[MockFunction]}
           showInfo={false}
           showUnity={true}
-          width="1334px"
+          width="70vw"
         />
         <Styled(Button)
           color="blue"

@@ -152,8 +152,8 @@ export const ContainerUnity = styled.div<ShowUnityProps>`
 `;
 
 export const UnityStyle = styled(Unity)`
-  width: 1334px;
-  height: 1000px;
+  width: calc(90vh * 4 / 3);
+  height: 90vh;
   border-radius: 12px;
   flex-grow: 0;
   flex-shrink: 0;

@@ -78,8 +78,8 @@ export const CodeCoding: React.FC<Props> = () => {
             defaultValue={code && code.codeContent}
             onMount={handleEditorDidMount}
             close={showUnity || loading || showError || !isCode(code)}
-            width="1334px"
-            height="984px"
+            width="70vw"
+            height="90vh"
             showUnity={showUnity}
             showInfo={loading || showError || !isCode(code)}
           />

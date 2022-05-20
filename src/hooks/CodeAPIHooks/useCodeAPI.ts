@@ -55,7 +55,7 @@ export type PlayerState = {
 };
 
 export const useCodeAPI = (): IResponse => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | undefined>();
   /**
    * codeIdからコードを取得する

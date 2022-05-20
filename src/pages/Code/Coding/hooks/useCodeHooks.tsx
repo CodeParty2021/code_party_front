@@ -31,7 +31,6 @@ const unityContext = new UnityContext({
 
 export const useCodingState = () => {
   const { codeId } = useParams<string>(); //code_id
-  console.log(codeId);
   const { error, getCode, updateCode, createCode, testCode } = useCodeAPI(); //api通信用カスタムフック
   const [loading, setLoading] = useState<boolean>(false);
   const [json, setJson] = useState<string>("");
@@ -39,6 +38,7 @@ export const useCodingState = () => {
   const navigate = useNavigate();
 
   const [code, setCode] = useState<CodeType>(); //表示中のコード
+
   //code の型ガード
   function isCode(code: CodeType | undefined): code is CodeType {
     return code?.id !== undefined;
@@ -75,7 +75,6 @@ export const useCodingState = () => {
   }, []);
 
   const [showUnity, setShowUnity] = useState(false);
-  console.log(turnLog);
   const editorRef = useRef(
     null
   ) as React.MutableRefObject<null | HTMLInputElement>;
@@ -88,6 +87,8 @@ export const useCodingState = () => {
     // @ts-ignore
     return editorRef.current?.getValue();
   }
+
+  //unityにjsonを送る
   const loadJson = (json: string) => {
     //unityContext.send("JSONLoader", "LoadJSON", json);
     unityContext.send("JSUnityConnector", "SetSimulationData", json);

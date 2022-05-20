@@ -1,11 +1,11 @@
 import { ArrowLeft } from "components/icons";
 import React from "react";
+import { Background } from "../components/Background";
 import { RobotLink } from "./components/RobotLink";
 import { useSelectAIState } from "./hooks/useSelectAIState";
 import {
   Back,
   BackButton,
-  Background,
   Content,
   Discription,
   Planet,

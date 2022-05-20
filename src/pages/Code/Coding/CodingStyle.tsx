@@ -9,6 +9,7 @@ import { FONT_WEIGHT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 import { AlgoEditor } from "./components/AlgoEditor/AlgoEditor";
 import { Tab } from "./components/Tab/Tab";
+import { Message } from "./components/Message/Message";
 
 type ShowUnityProps = {
   showUnity?: boolean;
@@ -16,6 +17,10 @@ type ShowUnityProps = {
 
 type ShowLogProps = {
   showLog?: boolean;
+};
+
+type ShowInfoProps = {
+  showInfo?: boolean;
 };
 
 export const CodingStyle = styled.div`
@@ -32,6 +37,25 @@ export const Background = styled(PlanetPicture)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+export const WhiteBackground = styled.div<ShowUnityProps>`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: ${WHITE};
+  opacity: 0;
+
+  transition: opacity 0.5s ease;
+
+  ${({ showUnity }) =>
+    showUnity &&
+    css`
+      opacity: 0.5;
+    `}
 `;
 
 export const BackLink = styled(Link)`
@@ -141,7 +165,9 @@ export const WatchingLogo = styled(ReactSVG)`
   fill: ${WHITE};
 `;
 
-export const AlgoEditorStyle = styled(AlgoEditor)<ShowUnityProps>`
+export const AlgoEditorStyle = styled(AlgoEditor)<
+  ShowUnityProps & ShowInfoProps
+>`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -153,6 +179,28 @@ export const AlgoEditorStyle = styled(AlgoEditor)<ShowUnityProps>`
     showUnity &&
     css`
       opacity: 0;
+      transform: translate(-50%, calc(-50% + 85.5px));
+    `}
+
+  ${({ showInfo }) =>
+    showInfo &&
+    css`
+      transform: translate(-50%, calc(-50% + 85.5px));
+    `}
+`;
+
+export const MessageStyle = styled(Message)<ShowInfoProps>`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  transition: all 0.5s ease;
+
+  ${({ showInfo }) =>
+    showInfo &&
+    css`
+      top: 50%;
+      transform: translate(-50%, calc(-50% - 110px));
     `}
 `;
 

@@ -43,6 +43,7 @@ const initialState: IResponse = {
   showUnity: true,
   toggleLogHandler: jest.fn(),
   showLog: false,
+  showError: false,
 };
 
 describe("<CodeCoding />", () => {

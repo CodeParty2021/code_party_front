@@ -20,6 +20,15 @@ exports[`<LogItem /> snapshot test 1`] = `
   width: 100%;
 }
 
+.c0 .logitem_turnnum {
+  display: block;
+  width: 24px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+
 .c0 .logitem_bar {
   width: 2px;
   background: #2F364D;
@@ -55,7 +64,9 @@ exports[`<LogItem /> snapshot test 1`] = `
 <div
   class="c0"
 >
-  <span>
+  <span
+    class="logitem_turnnum"
+  >
     1
   </span>
   <div

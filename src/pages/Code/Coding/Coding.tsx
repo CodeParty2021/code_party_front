@@ -13,9 +13,11 @@ import {
   ContainerMain,
   ContainerUnity,
   ContainerWrap,
+  MessageStyle,
   TabStyle,
   UnityStyle,
   WatchingLogo,
+  WhiteBackground,
 } from "./CodingStyle";
 import { LogPanel } from "./components/LogPanel/LogPanel";
 import { LogItem } from "./components/LogItem/LogItem";
@@ -27,7 +29,6 @@ type Props = {};
 export const CodeCoding: React.FC<Props> = () => {
   const {
     code,
-    error,
     loading,
     isCode,
     execCode,
@@ -38,68 +39,83 @@ export const CodeCoding: React.FC<Props> = () => {
     unityContext,
     toggleLogHandler,
     showLog,
+    showError,
   } = useCodingState();
-  if (loading) {
-    return <div>ロード中です</div>;
-  } else if (error) {
-    return (
-      <div>
-        <p>エラーが発生しました。再読込してください</p>
-        <p>{error}</p>
-      </div>
-    );
-  } else if (isCode(code)) {
-    return (
-      <CodingStyle>
-        <Background color="blue" />
-        <BackLink to="/event/select-mode">
-          <IconButton Icon={ArrowLeft} />
-          <span>モード選択に戻る</span>
-        </BackLink>
-        <ContainerWrap showLog={showLog}>
-          <ContainerMain>
-            <ContainerUnity showUnity={showUnity}>
-              <UnityStyle unityContext={unityContext} />
-              <WatchingLogo src="/img/watching_logo.svg" wrapper="svg" />
-            </ContainerUnity>
-            <AlgoEditorStyle
-              defaultLanguage="python"
-              defaultValue={code.codeContent}
-              onMount={handleEditorDidMount}
-              close={showUnity}
-              width="1334px"
-              height="984px"
-              showUnity={showUnity}
+  return (
+    <CodingStyle>
+      <Background color="blue" />
+      <WhiteBackground showUnity={showUnity} />
+      <BackLink to="/event/select-mode">
+        <IconButton Icon={ArrowLeft} />
+        <span>モード選択に戻る</span>
+      </BackLink>
+      <ContainerWrap showLog={showLog}>
+        <ContainerMain>
+          <ContainerUnity showUnity={showUnity}>
+            <UnityStyle unityContext={unityContext} />
+            <WatchingLogo src="/img/watching_logo.svg" wrapper="svg" />
+          </ContainerUnity>
+          <MessageStyle
+            title="シンタックスエラー！"
+            value="スタッフに聞いてみよう"
+            color="red"
+            showInfo={showError}
+          />
+          <MessageStyle
+            title="ヨミコミチュウ！"
+            value="しばらくお待ちください"
+            color="red"
+            showInfo={!isCode(code)}
+          />
+          <MessageStyle
+            title="ローディングチュウ..."
+            value="しばらくお待ちください"
+            color="blue"
+            showInfo={loading}
+          />
+          <AlgoEditorStyle
+            defaultLanguage="python"
+            defaultValue={code && code.codeContent}
+            onMount={handleEditorDidMount}
+            close={showUnity || loading || showError || !isCode(code)}
+            width="1334px"
+            height="984px"
+            showUnity={showUnity}
+            showInfo={loading || showError || !isCode(code)}
+          />
+          {showUnity ? (
+            <ButtonStyle
+              value="コード画面に戻る"
+              color="blue"
+              size="M"
+              onClick={closeEditorButtonHandler}
             />
-            {showUnity ? (
-              <ButtonStyle
-                value="コード画面に戻る"
-                color="blue"
-                size="M"
-                onClick={closeEditorButtonHandler}
-              />
-            ) : (
-              <ButtonStyle
-                value="ゲーム画面で確認"
-                color="pink"
-                size="M"
-                onClick={execCode}
-              />
-            )}
-          </ContainerMain>
-          <LogPanel onCloseButtonClick={toggleLogHandler}>
-            {turnLog.map((turn, index) => {
-              const log = turn.players[0].print;
-              if (log) {
-                return <LogItem key={index} turnNum={index + 1} log={log} />;
-              }
-            })}
-          </LogPanel>
-        </ContainerWrap>
-        <TabStyle value="LOG" onClick={toggleLogHandler} showLog={showLog} />
-      </CodingStyle>
-    );
-  } else {
-    return <div>ノーリソースです</div>;
-  }
+          ) : loading || showError || !isCode(code) ? (
+            <ButtonStyle
+              value="コード画面に戻る"
+              color="black"
+              size="M"
+              onClick={closeEditorButtonHandler}
+            />
+          ) : (
+            <ButtonStyle
+              value="ゲーム画面で確認"
+              color="pink"
+              size="M"
+              onClick={execCode}
+            />
+          )}
+        </ContainerMain>
+        <LogPanel onCloseButtonClick={toggleLogHandler}>
+          {turnLog.map((turn, index) => {
+            const log = turn.players[0].print;
+            if (log) {
+              return <LogItem key={index} turnNum={index + 1} log={log} />;
+            }
+          })}
+        </LogPanel>
+      </ContainerWrap>
+      <TabStyle value="LOG" onClick={toggleLogHandler} showLog={showLog} />
+    </CodingStyle>
+  );
 };

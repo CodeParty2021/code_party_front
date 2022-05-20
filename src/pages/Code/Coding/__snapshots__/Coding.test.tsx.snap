@@ -6,6 +6,9 @@ Array [
     <Styled(PlanetPicture)
       color="blue"
     />
+    <styled.div
+      showUnity={true}
+    />
     <Styled(Component)
       to="/event/select-mode"
     >
@@ -43,12 +46,31 @@ Array [
             wrapper="svg"
           />
         </styled.div>
+        <Styled(Message)
+          color="red"
+          showInfo={false}
+          title="シンタックスエラー！"
+          value="スタッフに聞いてみよう"
+        />
+        <Styled(Message)
+          color="red"
+          showInfo={false}
+          title="ヨミコミチュウ！"
+          value="しばらくお待ちください"
+        />
+        <Styled(Message)
+          color="blue"
+          showInfo={false}
+          title="ローディングチュウ..."
+          value="しばらくお待ちください"
+        />
         <Styled(AlgoEditor)
           close={true}
           defaultLanguage="python"
           defaultValue="print(aa);"
           height="984px"
           onMount={[MockFunction]}
+          showInfo={false}
           showUnity={true}
           width="1334px"
         />

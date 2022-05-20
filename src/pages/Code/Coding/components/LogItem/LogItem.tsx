@@ -9,7 +9,7 @@ type Props = LogItemStyleProps & {
 export const LogItem: React.FC<Props> = ({ turnNum, log, ...styleProps }) => {
   return (
     <LogItemStyle {...styleProps}>
-      <span>{turnNum}</span>
+      <span className="logitem_turnnum">{turnNum}</span>
       <div className="logitem_bar" />
       <span className="logitem_log">{log}</span>
     </LogItemStyle>

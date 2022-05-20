@@ -30,7 +30,7 @@ export const AlgoEditor: React.FC<Props> = ({
         <div className="algoeditor_container_editor">
           <Editor
             defaultLanguage={defaultLanguage}
-            defaultValue={defaultValue}
+            value={defaultValue}
             onMount={onMount}
             {...EditorStyleProps()}
           />

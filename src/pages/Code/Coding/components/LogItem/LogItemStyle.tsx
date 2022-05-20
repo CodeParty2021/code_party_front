@@ -16,6 +16,13 @@ const defaultStyle = css`
 
   width: 100%;
 
+  .logitem_turnnum {
+    display: block;
+    width: 24px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
   .logitem_bar {
     width: 2px;
     background: ${BLUE_GRAY_70};

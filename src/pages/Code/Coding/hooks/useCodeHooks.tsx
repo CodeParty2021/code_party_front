@@ -19,6 +19,9 @@ export type IResponse = {
   closeEditorButtonHandler: () => void;
   showUnity: boolean;
   unityContext: UnityContext;
+  toggleLogHandler: () => void;
+  showLog: boolean;
+  showError: boolean;
 };
 
 //TODO:ここstepかstageごとに変更する必要あり
@@ -35,6 +38,7 @@ export const useCodingState = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const [code, setCode] = useState<CodeType>(); //表示中のコード
@@ -103,6 +107,7 @@ export const useCodingState = () => {
   // unityモーダルを閉じる
   const _closeEditorButtonHandler = () => {
     setJson("");
+    setShowError(false);
   };
 
   const execCode = async () => {
@@ -116,6 +121,22 @@ export const useCodingState = () => {
     }
   };
 
+  // ログの表示管理
+  const [showLog, setShowLog] = useState(false);
+
+  const toggleLogHandler = () => {
+    setShowLog((showLog) => !showLog);
+  };
+
+  // エラー発生時の処理
+  useEffect(() => {
+    if (error) {
+      setShowUnity(false);
+      setShowLog(false);
+      setShowError(true);
+    }
+  }, [error]);
+
   return {
     code,
     error,
@@ -127,5 +148,8 @@ export const useCodingState = () => {
     closeEditorButtonHandler: _closeEditorButtonHandler,
     showUnity,
     unityContext,
+    toggleLogHandler,
+    showLog,
+    showError,
   };
 };

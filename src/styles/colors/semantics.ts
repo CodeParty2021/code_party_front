@@ -28,6 +28,7 @@ import {
   BLUE_GRAY_80,
   GRAY_10,
   GRAY_20,
+  GRAY_80,
   WHITE,
 } from "./monotone";
 
@@ -122,4 +123,11 @@ export const setName = {
 export const iconButton = {
   bg: WHITE,
   icon: BLUE_45,
+};
+
+export const algoEditor = {
+  algoColor: LIGHT_BLUE_60,
+  algoBody: BLUE_GRAY_75,
+  algoFrame: GRAY_10,
+  codingBG: GRAY_80,
 };

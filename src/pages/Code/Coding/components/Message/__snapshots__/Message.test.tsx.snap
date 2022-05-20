@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Message /> snapshot test 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 .message_container_main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 24px;
+  padding: 72px 32px 0 32px;
+  width: 614px;
+  height: 210px;
+  border-radius: 48px;
+  background: #FFF;
+}
+
+.c0 .message_title {
+  font-family: "851Gkktt";
+  font-size: 32px;
+  line-height: 25px;
+}
+
+.c0 .message_value {
+  font-size: 24px;
+  line-height: 150%;
+  color: #2A2C33;
+  text-align: center;
+}
+
+.c0 .message_title {
+  color: #0DB3C6;
+}
+
+.c1 {
+  width: 40px;
+  height: 16px;
+  fill: #FFF;
+}
+
+@supports not (gap:24px) {
+  .c0 .message_container_main > *:not(:first-child) {
+    margin-top: 24px;
+  }
+}
+
+<div
+  class="c0"
+  color="blue"
+>
+  <div
+    class="message_container_main"
+  >
+    <span
+      class="message_title"
+    >
+      タイトル
+    </span>
+    <span
+      class="message_value"
+    >
+      メッセージ
+    </span>
+  </div>
+  <svg
+    class="c1"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+</div>
+`;

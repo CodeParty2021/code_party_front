@@ -5,7 +5,7 @@ import {
 } from "./components/IconPrototype/IconPrototype";
 
 type Props = {
-  size?: 16;
+  size?: 16 | 24;
 } & Omit<ComponentProps<typeof IconPrototype>, "filename" | "size">;
 
 const Times: React.FC<Props> = ({ size = 16, ...props }) => {

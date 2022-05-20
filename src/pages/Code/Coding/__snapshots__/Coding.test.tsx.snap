@@ -2,79 +2,103 @@
 
 exports[`<CodeCoding /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <styled.div>
-      <styled.div>
-        <Description />
-      </styled.div>
-      <styled.div>
-        <React.Fragment>
-          <Memo(Editor)
-            defaultLanguage="python"
-            defaultValue="print(aa);"
-            height="569px"
-            onMount={[MockFunction]}
-          />
-          <button
-            onClick={[Function]}
-          >
-            実行する
-          </button>
-        </React.Fragment>
-      </styled.div>
-    </styled.div>
+  <styled.div>
+    <Styled(PlanetPicture)
+      color="blue"
+    />
     <styled.div
-      shown={true}
+      showUnity={true}
+    />
+    <Styled(Component)
+      to="/event/select-mode"
     >
-      <styled.div
-        onClick={[Function]}
-      >
-        ×
-      </styled.div>
-      <Unity
-        style={
-          Object {
-            "height": "600px",
-            "width": "800px",
-          }
-        }
-        unityContext={
-          UnityContext {
-            "eventMap": Map {},
-            "htmlCanvasElement": null,
-            "unityConfig": Object {
-              "codeUrl": "unity/sp/web.wasm.unityweb",
-              "dataUrl": "unity/sp/web.data.unityweb",
-              "frameworkUrl": "unity/sp/web.framework.js.unityweb",
-              "loaderUrl": "unity/sp/web.loader.js",
-            },
-            "unityInstance": null,
-          }
-        }
+      <IconButton
+        Icon={[Function]}
       />
+      <span>
+        モード選択に戻る
+      </span>
+    </Styled(Component)>
+    <styled.div
+      showLog={false}
+    >
       <styled.div>
-        <styled.div>
-          <styled.div>
-            <div>
-              1
-            </div>
-          </styled.div>
-          <styled.div>
-            aaa
-          </styled.div>
+        <styled.div
+          showUnity={true}
+        >
+          <Styled(Unity)
+            unityContext={
+              UnityContext {
+                "eventMap": Map {},
+                "htmlCanvasElement": null,
+                "unityConfig": Object {
+                  "codeUrl": "unity/sp/web.wasm.unityweb",
+                  "dataUrl": "unity/sp/web.data.unityweb",
+                  "frameworkUrl": "unity/sp/web.framework.js.unityweb",
+                  "loaderUrl": "unity/sp/web.loader.js",
+                },
+                "unityInstance": null,
+              }
+            }
+          />
+          <Styled(ReactSVG)
+            src="/img/watching_logo.svg"
+            wrapper="svg"
+          />
         </styled.div>
-        <styled.div>
-          <styled.div>
-            <div>
-              2
-            </div>
-          </styled.div>
-          <styled.div>
-            aaa
-          </styled.div>
-        </styled.div>
+        <Styled(Message)
+          color="red"
+          showInfo={false}
+          title="シンタックスエラー！"
+          value="スタッフに聞いてみよう"
+        />
+        <Styled(Message)
+          color="red"
+          showInfo={false}
+          title="ヨミコミチュウ！"
+          value="しばらくお待ちください"
+        />
+        <Styled(Message)
+          color="blue"
+          showInfo={false}
+          title="ローディングチュウ..."
+          value="しばらくお待ちください"
+        />
+        <Styled(AlgoEditor)
+          close={true}
+          defaultLanguage="python"
+          defaultValue="print(aa);"
+          height="90vh"
+          onMount={[MockFunction]}
+          showInfo={false}
+          showUnity={true}
+          width="70vw"
+        />
+        <Styled(Button)
+          color="blue"
+          onClick={[MockFunction]}
+          size="M"
+          value="コード画面に戻る"
+        />
       </styled.div>
+      <LogPanel
+        onCloseButtonClick={[MockFunction]}
+      >
+        <LogItem
+          log="aaa"
+          turnNum={1}
+        />
+        <LogItem
+          log="aaa"
+          turnNum={2}
+        />
+      </LogPanel>
     </styled.div>
-  </div>,
+    <Styled(Tab)
+      onClick={[MockFunction]}
+      showLog={false}
+      value="LOG"
+    />
+  </styled.div>,
 ]
 `;

@@ -41,6 +41,8 @@ const initialState: IResponse = {
     codeUrl: "unity/sp/web.wasm.unityweb",
   }),
   showUnity: true,
+  toggleLogHandler: jest.fn(),
+  showLog: false,
 };
 
 describe("<CodeCoding />", () => {

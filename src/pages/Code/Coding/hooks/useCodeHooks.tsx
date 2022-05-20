@@ -19,6 +19,8 @@ export type IResponse = {
   closeEditorButtonHandler: () => void;
   showUnity: boolean;
   unityContext: UnityContext;
+  toggleLogHandler: () => void;
+  showLog: boolean;
 };
 
 //TODO:ここstepかstageごとに変更する必要あり
@@ -116,6 +118,13 @@ export const useCodingState = () => {
     }
   };
 
+  // ログの表示管理
+  const [showLog, setShowLog] = useState(false);
+
+  const toggleLogHandler = () => {
+    setShowLog((showLog) => !showLog);
+  };
+
   return {
     code,
     error,
@@ -127,5 +136,7 @@ export const useCodingState = () => {
     closeEditorButtonHandler: _closeEditorButtonHandler,
     showUnity,
     unityContext,
+    toggleLogHandler,
+    showLog,
   };
 };

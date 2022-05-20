@@ -4,7 +4,19 @@ import { useCodingState } from "./hooks/useCodeHooks";
 // import Editor from "@monaco-editor/react";
 // import Unity from "react-unity-webgl";
 // import styled from "styled-components";
-import { AlgoEditorStyle, Background, BackLink, ButtonStyle, CodingStyle, ContainerMain, ContainerUnity, ContainerWrap, TabStyle, UnityStyle, WatchingLogo } from "./CodingStyle";
+import {
+  AlgoEditorStyle,
+  Background,
+  BackLink,
+  ButtonStyle,
+  CodingStyle,
+  ContainerMain,
+  ContainerUnity,
+  ContainerWrap,
+  TabStyle,
+  UnityStyle,
+  WatchingLogo,
+} from "./CodingStyle";
 import { LogPanel } from "./components/LogPanel/LogPanel";
 import { LogItem } from "./components/LogItem/LogItem";
 import { IconButton } from "components/IconButton/IconButton";
@@ -46,12 +58,8 @@ export const CodeCoding: React.FC<Props> = () => {
         </BackLink>
         <ContainerWrap showLog={showLog}>
           <ContainerMain>
-            <ContainerUnity
-              showUnity={showUnity}
-            >
-              <UnityStyle
-                unityContext={unityContext}
-              />
+            <ContainerUnity showUnity={showUnity}>
+              <UnityStyle unityContext={unityContext} />
               <WatchingLogo src="/img/watching_logo.svg" wrapper="svg" />
             </ContainerUnity>
             <AlgoEditorStyle
@@ -63,27 +71,27 @@ export const CodeCoding: React.FC<Props> = () => {
               height="984px"
               showUnity={showUnity}
             />
-            {showUnity ? <ButtonStyle
-              value="コード画面に戻る"
-              color="blue"
-              size="M"
-              onClick={closeEditorButtonHandler}
-            /> : <ButtonStyle
-              value="ゲーム画面で確認"
-              color="pink"
-              size="M"
-              onClick={execCode}
-            />}
+            {showUnity ? (
+              <ButtonStyle
+                value="コード画面に戻る"
+                color="blue"
+                size="M"
+                onClick={closeEditorButtonHandler}
+              />
+            ) : (
+              <ButtonStyle
+                value="ゲーム画面で確認"
+                color="pink"
+                size="M"
+                onClick={execCode}
+              />
+            )}
           </ContainerMain>
-          <LogPanel
-            onCloseButtonClick={toggleLogHandler}
-          >
+          <LogPanel onCloseButtonClick={toggleLogHandler}>
             {turnLog.map((turn, index) => {
               const log = turn.players[0].print;
               if (log) {
-                return (
-                  <LogItem key={index} turnNum={index + 1} log={log} />
-                );
+                return <LogItem key={index} turnNum={index + 1} log={log} />;
               }
             })}
           </LogPanel>

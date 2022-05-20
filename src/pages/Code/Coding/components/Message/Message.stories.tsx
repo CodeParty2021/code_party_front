@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Message } from "./Message";
-import { LogPanel } from "../LogPanel/LogPanel";
 
 export default {
   title: "components/Message",

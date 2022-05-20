@@ -2,15 +2,14 @@ import styled, { css } from "styled-components";
 import { BLUE_GRAY_70 } from "styles/colors";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
-export type LogItemStyleProps = {
-};
+export type LogItemStyleProps = {};
 
 const defaultStyle = css`
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 10px;
-  ${FlexGap({gap: "10px", direction: "row"})}
+  ${FlexGap({ gap: "10px", direction: "row" })}
 
   color: ${BLUE_GRAY_70};
   line-height: 160%;
@@ -36,5 +35,4 @@ export const LogItemStyle = styled.div<LogItemStyleProps>`
   ${defaultStyle}
 `;
 
-LogItemStyle.defaultProps = {
-};
+LogItemStyle.defaultProps = {};

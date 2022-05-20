@@ -8,9 +8,7 @@ export default {
   component: Tab,
 } as ComponentMeta<typeof Tab>;
 
-const Template: ComponentStory<typeof Tab> = (args) => (
-  <Tab {...args} />
-);
+const Template: ComponentStory<typeof Tab> = (args) => <Tab {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

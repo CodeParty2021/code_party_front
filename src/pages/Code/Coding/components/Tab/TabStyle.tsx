@@ -2,8 +2,7 @@ import styled, { css } from "styled-components";
 import { BLUE_45, WHITE } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 
-export type TabStyleProps = {
-};
+export type TabStyleProps = {};
 
 const defaultStyle = css`
   display: block;
@@ -35,5 +34,4 @@ export const TabStyle = styled.button<TabStyleProps>`
   ${defaultStyle}
 `;
 
-TabStyle.defaultProps = {
-};
+TabStyle.defaultProps = {};

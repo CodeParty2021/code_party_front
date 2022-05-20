@@ -26,9 +26,7 @@ export const LogPanel: React.FC<Props> = ({
         </div>
         <span className="logpanel_title">LOG</span>
       </div>
-      <div className="logpanel_container_main">
-        {children}
-      </div>
+      <div className="logpanel_container_main">{children}</div>
     </LogPanelStyle>
   );
 };

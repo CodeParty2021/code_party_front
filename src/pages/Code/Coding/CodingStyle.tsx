@@ -38,7 +38,7 @@ export const BackLink = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  ${FlexGap({gap: "16px", direction: "row"})}
+  ${FlexGap({ gap: "16px", direction: "row" })}
 
   position: absolute;
   top: 32px;
@@ -49,7 +49,7 @@ export const BackLink = styled(Link)`
   font-size: 20px;
   line-height: 160%;
   text-decoration: none;
-  font-feature-settings: 'palt' on;
+  font-feature-settings: "palt" on;
 
   & > span {
     transform: matrix(1, 0, -0.08, 1, 0, 0);
@@ -61,11 +61,13 @@ export const TabStyle = styled(Tab)<ShowLogProps>`
   top: 26px;
   right: 0;
 
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 
-  ${({showLog}) => showLog && css`
-    right: -44px;
-  `}
+  ${({ showLog }) =>
+    showLog &&
+    css`
+      right: -44px;
+    `}
 `;
 
 export const ContainerWrap = styled.div<ShowLogProps>`
@@ -76,11 +78,13 @@ export const ContainerWrap = styled.div<ShowLogProps>`
   height: 100%;
   width: calc(100% + 527px);
 
-  transition: width .5s ease;
+  transition: width 0.5s ease;
 
-  ${({showLog}) => showLog && css`
-    width: 100%;
-  `}
+  ${({ showLog }) =>
+    showLog &&
+    css`
+      width: 100%;
+    `}
 `;
 
 export const ContainerMain = styled.div`
@@ -105,7 +109,7 @@ export const ContainerUnity = styled.div<ShowUnityProps>`
   justify-content: center;
   align-items: center;
   padding: 12px 48px 0;
-  ${FlexGap({gap: "8px", direction: "column"})}
+  ${FlexGap({ gap: "8px", direction: "column" })}
 
   height: 100%;
 
@@ -114,11 +118,13 @@ export const ContainerUnity = styled.div<ShowUnityProps>`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
 
-  ${({showUnity}) => !showUnity && css`
-    opacity: 0;
-  `}
+  ${({ showUnity }) =>
+    !showUnity &&
+    css`
+      opacity: 0;
+    `}
 `;
 
 export const UnityStyle = styled(Unity)`
@@ -141,11 +147,13 @@ export const AlgoEditorStyle = styled(AlgoEditor)<ShowUnityProps>`
   left: 50%;
   transform: translate(-50%, -50%);
 
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 
-  ${({showUnity}) => showUnity && css`
-    opacity: 0;
-  `}
+  ${({ showUnity }) =>
+    showUnity &&
+    css`
+      opacity: 0;
+    `}
 `;
 
 export const ButtonStyle = styled(Button)`

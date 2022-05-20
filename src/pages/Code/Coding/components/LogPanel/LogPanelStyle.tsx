@@ -5,8 +5,7 @@ import { BLUE_45, BLUE_GRAY_20, GRAY_10, GRAY_20 } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
-export type LogPanelStyleProps = {
-};
+export type LogPanelStyleProps = {};
 
 const defaultStyle = css`
   display: flex;
@@ -56,7 +55,7 @@ const defaultStyle = css`
     flex-direction: row;
     align-items: center;
     padding: 10px 0px;
-    ${FlexGap({gap: "33px", direction: "row"})}
+    ${FlexGap({ gap: "33px", direction: "row" })}
 
     z-index: 20;
   }
@@ -79,7 +78,7 @@ const defaultStyle = css`
     align-items: stretch;
     padding: 8px 0 0 32px;
     margin-right: 32px;
-    ${FlexGap({gap: "8px", direction: "column"})}
+    ${FlexGap({ gap: "8px", direction: "column" })}
 
     flex-grow: 1;
     flex-shrink: 1;
@@ -109,8 +108,7 @@ export const LogPanelStyle = styled.div<LogPanelStyleProps>`
   ${defaultStyle}
 `;
 
-LogPanelStyle.defaultProps = {
-};
+LogPanelStyle.defaultProps = {};
 
 export const IconButtonStyle = styled(IconButton)`
   position: absolute;

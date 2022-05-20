@@ -17,7 +17,7 @@ const defaultStyle = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    ${FlexGap({gap: "24px", direction: "column"})}
+    ${FlexGap({ gap: "24px", direction: "column" })}
 
     padding: 72px 32px 0 32px;
 
@@ -56,8 +56,8 @@ const redStyle = css`
 export const MessageStyle = styled.div<MessageStyleProps>`
   ${defaultStyle}
 
-  ${({color}) => color == "blue" && blueStyle}
-  ${({color}) => color == "red" && redStyle}
+  ${({ color }) => color == "blue" && blueStyle}
+  ${({ color }) => color == "red" && redStyle}
 `;
 
 MessageStyle.defaultProps = {

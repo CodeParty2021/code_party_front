@@ -17,7 +17,7 @@ const defaultStyle = css`
   flex-direction: column;
   align-items: center;
 
-  transition: width .5s ease, height .5s ease;
+  transition: width 0.5s ease, height 0.5s ease;
 
   .algoeditor_container_body {
     display: flex;
@@ -32,7 +32,7 @@ const defaultStyle = css`
     border: 16px solid ${algoEditor.algoFrame};
     border-radius: 48px;
 
-    transition: border-radius .5s ease;
+    transition: border-radius 0.5s ease;
 
     align-self: stretch;
     flex-grow: 1;
@@ -70,11 +70,11 @@ const defaultStyle = css`
 `;
 
 const withSizeStyle = css<AlgoEditorStyleProps>`
-  width: ${({width}) => width};
-  height: ${({height}) => height};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 
   .algoeditor_container_editor {
-    height: calc(${({height}) => height} - 172px - 32px - 20px - 30px - 34px);
+    height: calc(${({ height }) => height} - 172px - 32px - 20px - 30px - 34px);
   }
 `;
 
@@ -85,13 +85,13 @@ const closeStyle = css`
   .algoeditor_container_body {
     border-radius: 32px;
   }
-`
+`;
 
 export const AlgoEditorStyle = styled.div<AlgoEditorStyleProps>`
   ${defaultStyle}
 
-  ${({width, height}) => width && height && withSizeStyle}
-  ${({close}) => close && closeStyle}
+  ${({ width, height }) => width && height && withSizeStyle}
+  ${({ close }) => close && closeStyle}
 `;
 
 AlgoEditorStyle.defaultProps = {
@@ -130,5 +130,5 @@ export const EditorStyleProps: () => ComponentProps<typeof Editor> = () => {
       lineHeight: 30,
     },
     height: "100%",
-  }
+  };
 };

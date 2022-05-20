@@ -9,9 +9,9 @@ import {
 } from "./AlgoEditorStyle";
 
 type Props = AlgoEditorStyleProps & {
-  defaultLanguage?: ComponentProps<typeof Editor>["defaultLanguage"],
-  defaultValue?: ComponentProps<typeof Editor>["defaultValue"],
-  onMount?: ComponentProps<typeof Editor>["onMount"],
+  defaultLanguage?: ComponentProps<typeof Editor>["defaultLanguage"];
+  defaultValue?: ComponentProps<typeof Editor>["defaultValue"];
+  onMount?: ComponentProps<typeof Editor>["onMount"];
 };
 
 export const AlgoEditor: React.FC<Props> = ({
@@ -22,16 +22,10 @@ export const AlgoEditor: React.FC<Props> = ({
 }) => {
   return (
     <AlgoEditorStyle {...styleProps}>
-      <AlgoHeadPartsStyle
-        src="/img/algo_head_parts.svg"
-        wrapper="svg"
-      />
+      <AlgoHeadPartsStyle src="/img/algo_head_parts.svg" wrapper="svg" />
       <div className="algoeditor_container_body">
         <div className="algoeditor_container_header">
-          <AlgoEyeStyle
-            src="/img/algo_eye.svg"
-            wrapper="svg"
-          />
+          <AlgoEyeStyle src="/img/algo_eye.svg" wrapper="svg" />
         </div>
         <div className="algoeditor_container_editor">
           <Editor

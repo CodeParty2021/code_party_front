@@ -18,5 +18,5 @@ const Template: ComponentStory<typeof LogItem> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   turnNum: 1,
-  log: "１行目のログです。"
+  log: "１行目のログです。",
 };

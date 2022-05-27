@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
 import { Stage } from "./pages/Stage/Stage";
@@ -45,7 +45,7 @@ export const App: React.FC<Props> = () => {
 
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Top />} />
           <Route path="/stages" element={<StageList />} />
@@ -98,7 +98,7 @@ export const App: React.FC<Props> = () => {
           />
         </Routes>
         {isDev && <RootingScreen />}
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 };

@@ -3,6 +3,11 @@
 exports[`<CasualBattleInvitation /> snapshot test 1`] = `
 Array [
   <div>
+    <Head
+      ogDescription="HostId:undefinedからRoomId:sampleIDに招待されています。"
+      ogType="article"
+      title="招待されています"
+    />
     <h1>
       次のルームに招待されています。
     </h1>

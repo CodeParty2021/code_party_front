@@ -33,7 +33,7 @@ const initialState: IResponse = {
     },
   ],
   handleEditorDidMount: jest.fn(),
-  setShowUnity: jest.fn(),
+  closeEditorButtonHandler: jest.fn(),
   unityContext: new UnityContext({
     loaderUrl: "unity/sp/web.loader.js",
     dataUrl: "unity/sp/web.data.unityweb",
@@ -41,6 +41,9 @@ const initialState: IResponse = {
     codeUrl: "unity/sp/web.wasm.unityweb",
   }),
   showUnity: true,
+  toggleLogHandler: jest.fn(),
+  showLog: false,
+  showError: false,
 };
 
 describe("<CodeCoding />", () => {

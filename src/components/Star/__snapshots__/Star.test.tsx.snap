@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Star /> snapshot test 1`] = `
+.c0 {
+  width: 38px;
+  height: 38px;
+  fill: #FE839F;
+}
+
+<svg
+  class="c0"
+  color="pink"
+  xlink="http://www.w3.org/1999/xlink"
+  xmlns="http://www.w3.org/2000/svg"
+/>
+`;

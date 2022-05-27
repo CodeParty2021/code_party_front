@@ -16,9 +16,12 @@ export type IResponse = {
   execCode: (content: string, step: string, language: string) => void;
   turnLog: TurnState[];
   handleEditorDidMount: (editor: any, _monaco: any) => void;
-  setShowUnity: React.Dispatch<React.SetStateAction<boolean>>;
+  closeEditorButtonHandler: () => void;
   showUnity: boolean;
   unityContext: UnityContext;
+  toggleLogHandler: () => void;
+  showLog: boolean;
+  showError: boolean;
 };
 
 //TODO:ここstepかstageごとに変更する必要あり
@@ -31,11 +34,11 @@ const unityContext = new UnityContext({
 
 export const useCodingState = () => {
   const { codeId } = useParams<string>(); //code_id
-  console.log(codeId);
   const { error, getCode, updateCode, createCode, testCode } = useCodeAPI(); //api通信用カスタムフック
   const [loading, setLoading] = useState<boolean>(false);
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const [code, setCode] = useState<CodeType>(); //表示中のコード
@@ -74,8 +77,8 @@ export const useCodingState = () => {
     });
   }, []);
 
-  const [showUnity, setShowUnity] = useState(false);
-  console.log(turnLog);
+  const [showUnity, setShowUnity] = useState(false); // unityの表示フラグ
+
   const editorRef = useRef(
     null
   ) as React.MutableRefObject<null | HTMLInputElement>;
@@ -88,27 +91,51 @@ export const useCodingState = () => {
     // @ts-ignore
     return editorRef.current?.getValue();
   }
+
   const loadJson = (json: string) => {
     //unityContext.send("JSONLoader", "LoadJSON", json);
-    unityContext.send("JSUnityConnector", "SetSimulationData", json);
-    unityContext.send("JSUnityConnector", "LoadStage", "SquarePaint");
+    unityContext.send("ReactUnityConnector", "SetSimulationData", json);
+    unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
   };
 
+  // jsonに値が入ればunity描画、空が入ればunity非表示
   useEffect(() => {
     setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
     loadJson(json);
   }, [json]);
 
+  // unityモーダルを閉じる
+  const _closeEditorButtonHandler = () => {
+    setJson("");
+    setShowError(false);
+  };
+
   const execCode = async () => {
     const inputCode = getInputCode();
     if (isCode(code)) {
       setCode({ ...code, codeContent: inputCode });
-      await updateCode(code.id, code.codeContent, code.step, code.language);
+      await updateCode(code.id, inputCode, code.step, code.language);
       const { json } = await testCode(code.id);
       setJson(JSON.stringify(json));
       setTurnLog(json.turn);
     }
   };
+
+  // ログの表示管理
+  const [showLog, setShowLog] = useState(false);
+
+  const toggleLogHandler = () => {
+    setShowLog((showLog) => !showLog);
+  };
+
+  // エラー発生時の処理
+  useEffect(() => {
+    if (error) {
+      setShowUnity(false);
+      setShowLog(false);
+      setShowError(true);
+    }
+  }, [error]);
 
   return {
     code,
@@ -118,8 +145,11 @@ export const useCodingState = () => {
     execCode,
     turnLog,
     handleEditorDidMount,
-    setShowUnity,
+    closeEditorButtonHandler: _closeEditorButtonHandler,
     showUnity,
     unityContext,
+    toggleLogHandler,
+    showLog,
+    showError,
   };
 };

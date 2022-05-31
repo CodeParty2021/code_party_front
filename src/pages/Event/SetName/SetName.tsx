@@ -10,8 +10,8 @@ import {
   NameInput,
 } from "./SetNameStyle";
 import { Balloon, SetNameModal, SetNameStyle } from "./SetNameStyle";
-
 type Props = {};
+import { Load } from "pages/Code/Coding/components/Load/Load";
 
 export const EventSetName: React.FC<Props> = () => {
   const {
@@ -22,7 +22,9 @@ export const EventSetName: React.FC<Props> = () => {
     btnDisabled,
   } = useSetNameState();
   if (loading) {
-    return <div>ロード中</div>;
+    return <div>
+      <Load/>
+    </div>;
   }
   return (
     <>

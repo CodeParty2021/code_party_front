@@ -5,8 +5,10 @@ type Prop = {};
 
 export const Load: React.FC<Prop> = () => {
   return (
-    <div>
-      ロード中です
+    <div id="overlay">
+      <div id="content">
+        <p>ロード中です。</p>
+      </div>
     </div>
   );
 };

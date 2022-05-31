@@ -14,13 +14,15 @@ import {
   Title,
   TitleLabel,
 } from "./SelectAIStyle";
-
+import { Load } from "pages/Code/Coding/components/Load/Load";
 type Props = {};
 
 export const EventSelectAI: React.FC<Props> = () => {
   const { loading, beginTrainHandler, backButtonHandler } = useSelectAIState();
   if (loading) {
-    return <div>ロード中</div>;
+    return <div>
+      <Load/>
+    </div>;
   }
   return (
     <>

@@ -1,5 +1,4 @@
 import React from "react";
-import { renderHook } from "@testing-library/react-hooks";
 import { shallow } from "enzyme";
 import { useSelector } from "react-redux";
 import { PrivateRoute } from "./PrivateRoute";

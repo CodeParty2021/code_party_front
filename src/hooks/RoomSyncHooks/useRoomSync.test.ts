@@ -79,6 +79,7 @@ const initialRoomState: RoomState = {
 const userState: LoginUserState = {
   isLogin: true,
   unRegisterObserver: null,
+  loading: false,
   user: {
     id: "userid1",
     displayName: "user1",

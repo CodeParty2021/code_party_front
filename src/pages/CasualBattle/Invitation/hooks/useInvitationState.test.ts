@@ -38,6 +38,7 @@ describe("useWaitingRoomState", () => {
       user: null,
       isLogin: true,
       unRegisterObserver: null,
+      loading: false,
     });
     useParamsMock.mockReturnValue({
       roomId: "1234",

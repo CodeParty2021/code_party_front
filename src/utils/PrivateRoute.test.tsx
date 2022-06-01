@@ -1,31 +1,32 @@
 import React from "react";
+import { renderHook } from "@testing-library/react-hooks";
 import { shallow } from "enzyme";
-import { CodeList } from "./CodeList";
 import { useSelector } from "react-redux";
-import { LoginUserState } from "services/user/user";
+import { PrivateRoute } from "./PrivateRoute";
+import { Top } from "pages/Top/Top";
 jest.mock("react-redux");
 jest.mock("react-router-dom");
 
-const useSelectorMock = useSelector as jest.Mock<LoginUserState>;
+const useSelectorMock = useSelector as jest.Mock;
 
-describe("<CodeList />", () => {
-  beforeEach(() => {
+describe("privateRoute", () => {
+  it("privateRoute snapshot test", () => {
     useSelectorMock.mockReturnValue({
       user: {
-        id: "few",
+        id: "userid1",
         displayName: "ffawefae",
         email: "feaeafa@fafe.com",
         picture: "fewfawefaewf.png",
         jwt: "feefawef390urjfo",
-        isAnonymous: false,
       },
-      isLogin: true,
+      isLogin: false,
       unRegisterObserver: null,
       loading: false,
     });
-  });
-  it("auth snapshot test", () => {
-    const wrapper = shallow(<CodeList />);
+    const wrapper = shallow(
+      <PrivateRoute component={Top} redirectUrl="/event" />
+    );
+
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

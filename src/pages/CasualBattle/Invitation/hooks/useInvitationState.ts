@@ -3,8 +3,7 @@ import { Params, useNavigate, useParams } from "react-router-dom";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { RootState } from "store";
 import { useSelector } from "react-redux";
-import { RoomInfo } from "services/RoomSync/RoomSync";
-import { getRoomAsync } from "services/RoomSync/DBOperator/DBOperator";
+import { useFetchHost } from "hooks/RoomSyncHooks/useFetchHost";
 
 export type IResponse = {
   isLogin: boolean;
@@ -12,7 +11,7 @@ export type IResponse = {
   roomId?: string;
   enterBtnDisabled: boolean;
   enterBtnClickHandler: () => void;
-  hostId?: string;
+  hostName?: string;
 };
 
 export const useInvitationState = (): IResponse => {
@@ -24,21 +23,13 @@ export const useInvitationState = (): IResponse => {
     undefined
   );
   const navigate = useNavigate();
-  const [roomInfo, setRoomInfo] = useState<RoomInfo | undefined>(undefined);
+  const { data: host, getHost } = useFetchHost();
 
   useEffect(() => {
     if (room.isEntered) {
       navigate("/casual-battle/waiting-room");
     }
   }, [room.isEntered]);
-
-  useEffect(() => {
-    if (roomId) {
-      getRoomAsync(roomId).then((data) => {
-        if (data) setRoomInfo(data);
-      });
-    }
-  }, [roomId]);
 
   //入場ボタン
   const _enterBtnHandler = () => {
@@ -52,12 +43,18 @@ export const useInvitationState = (): IResponse => {
     }
   };
 
+  useEffect(() => {
+    if (roomId) {
+      getHost(roomId);
+    }
+  }, []);
+
   return {
     isLogin: isLogin,
     errorMessage: errorMessage,
     roomId: roomId,
     enterBtnDisabled: enterBtnDisabled,
     enterBtnClickHandler: _enterBtnHandler,
-    hostId: roomInfo?.host,
+    hostName: host?.displayName,
   };
 };

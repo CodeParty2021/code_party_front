@@ -12,6 +12,7 @@ import {
   addActionAsync,
   updateActionAsync,
   removeActionAsync,
+  getMemberAsync,
 } from "./DBOperator";
 
 jest.mock("firebase/database");
@@ -86,6 +87,33 @@ describe("Test Cases for Reducers of DBOperator", () => {
 
     it("異常系２（roomIdが空文字列の場合）", async () => {
       const result = await getRoomAsync("");
+      expect(getMock).toBeCalledTimes(0);
+      expect(result).toBeFalsy();
+    });
+  });
+
+  describe("test of getMemberAsync", () => {
+    it("正常系", async () => {
+      getMock.mockResolvedValue({
+        val: () => users["userId"],
+      });
+      const result = await getMemberAsync("roomId", "userId");
+      expect(getMock).toBeCalledTimes(1);
+      expect(getMock).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(result).toEqual(users["userId"]);
+    });
+
+    it("異常系１（DB上で値が見つからなかった場合）", async () => {
+      getMock.mockResolvedValue({
+        val: () => {},
+      });
+      const result = await getMemberAsync("roomId", "userId");
+      expect(getMock).toBeCalledTimes(1);
+      expect(result).toBeFalsy();
+    });
+
+    it("異常系２（Idが空文字列の場合）", async () => {
+      const result = await getMemberAsync("", "");
       expect(getMock).toBeCalledTimes(0);
       expect(result).toBeFalsy();
     });

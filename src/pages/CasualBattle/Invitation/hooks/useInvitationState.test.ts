@@ -6,17 +6,23 @@ import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { useSelector } from "react-redux";
 import { LoginUserState } from "services/user/user";
 import { getRoomAsync } from "services/RoomSync/DBOperator/DBOperator";
+import {
+  useFetchHost,
+  IResponse as IFetchHostResponse,
+} from "hooks/RoomSyncHooks/useFetchHost";
 
 jest.mock("react-redux");
 jest.mock("react-router-dom");
 jest.mock("hooks/RoomSyncHooks/useRoomSync");
 jest.mock("services/RoomSync/DBOperator/DBOperator");
+jest.mock("hooks/RoomSyncHooks/useFetchHost");
 
 const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
 const useSelectorMock = useSelector as jest.Mock<LoginUserState>;
 const useParamsMock = useParams as jest.Mock<Params<string>>;
 const getRoomAsyncMock = getRoomAsync as jest.Mock;
+const useFetchHostMock = useFetchHost as jest.Mock;
 const initialRoomState = {
   isEntered: false,
   sortedKeysOfMembers: [],
@@ -28,6 +34,16 @@ const initialRoomState = {
 const initialRoomSyncState = {
   room: { ...initialRoomState },
   enterRoom: jest.fn(),
+};
+
+const initialFetchHostState: IFetchHostResponse = {
+  data: {
+    displayName: "hostName",
+    status: "waiting",
+    ready: false,
+  },
+  loading: false,
+  getHost: jest.fn(),
 };
 
 const navigateMock = jest.fn();
@@ -46,6 +62,7 @@ describe("useWaitingRoomState", () => {
     useParamsMock.mockReturnValue({
       roomId: "1234",
     });
+    useFetchHostMock.mockReturnValue({ ...initialFetchHostState });
   });
   afterEach(() => {
     jest.resetAllMocks();

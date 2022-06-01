@@ -12,19 +12,29 @@ export const CasualBattleInvitation: React.FC<Props> = () => {
     roomId,
     enterBtnDisabled,
     enterBtnClickHandler,
-    hostId,
+    hostName,
   } = useInvitationState();
+  const header = (
+    <Head
+      title="ALGOSMO"
+      ogDescription={
+        hostName
+          ? `${hostName}からカジュアル対戦に招待されています！`
+          : "ルーム情報が見つかりませんでした。"
+      }
+      ogType="article"
+      ogImage="https://codeparty.netlify.app/img/modeselectcard_battle.png"
+      ogImageHeight="412"
+      ogImageWidth="616"
+    />
+  );
 
   if (typeof roomId === "string") {
     // if not login yet, Go to SignIn
     if (isLogin == false) {
       return (
         <>
-          <Head
-            title="招待されています"
-            ogDescription={`HostId:${hostId}からRoomId:${roomId}に招待されています。`}
-            ogType="article"
-          />
+          {header}
           <SignInScreen
             signInSuccessUrl={`/casual-battle/invitation/${roomId}`}
           />
@@ -35,11 +45,7 @@ export const CasualBattleInvitation: React.FC<Props> = () => {
     else {
       return (
         <div>
-          <Head
-            title="招待されています"
-            ogDescription={`HostId:${hostId}からRoomId:${roomId}に招待されています。`}
-            ogType="article"
-          />
+          {header}
           <h1>次のルームに招待されています。</h1>
           <p>RoomID:{roomId}</p>
           <button

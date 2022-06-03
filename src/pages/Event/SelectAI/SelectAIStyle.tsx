@@ -25,7 +25,7 @@ export const Back = styled.div`
 export const Title = styled.div`
   height: 25px;
   display:flex;
-  ${FlexGap({ gap: "32px" })}}
+  ${FlexGap({ gap: "32px" })}
   align-items:center;
   padding-bottom:29px;
 `;

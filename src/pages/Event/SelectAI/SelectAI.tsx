@@ -3,6 +3,7 @@ import React from "react";
 import { Background } from "../components/Background";
 import { RobotLink } from "./components/RobotLink";
 import { useSelectAIState } from "./hooks/useSelectAIState";
+import { Loading } from "pages/Loading/Loading";
 import {
   Back,
   BackButton,
@@ -14,14 +15,13 @@ import {
   Title,
   TitleLabel,
 } from "./SelectAIStyle";
-import { Load } from "pages/Code/Coding/components/Load/Load";
 type Props = {};
 
 export const EventSelectAI: React.FC<Props> = () => {
   const { loading, beginTrainHandler, backButtonHandler } = useSelectAIState();
   if (loading) {
     return <div>
-      <Load/>
+      <Loading/>
     </div>;
   }
   return (

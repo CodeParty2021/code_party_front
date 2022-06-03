@@ -3,7 +3,7 @@ import { Background } from "../components/Background";
 import { ModeSelectCard } from "./components/ModeSelectCard/ModeSelectCard";
 import { useSelectModeState } from "./hooks/useSelectModeState";
 import { InnerBox, MarginBox } from "./SelectModeStyle";
-import { Load } from "pages/Code/Coding/components/Load/Load";
+import { Loading } from "pages/Loading/Loading";
 type Props = {};
 
 export const EventSelectMode: React.FC<Props> = () => {
@@ -11,7 +11,7 @@ export const EventSelectMode: React.FC<Props> = () => {
     useSelectModeState();
   if (loading) {
     return <div>
-      <Load/>
+      <Loading/>
     </div>;
   }
   return (

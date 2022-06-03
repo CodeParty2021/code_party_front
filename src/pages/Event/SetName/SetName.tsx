@@ -11,7 +11,7 @@ import {
 } from "./SetNameStyle";
 import { Balloon, SetNameModal, SetNameStyle } from "./SetNameStyle";
 type Props = {};
-import { Load } from "pages/Code/Coding/components/Load/Load";
+import { Loading } from "pages/Loading/Loading";
 
 export const EventSetName: React.FC<Props> = () => {
   const {
@@ -23,7 +23,7 @@ export const EventSetName: React.FC<Props> = () => {
   } = useSetNameState();
   if (loading) {
     return <div>
-      <Load/>
+      <Loading/>
     </div>;
   }
   return (

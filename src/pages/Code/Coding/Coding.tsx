@@ -23,7 +23,7 @@ import { LogPanel } from "./components/LogPanel/LogPanel";
 import { LogItem } from "./components/LogItem/LogItem";
 import { IconButton } from "components/IconButton/IconButton";
 import { ArrowLeft } from "components/icons";
-
+import { Loading } from "pages/Loading/Loading";
 type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
@@ -41,6 +41,11 @@ export const CodeCoding: React.FC<Props> = () => {
     showLog,
     showError,
   } = useCodingState();
+  if (loading) {
+    return <div>
+      <Loading/>
+    </div>;
+  }
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -67,7 +72,7 @@ export const CodeCoding: React.FC<Props> = () => {
             color="red"
             showInfo={!isCode(code)}
           />
-          <MessageStyle
+          <MessageStyle //ローディング中の文章、消してもいいかも？
             title="ローディングチュウ..."
             value="しばらくお待ちください"
             color="blue"

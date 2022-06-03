@@ -1,6 +1,5 @@
 import React from "react";
 
-
 type Prop = {};
 
 export const Load: React.FC<Prop> = () => {

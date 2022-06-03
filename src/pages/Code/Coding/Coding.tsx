@@ -42,9 +42,11 @@ export const CodeCoding: React.FC<Props> = () => {
     showError,
   } = useCodingState();
   if (loading) {
-    return <div>
-      <Loading/>
-    </div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   return (
     <CodingStyle>

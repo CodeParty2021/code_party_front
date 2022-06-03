@@ -20,9 +20,11 @@ type Props = {};
 export const EventSelectAI: React.FC<Props> = () => {
   const { loading, beginTrainHandler, backButtonHandler } = useSelectAIState();
   if (loading) {
-    return <div>
-      <Loading/>
-    </div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   return (
     <>

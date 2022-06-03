@@ -24,10 +24,10 @@ export const Back = styled.div`
 `;
 export const Title = styled.div`
   height: 25px;
-  display:flex;
+  display: flex;
   ${FlexGap({ gap: "32px" })}
   align-items:center;
-  padding-bottom:29px;
+  padding-bottom: 29px;
 `;
 export const TitleLabel = styled.div`
   font-family: ${FONT.NOTO_SANS};

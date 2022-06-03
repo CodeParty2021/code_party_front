@@ -22,9 +22,11 @@ export const EventSetName: React.FC<Props> = () => {
     btnDisabled,
   } = useSetNameState();
   if (loading) {
-    return <div>
-      <Loading/>
-    </div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   return (
     <>

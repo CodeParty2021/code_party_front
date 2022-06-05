@@ -25,7 +25,7 @@ export const Head: React.FC<Props> = ({
       <meta property="og:type" content={ogType} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={ogDescription} />
-      <meta property="og:site_name" content="アルゴズモ" />
+      <meta property="og:site_name" content="アルゴスモ" />
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content={ogImageWidth} />
       <meta property="og:image:height" content={ogImageHeight} />

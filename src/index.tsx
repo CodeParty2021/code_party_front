@@ -7,12 +7,15 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { GlobalStyle } from "styles/GlobalStyle/GlobalStyle";
+import { HelmetProvider } from "react-helmet-async";
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <GlobalStyle />
-      <App />
+      <HelmetProvider>
+        <GlobalStyle />
+        <App />
+      </HelmetProvider>
     </React.StrictMode>
   </Provider>,
   document.getElementById("root")

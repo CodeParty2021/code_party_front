@@ -3,6 +3,7 @@ import { Params, useNavigate, useParams } from "react-router-dom";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { RootState } from "store";
 import { useSelector } from "react-redux";
+import { useFetchHost } from "hooks/RoomSyncHooks/useFetchHost";
 
 export type IResponse = {
   isLogin: boolean;
@@ -10,6 +11,7 @@ export type IResponse = {
   roomId?: string;
   enterBtnDisabled: boolean;
   enterBtnClickHandler: () => void;
+  hostName?: string;
 };
 
 export const useInvitationState = (): IResponse => {
@@ -21,6 +23,7 @@ export const useInvitationState = (): IResponse => {
     undefined
   );
   const navigate = useNavigate();
+  const { data: host, getHost } = useFetchHost();
 
   useEffect(() => {
     if (room.isEntered) {
@@ -40,11 +43,18 @@ export const useInvitationState = (): IResponse => {
     }
   };
 
+  useEffect(() => {
+    if (roomId) {
+      getHost(roomId);
+    }
+  }, []);
+
   return {
     isLogin: isLogin,
     errorMessage: errorMessage,
     roomId: roomId,
     enterBtnDisabled: enterBtnDisabled,
     enterBtnClickHandler: _enterBtnHandler,
+    hostName: host?.displayName,
   };
 };

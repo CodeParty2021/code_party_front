@@ -63,7 +63,7 @@ const action2: UserAction = {
 const enteredState: RoomState = {
   ...initialState,
   id: roomId,
-  invitationLink: "http://localhost/#/casual-battle/invitation/room id",
+  invitationLink: "http://localhost/casual-battle/invitation/room id",
   isEntered: true,
   info: { ...roomInfo },
 };

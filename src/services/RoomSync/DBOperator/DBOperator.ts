@@ -44,6 +44,41 @@ export const getRoomAsync = async (roomId: string) => {
 };
 
 /**
+ * メンバー情報を取得する
+ * @param roomId ルームID
+ * @param memberId メンバーID
+ * @returns メンバー情報
+ */
+export const getMemberAsync = async (roomId: string, memberId: string) => {
+  if (roomId == "" || memberId == "") return;
+
+  //DBからGET
+  const ss = await get(child(child(MembersRef(), roomId), memberId));
+  const data = ss.val();
+
+  //データが存在しない場合はundefined
+  if (!data) return;
+
+  //メンバー情報にキャスト
+  const member: UserState = {
+    displayName: data.displayName,
+    ready: data.ready,
+    status: data.status,
+    codeId: data.codeId,
+  };
+
+  //チェック
+  if (
+    member.displayName === undefined ||
+    member.ready === undefined ||
+    member.status === undefined
+  )
+    return;
+
+  return member;
+};
+
+/**
  * ルーム情報を追加する
  * @param roomInfo ルーム情報
  * @returns DB上のルームへの参照

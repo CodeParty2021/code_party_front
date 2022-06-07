@@ -14,6 +14,7 @@ const state: IResponse = {
   roomId: "sampleID",
   enterBtnDisabled: true,
   enterBtnClickHandler: jest.fn(),
+  hostName: "hostName",
 };
 
 describe("<CasualBattleInvitation />", () => {

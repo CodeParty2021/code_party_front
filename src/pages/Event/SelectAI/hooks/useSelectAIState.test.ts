@@ -33,6 +33,7 @@ describe("useStartState", () => {
       },
       isLogin: false,
       unRegisterObserver: null,
+      loading: false,
     });
     useNavigateMock.mockReturnValue(navigateMock);
   });

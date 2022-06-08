@@ -31,6 +31,7 @@ describe("useFetchCodes", () => {
       },
       isLogin: false,
       unRegisterObserver: null,
+      loading: false,
     });
   });
   afterEach(() => {

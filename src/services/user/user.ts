@@ -20,6 +20,7 @@ export type User = {
 export type LoginUserState = {
   user: User | null;
   isLogin: boolean;
+  loading: boolean; //loading中かどうか
   unRegisterObserver: firebase.Unsubscribe | null; // ログイン監視用のobserverのkill用メソッド
 };
 
@@ -48,11 +49,16 @@ const isUserAuthResponse = (data: any): data is UserAuthResponse => {
 
 const userSlice = createSlice({
   name: "users", //識別用の名前
-  initialState: { user: null, isLogin: false } as LoginUserState,
+  initialState: {
+    user: null,
+    isLogin: false,
+    loading: true,
+  } as LoginUserState,
   reducers: {
     signIn: (state, action: signInAction) => {
       state.isLogin = true;
       state.user = action.payload;
+      state.loading = false;
     },
     setUnRegisterObserver: (state, action: setUnRegisterObserverAction) => {
       state.unRegisterObserver = action.payload;
@@ -60,6 +66,7 @@ const userSlice = createSlice({
     signOut: (state) => {
       state.isLogin = false;
       state.user = null;
+      state.loading = false;
     },
     updateUserDisplayName: (state, action: PayloadAction<string>) => {
       if (isUser(state.user)) {
@@ -133,7 +140,7 @@ export const setCallBackToSyncUser = () => {
   return async (dispatch: any) => {
     const observer = onAuthStateChanged(getAuth(), (user) => {
       if (user) {
-        console.log(user);
+        console.log("setCallBackToSyncUser", user);
         dispatch(signInAsync(user));
       }
     });

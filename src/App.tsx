@@ -33,7 +33,6 @@ export const App: React.FC<Props> = () => {
   );
   const dispatch = useDispatch();
   const isDev = process.env.NODE_ENV === "development";
-
   // ログイン監視リスナーをセット
   useEffect(() => {
     dispatch(setCallBackToSyncUser());

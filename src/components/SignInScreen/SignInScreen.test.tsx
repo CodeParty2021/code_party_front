@@ -18,6 +18,7 @@ describe("<SignInScreen />", () => {
       user: null,
       isLogin: false,
       unRegisterObserver: null,
+      loading: false,
     });
     useDispatchMock.mockReturnValue(jest.fn());
   });

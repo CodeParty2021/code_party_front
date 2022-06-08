@@ -79,6 +79,7 @@ const initialState: RootState = {
     isLogin: false,
     unRegisterObserver: null,
     user: null,
+    loading: false,
   },
 };
 

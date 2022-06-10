@@ -6,10 +6,10 @@ import { useRunSimulation } from "./hooks/useRunSimulation";
 type Props = {};
 //TODO:ここstepかstageごとに変更する必要あり
 const unityContext = new UnityContext({
-  loaderUrl: "unity/sp/web.loader.js",
-  dataUrl: "unity/sp/web.data.unityweb",
-  frameworkUrl: "unity/sp/web.framework.js.unityweb",
-  codeUrl: "unity/sp/web.wasm.unityweb",
+  loaderUrl: "/unity/sp/web.loader.js",
+  dataUrl: "/unity/sp/web.data.unityweb",
+  frameworkUrl: "/unity/sp/web.framework.js.unityweb",
+  codeUrl: "/unity/sp/web.wasm.unityweb",
 });
 
 export const CasualBattleGameWatch: React.FC<Props> = () => {

@@ -7,7 +7,7 @@ Array [
     display="block"
     fill="red"
     size={16}
-    src="icons/adjust_16.svg"
+    src="/icons/adjust_16.svg"
     wrapper="span"
   />,
 ]

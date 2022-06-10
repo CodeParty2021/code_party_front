@@ -26,10 +26,10 @@ export type IResponse = {
 
 //TODO:ここstepかstageごとに変更する必要あり
 const unityContext = new UnityContext({
-  loaderUrl: "unity/sp/web.loader.js",
-  dataUrl: "unity/sp/web.data.unityweb",
-  frameworkUrl: "unity/sp/web.framework.js.unityweb",
-  codeUrl: "unity/sp/web.wasm.unityweb",
+  loaderUrl: "/unity/sp/web.loader.js",
+  dataUrl: "/unity/sp/web.data.unityweb",
+  frameworkUrl: "/unity/sp/web.framework.js.unityweb",
+  codeUrl: "/unity/sp/web.wasm.unityweb",
 });
 
 export const useCodingState = () => {

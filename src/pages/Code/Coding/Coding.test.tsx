@@ -18,7 +18,7 @@ const initialState: IResponse = {
     updatedAt: "2012312-1312-1",
     createdAt: "2032121-3123-1",
     user: "teruto",
-    step: "1",
+    step: 1,
   },
   error: undefined,
   loading: false,
@@ -44,6 +44,16 @@ const initialState: IResponse = {
   toggleLogHandler: jest.fn(),
   showLog: false,
   showError: false,
+  description: {
+    id: "",
+    createdAt: new Date(`2020-09-21T12:38:15.655Z`),
+    updatedAt: new Date(`2020-09-21T12:38:15.655Z`),
+    publishedAt: new Date(`2020-09-21T12:38:15.655Z`),
+    revisedAt: new Date(`2020-09-21T12:38:15.655Z`),
+    stageIndex: 0,
+    stepIndex: 0,
+    body: [],
+  },
 };
 
 describe("<CodeCoding />", () => {

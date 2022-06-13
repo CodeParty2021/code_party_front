@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { UnityContext } from "react-unity-webgl";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCodeAPI, CodeType, TurnState } from "hooks/CodeAPIHooks/useCodeAPI";
+import {
+  DescriptionCMSType,
+  useDescriptionCMS,
+} from "hooks/DescriptionCMSHooks/useDescriptionCMS";
 
 export type RunResponse = {
   unityURL: string;
@@ -22,6 +26,7 @@ export type IResponse = {
   toggleLogHandler: () => void;
   showLog: boolean;
   showError: boolean;
+  description: DescriptionCMSType;
 };
 
 //TODO:ここstepかstageごとに変更する必要あり
@@ -34,37 +39,54 @@ const unityContext = new UnityContext({
 
 export const useCodingState = () => {
   const { codeId } = useParams<string>(); //code_id
-  const { error, getCode, updateCode, createCode, testCode } = useCodeAPI(); //api通信用カスタムフック
+  const {
+    error: errorCodeAPI,
+    getCode,
+    updateCode,
+    createCode,
+    testCode,
+  } = useCodeAPI(); //api通信用カスタムフック
+  const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
+  const { error: errorDescriptionCMS, getDescriptionFromStepID } =
+    useDescriptionCMS();
+
   const [code, setCode] = useState<CodeType>(); //表示中のコード
   //code の型ガード
   function isCode(code: CodeType | undefined): code is CodeType {
     return code?.id !== undefined;
   }
-
-  //codeの更新
+  const [description, setDescription] = useState<
+    DescriptionCMSType | undefined
+  >(undefined);
+  //code, Descriptionの更新
   useEffect(() => {
     const loadCode = async () => {
       setLoading(true);
       if (codeId) {
         const code = await getCode(codeId as string); //TODO エラー処理
         setCode(code);
+        const description = await getDescriptionFromStepID(code.step);
+        setDescription(description);
+        setLoading(false);
       } else {
         // 新規コード作成時（/free-coding遷移時）、新規コードを作成して再度リダイレクトする（urlに統一性を持たせるため）
         const code = await createCode(
           "def select(field,my_pos,other_pos):\n  return 0",
-          "1",
+          1,
           "1"
         );
         navigate(`/free-coding/${code.id}/`);
       }
       await setTimeout(() => {}, 5000);
+      console.log("aa");
       setLoading(false);
+      console.log(loading);
     };
     loadCode();
   }, []);
@@ -114,6 +136,7 @@ export const useCodingState = () => {
     const inputCode = getInputCode();
     if (isCode(code)) {
       setCode({ ...code, codeContent: inputCode });
+      console.log({ code });
       await updateCode(code.id, inputCode, code.step, code.language);
       const { json } = await testCode(code.id);
       setJson(JSON.stringify(json));
@@ -135,10 +158,16 @@ export const useCodingState = () => {
       setShowLog(false);
       setShowError(true);
     }
-  }, [error]);
+    if (errorDescriptionCMS && errorCodeAPI) {
+      setError(errorDescriptionCMS + "," + errorCodeAPI);
+    } else {
+      setError(errorDescriptionCMS || errorCodeAPI);
+    }
+  }, [error, errorDescriptionCMS, errorCodeAPI]);
 
   return {
     code,
+    description,
     error,
     loading,
     isCode,

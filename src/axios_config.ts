@@ -1,11 +1,10 @@
 import axios, { Axios } from "axios";
-import { uri } from "config";
+import { uri, microCMSConfig } from "config";
 import { getIdToken } from "firebase_config";
 
-axios.defaults.baseURL = uri;
-
 // APIへのアクセスだけなのでjsonに絞る
-const instance: Axios = axios.create({
+const frontendApi: Axios = axios.create({
+  baseURL: uri,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -13,7 +12,7 @@ const instance: Axios = axios.create({
 });
 
 // アクセスの度に実行される
-instance.interceptors.request.use(
+frontendApi.interceptors.request.use(
   async (config) => {
     //tokenを取得
     const token = await getIdToken();
@@ -32,4 +31,16 @@ instance.interceptors.request.use(
   }
 );
 
-export const axiosWithIdToken = instance;
+// APIへのアクセスだけなのでjsonに絞る
+
+const microCMSApi: Axios = axios.create({
+  baseURL: microCMSConfig.uri,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "X-MICROCMS-API-KEY": microCMSConfig.apiKey as string,
+  },
+});
+
+export const axiosWithIdToken = frontendApi;
+export const axiosMicroCMS = microCMSApi;

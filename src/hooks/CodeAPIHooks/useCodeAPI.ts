@@ -7,18 +7,18 @@ export type IResponse = {
   error: string | undefined;
   getCode: (codeId: string) => Promise<GetCodeResponseType>;
   getCodesFilterStepIdAndUserId: (
-    stepId: string,
+    stepId: number,
     userId: string
   ) => Promise<GetCodesResponseType>;
   updateCode: (
     id: string,
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ) => Promise<UpdateCodeResponseType>;
   createCode: (
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ) => Promise<CreateCodeResponseType>;
   testCode: (codeId: string) => Promise<TestCodeResponseType>;
@@ -31,7 +31,7 @@ export type CodeType = {
   updatedAt: string;
   createdAt: string;
   user: string;
-  step: string;
+  step: number;
 };
 
 export type GetCodeResponseType = CodeType;
@@ -86,11 +86,11 @@ export const useCodeAPI = (): IResponse => {
 
   /**
    * stepIDとユーザIDを満たすコードを取得する. updated_atでソートする
-   * @param {string} stepId コードID
+   * @param {number} stepId コードID
    * @param {string} userId ユーザID
    */
   const getCodesFilterStepIdAndUserId = async (
-    stepId: string,
+    stepId: number,
     userId: string
   ): Promise<GetCodesResponseType> => {
     return new Promise((resolve, rejects) => {
@@ -120,22 +120,23 @@ export const useCodeAPI = (): IResponse => {
    * codeIdのコードをUpdateする
    * @param {string} codeId コードID
    * @param {string} content コードの中身
-   * @param {string} step ステップID
+   * @param {string} stepId ステップID
    * @param {string} language 言語ID
    */
   const updateCode = async (
     codeId: string,
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ): Promise<UpdateCodeResponseType> => {
     return new Promise((resolve, rejects) => {
       setError(undefined);
       setLoading(true);
+      console.log(stepId);
       axiosWithIdToken
         .put(`/codes/${codeId}/`, {
           codeContent,
-          step,
+          step: stepId,
           language,
         })
         .then((response: AxiosResponse<UpdateCodeResponseType>) => {
@@ -153,12 +154,12 @@ export const useCodeAPI = (): IResponse => {
   /**
    * 新規codeを作成する
    * @param content コードの中身
-   * @param step ステップID
+   * @param stepId ステップID
    * @param language 言語ID
    */
   const createCode = async (
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ): Promise<CreateCodeResponseType> => {
     return new Promise((resolve, rejects) => {
@@ -167,7 +168,7 @@ export const useCodeAPI = (): IResponse => {
       axiosWithIdToken
         .post(`/codes/`, {
           codeContent,
-          step,
+          stepId,
           language,
         })
         .then((response: AxiosResponse<CreateCodeResponseType>) => {

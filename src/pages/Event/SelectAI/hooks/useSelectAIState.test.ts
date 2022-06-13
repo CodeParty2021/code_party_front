@@ -58,7 +58,7 @@ describe("useStartState", () => {
     const { result } = renderHook(() => useSelectAIState());
 
     const { beginTrainHandler } = result.current;
-    await beginTrainHandler("2");
+    await beginTrainHandler(2);
     expect(navigateMock).toBeCalledTimes(1);
     expect(navigateMock).lastCalledWith("/free-coding/123/");
   });
@@ -78,7 +78,7 @@ describe("useStartState", () => {
     const { result } = renderHook(() => useSelectAIState());
 
     const { beginTrainHandler } = result.current;
-    await beginTrainHandler("2");
+    await beginTrainHandler(2);
     expect(navigateMock).toBeCalledTimes(1);
     expect(navigateMock).lastCalledWith("/free-coding/123/");
   });

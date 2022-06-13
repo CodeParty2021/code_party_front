@@ -8,7 +8,7 @@ import { RootState } from "store";
 export type IResponse = {
   loading: boolean;
   error: string | undefined;
-  beginTrainHandler: (stepId: string) => void;
+  beginTrainHandler: (stepId: number) => void;
   backButtonHandler: () => void;
 };
 
@@ -19,7 +19,7 @@ export const useSelectAIState = (): IResponse => {
     useCodeAPI();
 
   //該当ステップにユーザのコードが存在していればそれをロードするなければ新しく作ってそれをロードする
-  const _beginTrainHandler = async (stepId: string) => {
+  const _beginTrainHandler = async (stepId: number) => {
     let codeId: string;
     if (isUser(user)) {
       const codes = await getCodesFilterStepIdAndUserId(stepId, user.id);

@@ -7,7 +7,6 @@ import { useStepAPI } from "hooks/StepAPIHooks/useStepAPI";
 
 export type IResponse = {
   error: string | undefined;
-  loading: boolean;
   getDescription: (
     worldIndex: number,
     stageIndex: number,
@@ -25,10 +24,11 @@ export type DescriptionCMSsType = {
 
 export type DescriptionCMSType = {
   id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date;
-  revisedAt: Date;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  worldIndex: 1;
   stageIndex: number;
   stepIndex: number;
   body: Array<BodyType | HintBoxType>;
@@ -46,19 +46,23 @@ export type HintBoxType = {
 export type GetDescriptionResponseType = DescriptionCMSType;
 
 export const useDescriptionCMS = (): IResponse => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
   const { error: errorUseStepAPI, getStep } = useStepAPI();
   const { error: errorUseStageAPI, getStage } = useStageAPI();
   const { error: errorUseWorldAPI, getWorld } = useWorldAPI();
-
+  const [errorDescription, setErrorDescription] = useState<
+    string | undefined
+  >();
   useEffect(() => {
-    if (errorUseStepAPI || errorUseStageAPI || errorUseWorldAPI) {
-      setError(`${errorUseStepAPI}: ${errorUseStageAPI}: ${errorUseWorldAPI}`);
-    } else {
-      setError(undefined);
-    }
-  }, [errorUseStageAPI, errorUseWorldAPI]);
+    const errors = [
+      errorDescription,
+      errorUseStepAPI,
+      errorUseStageAPI,
+      errorUseWorldAPI,
+    ];
+    const errorStr = errors.filter((error) => error).join(", ");
+    setError(errorStr ? errorStr : undefined);
+  }, [errorDescription, errorUseStepAPI, errorUseStageAPI, errorUseWorldAPI]);
 
   /**
    * DescriptionをCMSから取得する. 1つのみを返す。複数ヒットした場合やヒットしなかった場合はerrorを返す。
@@ -73,26 +77,22 @@ export const useDescriptionCMS = (): IResponse => {
   ): Promise<GetDescriptionResponseType> => {
     return new Promise((resolve, reject) => {
       setError(undefined);
-      setLoading(true);
       axiosMicroCMS
         .get(
           `/step-description?filters=worldIndex[equals]${worldIndex}[and]stageIndex[equals]${stageIndex}[and]stepIndex[equals]${stepIndex}`
         )
         .then((response: AxiosResponse<DescriptionCMSsType>) => {
-          setLoading(false);
           if (response.data.totalCount == 1) {
-            console.log(response.data.contents[0]);
             return resolve(response.data.contents[0]);
           } else {
-            return reject(
-              new Error(
-                "GetDescriptionError StageIndex or StepIndex is invalid"
-              )
-            );
+            console.log({ response });
+            console.log(response.data.totalCount);
+            setErrorDescription("GetStepResponseError Index is invalid");
+            return reject(new Error("GetDescriptionError Index is invalid"));
           }
         })
         .catch((error: AxiosError) => {
-          setLoading(false);
+          setErrorDescription(`GetStepResponseError ${error}`);
           return reject(new Error(`GetDescriptionError ${error}`));
         });
     });
@@ -112,12 +112,10 @@ export const useDescriptionCMS = (): IResponse => {
         return { stage, world };
       })
       .then(({ stage, world }) => {
-        console.log(world.id, stage.id, stepId);
         return getDescription(world.id, stage.id, stepId); // descriptionCMSAPIを叩く。Promiseが返される
       });
   };
   return {
-    loading,
     error,
     getDescription,
     getDescriptionFromStepID,

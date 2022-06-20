@@ -3,7 +3,6 @@ import { useState } from "react";
 import { axiosWithIdToken } from "axios_config";
 
 export type IResponse = {
-  loading: boolean;
   error: string | undefined;
   getStep: (stepId: number) => Promise<GetStepResponseType>;
 };
@@ -26,7 +25,6 @@ export interface Option {
 export type GetStepResponseType = StepType;
 
 export const useStepAPI = (): IResponse => {
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
 
   /**
@@ -36,21 +34,18 @@ export const useStepAPI = (): IResponse => {
   const getStep = (stepId: number): Promise<GetStepResponseType> => {
     return new Promise((resolve, reject) => {
       setError(undefined);
-      setLoading(true);
       axiosWithIdToken
         .get("/steps/" + stepId + "/", {})
         .then((response: AxiosResponse<GetStepResponseType>) => {
-          setLoading(false);
           return resolve(response.data);
         })
         .catch((error: AxiosError) => {
-          setLoading(false);
+          setError(`GetStepResponseError ${error}`);
           return reject(new Error(`GetStepResponseError ${error}`));
         });
     });
   };
   return {
-    loading,
     error,
     getStep,
   };

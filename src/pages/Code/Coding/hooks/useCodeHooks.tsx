@@ -73,6 +73,7 @@ export const useCodingState = () => {
         setCode(code);
         const description = await getDescriptionFromStepID(code.step);
         setDescription(description);
+        console.log({ description });
         setLoading(false);
       } else {
         // 新規コード作成時（/free-coding遷移時）、新規コードを作成して再度リダイレクトする（urlに統一性を持たせるため）

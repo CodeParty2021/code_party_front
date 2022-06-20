@@ -56,7 +56,7 @@ export const CodeCoding: React.FC<Props> = () => {
             <WatchingLogo src="/img/watching_logo.svg" wrapper="svg" />
           </ContainerUnity>
           <MessageStyle
-            title="シンタックスエラー！"
+            title="エラー！"
             value="スタッフに聞いてみよう"
             color="red"
             showInfo={showError}

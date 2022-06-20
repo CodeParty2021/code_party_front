@@ -11,8 +11,10 @@ export type IResponse = {
     worldIndex: number,
     stageIndex: number,
     stepIndex: number
-  ) => Promise<DescriptionCMSType>;
-  getDescriptionFromStepID: (stepId: number) => Promise<DescriptionCMSType>;
+  ) => Promise<DescriptionCMSType | undefined>;
+  getDescriptionFromStepID: (
+    stepId: number
+  ) => Promise<DescriptionCMSType | undefined>;
 };
 
 export type DescriptionCMSsType = {
@@ -74,7 +76,7 @@ export const useDescriptionCMS = (): IResponse => {
     worldIndex: number,
     stageIndex: number,
     stepIndex: number
-  ): Promise<GetDescriptionResponseType> => {
+  ): Promise<GetDescriptionResponseType | undefined> => {
     return new Promise((resolve, reject) => {
       setError(undefined);
       axiosMicroCMS
@@ -88,7 +90,7 @@ export const useDescriptionCMS = (): IResponse => {
             console.log({ response });
             console.log(response.data.totalCount);
             setErrorDescription("GetStepResponseError Index is invalid");
-            return reject(new Error("GetDescriptionError Index is invalid"));
+            return resolve(undefined);
           }
         })
         .catch((error: AxiosError) => {
@@ -104,7 +106,7 @@ export const useDescriptionCMS = (): IResponse => {
    */
   const getDescriptionFromStepID = (
     stepId: number
-  ): Promise<GetDescriptionResponseType> => {
+  ): Promise<GetDescriptionResponseType | undefined> => {
     return getStep(stepId) // stageAPIを叩く。Promiseが返される
       .then((step) => getStage(step.stage))
       .then(async (stage) => {

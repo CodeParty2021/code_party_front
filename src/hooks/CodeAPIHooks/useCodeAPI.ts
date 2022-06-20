@@ -132,7 +132,6 @@ export const useCodeAPI = (): IResponse => {
     return new Promise((resolve, rejects) => {
       setError(undefined);
       setLoading(true);
-      console.log(stepId);
       axiosWithIdToken
         .put(`/codes/${codeId}/`, {
           codeContent,
@@ -168,7 +167,7 @@ export const useCodeAPI = (): IResponse => {
       axiosWithIdToken
         .post(`/codes/`, {
           codeContent,
-          stepId,
+          step: stepId,
           language,
         })
         .then((response: AxiosResponse<CreateCodeResponseType>) => {

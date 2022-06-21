@@ -3,6 +3,12 @@
 - [スタートアップ](#%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89)
 - [アイコンシステム](/commands/IconImporter/README.md)
 
+
+![codeparty_event](https://user-images.githubusercontent.com/45113742/174785974-7daa1e0b-e07c-4591-b2a3-f71e70493812.gif)
+
+
+
+
 # 環境構築
 
 1. ライブラリインストール

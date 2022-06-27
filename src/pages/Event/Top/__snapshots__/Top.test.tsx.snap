@@ -6,7 +6,7 @@ Array [
     <styled.div>
       <styled.div>
         <styled.img
-          src="./logo454.png"
+          src="./logo.svg"
         />
         <styled.div>
           <Button

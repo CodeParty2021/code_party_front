@@ -12,7 +12,7 @@ export const EventTop: React.FC<Props> = () => {
     <>
       <TopStyle>
         <CenterBox>
-          <LogoStyle src="./logo454.png" />
+          <LogoStyle src="./logo.svg" />
           <ButtonBox>
             <Button
               color="pink"

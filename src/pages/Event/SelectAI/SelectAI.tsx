@@ -38,27 +38,27 @@ export const EventSelectAI: React.FC<Props> = () => {
             <RobotLink
               label="ロボ1"
               number={1}
-              onClick={() => beginTrainHandler("3")}
+              onClick={() => beginTrainHandler(3)}
             />
             <RobotLink
               label="ロボ2"
               number={2}
-              onClick={() => beginTrainHandler("4")}
+              onClick={() => beginTrainHandler(4)}
             />
             <RobotLink
               label="ロボ3"
               number={3}
-              onClick={() => beginTrainHandler("5")}
+              onClick={() => beginTrainHandler(5)}
             />
             <RobotLink
               label="ロボ4"
               number={4}
-              onClick={() => beginTrainHandler("6")}
+              onClick={() => beginTrainHandler(6)}
             />
             <RobotLink
               label="最強ロボ"
               number={5}
-              onClick={() => beginTrainHandler("7")}
+              onClick={() => beginTrainHandler(7)}
             />
           </RobotList>
         </Content>

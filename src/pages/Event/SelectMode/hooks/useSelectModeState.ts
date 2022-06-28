@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { isUser } from "services/user/user";
 import { RootState } from "store";
 
-const EVENT1ON1_STEP_ID = "2";
+const EVENT1ON1_STEP_ID = 2;
 export type IResponse = {
   loading: boolean;
   error: string | undefined;

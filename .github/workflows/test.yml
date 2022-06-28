@@ -27,6 +27,9 @@ jobs:
       REACT_APP_DEV_URI: ${{ secrets.REACT_APP_DEV_URI }}
       REACT_APP_PRO_URI: ${{ secrets.REACT_APP_PRO_URI }}
       REACT_APP_TEST_URI: ${{ secrets.REACT_APP_TEST_URI }}
+      REACT_APP_MICROCMS_URI_V1: ${{secrets.REACT_APP_MICROCMS_URI_V1 }}
+      REACT_APP_MICROCMS_API_KEY: ${{secrets.REACT_APP_MICROCMS_API_KEY}}
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

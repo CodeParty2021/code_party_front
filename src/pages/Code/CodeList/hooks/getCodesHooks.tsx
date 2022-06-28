@@ -29,7 +29,7 @@ def select(field, my_pos, other_pos):
    return 0
 `;
 
-const FREE_STEP_ID = "1";
+const FREE_STEP_ID = 1;
 
 export const useFetchCodes = (): IResponse => {
   const { user } = useSelector((state: RootState) => state.user);

@@ -6,6 +6,7 @@ test("reducer test ( signIn and signOut ) ", () => {
     user: null,
     isLogin: false,
     unRegisterObserver: null,
+    loading: true,
   };
 
   const loginUser: User = {
@@ -29,11 +30,13 @@ test("reducer test ( signIn and signOut ) ", () => {
     },
     unRegisterObserver: null,
     isLogin: true,
+    loading: false,
   });
   // signout test
   expect(reducer(previousState, signOut())).toEqual({
     user: null,
     unRegisterObserver: null,
     isLogin: false,
+    loading: false,
   });
 });

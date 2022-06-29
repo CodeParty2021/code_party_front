@@ -1,12 +1,34 @@
-import { BLUE_50, GREEN_70, GREEN_80, PINK_60, PURPLE_60 } from "./colorful";
+import {
+  BLUE_45,
+  BLUE_50,
+  BLUE_GREEN_70,
+  BLUE_GREEN_80,
+  LIGHT_BLUE_60,
+  ORANGE_60,
+  GREEN_60,
+  PINK_45,
+  PINK_60,
+  PURPLE_60,
+  PINK_20,
+  YELLOW_20,
+  PURPLE_20,
+  LIGHT_BLUE_20,
+  GREEN_70,
+  BLUE_47,
+} from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
+  BLUE_GRAY_10,
+  BLUE_GRAY_15,
   BLUE_GRAY_30,
   BLUE_GRAY_40,
   BLUE_GRAY_60,
   BLUE_GRAY_70,
+  BLUE_GRAY_75,
   BLUE_GRAY_80,
   GRAY_10,
+  GRAY_20,
+  GRAY_80,
   WHITE,
 } from "./monotone";
 
@@ -34,11 +56,78 @@ export const button = {
     side: PINK_60,
   },
   green: {
-    surface: GREEN_70,
-    side: GREEN_80,
+    surface: BLUE_GREEN_70,
+    side: BLUE_GREEN_80,
   },
   disabled: {
     surface: BLUE_GRAY_30,
     side: BLUE_GRAY_40,
   },
 } as const;
+
+export const modeSelectCard = {
+  bg: GRAY_10,
+  border: GRAY_20,
+  font: BLUE_GRAY_70,
+  hover: {
+    bg: BLUE_47,
+    border: BLUE_47,
+    font: WHITE,
+  },
+  hoverInfo: {
+    bg: BLUE_GRAY_60,
+    font: GRAY_10,
+  },
+};
+
+export const iconCircle = {
+  bg: GREEN_70,
+  icon: WHITE,
+};
+
+export const star = {
+  pink: PINK_20,
+  yellow: YELLOW_20,
+  purple: PURPLE_20,
+  blue: LIGHT_BLUE_20,
+  gray: GRAY_20,
+};
+
+export const algo = {
+  turquoise: LIGHT_BLUE_60,
+  leaf: GREEN_60,
+  orange: ORANGE_60,
+  magenta: PINK_45,
+};
+
+export const roundedButton = {
+  font: BLUE_GRAY_70,
+  bg: BLUE_GRAY_10,
+  border: BLUE_GRAY_15,
+  hover: {
+    border: BLUE_45,
+  },
+};
+
+export const missionNumber = {
+  font: GRAY_10,
+  bg: BLUE_GRAY_75,
+};
+export const setName = {
+  modal: {
+    border: WHITE,
+    font: BLUE_GRAY_60,
+  },
+} as const;
+
+export const iconButton = {
+  bg: WHITE,
+  icon: BLUE_45,
+};
+
+export const algoEditor = {
+  algoColor: LIGHT_BLUE_60,
+  algoBody: BLUE_GRAY_75,
+  algoFrame: GRAY_10,
+  codingBG: GRAY_80,
+};

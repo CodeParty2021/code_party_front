@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LogPanel /> snapshot test 1`] = `
+.c5 {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  fill: #6074FF;
+}
+
+.c5 > span,
+.c5 > div,
+.c5 > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 12px;
+  border-radius: 48px;
+  background: #FFF;
+}
+
+.c1 {
+  width: 87px;
+  height: 87px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-bottom: 56px;
+  position: relative;
+  width: 527px;
+  height: 100vh;
+  overflow: hidden;
+  border-radius: 48px 0px 0px 48px;
+  background-image: linear-gradient( 0deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) ), linear-gradient( 90deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) );
+  background-size: 64px 64px;
+  background-repeat: repeat;
+  background-position: 0 0;
+  background-color: #F5F5F5;
+}
+
+.c0 .logpanel_smoke {
+  position: absolute;
+  left: 38px;
+  right: 30px;
+  top: 41px;
+  bottom: 41px;
+  background: #F5F5F5;
+  -webkit-filter: blur(74px);
+  filter: blur(74px);
+  border-radius: 63px;
+  z-index: 10;
+}
+
+.c0 .logpanel_container_title {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px 0px;
+  gap: 33px;
+  z-index: 20;
+}
+
+.c0 .logpanel_container_close {
+  width: 68px;
+  height: 87px;
+  position: relative;
+}
+
+.c0 .logpanel_title {
+  font-family: "851Gkktt";
+  font-size: 29px;
+  color: #6074FF;
+}
+
+.c0 .logpanel_container_main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  padding: 8px 0 0 32px;
+  margin-right: 32px;
+  gap: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  z-index: 20;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.c0 .logpanel_container_main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.c0 .logpanel_container_main::-webkit-scrollbar-track {
+  background: none;
+}
+
+.c0 .logpanel_container_main::-webkit-scrollbar-thumb {
+  background: #D6D9E3;
+  border-radius: 4px;
+}
+
+.c4 {
+  position: absolute;
+  left: 20px;
+  top: 19px;
+}
+
+.c2 {
+  position: absolute;
+  left: -43px;
+}
+
+@supports not (gap:33px) {
+  .c0 .logpanel_container_title > *:not(:first-child) {
+    margin-left: 33px;
+  }
+}
+
+@supports not (gap:8px) {
+  .c0 .logpanel_container_main > *:not(:first-child) {
+    margin-top: 8px;
+  }
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="logpanel_smoke"
+  />
+  <div
+    class="logpanel_container_title"
+  >
+    <div
+      class="logpanel_container_close"
+    >
+      <svg
+        class="c1 c2"
+        xlink="http://www.w3.org/1999/xlink"
+        xmlns="http://www.w3.org/2000/svg"
+      />
+      <button
+        class="c3 c4"
+      >
+        <span
+          class="c5"
+          display="inline-block"
+          fill="#6074FF"
+        />
+      </button>
+    </div>
+    <span
+      class="logpanel_title"
+    >
+      LOG
+    </span>
+  </div>
+  <div
+    class="logpanel_container_main"
+  />
+</div>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventSelectMode /> auth snapshot test 1`] = `
+Array [
+  <React.Fragment>
+    <styled.div>
+      <styled.div>
+        <styled.img
+          src="./logo454.png"
+        />
+        <styled.div>
+          <Button
+            color="pink"
+            icon={null}
+            onClick={[MockFunction]}
+            size="L"
+            status="default"
+            value="いざスタート！"
+          />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <Styled(StarBackground) />
+  </React.Fragment>,
+]
+`;

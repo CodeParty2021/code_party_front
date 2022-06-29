@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Top } from "./pages/Top/Top";
 import { StageList } from "./pages/Stage/StageList";
 import { Stage } from "./pages/Stage/Stage";
@@ -16,6 +16,10 @@ import { PrivateRoute } from "utils/PrivateRoute";
 import { setCallBackToSyncUser } from "services/user/user";
 import { RootingScreen } from "components/RootingScreen/RootingScreen";
 import { CasualBattleInvitation } from "pages/CasualBattle/Invitation/Invitation";
+import { EventTop } from "pages/Event/Top/Top";
+import { EventSelectMode } from "pages/Event/SelectMode/SelectMode";
+import { EventSelectAI } from "pages/Event/SelectAI/SelectAI";
+import { EventSetName } from "pages/Event/SetName/SetName";
 import { RootState } from "store";
 
 type Props = {};
@@ -29,7 +33,6 @@ export const App: React.FC<Props> = () => {
   );
   const dispatch = useDispatch();
   const isDev = process.env.NODE_ENV === "development";
-
   // ログイン監視リスナーをセット
   useEffect(() => {
     dispatch(setCallBackToSyncUser());
@@ -41,7 +44,7 @@ export const App: React.FC<Props> = () => {
 
   return (
     <div>
-      <HashRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Top />} />
           <Route path="/stages" element={<StageList />} />
@@ -77,9 +80,24 @@ export const App: React.FC<Props> = () => {
             path="/free-coding/:codeId"
             element={<PrivateRoute component={CodeCoding} />}
           />
+
+          <Route path="/event" element={<EventTop />} />
+          <Route
+            path="/event/select-mode"
+            element={
+              <PrivateRoute component={EventSelectMode} redirectUrl="/event" />
+            }
+          />
+          <Route path="/event/set-name" element={<EventSetName />} />
+          <Route
+            path="/event/select-ai"
+            element={
+              <PrivateRoute component={EventSelectAI} redirectUrl="/event" />
+            }
+          />
         </Routes>
         {isDev && <RootingScreen />}
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 };

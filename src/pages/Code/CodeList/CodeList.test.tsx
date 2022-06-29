@@ -21,6 +21,7 @@ describe("<CodeList />", () => {
       },
       isLogin: true,
       unRegisterObserver: null,
+      loading: false,
     });
   });
   it("auth snapshot test", () => {

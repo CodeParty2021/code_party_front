@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventSelectAI /> auth snapshot test 1`] = `
+Array [
+  <React.Fragment>
+    <styled.div>
+      <styled.div>
+        <Styled(PlanetPicture)
+          color="blue"
+        />
+        <Styled(IconButton)
+          Icon={[Function]}
+          onClick={[Function]}
+        />
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          <styled.div>
+            対戦ロボット
+          </styled.div>
+          <styled.div>
+            対戦相手のロボットを選ぼう！
+          </styled.div>
+        </styled.div>
+        <styled.div>
+          <RobotLink
+            label="ロボ1"
+            number={1}
+            onClick={[Function]}
+          />
+          <RobotLink
+            label="ロボ2"
+            number={2}
+            onClick={[Function]}
+          />
+          <RobotLink
+            label="ロボ3"
+            number={3}
+            onClick={[Function]}
+          />
+          <RobotLink
+            label="ロボ4"
+            number={4}
+            onClick={[Function]}
+          />
+          <RobotLink
+            label="最強ロボ"
+            number={5}
+            onClick={[Function]}
+          />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <Styled(StarBackground) />
+  </React.Fragment>,
+]
+`;

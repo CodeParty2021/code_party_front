@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LogItem /> snapshot test 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  color: #2F364D;
+  line-height: 160%;
+  width: 100%;
+}
+
+.c0 .logitem_turnnum {
+  display: block;
+  width: 24px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.c0 .logitem_bar {
+  width: 2px;
+  background: #2F364D;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+}
+
+.c0 .logitem_log {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  word-break: break-all;
+}
+
+@supports not (gap:10px) {
+  .c0 > *:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+
+<div
+  class="c0"
+>
+  <span
+    class="logitem_turnnum"
+  >
+    1
+  </span>
+  <div
+    class="logitem_bar"
+  />
+  <span
+    class="logitem_log"
+  >
+    hello, world
+  </span>
+</div>
+`;

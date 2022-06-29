@@ -14,18 +14,18 @@ const Template: ComponentStory<typeof PlanetPicture> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  color: "yellow",
-  size: 200,
+  size: "200px",
+  color: "blue",
 };
 
-export const Large = Template.bind({});
-Large.args = {
+export const Pink = Template.bind({});
+Pink.args = {
   ...Default.args,
-  size: 300,
+  color: "pink",
 };
 
-export const Small = Template.bind({});
-Small.args = {
+export const Orange = Template.bind({});
+Orange.args = {
   ...Default.args,
-  size: 100,
+  color: "orange",
 };

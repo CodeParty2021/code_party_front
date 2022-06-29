@@ -105,6 +105,7 @@ describe("useWaitingRoomState", () => {
       },
       isLogin: false,
       unRegisterObserver: null,
+      loading: false,
     });
   });
   afterEach(() => {

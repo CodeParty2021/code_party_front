@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventSelectMode /> auth snapshot test 1`] = `
+Array [
+  <React.Fragment>
+    <styled.div>
+      <styled.div>
+        <ModeSelectCard
+          mode="solo"
+          onClick={[Function]}
+        />
+      </styled.div>
+      <styled.div>
+        <ModeSelectCard
+          mode="battle"
+          onClick={[Function]}
+        />
+      </styled.div>
+    </styled.div>
+     
+    <Styled(StarBackground) />
+  </React.Fragment>,
+]
+`;

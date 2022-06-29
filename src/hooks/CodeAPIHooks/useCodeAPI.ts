@@ -6,15 +6,19 @@ export type IResponse = {
   loading: boolean;
   error: string | undefined;
   getCode: (codeId: string) => Promise<GetCodeResponseType>;
+  getCodesFilterStepIdAndUserId: (
+    stepId: number,
+    userId: string
+  ) => Promise<GetCodesResponseType>;
   updateCode: (
     id: string,
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ) => Promise<UpdateCodeResponseType>;
   createCode: (
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ) => Promise<CreateCodeResponseType>;
   testCode: (codeId: string) => Promise<TestCodeResponseType>;
@@ -27,10 +31,12 @@ export type CodeType = {
   updatedAt: string;
   createdAt: string;
   user: string;
-  step: string;
+  step: number;
 };
 
 export type GetCodeResponseType = CodeType;
+
+export type GetCodesResponseType = CodeType[];
 
 export type UpdateCodeResponseType = {
   codeContent: string;
@@ -59,7 +65,7 @@ export const useCodeAPI = (): IResponse => {
   const [error, setError] = useState<string | undefined>();
   /**
    * codeIdからコードを取得する
-   * @param codeId コードID
+   * @param {string} codeId コードID
    */
   const getCode = (codeId: string): Promise<GetCodeResponseType> => {
     return new Promise((resolve, rejects) => {
@@ -79,16 +85,48 @@ export const useCodeAPI = (): IResponse => {
   };
 
   /**
+   * stepIDとユーザIDを満たすコードを取得する. updated_atでソートする
+   * @param {number} stepId コードID
+   * @param {string} userId ユーザID
+   */
+  const getCodesFilterStepIdAndUserId = async (
+    stepId: number,
+    userId: string
+  ): Promise<GetCodesResponseType> => {
+    return new Promise((resolve, rejects) => {
+      setError(undefined);
+      setLoading(true);
+      axiosWithIdToken
+        .get(`/codes`, {
+          params: {
+            step: stepId,
+            user: userId,
+            order_by: "updated_at",
+          },
+        })
+        .then((response: AxiosResponse<GetCodesResponseType>) => {
+          setLoading(false);
+          return resolve(response.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(`testCodeAPIError${err}`);
+          return rejects(new Error(error));
+        });
+    });
+  };
+
+  /**
    * codeIdのコードをUpdateする
-   * @param codeId コードID
-   * @param content コードの中身
-   * @param step ステップID
-   * @param language 言語ID
+   * @param {string} codeId コードID
+   * @param {string} content コードの中身
+   * @param {string} stepId ステップID
+   * @param {string} language 言語ID
    */
   const updateCode = async (
     codeId: string,
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ): Promise<UpdateCodeResponseType> => {
     return new Promise((resolve, rejects) => {
@@ -97,7 +135,7 @@ export const useCodeAPI = (): IResponse => {
       axiosWithIdToken
         .put(`/codes/${codeId}/`, {
           codeContent,
-          step,
+          step: stepId,
           language,
         })
         .then((response: AxiosResponse<UpdateCodeResponseType>) => {
@@ -115,21 +153,21 @@ export const useCodeAPI = (): IResponse => {
   /**
    * 新規codeを作成する
    * @param content コードの中身
-   * @param step ステップID
+   * @param stepId ステップID
    * @param language 言語ID
    */
   const createCode = async (
     codeContent: string,
-    step: string,
+    stepId: number,
     language: string
   ): Promise<CreateCodeResponseType> => {
     return new Promise((resolve, rejects) => {
       setError(undefined);
       setLoading(true);
       axiosWithIdToken
-        .post(`/codes`, {
+        .post(`/codes/`, {
           codeContent,
-          step,
+          step: stepId,
           language,
         })
         .then((response: AxiosResponse<CreateCodeResponseType>) => {
@@ -146,7 +184,7 @@ export const useCodeAPI = (): IResponse => {
 
   /**
    * コードを実行する。対戦相手はランダムで選ばれる
-   * @param codeId コードID
+   * @param {string} codeId コードID
    */
   const testCode = async (codeId: string): Promise<TestCodeResponseType> => {
     return new Promise((resolve, rejects) => {
@@ -165,11 +203,11 @@ export const useCodeAPI = (): IResponse => {
         });
     });
   };
-
   return {
     loading,
     error,
     getCode,
+    getCodesFilterStepIdAndUserId,
     updateCode,
     createCode,
     testCode,

@@ -3,14 +3,18 @@ import { Background } from "../components/Background";
 import { ModeSelectCard } from "./components/ModeSelectCard/ModeSelectCard";
 import { useSelectModeState } from "./hooks/useSelectModeState";
 import { InnerBox, MarginBox } from "./SelectModeStyle";
-
+import { Loading } from "pages/Loading/Loading";
 type Props = {};
 
 export const EventSelectMode: React.FC<Props> = () => {
   const { loading, beginTrainHandler, beginBattleHandler } =
     useSelectModeState();
   if (loading) {
-    return <div>ロード中</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   return (
     <>

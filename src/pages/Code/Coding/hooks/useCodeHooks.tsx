@@ -53,9 +53,9 @@ export const useCodingState = () => {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
-  const { error: errorDescriptionCMS, getDescriptionFromStepID } =
-    useDescriptionCMS();
+  //const { error: errorDescriptionCMS, getDescriptionFromStepID } =useDescriptionCMS();
 
+  const { getDescriptionFromStepID } = useDescriptionCMS();
   const [code, setCode] = useState<CodeType>(); //表示中のコード
   //code の型ガード
   function isCode(code: CodeType | undefined): code is CodeType {
@@ -85,7 +85,6 @@ export const useCodingState = () => {
         navigate(`/free-coding/${code.id}/`);
       }
       await setTimeout(() => {}, 5000);
-      console.log("aa");
       setLoading(false);
       console.log(loading);
     };
@@ -159,13 +158,26 @@ export const useCodingState = () => {
       setShowLog(false);
       setShowError(true);
     }
-    if (errorDescriptionCMS && errorCodeAPI) {
+    if (errorCodeAPI) {
+      setError(error + "," + errorCodeAPI);
+    } else {
+      setError(error || errorCodeAPI);
+    }
+  }, [error, errorCodeAPI]);
+  /* cmsのエラー判定を一旦コメントアウト
+  useEffect(() => {
+    if (error) {
+      setShowUnity(false);
+      setShowLog(false);
+      setShowError(true);
+    }
+    if (errorCodeAPI) {
       setError(errorDescriptionCMS + "," + errorCodeAPI);
     } else {
       setError(errorDescriptionCMS || errorCodeAPI);
     }
   }, [error, errorDescriptionCMS, errorCodeAPI]);
-
+  */
   return {
     code,
     description,

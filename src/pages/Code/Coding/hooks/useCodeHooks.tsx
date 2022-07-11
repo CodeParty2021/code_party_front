@@ -32,9 +32,9 @@ export type IResponse = {
 //TODO:ここstepかstageごとに変更する必要あり
 const unityContext = new UnityContext({
   loaderUrl: "/unity/sp/web.loader.js",
-  dataUrl: "/unity/sp/web.data.unityweb",
-  frameworkUrl: "/unity/sp/web.framework.js.unityweb",
-  codeUrl: "/unity/sp/web.wasm.unityweb",
+  dataUrl: "/unity/sp/web.data",
+  frameworkUrl: "/unity/sp/web.framework.js",
+  codeUrl: "/unity/sp/web.wasm",
 });
 
 export const useCodingState = () => {
@@ -97,6 +97,14 @@ export const useCodingState = () => {
   useEffect(() => {
     unityContext.on("progress", function (progression) {
       setProgression(progression);
+    });
+
+    unityContext.on("GameOver", function () {
+      console.log("GameOver!!Unityから実行されました!");
+    });
+
+    unityContext.on("OnLoad", function () {
+      console.log("OnLoad!!Unityから実行されました!");
     });
   }, []);
 

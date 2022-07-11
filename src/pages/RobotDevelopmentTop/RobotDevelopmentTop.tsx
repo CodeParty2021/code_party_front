@@ -9,7 +9,6 @@ export const RobotDevelopmentTop: React.FC<Prop> = () => {
       <h1>ロボット開発モードトップ画面</h1>
       <Link to="/stages">チュートリアルモード</Link>
       <Link to="/codes">ガレージモード</Link>
-      <Link to="/casual-battle">カジュアル対戦モード</Link>
     </div>
   );
 };

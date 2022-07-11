@@ -36,7 +36,7 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/robot-development/Specification">ロボットの設計仕様書</Link>
         </li>
         <li>
-          <Link to="/garage">ロボットのガレージ画面</Link>
+          <Link to="/garage">ロボットの詳細画面</Link>
         </li>
         <li>
           <Link to="/casual-battle">カジュアルロビー画面</Link>
@@ -57,7 +57,7 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/free-coding">フリーコーディング</Link>
         </li>
         <li>
-          <Link to="/codes">ガレージ画面（コード一覧)</Link>
+          <Link to="/codes">コード一覧</Link>
         </li>
         <li>
           <Link to="/Lp">LP画面</Link>

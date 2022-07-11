@@ -9,6 +9,7 @@ import { Lp } from "./pages/Lp/Lp";
 import { RobotDevelopmentTop } from "./pages/RobotDevelopmentTop/RobotDevelopmentTop";
 import { Specification } from "pages/Specification/Specification";
 import { Garage } from "pages/Garage/Garage";
+import { GarageList } from "pages/Garage/GarageList";
 import { ModeSelect } from "pages/ModeSelect/ModeSelect";
 import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
@@ -58,7 +59,8 @@ export const App: React.FC<Props> = () => {
           <Route path="/robot-development/Specification" element={<Specification />} />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
-          <Route path="/garage" element={<Garage />} />
+          <Route path="/garage" element={<GarageList />} />
+          <Route path="/garage/:id" element={<Garage />} />
           <Route
             path="/casual-battle/waiting-room"
             element={<CasualBattleWaitingRoom />}

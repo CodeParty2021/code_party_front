@@ -27,7 +27,10 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/start">ログイン画面</Link>
         </li>
         <li>
-          <Link to="/mode-select">モード選択画面</Link>
+          <Link to="/robot-development/top">ロボット開発モードの選択画面</Link>
+        </li>
+        <li>
+          <Link to="/mode-select">選択画面Top</Link>
         </li>
         <li>
           <Link to="/casual-battle">カジュアルロビー画面</Link>
@@ -49,6 +52,9 @@ export const RootingScreen: React.FC<Props> = () => {
         </li>
         <li>
           <Link to="/codes">ガレージ画面（コード一覧)</Link>
+        </li>
+        <li>
+          <Link to="/Lp">LP画面</Link>
         </li>
       </ul>
       <h1>イベント系のページ</h1>

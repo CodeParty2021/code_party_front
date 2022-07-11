@@ -33,6 +33,9 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/mode-select">選択画面Top</Link>
         </li>
         <li>
+          <Link to="/robot-development/Specification">ロボットの設計仕様書</Link>
+        </li>
+        <li>
           <Link to="/casual-battle">カジュアルロビー画面</Link>
         </li>
         <li>

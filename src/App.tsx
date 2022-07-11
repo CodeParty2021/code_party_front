@@ -7,6 +7,7 @@ import { Stage } from "./pages/Stage/Stage";
 import { Start } from "./pages/Start/Start";
 import { Lp } from "./pages/Lp/Lp";
 import { RobotDevelopmentTop } from "./pages/RobotDevelopmentTop/RobotDevelopmentTop";
+import { Specification } from "pages/Specification/Specification";
 import { ModeSelect } from "pages/ModeSelect/ModeSelect";
 import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
@@ -53,6 +54,7 @@ export const App: React.FC<Props> = () => {
           <Route path="/stages/:id" element={<Stage />} />
           <Route path="/lp" element={<Lp />} />
           <Route path="/robot-development/top" element={<RobotDevelopmentTop />} />
+          <Route path="/robot-development/Specification" element={<Specification />} />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
           <Route

@@ -40,9 +40,61 @@ Array [
         <Link
           to="/mode-select"
         >
-          モード選択画面
+          選択画面Top
         </Link>
       </li>
+      <li>
+        <Link
+          to="/free-coding"
+        >
+          フリーコーディング
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/codes"
+        >
+          コード一覧
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/Lp"
+        >
+          LP画面
+        </Link>
+      </li>
+    </ul>
+    <h1>
+      ロボット開発モード系のページ
+    </h1>
+    <ul>
+      <li>
+        <Link
+          to="/robot-development/top"
+        >
+          ロボット開発モードの選択画面
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/robot-development/Specification"
+        >
+          ロボットの設計仕様書
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/garage"
+        >
+          ロボットのステータスを見る
+        </Link>
+      </li>
+    </ul>
+    <h1>
+      ルーム対戦モード系のページ
+    </h1>
+    <ul>
       <li>
         <Link
           to="/casual-battle"
@@ -78,18 +130,37 @@ Array [
           観戦画面
         </Link>
       </li>
+    </ul>
+    <h1>
+      チュートリアル系のページ
+    </h1>
+    <ul>
       <li>
         <Link
-          to="/free-coding"
+          to="/tutorial/world/:id/missions"
         >
-          フリーコーディング
+          ミッション一覧
         </Link>
       </li>
       <li>
         <Link
-          to="/codes"
+          to="/tutorial/world/:world_id/mission/:mission_id/step/:step_id"
         >
-          ガレージ画面（コード一覧)
+          ミッションの詳細(step)用のページ
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/tutorial/world/:world_id/mission/:mission_id/end"
+        >
+          ミッション終了後のページ
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/tutorial/world/:world_id/intro"
+        >
+          ワールド・ゲームの説明画面
         </Link>
       </li>
     </ul>

@@ -19,6 +19,9 @@ import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
+import { Tutorial } from "pages/Tutorial/Tutorial";
+import { TutorialMissions } from "pages/Tutorial/TutorialMissions";
+import { MissionEnd } from "pages/MissionEnd/MissionEnd";
 import { setCallBackToSyncUser } from "services/user/user";
 import { RootingScreen } from "components/RootingScreen/RootingScreen";
 import { CasualBattleInvitation } from "pages/CasualBattle/Invitation/Invitation";
@@ -27,6 +30,7 @@ import { EventSelectMode } from "pages/Event/SelectMode/SelectMode";
 import { EventSelectAI } from "pages/Event/SelectAI/SelectAI";
 import { EventSetName } from "pages/Event/SetName/SetName";
 import { RootState } from "store";
+import { GameIntro } from "pages/GameIntro/GameIntro";
 
 type Props = {};
 
@@ -56,13 +60,21 @@ export const App: React.FC<Props> = () => {
           <Route path="/stages" element={<StageList />} />
           <Route path="/stages/:id" element={<Stage />} />
           <Route path="/lp" element={<Lp />} />
-          <Route path="/robot-development/top" element={<RobotDevelopmentTop />} />
-          <Route path="/robot-development/Specification" element={<Specification />} />
+
+          <Route
+            path="/robot-development/top"
+            element={<RobotDevelopmentTop />}
+          />
+          <Route
+            path="/robot-development/Specification"
+            element={<Specification />}
+          />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
           <Route path="/garage" element={<GarageList />} />
           <Route path="/garage/:id" element={<Garage />} />
-          <Route path="/online-match" element={<OnlineMatch />} />        
+
+          <Route path="/online-match" element={<OnlineMatch />} />
           <Route
             path="/casual-battle/waiting-room"
             element={<CasualBattleWaitingRoom />}
@@ -91,6 +103,23 @@ export const App: React.FC<Props> = () => {
           <Route
             path="/free-coding/:codeId"
             element={<PrivateRoute component={CodeCoding} />}
+          />
+
+          <Route
+            path="/tutorial/world/:id/missions"
+            element={<PrivateRoute component={TutorialMissions} />}
+          />
+          <Route
+            path="/tutorial/world/:world_id/mission/:mission_id/step/:step_id"
+            element={<PrivateRoute component={Tutorial} />}
+          />
+          <Route
+            path="/tutorial/world/:world_id/mission/:mission_id/end"
+            element={<PrivateRoute component={MissionEnd} />}
+          />
+          <Route
+            path="/tutorial/world/:world_id/intro"
+            element={<PrivateRoute component={GameIntro} />}
           />
 
           <Route path="/event" element={<EventTop />} />

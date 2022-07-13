@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { Lp } from "./Lp";
-describe("<Load />", () => {
+describe("<Lp />", () => {
   it("auth snapshot test", () => {
     const wrapper = shallow(<Lp />);
 

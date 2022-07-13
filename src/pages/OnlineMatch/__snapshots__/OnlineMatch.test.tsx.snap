@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OnlineMatch /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      オンライン対戦開発予定地
+    </div>
+  </div>,
+]
+`;

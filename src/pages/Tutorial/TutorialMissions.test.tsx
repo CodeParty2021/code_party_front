@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { RobotDevelopmentTop } from "./RobotDevelopmentTop";
-describe("<RobotDevelopmentTop />", () => {
+import { TutorialMissions } from "./TutorialMissions";
+describe("<TutorialMissions />", () => {
   it("auth snapshot test", () => {
-    const wrapper = shallow(<RobotDevelopmentTop />);
+    const wrapper = shallow(<TutorialMissions />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });

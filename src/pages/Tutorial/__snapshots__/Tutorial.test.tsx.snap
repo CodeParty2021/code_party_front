@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tutorial /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      チュートリアルのステップでのコーディングページ
+    </h1>
+    <Link
+      to="/tutorial/world/:world_id/mission/:mission_id/end"
+    >
+      チュートリアルを終了する
+    </Link>
+  </div>,
+]
+`;

@@ -163,7 +163,7 @@ export const useCodingState = () => {
     } else {
       setError(error || errorCodeAPI);
     }
-  }, [error, errorCodeAPI]);
+  }, [errorCodeAPI]);
   /* cmsのエラー判定を一旦コメントアウト
   useEffect(() => {
     if (error) {

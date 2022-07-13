@@ -7,14 +7,9 @@ Array [
       遊ぶモードを決める
     </div>
     <Link
-      to="/stages"
+      to="/robot-development/top"
     >
-      チュートリアルモード
-    </Link>
-    <Link
-      to="/codes"
-    >
-      ガレージモード
+      ロボット開発モード
     </Link>
     <Link
       to="/casual-battle"

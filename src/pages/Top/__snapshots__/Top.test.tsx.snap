@@ -9,7 +9,7 @@ Array [
     <Link
       to="/start"
     >
-      Lets Play
+      ログインページ
     </Link>
   </div>,
 ]

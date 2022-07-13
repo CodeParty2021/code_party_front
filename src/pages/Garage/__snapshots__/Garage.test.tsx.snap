@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RobotDevelopmentTop /> auth snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      ロボットのステータスが出る
+    </h1>
+    <Link
+      to="/free-coding"
+    >
+      フリーコーディングへの遷移(ロボットの編集)
+    </Link>
+  </div>,
+]
+`;

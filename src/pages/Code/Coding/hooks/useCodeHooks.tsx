@@ -151,13 +151,15 @@ export const useCodingState = () => {
     setShowLog((showLog) => !showLog);
   };
 
-  // エラー発生時の処理
   useEffect(() => {
     if (error) {
       setShowUnity(false);
       setShowLog(false);
       setShowError(true);
     }
+  }, [error]);
+
+  useEffect(() => {
     if (errorCodeAPI) {
       setError(error + "," + errorCodeAPI);
     } else {

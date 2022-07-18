@@ -2,6 +2,7 @@ export { default as ArrowLeft } from "./ArrowLeft";
 export { default as ArrowRight } from "./ArrowRight";
 export { default as Banner } from "./Banner";
 export { default as Check } from "./Check";
+export { default as CheckCircle } from "./CheckCircle";
 export { default as Checked } from "./Checked";
 export { default as Link } from "./Link";
 export { default as Lock } from "./Lock";

@@ -71,26 +71,36 @@ export const App: React.FC<Props> = () => {
           />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
-          <Route path="/garage" element={<GarageList />} />
-          <Route path="/garage/:id" element={<Garage />} />
+          <Route 
+            path="/garage" 
+            element={<PrivateRoute component={GarageList}/>} />
+          <Route 
+            path="/garage/:id" 
+            element={<PrivateRoute component={Garage} />} 
+          />
 
-          <Route path="/online-match" element={<OnlineMatch />} />
+          <Route 
+            path="/online-match" 
+            element={<PrivateRoute component={OnlineMatch} />} />
           <Route
             path="/casual-battle/waiting-room"
-            element={<CasualBattleWaitingRoom />}
+            element={<PrivateRoute component={CasualBattleWaitingRoom} />}
           />
-          <Route path="/casual-battle" element={<CasualBattleLobby />} />
+          <Route 
+            path="/casual-battle"
+            element={<PrivateRoute component={CasualBattleLobby} />}
+          />
           <Route
             path="/casual-battle/invitation/:roomId"
-            element={<CasualBattleInvitation />}
+            element={<PrivateRoute component={CasualBattleInvitation} />}
           />
           <Route
             path="/casual-battle/search-room"
-            element={<CasualBattleSearchRoom />}
+            element={<PrivateRoute component={CasualBattleSearchRoom} />}
           />
           <Route
             path="/casual-battle/result"
-            element={<CasualBattleGameWatch />}
+            element={<PrivateRoute component={CasualBattleGameWatch} />}
           />
           <Route
             path="/codes"

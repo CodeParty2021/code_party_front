@@ -4,6 +4,7 @@ import {
   CMSRendererStyle,
   CMSRendererStyleProps,
   H1,
+  H2,
   P,
 } from "./CMSRendererStyle";
 import parse, {
@@ -33,6 +34,9 @@ export const CMSRenderer: React.FC<Props> = ({ html, ...styleProps }) => {
       }
       if (element.name === "blockquote") {
         return <BlockQuote>{domToReact(element.children)}</BlockQuote>;
+      }
+      if (element.name === "h2") {
+        return <H2>{domToReact(element.children)}</H2>;
       }
     },
   };

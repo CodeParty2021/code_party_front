@@ -4,9 +4,8 @@ import { FONT, FONT_WEIGHT } from "styles/constants/constants";
 export type CMSRendererStyleProps = {};
 import React from "react";
 
-export const CMSRendererStyle = styled.button<CMSRendererStyleProps>`
-  font-family: ${FONT.NOTO_SANS};
-  font-style: normal;
+export const CMSRendererStyle = styled.div<CMSRendererStyleProps>`
+
 `;
 
 export const H1: React.FC<{ id: number }> = ({ id, children }) => {
@@ -20,19 +19,44 @@ export const H1: React.FC<{ id: number }> = ({ id, children }) => {
     </H1Box>
   );
 };
+export const H2 = styled.h2`
+  display:inline-block;
+  font-family: ${FONT.NOTO_SANS};
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  /* identical to box height */
 
+  font-feature-settings: 'palt' on;
+
+  /* GRAY_100 */
+
+  color: #242A3D;
+
+  transform: matrix(1, 0, -0.08, 1, 0, 0);
+
+  padding: 16px 0.85px 0.09px 0px;
+`;
 const H1Box = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
+  margin-top:32px;
+  margin-bottom: 16px;
+
 `;
 const H1NumberStyle = styled.div`
   position: absolute;
+  z-index: 1;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
 `;
 const H1Number = styled.div`
   position: relative;
 
-  font-family: "Noto Sans JP";
+  font-family: ${FONT.NOTO_SANS};
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
@@ -40,14 +64,16 @@ const H1Number = styled.div`
 
   font-feature-settings: "palt" on;
   color: #ffffff;
+  margin-right:14px;
 `;
 const H1Text = styled.h1`
-    fonr-weight: ${FONT_WEIGHT.BOLD}
+    font-weight: ${FONT_WEIGHT.BOLD};
     font-size:22px;
-    lineheight:32px;
+    line-height:32px;
     color:${BLUE_GRAY_70};
     transform:matrix(1, 0, -0.08, 1, 0, 0);
 `;
+
 const H1Icon = styled.div`
   padding: 0px 0px 2px 2px;
   width: 38px;
@@ -57,5 +83,18 @@ const H1Icon = styled.div`
   transform: rotate(-45deg);
   flex: none;
 `;
-export const P = styled.p``;
+export const P = styled.p`
+font-family: ${FONT.NOTO_SANS};
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 160%;
+/* or 29px */
+
+
+/* GRAY_90 */
+
+color: #363E59;
+`;
 export const BlockQuote = styled.blockquote``;
+

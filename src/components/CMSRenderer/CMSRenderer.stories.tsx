@@ -13,5 +13,5 @@ const Template: ComponentStory<typeof CMSRenderer> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  html: '<h1 id="h5dc0e46670">aaaaa</h1><h1 id="h5dc0e46670">aaaaa</h1><p>aaaaaa<br><code>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</code></p><pre><code>aaasdfas</code></pre><blockquote>aaaaaa<br>aaaa<br>aaa<br>s</blockquote>',
+  html: '<h1 id="h5dc0e46670">これはh1です</h1><h1 id="h5dc0e46670">これはh1です</h1><h2 id="h5dc0e46670">これはh2です</h2><p>aaaaaa<br><code>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</code></p><pre><code>aaasdfas</code></pre><blockquote>aaaaaa<br>aaaa<br>aaa<br>s</blockquote>',
 };

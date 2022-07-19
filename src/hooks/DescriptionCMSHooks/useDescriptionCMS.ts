@@ -35,7 +35,7 @@ export type DescriptionCMSType = {
   stepIndex: number;
   body: Array<Element>;
 };
-export type Element = BodyType | HintBoxType | TableType | ClearConditionType
+export type Element = BodyType | HintBoxType | TableType | ClearConditionType;
 
 export type BodyType = {
   fieldId: string;
@@ -51,14 +51,13 @@ export type TableType = {
   body: string;
 };
 export type TextType = {
-  fieldId: string,
+  fieldId: string;
   text: string;
-}
+};
 export type ClearConditionType = {
   fieldId: string;
   condition: TextType[];
 };
-
 
 export type GetDescriptionResponseType = DescriptionCMSType;
 
@@ -139,9 +138,13 @@ export const useDescriptionCMS = (): IResponse => {
   };
 };
 
-export const isBodyType = (target:Element ): target is BodyType =>{
-  return target.fieldId=="body"
-}
-export const isHintBoxType = (target:Element ): target is HintBoxType =>target.fieldId=="hintBox"
-export const isTableType = (target:Element ): target is TableType =>target.fieldId=="table"
-export const isClearConditionType = (target:Element ): target is ClearConditionType =>target.fieldId=="clearCondition"
+export const isBodyType = (target: Element): target is BodyType => {
+  return target.fieldId == "body";
+};
+export const isHintBoxType = (target: Element): target is HintBoxType =>
+  target.fieldId == "hintBox";
+export const isTableType = (target: Element): target is TableType =>
+  target.fieldId == "table";
+export const isClearConditionType = (
+  target: Element
+): target is ClearConditionType => target.fieldId == "clearCondition";

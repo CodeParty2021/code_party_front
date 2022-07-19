@@ -6,9 +6,9 @@ import React from "react";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
 export const CMSRendererStyle = styled.div<CMSRendererStyleProps>`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  ${FlexGap({gap:"16px",direction:"column"})}
+  ${FlexGap({ gap: "16px", direction: "column" })}
 `;
 
 export const H1: React.FC<{ id: number }> = ({ id, children }) => {
@@ -23,7 +23,7 @@ export const H1: React.FC<{ id: number }> = ({ id, children }) => {
   );
 };
 export const H2 = styled.h2`
-  display:inline-block;
+  display: inline-block;
   font-family: ${FONT.NOTO_SANS};
   font-style: normal;
   font-weight: 700;
@@ -31,11 +31,11 @@ export const H2 = styled.h2`
   line-height: 26px;
   /* identical to box height */
 
-  font-feature-settings: 'palt' on;
+  font-feature-settings: "palt" on;
 
   /* GRAY_100 */
 
-  color: #242A3D;
+  color: #242a3d;
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 
@@ -45,16 +45,15 @@ const H1Box = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top:16px;
+  margin-top: 16px;
   margin-bottom: 16px;
-
 `;
 const H1NumberStyle = styled.div`
   position: absolute;
   z-index: 1;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 const H1Number = styled.div`
   position: relative;
@@ -67,14 +66,14 @@ const H1Number = styled.div`
 
   font-feature-settings: "palt" on;
   color: #ffffff;
-  margin-right:14px;
+  margin-right: 14px;
 `;
 const H1Text = styled.h1`
-    font-weight: ${FONT_WEIGHT.BOLD};
-    font-size:22px;
-    line-height:32px;
-    color:${BLUE_GRAY_70};
-    transform:matrix(1, 0, -0.08, 1, 0, 0);
+  font-weight: ${FONT_WEIGHT.BOLD};
+  font-size: 22px;
+  line-height: 32px;
+  color: ${BLUE_GRAY_70};
+  transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;
 
 const H1Icon = styled.div`
@@ -87,17 +86,15 @@ const H1Icon = styled.div`
   flex: none;
 `;
 export const P = styled.p`
-font-family: ${FONT.NOTO_SANS};
-font-style: normal;
-font-weight: 400;
-font-size: 18px;
-line-height: 160%;
-/* or 29px */
+  font-family: ${FONT.NOTO_SANS};
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 160%;
+  /* or 29px */
 
+  /* GRAY_90 */
 
-/* GRAY_90 */
-
-color: #363E59;
+  color: #363e59;
 `;
 export const BlockQuote = styled.blockquote``;
-

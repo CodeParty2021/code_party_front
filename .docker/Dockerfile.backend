@@ -1,0 +1,21 @@
+FROM python:3.9
+
+RUN apt-get update -y
+ENV PYTHONUNBUFFERED 1
+RUN pip install --upgrade pip && \
+  pip install pipenv
+RUN rm -rf /backend
+RUN git clone https://github.com/CodeParty2021/code_party_back.git /backend
+
+ENV APP_ROOT /backend
+WORKDIR ${APP_ROOT}
+
+ADD ./.env.backend ${APP_ROOT}/.env
+RUN pipenv install
+RUN pipenv run python manage.py migrate
+RUN pipenv run python manage.py loaddata post_initial.json
+RUN pipenv run python manage.py loaddata event.json
+
+RUN echo "if [[ -z \"\${VIRTUAL_ENV}\" ]]; then" >> /root/.bashrc && \
+  echo "source \$(pipenv --venv)/bin/activate" >> /root/.bashrc && \
+  echo "fi"                                    >> /root/.bashrc

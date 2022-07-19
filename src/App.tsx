@@ -72,22 +72,24 @@ export const App: React.FC<Props> = () => {
           />
           <Route path="/start" element={<Start />} />
           <Route path="/mode-select" element={<ModeSelect />} />
-          <Route 
-            path="/garage" 
-            element={<PrivateRoute component={GarageList}/>} />
-          <Route 
-            path="/garage/:id" 
-            element={<PrivateRoute component={Garage} />} 
+          <Route
+            path="/garage"
+            element={<PrivateRoute component={GarageList} />}
+          />
+          <Route
+            path="/garage/:id"
+            element={<PrivateRoute component={Garage} />}
           />
 
-          <Route 
-            path="/online-match" 
-            element={<PrivateRoute component={OnlineMatch} />} />
+          <Route
+            path="/online-match"
+            element={<PrivateRoute component={OnlineMatch} />}
+          />
           <Route
             path="/casual-battle/waiting-room"
             element={<PrivateRoute component={CasualBattleWaitingRoom} />}
           />
-          <Route 
+          <Route
             path="/casual-battle"
             element={<PrivateRoute component={CasualBattleLobby} />}
           />
@@ -103,7 +105,7 @@ export const App: React.FC<Props> = () => {
             path="/casual-battle/result"
             element={<PrivateRoute component={CasualBattleGameWatch} />}
           />
-           <Route
+          <Route
             path="/casual-battle/pick-mode"
             element={<PrivateRoute component={CasualBattlePickMode} />}
           />

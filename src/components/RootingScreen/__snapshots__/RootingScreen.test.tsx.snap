@@ -78,7 +78,7 @@ Array [
       </li>
       <li>
         <Link
-          to="/robot-development/Specification"
+          to="/robot-development/specification"
         >
           ロボットの設計仕様書
         </Link>
@@ -104,7 +104,7 @@ Array [
       </li>
       <li>
         <Link
-          to="/casual-battle/invitation"
+          to="/casual-battle/invitation/:roomId"
         >
           カジュアル対戦招待画面
         </Link>
@@ -128,6 +128,13 @@ Array [
           to="/casual-battle/result"
         >
           観戦画面
+        </Link>
+      </li>
+      <li>
+        <Link
+          to="/casual-battle/pick-mode"
+        >
+          対戦させるロボットを選ぶ
         </Link>
       </li>
     </ul>

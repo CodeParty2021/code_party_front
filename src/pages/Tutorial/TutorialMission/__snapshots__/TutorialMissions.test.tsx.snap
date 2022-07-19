@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TutorialMissions /> snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      チュートリアルミッション一覧のページ
+    </h1>
+    <Link
+      to="/tutorial/world/:world_id/mission/:mission_id/step/:step_id"
+    >
+      ミッションXのステップXに進む
+    </Link>
+    <Link
+      to="/tutorial/world/:world_id/intro"
+    >
+      このワールドのゲーム説明に進む
+    </Link>
+  </div>,
+]
+`;

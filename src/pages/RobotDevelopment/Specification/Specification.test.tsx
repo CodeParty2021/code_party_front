@@ -1,10 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { ModeSelect } from "./ModeSelect";
-
-describe("<ModeSelect />", () => {
+import { Specification } from "./Specification";
+describe("<Specification />", () => {
   it("snapshot test", () => {
-    const wrapper = shallow(<ModeSelect />);
+    const wrapper = shallow(<Specification />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });

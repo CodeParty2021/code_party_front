@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GarageList /> snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      ガレージ画面
+    </h1>
+    <div>
+      ロボットの新規作成画面 ここにロボットが並んで選択できる
+    </div>
+    <Link
+      to="/garage/:id"
+    >
+      ロボットの詳細を表示する(リンクの例)
+    </Link>
+  </div>,
+]
+`;

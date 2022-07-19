@@ -16,11 +16,11 @@ import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
-import { CasualBattlePickMode } from "pages/CasualBattle/PickMode/PickMode";
+import { CasualBattlePickCode } from "pages/CasualBattle/PickCode/PickCode";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
-import { Step } from "pages/Tutorial/TutorialStep/Step";
+import { TutorialStep } from "pages/Tutorial/TutorialStep/Step";
 import { TutorialMissions } from "pages/Tutorial/TutorialMission/TutorialMissions";
 import { MissionEnd } from "pages/Tutorial/MissionEnd/MissionEnd";
 import { setCallBackToSyncUser } from "services/user/user";
@@ -106,8 +106,8 @@ export const App: React.FC<Props> = () => {
             element={<PrivateRoute component={CasualBattleGameWatch} />}
           />
           <Route
-            path="/casual-battle/pick-mode"
-            element={<PrivateRoute component={CasualBattlePickMode} />}
+            path="/casual-battle/pick-code"
+            element={<PrivateRoute component={CasualBattlePickCode} />}
           />
           <Route
             path="/codes"
@@ -128,7 +128,7 @@ export const App: React.FC<Props> = () => {
           />
           <Route
             path="/tutorial/world/:world_id/mission/:mission_id/step/:step_id"
-            element={<PrivateRoute component={Step} />}
+            element={<PrivateRoute component={TutorialStep} />}
           />
           <Route
             path="/tutorial/world/:world_id/mission/:mission_id/end"

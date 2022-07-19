@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Tutorial /> snapshot test 1`] = `
+exports[`<TutorialStep /> snapshot test 1`] = `
 Array [
   <div>
     <h1>

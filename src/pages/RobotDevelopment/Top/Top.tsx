@@ -11,7 +11,7 @@ export const RobotDevelopmentTop: React.FC<Prop> = () => {
         チュートリアルモードへ進む(world選択画面は画面遷移図に基づき一旦飛ばす)
       </Link>
       <Link to="/garage">ガレージモード</Link>
-      <Link to="/robot-development/Specification">プログラム仕様書</Link>
+      <Link to="/robot-development/specification">プログラム仕様書</Link>
     </div>
   );
 };

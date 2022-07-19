@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { Specification } from "./Specification";
-describe("<RobotDevelopmentTop />", () => {
+describe("<Specification />", () => {
   it("snapshot test", () => {
     const wrapper = shallow(<Specification />);
 

@@ -75,7 +75,7 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/casual-battle/result">観戦画面</Link>
         </li>
         <li>
-          <Link to="/casual-battle/pick-mode">対戦させるロボットを選ぶ</Link>
+          <Link to="/casual-battle/pick-code">対戦させるロボットを選ぶ</Link>
         </li>
       </ul>
       <h1>チュートリアル系のページ</h1>

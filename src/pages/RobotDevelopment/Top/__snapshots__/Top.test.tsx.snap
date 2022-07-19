@@ -17,7 +17,7 @@ Array [
       ガレージモード
     </Link>
     <Link
-      to="/robot-development/Specification"
+      to="/robot-development/specification"
     >
       プログラム仕様書
     </Link>

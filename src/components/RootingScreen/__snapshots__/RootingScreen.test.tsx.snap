@@ -132,7 +132,7 @@ Array [
       </li>
       <li>
         <Link
-          to="/casual-battle/pick-mode"
+          to="/casual-battle/pick-code"
         >
           対戦させるロボットを選ぶ
         </Link>

@@ -36,7 +36,10 @@ export const ClearConditionStyle = styled.div<ClearConditionStyleProps>`
 
 export const TitleBar: React.FC<{}> = () => (
   <TitleBarStyle>
-    <img src={ClearConditionTitleBar} style={{ position: "absolute" }} />
+    <img
+      src={ClearConditionTitleBar}
+      style={{ position: "absolute", userSelect: "none" }}
+    />
     <TitleText>クリア条件</TitleText>
   </TitleBarStyle>
 );
@@ -93,7 +96,13 @@ export const Text = styled.div`
 export const RBEdge = () => (
   <img
     src={ClearConditionRB}
-    style={{ position: "absolute", right: 0, bottom: 0, zIndex: 1 }}
+    style={{
+      position: "absolute",
+      right: 0,
+      bottom: 0,
+      zIndex: 1,
+      userSelect: "none",
+    }}
   />
 );
 

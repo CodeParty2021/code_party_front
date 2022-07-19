@@ -1,7 +1,17 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CMSRenderer } from "./CMSRenderer";
+
+import { DescriptionPanel } from "./DescriptionPanel";
 import { DescriptionCMSType } from "hooks/DescriptionCMSHooks/useDescriptionCMS";
+
+export default {
+  title: "components/DescriptionPanel/DescriptionPanel",
+  component: DescriptionPanel,
+} as ComponentMeta<typeof DescriptionPanel>;
+
+const Template: ComponentStory<typeof DescriptionPanel> = (args) => (
+  <DescriptionPanel {...args} />
+);
 
 const sampleJSON: DescriptionCMSType = {
   id: "u3w7er2atby",
@@ -15,7 +25,7 @@ const sampleJSON: DescriptionCMSType = {
   body: [
     {
       fieldId: "body",
-      html: '<h1 id="hc9f08a00f8">ステージ１</h1><h1 id="hc9f08a00f8">ステージ１</h1><p>次の画像のように動こう<br><br><img src="https://images.microcms-assets.io/assets/4712ba13111f4c01bab9c344ae473307/40378f930361435f8596628bd0264402/blog-template-description3.png" alt=""></p>',
+      html: '<h1 id="hc9f08a00f8">ステージ１</h1><p>次の画像のように動こう<br><br><img src="https://images.microcms-assets.io/assets/4712ba13111f4c01bab9c344ae473307/40378f930361435f8596628bd0264402/blog-template-description3.png" alt=""></p>',
     },
     {
       fieldId: "table",
@@ -37,16 +47,12 @@ const sampleJSON: DescriptionCMSType = {
     },
   ],
 };
-export default {
-  title: "components/CMSRenderer",
-  component: CMSRenderer,
-} as ComponentMeta<typeof CMSRenderer>;
-
-const Template: ComponentStory<typeof CMSRenderer> = (args) => (
-  <CMSRenderer {...args} />
-);
-
 export const Default = Template.bind({});
 Default.args = {
   description: sampleJSON,
+  stage: 1,
+  maxStep: 3,
+  workingStep: 1,
+  completeStep: 1,
+  title: "チュートリアル",
 };

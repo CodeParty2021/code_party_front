@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ClearCondition } from "./ClearCondition";
 
 export default {
-  title: "components/ClearCondition",
+  title: "components/DescriptionPanel/ClearCondition",
   component: ClearCondition,
 } as ComponentMeta<typeof ClearCondition>;
 

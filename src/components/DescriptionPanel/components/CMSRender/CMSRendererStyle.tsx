@@ -45,8 +45,8 @@ const H1Box = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top: 16px;
-  margin-bottom: 16px;
+
+  margin: 16px 0 16px 10px;
 `;
 const H1NumberStyle = styled.div`
   position: absolute;

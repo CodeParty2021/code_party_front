@@ -23,8 +23,8 @@ import {
   isTableType,
   TableType,
 } from "hooks/DescriptionCMSHooks/useDescriptionCMS";
-import { Table } from "components/Table/Table";
-import { ClearCondition } from "components/ClearCondition/ClearCondition";
+import { Table } from "../Table/Table";
+import { ClearCondition } from "../ClearCondition/ClearCondition";
 
 type Props = CMSRendererStyleProps & {
   description: DescriptionCMSType;

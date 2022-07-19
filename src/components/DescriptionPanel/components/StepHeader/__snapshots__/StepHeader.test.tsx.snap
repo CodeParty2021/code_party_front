@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StepHeader /> snapshot test 1`] = `
+.c6 {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  fill: #2F364D;
+}
+
+.c6 > span,
+.c6 > div,
+.c6 > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c5 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  background: #F1F3F8;
+  border: 1px solid #E1E3EB;
+  border-radius: 40px;
+  color: #2F364D;
+  font-size: 16px;
+  line-height: 160%;
+  padding: 4px 16px 4px 12px;
+}
+
+.c5:hover {
+  border-color: #6074FF;
+}
+
+.c7 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  background: #F1F3F8;
+  border: 1px solid #E1E3EB;
+  border-radius: 40px;
+  color: #2F364D;
+  font-size: 16px;
+  line-height: 160%;
+  padding: 4px 12px 4px 16px;
+}
+
+.c7:hover {
+  border-color: #6074FF;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 24px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+}
+
+.c2 {
+  font-family: "851Gkktt";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 100%;
+  color: #6074ff;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 24px;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  font-feature-settings: "palt" on;
+  color: #4d5366;
+  -webkit-transform: matrix(1,0,-0.08,1,0,0);
+  -ms-transform: matrix(1,0,-0.08,1,0,0);
+  transform: matrix(1,0,-0.08,1,0,0);
+}
+
+@supports not (gap:8px) {
+  .c5 > *:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+@supports not (gap:8px) {
+  .c7 > *:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+@supports not (gap:24px) {
+  .c0 > *:not(:first-child) {
+    margin-left: 24px;
+  }
+}
+
+@supports not (gap:8px) {
+  .c4 > *:not(:first-child) {
+    margin-left: 8px;
+  }
+}
+
+@supports not (gap:24px) {
+  .c1 > *:not(:first-child) {
+    margin-left: 24px;
+  }
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="c1"
+  >
+    <div
+      class="c2"
+    >
+      Step 0
+    </div>
+    <div
+      class="c3"
+    >
+      チュートリアル
+    </div>
+  </div>
+  <div
+    class="c4"
+  >
+    <button
+      class="c5"
+    >
+      <span
+        class="c6"
+        display="inline-block"
+        fill="#2F364D"
+      />
+      <span>
+        前へ
+      </span>
+    </button>
+    <button
+      class="c7"
+    >
+      <span>
+        次へ
+      </span>
+      <span
+        class="c6"
+        display="inline-block"
+        fill="#2F364D"
+      />
+    </button>
+  </div>
+</div>
+`;

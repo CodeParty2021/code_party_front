@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import {
   BlockQuote,
   CMSRendererStyle,
@@ -12,14 +12,17 @@ import parse, {
   HTMLReactParserOptions,
   Element,
 } from "html-react-parser";
+import { BodyType, ClearConditionType, DescriptionCMSType, HintBoxType, isBodyType, isClearConditionType, isHintBoxType, isTableType, TableType } from "hooks/DescriptionCMSHooks/useDescriptionCMS";
+import { Table } from "components/Table/Table";
+import { ClearCondition } from "components/ClearCondition/ClearCondition";
 
 type Props = CMSRendererStyleProps & {
-  html: string;
+  description: DescriptionCMSType;
 };
 
-export const CMSRenderer: React.FC<Props> = ({ html, ...styleProps }) => {
+export const CMSRenderer: React.FC<Props> = ({ description, ...styleProps }) => {
   const h1id = useRef(1);
-
+  useEffect(()=>{h1id.current = 1},[h1id.current])
   const options: HTMLReactParserOptions = {
     replace: (node) => {
       const element = node as Element;
@@ -41,6 +44,13 @@ export const CMSRenderer: React.FC<Props> = ({ html, ...styleProps }) => {
     },
   };
   return (
-    <CMSRendererStyle {...styleProps}>{parse(html, options)}</CMSRendererStyle>
+    <CMSRendererStyle>
+      {description.body.map((s:BodyType | HintBoxType | TableType | ClearConditionType)=>{
+        if(isBodyType(s))return <div>{parse(s.html, options)}</div>
+        if(isTableType(s))return  <Table {...styleProps}>{parse(s.body, options)}</Table>
+        if(isClearConditionType(s))return <ClearCondition conditions={s.condition.map(c=>c.text)}></ClearCondition>
+        if(isHintBoxType(s))return <div>ヒントボックスは未実装</div>
+      })}
+    </CMSRendererStyle>
   );
 };

@@ -3,9 +3,12 @@ import { BLUE_GRAY_70 } from "styles/colors";
 import { FONT, FONT_WEIGHT } from "styles/constants/constants";
 export type CMSRendererStyleProps = {};
 import React from "react";
+import { FlexGap } from "styles/FlexGap/FlexGap";
 
 export const CMSRendererStyle = styled.div<CMSRendererStyleProps>`
-
+  display:flex;
+  flex-direction: column;
+  ${FlexGap({gap:"16px",direction:"column"})}
 `;
 
 export const H1: React.FC<{ id: number }> = ({ id, children }) => {
@@ -36,13 +39,13 @@ export const H2 = styled.h2`
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 
-  padding: 16px 0.85px 0.09px 0px;
+  padding: 0px 0.85px 0.09px 0px;
 `;
 const H1Box = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
-  margin-top:32px;
+  margin-top:16px;
   margin-bottom: 16px;
 
 `;

@@ -1,9 +1,9 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Tutorial } from "./Tutorial";
+import { Step } from "./Step";
 describe("<Tutorial />", () => {
   it("auth snapshot test", () => {
-    const wrapper = shallow(<Tutorial />);
+    const wrapper = shallow(<Step />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });

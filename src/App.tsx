@@ -19,9 +19,9 @@ import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
-import { Tutorial } from "pages/Tutorial/Tutorial";
-import { TutorialMissions } from "pages/Tutorial/TutorialMissions";
-import { MissionEnd } from "pages/MissionEnd/MissionEnd";
+import { Step } from "pages/Tutorial/TutorialStep/Step";
+import { TutorialMissions } from "pages/Tutorial/TutorialMission/TutorialMissions";
+import { MissionEnd } from "pages/Tutorial/MissionEnd/MissionEnd";
 import { setCallBackToSyncUser } from "services/user/user";
 import { RootingScreen } from "components/RootingScreen/RootingScreen";
 import { CasualBattleInvitation } from "pages/CasualBattle/Invitation/Invitation";
@@ -30,7 +30,7 @@ import { EventSelectMode } from "pages/Event/SelectMode/SelectMode";
 import { EventSelectAI } from "pages/Event/SelectAI/SelectAI";
 import { EventSetName } from "pages/Event/SetName/SetName";
 import { RootState } from "store";
-import { GameIntro } from "pages/GameIntro/GameIntro";
+import { GameIntro } from "pages/Tutorial/GameIntro/GameIntro";
 
 type Props = {};
 
@@ -66,7 +66,7 @@ export const App: React.FC<Props> = () => {
             element={<RobotDevelopmentTop />}
           />
           <Route
-            path="/robot-development/Specification"
+            path="/robot-development/specification"
             element={<Specification />}
           />
           <Route path="/start" element={<Start />} />
@@ -111,7 +111,7 @@ export const App: React.FC<Props> = () => {
           />
           <Route
             path="/tutorial/world/:world_id/mission/:mission_id/step/:step_id"
-            element={<PrivateRoute component={Tutorial} />}
+            element={<PrivateRoute component={Step} />}
           />
           <Route
             path="/tutorial/world/:world_id/mission/:mission_id/end"

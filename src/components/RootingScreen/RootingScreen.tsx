@@ -47,7 +47,7 @@ export const RootingScreen: React.FC<Props> = () => {
         </li>
 
         <li>
-          <Link to="/robot-development/Specification">
+          <Link to="/robot-development/specification">
             ロボットの設計仕様書
           </Link>
         </li>

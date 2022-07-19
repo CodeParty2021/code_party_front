@@ -1,9 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Step } from "./Step";
-describe("<Tutorial />", () => {
+import { CasualBattlePickMode } from "./PickMode";
+
+describe("<ModeSelect />", () => {
   it("snapshot test", () => {
-    const wrapper = shallow(<Step />);
+    const wrapper = shallow(<CasualBattlePickMode />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });

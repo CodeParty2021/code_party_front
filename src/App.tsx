@@ -16,6 +16,7 @@ import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
+import { CasualBattlePickMode } from "pages/CasualBattle/PickMode/PickMode";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
@@ -101,6 +102,10 @@ export const App: React.FC<Props> = () => {
           <Route
             path="/casual-battle/result"
             element={<PrivateRoute component={CasualBattleGameWatch} />}
+          />
+           <Route
+            path="/casual-battle/pick-mode"
+            element={<PrivateRoute component={CasualBattlePickMode} />}
           />
           <Route
             path="/codes"

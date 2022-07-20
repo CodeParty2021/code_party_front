@@ -14,7 +14,8 @@ export const getIdToken = async () => {
   return getAuth().currentUser?.getIdToken();
 };
 
-if (process.env.NODE_ENV === "test" || process.env.NODE_ENV === "development") {
+// TODO: 現状はテスト環境にFirebase Emulatorsを立てれないのでテスト環境では接続しない
+if (process.env.NODE_ENV === "development") {
   connectAuthEmulator(getAuth(), "http://localhost:9099");
   connectDatabaseEmulator(getDatabase(getApp()), "localhost", 9000);
 }

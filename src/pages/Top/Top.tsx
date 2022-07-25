@@ -7,7 +7,7 @@ export const Top: React.FC<Prop> = () => {
   return (
     <div>
       <h1>What is CodeParty</h1>
-      <Link to="/start">Lets Play</Link>
+      <Link to="/start">ログインページ</Link>
     </div>
   );
 };

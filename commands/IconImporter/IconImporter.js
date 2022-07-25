@@ -145,9 +145,9 @@ const getIconComponentInfo = async (targetDir) => {
       // svgファイルに絞り込み
       return (
         fs.statSync(path.join(targetDir, file)).isFile() &&
-        /.*\.tsx$/.test(file)
-        && file != "index.ts"
-        && !(/^.*\.stories\.tsx$/.test(file))
+        /.*\.tsx$/.test(file) &&
+        file != "index.ts" &&
+        !/^.*\.stories\.tsx$/.test(file)
       );
     })
     .map((file) => {
@@ -322,7 +322,7 @@ const createIconStory = (iconName) => {
     };
   `;
   return prettier.format(code, prettierrc);
-}
+};
 
 /**
  * パスカルケースでアイコンコンポーネント名を作成

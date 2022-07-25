@@ -9,7 +9,7 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
   (Story) => (

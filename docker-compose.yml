@@ -1,0 +1,71 @@
+version: "3"
+services:
+  backend:
+    env_file:
+      - .env.backend
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.backend
+    volumes:
+      - backend:/backend
+    tty: true
+    working_dir: /backend
+    command: pipenv run python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+  firebase:
+    env_file:
+      - .env.firebase
+    build:
+      context: .
+      dockerfile: ".docker/Dockerfile.firebase"
+    volumes:
+      - firebase:/firebese
+    tty: true
+    working_dir: /firebase
+    command: yarn start
+    ports:
+      - 4000:4000 # Emulator Suite UI
+      #- 5000:5000 # Firebase Hosting
+      #- 5001:5001 # Clound Functions
+      - 9000:9000 # Realtime Database
+      #- 8080:8080 # Cloud Firestore
+      #- 8085:8085 # Cloud Pub/Sub
+  frontend:
+    env_file:
+      - .env
+    image: node:16.11.0
+    volumes:
+      - .:/frontend
+      - frontend-node-modules:/frontend/node_modules
+    tty: true
+    working_dir: /frontend
+    command: >
+      bash -c 'yarn && yarn start'
+    ports:
+      - 3000:3000
+    links:
+      - backend
+      - firebase
+  storybook:
+    env_file:
+      - .env
+    image: node:16.11.0
+    volumes:
+      - .:/frontend
+      - storybook-node-modules:/frontend/node_modules
+    tty: true
+    working_dir: /frontend
+    command: >
+      bash -c 'yarn && yarn storybook'
+    ports:
+      - 6006:6006
+    links:
+      - frontend
+volumes:
+  backend:
+    driver: local
+  firebase:
+    driver: local
+  frontend-node-modules:
+  storybook-node-modules:

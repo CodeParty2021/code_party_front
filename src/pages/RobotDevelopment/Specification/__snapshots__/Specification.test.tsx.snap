@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Specification /> snapshot test 1`] = `
+Array [
+  <div>
+    <h1>
+      ロボットの設計仕様書
+    </h1>
+    <Link
+      to="/robot-development/top"
+    >
+      ロボット開発モードのトップ画面に戻る
+    </Link>
+  </div>,
+]
+`;

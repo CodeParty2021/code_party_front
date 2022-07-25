@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { ModeSelect } from "./ModeSelect";
 
 describe("<ModeSelect />", () => {
-  it("auth snapshot test", () => {
+  it("snapshot test", () => {
     const wrapper = shallow(<ModeSelect />);
 
     expect(wrapper.getElements()).toMatchSnapshot();

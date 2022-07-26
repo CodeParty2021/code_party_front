@@ -33,9 +33,9 @@ exports[`<AlgoEditor /> snapshot test 1`] = `
   align-items: center;
   padding: 0px;
   overflow: hidden;
-  background: #1E1E1E;
+  background: #4A5373;
   box-sizing: border-box;
-  border: 16px solid #F5F5F5;
+  border: 16px solid #F5F6F8;
   border-radius: 48px;
   -webkit-transition: border-radius 0.5s ease;
   transition: border-radius 0.5s ease;

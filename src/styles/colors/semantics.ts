@@ -1,4 +1,3 @@
-
 import {
   BLUE_45,
   BLUE_50,
@@ -139,35 +138,33 @@ export const algoEditor = {
 };
 
 export const descriptionPanel = {
-  background:GRAY_10,
-  backline:GRAY_30,
-  table:{background:GRAY_20,
-    color:GRAY_100,},
-  stepHeader:{
-    stepColor:BLUE_45,
-    titleColor:GRAY_90 //ここfigmaがカラーパレットにない色。確認中
+  background: GRAY_10,
+  backline: GRAY_30,
+  table: { background: GRAY_20, color: GRAY_100 },
+  stepHeader: {
+    stepColor: BLUE_45,
+    titleColor: GRAY_90, //ここfigmaがカラーパレットにない色。確認中
   },
-  stageHeader:{
-    color:GRAY_100,
-    progressBar:GRAY_30,
-    progressFill:BLUE_50
+  stageHeader: {
+    color: GRAY_100,
+    progressBar: GRAY_30,
+    progressFill: BLUE_50,
   },
-  heading:{
-    background:GRAY_100,
-    color:GRAY_100,
-    number:WHITE
+  heading: {
+    background: GRAY_100,
+    color: GRAY_100,
+    number: WHITE,
   },
-  CMSRenderer:{
-    color:GRAY_90
+  CMSRenderer: {
+    color: GRAY_90,
   },
-  clearCondition:{
-    background:GRAY_00,
-    border:BLUE_50,
-    titleColor:WHITE,
-    conditionColor:GRAY_100,
-    cleared:GREEN_50,
-    notCleared:GRAY_30
+  clearCondition: {
+    background: GRAY_00,
+    border: BLUE_50,
+    titleColor: WHITE,
+    conditionColor: GRAY_100,
+    cleared: GREEN_50,
+    notCleared: GRAY_30,
   },
-  color:GRAY_100,
-
+  color: GRAY_100,
 };

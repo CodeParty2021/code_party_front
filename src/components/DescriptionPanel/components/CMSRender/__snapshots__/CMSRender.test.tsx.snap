@@ -12,72 +12,13 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
   gap: 16px;
 }
 
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  gap: 8px;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: 16px 0 16px 10px;
-}
-
-.c3 {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-}
-
-.c2 {
-  position: relative;
-  font-family: "Noto Sans JP";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 32px;
-  font-feature-settings: "palt" on;
-  color: #ffffff;
-  margin-right: 14px;
-}
-
-.c5 {
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 32px;
-  color: #2F364D;
-  -webkit-transform: matrix(1,0,-0.08,1,0,0);
-  -ms-transform: matrix(1,0,-0.08,1,0,0);
-  transform: matrix(1,0,-0.08,1,0,0);
-}
-
-.c4 {
-  padding: 0px 0px 2px 2px;
-  width: 38px;
-  height: 38px;
-  background: #242a3d;
-  border-radius: 6px;
-  -webkit-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  -webkit-flex: none;
-  -ms-flex: none;
-  flex: none;
-}
-
 .c6 {
   font-family: "Noto Sans JP";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 160%;
-  color: #363e59;
+  color: #363E59;
 }
 
 .c8 {
@@ -87,13 +28,14 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
 .c7 {
   display: inline-block;
   text-align: center;
-  background: #eaebf1;
+  background-color: #EAEBF1;
   border-radius: 8px;
   padding: 8px;
+  color: #242A3D;
 }
 
 .c7 thead {
-  border-bottom: 1px solid #242a3d;
+  border-bottom: 1px solid #242A3D;
   margin: 2px 0px;
 }
 
@@ -111,6 +53,7 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
 
 .c9 {
   box-sizing: border-box;
+  overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -126,7 +69,7 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
   gap: 16px;
   isolation: isolate;
   width: 100%;
-  background: #fafafa;
+  background: #FAFAFA;
   border: 2px solid #6675fc;
   border-radius: 8px;
   -webkit-flex: none;
@@ -155,14 +98,13 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
   position: relative;
   left: 20px;
   top: 1px;
-  color: #ffffff;
   font-family: "Noto Sans JP";
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
   line-height: 22px;
   font-feature-settings: "palt" on;
-  color: #ffffff;
+  color: #FFF;
   -webkit-transform: matrix(0.99,0,-0.1,1,0,0);
   -ms-transform: matrix(0.99,0,-0.1,1,0,0);
   transform: matrix(0.99,0,-0.1,1,0,0);
@@ -194,7 +136,66 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  color: #242a3d;
+  color: #242A3D;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 16px 0 16px 10px;
+}
+
+.c3 {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c2 {
+  position: relative;
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 32px;
+  font-feature-settings: "palt" on;
+  color: #FFF;
+  margin-right: 14px;
+}
+
+.c5 {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 32px;
+  color: #242A3D;
+  -webkit-transform: matrix(1,0,-0.08,1,0,0);
+  -ms-transform: matrix(1,0,-0.08,1,0,0);
+  transform: matrix(1,0,-0.08,1,0,0);
+}
+
+.c4 {
+  padding: 0px 0px 2px 2px;
+  width: 38px;
+  height: 38px;
+  background: #242A3D;
+  border-radius: 6px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
 }
 
 @supports not (gap:16px) {
@@ -283,7 +284,7 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
     >
       <img
         src="ClearConditionTitleBar.svg"
-        style="position:absolute;user-select:none"
+        style="position:absolute;user-select:none;display:block"
       />
       <div
         class="c11"
@@ -300,7 +301,7 @@ exports[`<CMSRenderer /> snapshot test 1`] = `
     </div>
     <img
       src="ClearConditionRB.svg"
-      style="position:absolute;right:0;bottom:0;z-index:1;user-select:none"
+      style="position:absolute;right:0;bottom:0;z-index:1;user-select:none;display:block"
     />
   </div>
   <div>

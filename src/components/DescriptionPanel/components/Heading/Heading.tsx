@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {descriptionPanel } from "styles/colors";
+import { descriptionPanel } from "styles/colors";
 import { FONT, FONT_WEIGHT } from "styles/constants/constants";
 export type CMSRendererStyleProps = {};
 

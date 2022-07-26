@@ -29,11 +29,11 @@ exports[`<Button /> snapshot test 1`] = `
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient( 0deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) ), linear-gradient( 90deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) );
+  background-image: linear-gradient( 0deg, transparent calc(100% - 1px), #EAEBF1 calc(100% - 1px) ), linear-gradient( 90deg, transparent calc(100% - 1px), #EAEBF1 calc(100% - 1px) );
   background-size: 64px 64px;
   background-repeat: repeat;
   background-position: 0 0;
-  background-color: #F5F5F5;
+  background-color: #F5F6F8;
   z-index: -2;
 }
 

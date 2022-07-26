@@ -14,8 +14,8 @@ const Template: ComponentStory<typeof H1 & { children: any }> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children:<>H1のサンプル</>,
-  id:1
+  children: <>H1のサンプル</>,
+  id: 1,
 };
 
 const Template2: ComponentStory<typeof H2 & { children: any }> = (args) => (
@@ -24,5 +24,5 @@ const Template2: ComponentStory<typeof H2 & { children: any }> = (args) => (
 
 export const Default2 = Template2.bind({});
 Default2.args = {
-  children:<>H2のサンプル</>,
+  children: <>H2のサンプル</>,
 };

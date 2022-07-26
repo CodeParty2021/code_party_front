@@ -8,7 +8,7 @@ exports[`<RobotLink /> snapshot test 1`] = `
 .c5 {
   font-family: "851Gkktt";
   font-size: 30px;
-  color: #F5F5F5;
+  color: #F5F6F8;
   overflow: hidden;
   width: 50px;
   height: 59px;
@@ -51,8 +51,8 @@ exports[`<RobotLink /> snapshot test 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #F5F5F5;
-  border: 1px solid #DBDBDB;
+  background-color: #F5F6F8;
+  border: 1px solid #EAEBF1;
 }
 
 .c0:hover {

@@ -27,7 +27,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   width: 616px;
   height: 744px;
   position: relative;
-  background: #F5F5F5;
+  background: #F5F6F8;
   border-radius: 64px;
   font-weight: 700;
   color: #2F364D;
@@ -88,7 +88,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   height: 100%;
   border-radius: 64px;
   box-sizing: border-box;
-  border: 2px solid #DBDBDB;
+  border: 2px solid #EAEBF1;
 }
 
 .c1:hover {
@@ -110,7 +110,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  fill: #F5F5F5;
+  fill: #F5F6F8;
 }
 
 .c0:hover .c2.c2 {

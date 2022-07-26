@@ -8,13 +8,14 @@ exports[`<Star /> snapshot test 1`] = `
 .c0 {
   display: inline-block;
   text-align: center;
-  background: #eaebf1;
+  background-color: #EAEBF1;
   border-radius: 8px;
   padding: 8px;
+  color: #242A3D;
 }
 
 .c0 thead {
-  border-bottom: 1px solid #242a3d;
+  border-bottom: 1px solid #242A3D;
   margin: 2px 0px;
 }
 

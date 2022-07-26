@@ -5,7 +5,7 @@ exports[`<Button /> snapshot test 1`] = `
   display: inline-block;
   width: 24px;
   height: 24px;
-  fill: #30C567;
+  fill: #D7DAE4;
 }
 
 .c4 > span,
@@ -20,7 +20,7 @@ exports[`<Button /> snapshot test 1`] = `
   display: inline-block;
   width: 24px;
   height: 24px;
-  fill: #D7DAE4;
+  fill: #30C567;
 }
 
 .c6 > span,
@@ -33,6 +33,7 @@ exports[`<Button /> snapshot test 1`] = `
 
 .c0 {
   box-sizing: border-box;
+  overflow: hidden;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -48,7 +49,7 @@ exports[`<Button /> snapshot test 1`] = `
   gap: 16px;
   isolation: isolate;
   width: 100%;
-  background: #fafafa;
+  background: #FAFAFA;
   border: 2px solid #6675fc;
   border-radius: 8px;
   -webkit-flex: none;
@@ -77,14 +78,13 @@ exports[`<Button /> snapshot test 1`] = `
   position: relative;
   left: 20px;
   top: 1px;
-  color: #ffffff;
   font-family: "Noto Sans JP";
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
   line-height: 22px;
   font-feature-settings: "palt" on;
-  color: #ffffff;
+  color: #FFF;
   -webkit-transform: matrix(0.99,0,-0.1,1,0,0);
   -ms-transform: matrix(0.99,0,-0.1,1,0,0);
   transform: matrix(0.99,0,-0.1,1,0,0);
@@ -123,7 +123,7 @@ exports[`<Button /> snapshot test 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  color: #242a3d;
+  color: #242A3D;
 }
 
 @supports not (gap:16px) {
@@ -140,7 +140,7 @@ exports[`<Button /> snapshot test 1`] = `
   >
     <img
       src="ClearConditionTitleBar.svg"
-      style="position:absolute;user-select:none"
+      style="position:absolute;user-select:none;display:block"
     />
     <div
       class="c2"
@@ -154,7 +154,7 @@ exports[`<Button /> snapshot test 1`] = `
     <span
       class="c4 c5"
       display="inline-block"
-      fill="#30C567;"
+      fill="#D7DAE4"
     />
     <div>
       aa
@@ -166,7 +166,7 @@ exports[`<Button /> snapshot test 1`] = `
     <span
       class="c6 c5"
       display="inline-block"
-      fill="#D7DAE4;"
+      fill="#30C567"
     />
     <div>
       b
@@ -174,7 +174,7 @@ exports[`<Button /> snapshot test 1`] = `
   </div>
   <img
     src="ClearConditionRB.svg"
-    style="position:absolute;right:0;bottom:0;z-index:1;user-select:none"
+    style="position:absolute;right:0;bottom:0;z-index:1;user-select:none;display:block"
   />
 </div>
 `;

@@ -4,7 +4,7 @@ exports[`<MissionNumber /> snapshot test 1`] = `
 .c0 {
   font-family: "851Gkktt";
   font-size: 30px;
-  color: #F5F5F5;
+  color: #F5F6F8;
   overflow: hidden;
   width: 50px;
   height: 59px;

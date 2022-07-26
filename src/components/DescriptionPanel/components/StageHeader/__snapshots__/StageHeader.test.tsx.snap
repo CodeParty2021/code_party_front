@@ -4,7 +4,7 @@ exports[`<StageHeader /> snapshot test 1`] = `
 .c1 {
   font-family: "851Gkktt";
   font-size: 30px;
-  color: #F5F5F5;
+  color: #F5F6F8;
   overflow: hidden;
   width: 50px;
   height: 59px;
@@ -73,7 +73,7 @@ exports[`<StageHeader /> snapshot test 1`] = `
   font-size: 30px;
   line-height: 43px;
   font-feature-settings: "palt" on;
-  color: #242a3d;
+  color: #242A3D;
   -webkit-transform: matrix(1,0,-0.08,1,0,0);
   -ms-transform: matrix(1,0,-0.08,1,0,0);
   transform: matrix(1,0,-0.08,1,0,0);
@@ -89,7 +89,7 @@ exports[`<StageHeader /> snapshot test 1`] = `
   border-radius: 4px;
   width: 100%;
   height: 100%;
-  background-color: #d7dae4;
+  background-color: #D7DAE4;
 }
 
 .c7 {
@@ -123,7 +123,7 @@ exports[`<StageHeader /> snapshot test 1`] = `
   font-size: 18px;
   line-height: 26px;
   font-feature-settings: "palt" on;
-  color: #242a3d;
+  color: #242A3D;
 }
 
 @supports not (gap:16px) {

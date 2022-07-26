@@ -88,7 +88,7 @@ export const CodeCoding: React.FC<Props> = () => {
             width="70vw"
             height="90vh"
             showUnity={showUnity}
-            showInfo={loading || showError || !isCode(code)}
+            showInfo={loading || showError ||!isCode(code)}
           />
           {showUnity ? (
             <ButtonStyle

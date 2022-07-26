@@ -103,6 +103,7 @@ export const useCodingState = () => {
     });
 
     unityContext.on("OnLoad", function () {
+      //ここにボタンを表示する処理を入れる。
       console.log("OnLoad!!Unityから実行されました!");
     });
   }, []);

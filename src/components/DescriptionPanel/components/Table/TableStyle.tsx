@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { descriptionPanel } from "styles/colors";
 export type TableStyleProps = {};
 
 export const Tb = styled.table`
@@ -8,12 +9,12 @@ export const TableStyle = styled.div`
   display: inline-block;
   text-align: center;
 
-  background: #eaebf1;
+  background-color: ${descriptionPanel.table.background};
   border-radius: 8px;
   padding: 8px;
-
+  color: ${descriptionPanel.table.color};
   & thead {
-    border-bottom: 1px solid #242a3d;
+    border-bottom: 1px solid ${descriptionPanel.table.color};
     margin: 2px 0px;
   }
   & th {

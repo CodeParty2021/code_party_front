@@ -1,3 +1,4 @@
+
 import {
   BLUE_45,
   BLUE_50,
@@ -15,6 +16,7 @@ import {
   LIGHT_BLUE_20,
   GREEN_70,
   BLUE_47,
+  GREEN_50,
 } from "./colorful";
 import { BLUE_TO_PURPLE, PINK_TO_ORANGE } from "./gradation";
 import {
@@ -26,9 +28,13 @@ import {
   BLUE_GRAY_70,
   BLUE_GRAY_75,
   BLUE_GRAY_80,
+  GRAY_00,
   GRAY_10,
+  GRAY_100,
   GRAY_20,
+  GRAY_30,
   GRAY_80,
+  GRAY_90,
   WHITE,
 } from "./monotone";
 
@@ -130,4 +136,38 @@ export const algoEditor = {
   algoBody: BLUE_GRAY_75,
   algoFrame: GRAY_10,
   codingBG: GRAY_80,
+};
+
+export const descriptionPanel = {
+  background:GRAY_10,
+  backline:GRAY_30,
+  table:{background:GRAY_20,
+    color:GRAY_100,},
+  stepHeader:{
+    stepColor:BLUE_45,
+    titleColor:GRAY_90 //ここfigmaがカラーパレットにない色。確認中
+  },
+  stageHeader:{
+    color:GRAY_100,
+    progressBar:GRAY_30,
+    progressFill:BLUE_50
+  },
+  heading:{
+    background:GRAY_100,
+    color:GRAY_100,
+    number:WHITE
+  },
+  CMSRenderer:{
+    color:GRAY_90
+  },
+  clearCondition:{
+    background:GRAY_00,
+    border:BLUE_50,
+    titleColor:WHITE,
+    conditionColor:GRAY_100,
+    cleared:GREEN_50,
+    notCleared:GRAY_30
+  },
+  color:GRAY_100,
+
 };

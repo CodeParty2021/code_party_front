@@ -4,11 +4,12 @@ import ClearConditionTitleBar from "./ClearConditionTitleBar.svg";
 import ClearConditionRB from "./ClearConditionRB.svg";
 import { CheckCircle } from "components/icons";
 import { FlexGap } from "styles/FlexGap/FlexGap";
+import { descriptionPanel } from "styles/colors";
 export type ClearConditionStyleProps = {};
 
 export const ClearConditionStyle = styled.div<ClearConditionStyleProps>`
   box-sizing: border-box;
-
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -20,10 +21,10 @@ export const ClearConditionStyle = styled.div<ClearConditionStyleProps>`
 
   /* GRAY_00 */
 
-  background: #fafafa;
+  background: ${descriptionPanel.clearCondition.background};
   /* BLUE_50 */
 
-  border: 2px solid #6675fc;
+  border: 2px solid ${descriptionPanel.clearCondition.border};
   border-radius: 8px;
 
   flex: none;
@@ -38,7 +39,7 @@ export const TitleBar: React.FC<{}> = () => (
   <TitleBarStyle>
     <img
       src={ClearConditionTitleBar}
-      style={{ position: "absolute", userSelect: "none" }}
+      style={{ position: "absolute", userSelect: "none", display: "block" }}
     />
     <TitleText>クリア条件</TitleText>
   </TitleBarStyle>
@@ -54,23 +55,17 @@ export const TitleText = styled.div`
   position: relative;
   left: 20px;
   top: 1px;
-  color: #ffffff;
   font-family: "Noto Sans JP";
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
   line-height: 22px;
-  /* identical to box height */
 
   font-feature-settings: "palt" on;
 
-  /* WHITE */
-
-  color: #ffffff;
+  color: ${descriptionPanel.clearCondition.titleColor};
 
   transform: matrix(0.99, 0, -0.1, 1, 0, 0);
-
-  /* Inside auto layout */
 
   flex: none;
   order: 3;
@@ -87,7 +82,7 @@ export const Text = styled.div`
   font-size: 18px;
   line-height: 160%;
 
-  color: #242a3d;
+  color: ${descriptionPanel.clearCondition.conditionColor};
 
   flex: none;
   order: 1;
@@ -102,15 +97,16 @@ export const RBEdge = () => (
       bottom: 0,
       zIndex: 1,
       userSelect: "none",
+      display: "block",
     }}
   />
 );
 
 export const State: React.FC<{ state: boolean }> = ({ state }) =>
   state ? (
-    <CheckCircleBlock fill="#30C567;" />
+    <CheckCircleBlock fill={descriptionPanel.clearCondition.notCleared} />
   ) : (
-    <CheckCircleBlock fill="#D7DAE4;" />
+    <CheckCircleBlock fill={descriptionPanel.clearCondition.cleared} />
   );
 
 const CheckCircleBlock = styled(CheckCircle)`
@@ -128,7 +124,5 @@ export const Condition = styled.div`
   ${FlexGap({ gap: "16px", direction: "column" })}
   align-items: center;
 
-  /* GRAY_100 */
-
-  color: #242a3d;
+  color: ${descriptionPanel.clearCondition.conditionColor};
 `;

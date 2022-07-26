@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { descriptionPanel } from "styles/colors";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 export type StepHeaderStyleProps = {};
 
@@ -20,7 +21,7 @@ export const Step = styled.div`
   line-height: 100%;
   /* identical to box height, or 40px */
 
-  color: #6074ff;
+  color: ${descriptionPanel.stepHeader.stepColor};
 `;
 
 export const TextBox = styled.div`
@@ -39,7 +40,7 @@ export const Title = styled.div`
 
   font-feature-settings: "palt" on;
 
-  color: #4d5366;
+  color: ${descriptionPanel.stepHeader.titleColor};
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;

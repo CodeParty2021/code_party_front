@@ -3,8 +3,6 @@ import {
   BlockQuote,
   CMSRendererStyle,
   CMSRendererStyleProps,
-  H1,
-  H2,
   P,
 } from "./CMSRendererStyle";
 import parse, {
@@ -25,6 +23,7 @@ import {
 } from "hooks/DescriptionCMSHooks/useDescriptionCMS";
 import { Table } from "../Table/Table";
 import { ClearCondition } from "../ClearCondition/ClearCondition";
+import { H1, H2 } from "../Heading/Heading";
 
 type Props = CMSRendererStyleProps & {
   description: DescriptionCMSType;

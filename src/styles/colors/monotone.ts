@@ -1,9 +1,11 @@
 export const WHITE = "#FFF";
-
-export const GRAY_10 = "#F5F5F5";
-export const GRAY_20 = "#DBDBDB";
-export const GRAY_80 = "#1E1E1E";
-
+export const GRAY_00 = "#FAFAFA";
+export const GRAY_10 = "#F5F6F8";
+export const GRAY_20 = "#EAEBF1";
+export const GRAY_30 = "#D7DAE4";
+export const GRAY_80 = "#4A5373";
+export const GRAY_90 = "#363E59";
+export const GRAY_100 = "#242A3D";
 export const BLUE_GRAY_10 = "#F1F3F8";
 export const BLUE_GRAY_15 = "#E1E3EB";
 export const BLUE_GRAY_20 = "#D6D9E3";

@@ -1,5 +1,6 @@
 import { Banner } from "components/icons";
 import styled from "styled-components";
+import { descriptionPanel } from "styles/colors";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 export type StageHeaderStyleProps = {};
 
@@ -25,7 +26,7 @@ export const Title = styled.div`
 
   /* GRAY_100 */
 
-  color: #242a3d;
+  color: ${descriptionPanel.stageHeader.color};
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;
@@ -38,13 +39,13 @@ export const ProgressGray = styled.div`
   border-radius: 4px;
   width: 100%;
   height: 100%;
-  background-color: #d7dae4;
+  background-color: ${descriptionPanel.stageHeader.progressBar};
 `;
 export const ProgressBlue = styled.div<{ progress: string }>`
   ${({ progress }) => `width: ${progress}`};
   height: 8px;
   border-radius: 4px;
-  background-color: #6675fc;
+  background-color: ${descriptionPanel.stageHeader.progressFill};
   transition: 0.5s;
 `;
 
@@ -71,5 +72,5 @@ export const TextProgress = styled.div`
 
   /* GRAY_100 */
 
-  color: #242a3d;
+  color: ${descriptionPanel.stageHeader.color};
 `;

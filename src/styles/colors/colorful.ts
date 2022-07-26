@@ -7,6 +7,7 @@ export const YELLOW_20 = "#FFC047";
 
 export const GREEN_70 = "#5FC322";
 export const GREEN_60 = "#98D435";
+export const GREEN_50 = "#30C567";
 
 export const BLUE_GREEN_70 = "#47C98B";
 export const BLUE_GREEN_80 = "#2F8C7C";
@@ -15,7 +16,7 @@ export const LIGHT_BLUE_20 = "#7ED1E3";
 export const LIGHT_BLUE_60 = "#35C4D4";
 export const LIGHT_BLUE_70 = "#0DB3C6";
 
-export const BLUE_50 = "#4462FF";
+export const BLUE_50 = "#6675fc";
 export const BLUE_47 = "#5E67F5";
 export const BLUE_45 = "#6074FF";
 

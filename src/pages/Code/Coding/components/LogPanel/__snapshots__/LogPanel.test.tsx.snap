@@ -49,11 +49,11 @@ exports[`<LogPanel /> snapshot test 1`] = `
   height: 100vh;
   overflow: hidden;
   border-radius: 48px 0px 0px 48px;
-  background-image: linear-gradient( 0deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) ), linear-gradient( 90deg, transparent calc(100% - 1px), #DBDBDB calc(100% - 1px) );
+  background-image: linear-gradient( 0deg, transparent calc(100% - 1px), #EAEBF1 calc(100% - 1px) ), linear-gradient( 90deg, transparent calc(100% - 1px), #EAEBF1 calc(100% - 1px) );
   background-size: 64px 64px;
   background-repeat: repeat;
   background-position: 0 0;
-  background-color: #F5F5F5;
+  background-color: #F5F6F8;
 }
 
 .c0 .logpanel_smoke {
@@ -62,7 +62,7 @@ exports[`<LogPanel /> snapshot test 1`] = `
   right: 30px;
   top: 41px;
   bottom: 41px;
-  background: #F5F5F5;
+  background: #F5F6F8;
   -webkit-filter: blur(74px);
   filter: blur(74px);
   border-radius: 63px;

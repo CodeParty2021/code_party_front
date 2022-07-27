@@ -6,6 +6,7 @@ import {
   DescriptionCMSType,
   useDescriptionCMS,
 } from "hooks/DescriptionCMSHooks/useDescriptionCMS";
+import { StepType, useStepAPI } from "hooks/StepAPIHooks/useStepAPI";
 
 export type RunResponse = {
   unityURL: string;
@@ -46,13 +47,14 @@ export const useCodingState = () => {
     createCode,
     testCode,
   } = useCodeAPI(); //api通信用カスタムフック
+  const { error: errorStepAPI, getStep } = useStepAPI();
   const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
   const [showError, setShowError] = useState(false);
+  const [step, setStep] = useState<StepType | undefined>(undefined);
   const navigate = useNavigate();
-
   //const { error: errorDescriptionCMS, getDescriptionFromStepID } =useDescriptionCMS();
 
   const { getDescriptionFromStepID } = useDescriptionCMS();
@@ -75,6 +77,8 @@ export const useCodingState = () => {
         setDescription(description);
         console.log({ description });
         setLoading(false);
+        const step = await getStep(code.step);
+        setStep(step);
       } else {
         // 新規コード作成時（/free-coding遷移時）、新規コードを作成して再度リダイレクトする（urlに統一性を持たせるため）
         const code = await createCode(
@@ -174,6 +178,13 @@ export const useCodingState = () => {
       setError(error || errorCodeAPI);
     }
   }, [errorCodeAPI]);
+  useEffect(() => {
+    if (errorStepAPI) {
+      setError(error + "," + errorStepAPI);
+    } else {
+      setError(error || errorStepAPI);
+    }
+  }, [errorStepAPI]);
   /* cmsのエラー判定を一旦コメントアウト
   useEffect(() => {
     if (error) {
@@ -203,5 +214,6 @@ export const useCodingState = () => {
     toggleLogHandler,
     showLog,
     showError,
+    step,
   };
 };

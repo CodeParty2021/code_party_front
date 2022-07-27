@@ -10,6 +10,7 @@ import { FlexGap } from "styles/FlexGap/FlexGap";
 import { AlgoEditor } from "./components/AlgoEditor/AlgoEditor";
 import { Tab } from "./components/Tab/Tab";
 import { Message } from "./components/Message/Message";
+import { DescriptionPanel } from "components/DescriptionPanel/DescriptionPanel";
 
 type ShowUnityProps = {
   showUnity?: boolean;
@@ -21,6 +22,9 @@ type ShowLogProps = {
 
 type ShowInfoProps = {
   showInfo?: boolean;
+};
+type ShowDescriptionProps = {
+  showDescription?: boolean;
 };
 
 export const CodingStyle = styled.div`
@@ -168,13 +172,9 @@ export const WatchingLogo = styled(ReactSVG)`
 export const AlgoEditorStyle = styled(AlgoEditor)<
   ShowUnityProps & ShowInfoProps
 >`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
   transition: all 0.5s ease;
-
+  margin: 0 32px;
+  max-width: 70vw;
   ${({ showUnity }) =>
     showUnity &&
     css`
@@ -208,4 +208,18 @@ export const ButtonStyle = styled(Button)`
   position: absolute;
   bottom: 32px;
   right: 69px;
+`;
+
+export const FlexBox = styled.div`
+  display: flex;
+  ${FlexGap({ gap: "4px", direction: "row" })}
+`;
+export const DescriptionTab = styled(DescriptionPanel)<ShowDescriptionProps>`
+  transition: all 0.5s ease;
+  width: 100%;
+  ${({ showDescription }) =>
+    showDescription &&
+    css`
+      transform: translateX(-100%);
+    `}
 `;

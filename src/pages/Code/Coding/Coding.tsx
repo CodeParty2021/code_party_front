@@ -13,6 +13,8 @@ import {
   ContainerMain,
   ContainerUnity,
   ContainerWrap,
+  DescriptionTab,
+  FlexBox,
   MessageStyle,
   TabStyle,
   UnityStyle,
@@ -40,6 +42,8 @@ export const CodeCoding: React.FC<Props> = () => {
     toggleLogHandler,
     showLog,
     showError,
+    description,
+    step,
   } = useCodingState();
   if (loading) {
     return (
@@ -80,16 +84,30 @@ export const CodeCoding: React.FC<Props> = () => {
             color="blue"
             showInfo={loading}
           />
-          <AlgoEditorStyle
-            defaultLanguage="python"
-            defaultValue={code && code.codeContent}
-            onMount={handleEditorDidMount}
-            close={showUnity || loading || showError || !isCode(code)}
-            width="70vw"
-            height="90vh"
-            showUnity={showUnity}
-            showInfo={loading || showError || !isCode(code)}
-          />
+          <FlexBox>
+            {description && (
+              <DescriptionTab
+                description={description}
+                stage={step?.id || 0}
+                workingStep={step?.id || 0}
+                completeStep={step?.id || 0}
+                maxStep={3}
+                title={""}
+                showDescription={showUnity}
+              />
+            )}
+            <AlgoEditorStyle
+              defaultLanguage="python"
+              defaultValue={code && code.codeContent}
+              onMount={handleEditorDidMount}
+              close={showUnity || loading || showError || !isCode(code)}
+              width="100%"
+              height="90vh"
+              showUnity={showUnity}
+              showInfo={loading || showError || !isCode(code)}
+            />
+          </FlexBox>
+
           {showUnity ? (
             <ButtonStyle
               value="コード画面に戻る"

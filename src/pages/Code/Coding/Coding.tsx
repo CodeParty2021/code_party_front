@@ -40,7 +40,7 @@ export const CodeCoding: React.FC<Props> = () => {
     toggleLogHandler,
     showLog,
     showError,
-    unityload,
+    unityLoad,
   } = useCodingState();
   if (loading) {
     return (
@@ -105,7 +105,7 @@ export const CodeCoding: React.FC<Props> = () => {
               size="M"
               onClick={closeEditorButtonHandler}
             />
-          ) : unityload ? (
+          ) : unityLoad ? (
             <ButtonStyle
               value="ロード中です"
               color="pink"

@@ -1,6 +1,7 @@
 version: "3"
 services:
   backend:
+    container_name: code_party_backend
     env_file:
       - .env.backend
     build:
@@ -14,6 +15,7 @@ services:
     ports:
       - 8000:8000
   firebase:
+    container_name: code_party_firebase
     env_file:
       - .env.firebase
     build:
@@ -35,36 +37,26 @@ services:
       - 4400:4400 # Emuylator Hub
       - 4500:4500 # Other reserved ports
   frontend:
+    container_name: code_party_frontend
     env_file:
       - .env
-    image: node:16.11.0
+    environment:
+      - WATCHPACK_POLLING=true
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.frontend
     volumes:
       - .:/frontend
       - frontend-node-modules:/frontend/node_modules
     tty: true
     working_dir: /frontend
-    command: >
-      bash -c 'yarn && yarn start'
+    command: yarn start
     ports:
       - 3000:3000
+      - 6006:6006
     links:
       - backend
       - firebase
-  storybook:
-    env_file:
-      - .env
-    image: node:16.11.0
-    volumes:
-      - .:/frontend
-      - storybook-node-modules:/frontend/node_modules
-    tty: true
-    working_dir: /frontend
-    command: >
-      bash -c 'yarn && yarn storybook'
-    ports:
-      - 6006:6006
-    links:
-      - frontend
 volumes:
   backend:
     driver: local

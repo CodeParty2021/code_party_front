@@ -53,6 +53,25 @@ services:
     command: yarn start
     ports:
       - 3000:3000
+    links:
+      - backend
+      - firebase
+  storybook:
+    container_name: code_party_storybook
+    env_file:
+      - .env
+    environment:
+      - WATCHPACK_POLLING=true
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.frontend
+    volumes:
+      - .:/storybook
+      - frontend-node-modules:/storybook/node_modules
+    tty: true
+    working_dir: /storybook
+    command: yarn storybook
+    ports:
       - 6006:6006
     links:
       - backend
@@ -63,4 +82,3 @@ volumes:
   firebase:
     driver: local
   frontend-node-modules:
-  storybook-node-modules:

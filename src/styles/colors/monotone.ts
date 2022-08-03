@@ -1,4 +1,4 @@
-export const WHITE = "#FFF";
+export const WHITE = "#FFFFFF";
 
 export const GRAY_00 = "#FAFAFA";
 export const GRAY_10 = "#F5F6F8";
@@ -12,4 +12,4 @@ export const GRAY_80 = "#4A5373";
 export const GRAY_90 = "#363E59";
 export const GRAY_100 = "#242A3D";
 
-export const BLACK = "#000";
+export const BLACK = "#191A20";

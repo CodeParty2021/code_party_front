@@ -5,7 +5,7 @@ exports[`<RoundedButton /> snapshot test 1`] = `
   display: inline-block;
   width: 16px;
   height: 16px;
-  fill: #2F364D;
+  fill: #363E59;
 }
 
 .c1 > span,
@@ -34,17 +34,17 @@ exports[`<RoundedButton /> snapshot test 1`] = `
   align-items: center;
   gap: 8px;
   height: 40px;
-  background: #F1F3F8;
-  border: 1px solid #E1E3EB;
+  background: #F5F6F8;
+  border: 1px solid #D7DAE4;
   border-radius: 40px;
-  color: #2F364D;
+  color: #363E59;
   font-size: 16px;
   line-height: 160%;
   padding: 4px 16px 4px 12px;
 }
 
 .c0:hover {
-  border-color: #6074FF;
+  border-color: #6675FC;
 }
 
 @supports not (gap:8px) {
@@ -59,7 +59,7 @@ exports[`<RoundedButton /> snapshot test 1`] = `
   <span
     class="c1"
     display="inline-block"
-    fill="#2F364D"
+    fill="#363E59"
   />
   <span>
     次へ

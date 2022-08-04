@@ -5,7 +5,7 @@ exports[`<StepHeader /> snapshot test 1`] = `
   display: inline-block;
   width: 16px;
   height: 16px;
-  fill: #2F364D;
+  fill: #363E59;
 }
 
 .c6 > span,
@@ -34,17 +34,17 @@ exports[`<StepHeader /> snapshot test 1`] = `
   align-items: center;
   gap: 8px;
   height: 40px;
-  background: #F1F3F8;
-  border: 1px solid #E1E3EB;
+  background: #F5F6F8;
+  border: 1px solid #D7DAE4;
   border-radius: 40px;
-  color: #2F364D;
+  color: #363E59;
   font-size: 16px;
   line-height: 160%;
   padding: 4px 16px 4px 12px;
 }
 
 .c5:hover {
-  border-color: #6074FF;
+  border-color: #6675FC;
 }
 
 .c7 {
@@ -65,17 +65,17 @@ exports[`<StepHeader /> snapshot test 1`] = `
   align-items: center;
   gap: 8px;
   height: 40px;
-  background: #F1F3F8;
-  border: 1px solid #E1E3EB;
+  background: #F5F6F8;
+  border: 1px solid #D7DAE4;
   border-radius: 40px;
-  color: #2F364D;
+  color: #363E59;
   font-size: 16px;
   line-height: 160%;
   padding: 4px 12px 4px 16px;
 }
 
 .c7:hover {
-  border-color: #6074FF;
+  border-color: #6675FC;
 }
 
 .c0 {
@@ -105,7 +105,7 @@ exports[`<StepHeader /> snapshot test 1`] = `
   font-weight: 400;
   font-size: 40px;
   line-height: 100%;
-  color: #6074FF;
+  color: #6675FC;
 }
 
 .c1 {
@@ -130,7 +130,7 @@ exports[`<StepHeader /> snapshot test 1`] = `
   font-size: 18px;
   line-height: 26px;
   font-feature-settings: "palt" on;
-  color: #363E59;
+  color: #4A5373;
   -webkit-transform: matrix(1,0,-0.08,1,0,0);
   -ms-transform: matrix(1,0,-0.08,1,0,0);
   transform: matrix(1,0,-0.08,1,0,0);
@@ -192,7 +192,7 @@ exports[`<StepHeader /> snapshot test 1`] = `
       <span
         class="c6"
         display="inline-block"
-        fill="#2F364D"
+        fill="#363E59"
       />
       <span>
         前へ
@@ -207,7 +207,7 @@ exports[`<StepHeader /> snapshot test 1`] = `
       <span
         class="c6"
         display="inline-block"
-        fill="#2F364D"
+        fill="#363E59"
       />
     </button>
   </div>

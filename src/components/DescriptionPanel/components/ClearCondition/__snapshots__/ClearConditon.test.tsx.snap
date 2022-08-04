@@ -50,7 +50,7 @@ exports[`<Button /> snapshot test 1`] = `
   isolation: isolate;
   width: 100%;
   background: #FAFAFA;
-  border: 2px solid #6675fc;
+  border: 2px solid #6675FC;
   border-radius: 8px;
   -webkit-flex: none;
   -ms-flex: none;
@@ -84,7 +84,7 @@ exports[`<Button /> snapshot test 1`] = `
   font-size: 15px;
   line-height: 22px;
   font-feature-settings: "palt" on;
-  color: #FFF;
+  color: #FFFFFF;
   -webkit-transform: matrix(0.99,0,-0.1,1,0,0);
   -ms-transform: matrix(0.99,0,-0.1,1,0,0);
   transform: matrix(0.99,0,-0.1,1,0,0);

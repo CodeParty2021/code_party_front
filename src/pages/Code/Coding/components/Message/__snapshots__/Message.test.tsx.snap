@@ -32,7 +32,7 @@ exports[`<Message /> snapshot test 1`] = `
   width: 614px;
   height: 210px;
   border-radius: 48px;
-  background: #FFF;
+  background: #FFFFFF;
 }
 
 .c0 .message_title {
@@ -44,18 +44,18 @@ exports[`<Message /> snapshot test 1`] = `
 .c0 .message_value {
   font-size: 24px;
   line-height: 150%;
-  color: #2A2C33;
+  color: #363E59;
   text-align: center;
 }
 
 .c0 .message_title {
-  color: #0DB3C6;
+  color: #34C5D5;
 }
 
 .c1 {
   width: 40px;
   height: 16px;
-  fill: #FFF;
+  fill: #FFFFFF;
 }
 
 @supports not (gap:24px) {

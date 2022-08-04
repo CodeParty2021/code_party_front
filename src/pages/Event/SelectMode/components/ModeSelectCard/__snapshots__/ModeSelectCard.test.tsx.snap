@@ -27,11 +27,11 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   width: 616px;
   height: 744px;
   position: relative;
-  background: #F5F6F8;
+  background: #FAFAFA;
   border-radius: 64px;
   font-weight: 700;
-  color: #2F364D;
-  fill: #2F364D;
+  color: #242A3D;
+  fill: #242A3D;
 }
 
 .c1 .modeselectcard_container_image {
@@ -88,17 +88,17 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   height: 100%;
   border-radius: 64px;
   box-sizing: border-box;
-  border: 2px solid #EAEBF1;
+  border: 2px solid #D7DAE4;
 }
 
 .c1:hover {
-  background: #5E67F5;
-  color: #FFF;
-  fill: #FFF;
+  background: #545EED;
+  color: #FFFFFF;
+  fill: #FFFFFF;
 }
 
 .c1:hover .modeselectcard_border {
-  border: 8px solid #5E67F5;
+  border: 8px solid #545EED;
 }
 
 .c2 {
@@ -110,11 +110,11 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  fill: #F5F6F8;
+  fill: #FAFAFA;
 }
 
 .c0:hover .c2.c2 {
-  fill: #5E67F5;
+  fill: #545EED;
 }
 
 @supports not (gap:32px) {

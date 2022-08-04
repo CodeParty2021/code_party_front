@@ -1,7 +1,7 @@
 import { IconButton } from "components/IconButton/IconButton";
 import { PlanetPicture } from "components/PlanetPicture/PlanetPicture";
 import styled, { css } from "styled-components";
-import { BLUE_45, BLUE_GRAY_20, GRAY_10, GRAY_20 } from "styles/colors";
+import { BLUE_50, GRAY_10, GRAY_30 } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
@@ -24,12 +24,12 @@ const defaultStyle = css`
   background-image: linear-gradient(
       0deg,
       transparent calc(100% - 1px),
-      ${GRAY_20} calc(100% - 1px)
+      ${GRAY_30} calc(100% - 1px)
     ),
     linear-gradient(
       90deg,
       transparent calc(100% - 1px),
-      ${GRAY_20} calc(100% - 1px)
+      ${GRAY_30} calc(100% - 1px)
     );
   background-size: 64px 64px;
   background-repeat: repeat;
@@ -69,7 +69,7 @@ const defaultStyle = css`
   .logpanel_title {
     font-family: ${FONT.F_851Gkktt};
     font-size: 29px;
-    color: ${BLUE_45};
+    color: ${BLUE_50};
   }
 
   .logpanel_container_main {
@@ -98,7 +98,7 @@ const defaultStyle = css`
     }
 
     ::-webkit-scrollbar-thumb {
-      background: ${BLUE_GRAY_20};
+      background: ${GRAY_30};
       border-radius: 4px;
     }
   }

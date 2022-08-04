@@ -1,8 +1,37 @@
-import { BLUE_50, BLUE_60, GREEN_50, GREEN_60, LEAF_50, ORANGE_50, PINK_50, PURPLE_40, RED_40, TURQUOISE_50 } from "./colorful";
-import { BLUE_TO_PURPLE, BLUE_TO_PURPLE_SHADOW, PINK_TO_ORANGE, PINK_TO_ORANGE_SHADOW } from "./gradation";
-import { BLACK, GRAY_00, GRAY_10, GRAY_100, GRAY_20, GRAY_30, GRAY_50, GRAY_60, GRAY_80, GRAY_90, WHITE } from "./monotone";
+import {
+  BLUE_50,
+  BLUE_60,
+  GREEN_50,
+  GREEN_60,
+  LEAF_50,
+  ORANGE_50,
+  PINK_50,
+  PURPLE_40,
+  RED_40,
+  TURQUOISE_50,
+} from "./colorful";
+import {
+  BLUE_TO_PURPLE,
+  BLUE_TO_PURPLE_SHADOW,
+  PINK_TO_ORANGE,
+  PINK_TO_ORANGE_SHADOW,
+} from "./gradation";
+import {
+  BLACK,
+  GRAY_00,
+  GRAY_10,
+  GRAY_100,
+  GRAY_20,
+  GRAY_30,
+  GRAY_50,
+  GRAY_60,
+  GRAY_80,
+  GRAY_90,
+  WHITE,
+} from "./monotone";
 
 export const global = {
+  base: GRAY_00,
   main: TURQUOISE_50,
 } as const;
 

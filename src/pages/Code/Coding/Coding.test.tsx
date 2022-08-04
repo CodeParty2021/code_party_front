@@ -24,6 +24,7 @@ const initialState: IResponse = {
   loading: false,
   isCode: () => true,
   execCode: jest.fn(),
+  unityLoad: false,
   turnLog: [
     {
       players: [{ print: "aaa" }, { print: "bbb" }],

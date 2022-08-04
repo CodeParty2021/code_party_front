@@ -27,6 +27,7 @@ export type IResponse = {
   showLog: boolean;
   showError: boolean;
   description: DescriptionCMSType;
+  unityLoad: boolean;
 };
 
 //TODO:ここstepかstageごとに変更する必要あり
@@ -51,6 +52,7 @@ export const useCodingState = () => {
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
   const [showError, setShowError] = useState(false);
+  const [unityLoad, setUnityLoad] = useState<boolean>(true);
   const navigate = useNavigate();
 
   //const { error: errorDescriptionCMS, getDescriptionFromStepID } =useDescriptionCMS();
@@ -103,6 +105,8 @@ export const useCodingState = () => {
     });
 
     unityContext.on("OnLoad", function () {
+      //ここにボタンを表示する処理を入れる。
+      setUnityLoad(false);
       console.log("OnLoad!!Unityから実行されました!");
     });
   }, []);
@@ -203,5 +207,6 @@ export const useCodingState = () => {
     toggleLogHandler,
     showLog,
     showError,
+    unityLoad,
   };
 };

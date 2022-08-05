@@ -48,7 +48,7 @@ services:
     image: code_party_frontend
     volumes:
       - .:/frontend
-      - frontend-node-modules:/frontend/node_modules
+      - node_modules:/frontend/node_modules
     tty: true
     working_dir: /frontend
     command: yarn start
@@ -66,7 +66,7 @@ services:
     image: code_party_frontend
     volumes:
       - .:/storybook
-      - frontend-node-modules:/storybook/node_modules
+      - node_modules:/storybook/node_modules
     tty: true
     working_dir: /storybook
     command: yarn storybook
@@ -76,7 +76,5 @@ services:
       - frontend
 volumes:
   backend:
-    driver: local
   firebase:
-    driver: local
-  frontend-node-modules:
+  node_modules:

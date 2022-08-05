@@ -45,6 +45,7 @@ services:
     build:
       context: .
       dockerfile: ./.docker/Dockerfile.frontend
+    image: code_party_frontend
     volumes:
       - .:/frontend
       - frontend-node-modules:/frontend/node_modules
@@ -62,9 +63,7 @@ services:
       - .env
     environment:
       - WATCHPACK_POLLING=true
-    build:
-      context: .
-      dockerfile: ./.docker/Dockerfile.frontend
+    image: code_party_frontend
     volumes:
       - .:/storybook
       - frontend-node-modules:/storybook/node_modules
@@ -74,8 +73,7 @@ services:
     ports:
       - 6006:6006
     links:
-      - backend
-      - firebase
+      - frontend
 volumes:
   backend:
     driver: local

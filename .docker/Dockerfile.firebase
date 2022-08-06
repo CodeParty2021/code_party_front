@@ -12,3 +12,5 @@ WORKDIR ${APP_ROOT}
 
 ADD ./.env.firebase ${APP_ROOT}/.env
 RUN yarn install
+
+CMD ["yarn", "start"]

@@ -8,7 +8,7 @@
 # 環境構築（Docker）
 - dockerまたはdocker desktopをインストール
   - [docker desktopのインストールはこちらから](https://www.docker.com/products/docker-desktop/)
-- dockerを起動
+- dockerまたはdocker desktopを起動
 - リポジトリをクローン
 - プロジェクトディレクトリに以下のファイルを作成
   - .env
@@ -32,8 +32,9 @@ $ docker-compose up -d
 - node_modulesを作り直したい
   - まずはコンテナを削除
   - frontend-node-modulesというDocker Volumeを削除
-  - storybook-node-modulesというDocker Volumeを削除
   - `docker-compose up -d`を実行（環境丸ごと作り直したい場合は`docker-compose build --no-cache`）
+- node_modulesがホスト側にあるとDockerが正常に動作しない可能性があります
+  - Volumeのnode_modulesより、ホスト側のnode_modulesが優先的に参照される場合があるみたいです。
 
 # 環境構築（従来）
 

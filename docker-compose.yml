@@ -65,10 +65,10 @@ services:
       - WATCHPACK_POLLING=true
     image: code_party_frontend
     volumes:
-      - .:/storybook
-      - node_modules:/storybook/node_modules
+      - .:/frontend
+      - node_modules:/frontend/node_modules
     tty: true
-    working_dir: /storybook
+    working_dir: /frontend
     command: yarn storybook
     ports:
       - 6006:6006

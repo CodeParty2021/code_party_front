@@ -1,7 +1,7 @@
 import { AlgoHead } from "components/Character/Algo/Head/AlgoHead";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
-import { BLUE_GRAY_60, WHITE } from "styles/colors";
+import { GRAY_80, WHITE } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 
 export const SetNameStyle = styled.div`
@@ -53,7 +53,7 @@ export const ModalTitle = styled.div`
     text-align: center;
     font-feature-settings: "palt" on;
 
-    color: ${BLUE_GRAY_60};
+    color: ${GRAY_80};
 
     transform: matrix(1, 0, -0.08, 1, 0, 0);
   }

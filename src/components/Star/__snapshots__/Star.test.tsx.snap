@@ -4,7 +4,7 @@ exports[`<Star /> snapshot test 1`] = `
 .c0 {
   width: 38px;
   height: 38px;
-  fill: #FE839F;
+  fill: #F8919F;
 }
 
 <svg

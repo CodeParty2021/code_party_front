@@ -4,7 +4,7 @@ exports[`<Button /> snapshot test 1`] = `
 .c1 {
   width: 38px;
   height: 38px;
-  fill: #D377FF;
+  fill: #BFA3FF;
 }
 
 .c4 {
@@ -16,13 +16,13 @@ exports[`<Button /> snapshot test 1`] = `
 .c7 {
   width: 38px;
   height: 38px;
-  fill: #FE839F;
+  fill: #F8919F;
 }
 
 .c10 {
   width: 38px;
   height: 38px;
-  fill: #7ED1E3;
+  fill: #34C5D5;
 }
 
 .c0 {

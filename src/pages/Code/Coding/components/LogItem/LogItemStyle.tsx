@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { BLUE_GRAY_70 } from "styles/colors";
+import { GRAY_90 } from "styles/colors";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
 export type LogItemStyleProps = {};
@@ -11,7 +11,7 @@ const defaultStyle = css`
   padding: 10px;
   ${FlexGap({ gap: "10px", direction: "row" })}
 
-  color: ${BLUE_GRAY_70};
+  color: ${GRAY_90};
   line-height: 160%;
 
   width: 100%;
@@ -25,7 +25,7 @@ const defaultStyle = css`
 
   .logitem_bar {
     width: 2px;
-    background: ${BLUE_GRAY_70};
+    background: ${GRAY_90};
     align-self: stretch;
     flex-shrink: 0;
     flex-grow: 0;

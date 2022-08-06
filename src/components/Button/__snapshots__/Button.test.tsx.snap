@@ -19,8 +19,8 @@ exports[`<Button /> snapshot test 1`] = `
   justify-content: center;
   font-weight: 700;
   line-height: 150%;
-  color: #FFF;
-  background: #1A1B1F;
+  color: #FFFFFF;
+  background: #242A3D;
   border-radius: 24px;
   padding-bottom: 8px;
   font-size: 24px;
@@ -45,15 +45,15 @@ exports[`<Button /> snapshot test 1`] = `
 }
 
 .c0 .frame {
-  background: #2F364D;
+  background: #363E59;
 }
 
 .c0:hover {
-  background: #2F364D;
+  background: #363E59;
 }
 
 .c0:hover .frame {
-  background: #495067;
+  background: #4A5373;
 }
 
 .c0 .frame {

@@ -2,13 +2,13 @@
 
 exports[`<RobotLink /> snapshot test 1`] = `
 .c8 .algo_color_main {
-  fill: #35C4D4;
+  fill: #34C5D5;
 }
 
 .c5 {
   font-family: "851Gkktt";
   font-size: 30px;
-  color: #F5F6F8;
+  color: #FFFFFF;
   overflow: hidden;
   width: 50px;
   height: 59px;
@@ -30,7 +30,7 @@ exports[`<RobotLink /> snapshot test 1`] = `
   top: 0;
   width: 100%;
   height: 100%;
-  fill: #2A2C33;
+  fill: #242A3D;
 }
 
 .c0 {

@@ -19,3 +19,5 @@ RUN pipenv run python manage.py loaddata event.json
 RUN echo "if [[ -z \"\${VIRTUAL_ENV}\" ]]; then" >> /root/.bashrc && \
   echo "source \$(pipenv --venv)/bin/activate" >> /root/.bashrc && \
   echo "fi"                                    >> /root/.bashrc
+
+CMD ["pipenv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]

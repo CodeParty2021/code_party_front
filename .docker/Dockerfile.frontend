@@ -10,3 +10,5 @@ ADD ./package.json ${APP_ROOT}/package.json
 ADD ./yarn.lock ${APP_ROOT}/yarn.lock
 
 RUN yarn install
+
+CMD ["yarn", "start"]

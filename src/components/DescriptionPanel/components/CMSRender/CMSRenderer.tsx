@@ -60,17 +60,27 @@ export const CMSRenderer: React.FC<Props> = ({
   return (
     <CMSRendererStyle>
       {description.body.map(
-        (s: BodyType | HintBoxType | TableType | ClearConditionType) => {
-          if (isBodyType(s)) return <div>{parse(s.html, options)}</div>;
+        (
+          s: BodyType | HintBoxType | TableType | ClearConditionType,
+          index: number
+        ) => {
+          if (isBodyType(s))
+            return <div key={index}>{parse(s.html, options)}</div>;
           if (isTableType(s))
-            return <Table {...styleProps}>{parse(s.body, options)}</Table>;
+            return (
+              <Table key={index} {...styleProps}>
+                {parse(s.body, options)}
+              </Table>
+            );
           if (isClearConditionType(s))
             return (
               <ClearCondition
+                key={index}
                 conditions={s.condition.map((c) => c.text)}
               ></ClearCondition>
             );
-          if (isHintBoxType(s)) return <div>ヒントボックスは未実装</div>;
+          if (isHintBoxType(s))
+            return <div key={index}>ヒントボックスは未実装</div>;
         }
       )}
     </CMSRendererStyle>

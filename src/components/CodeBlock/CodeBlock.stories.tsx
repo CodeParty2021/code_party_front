@@ -13,14 +13,15 @@ const Template: ComponentStory<typeof CodeBlock> = (args) => (
 );
 
 export const Default = Template.bind({});
-var code = '\
+var code =
+  "\
 import codeparty.squarepaint\n\
 \n\
 UP,DOWN,LEFT,RIGHT = 0,1,2,3\n\
 \n\
 def action(helper):\n\
     # ここを編集しよう\n\
-    return UP'
+    return UP";
 Default.args = {
   code: code,
   fontSize: 18,

@@ -6,22 +6,22 @@ import { FONT } from "styles/constants/constants";
 export type CodeBlockStyleProps = {};
 
 export const CodeBlockStyle = styled.div<CodeBlockStyleProps>`
-.CodeBlock > .monaco-editor {
-  display: flex;
-  padding: 0 32px 0 16px;
-  gap: 32px;
+  .CodeBlock > .monaco-editor {
+    display: flex;
+    padding: 0 32px 0 16px;
+    gap: 32px;
 
-  width: 100%;
+    width: 100%;
 
-  border-radius: 8px;
-}
+    border-radius: 8px;
+  }
 `;
 
 interface EditorStyleProps {
-  fontSize: number,
-  editorHeight: number,
-  contentHeight: number
-};
+  fontSize: number;
+  editorHeight: number;
+  contentHeight: number;
+}
 
 type EditorPropsExtend = EditorProps & EditorStyleProps;
 
@@ -40,7 +40,7 @@ export const editorStyleProps: (
       lineHeight: props.fontSize * 1.5,
       lineNumbersMinChars: 0,
       minimap: {
-        enabled: false
+        enabled: false,
       },
       overviewRulerLanes: 0,
       padding: {

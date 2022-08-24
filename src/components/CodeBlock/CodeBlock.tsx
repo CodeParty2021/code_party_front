@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  CodeBlockStyle,
-  editorStyleProps
-} 
-from "./CodeBlockStyle";
+import { CodeBlockStyle, editorStyleProps } from "./CodeBlockStyle";
 import Editor, { OnMount, EditorProps } from "@monaco-editor/react";
 
 type Props = {
@@ -17,13 +13,14 @@ export const CodeBlock: React.FC<Props> = ({
   code = "",
   fontSize = 18,
   height = 0,
-  editorProps
+  editorProps,
 }) => {
   const [editorHeight, setEditorHeight] = useState<number>(0);
   const [contentHeight, setContentHeight] = useState<number>(0);
 
   const handleEditorDidMount: OnMount = (editor) => {
-    const maxHeight = document.parentElement?.clientHeight || window.innerHeight;
+    const maxHeight =
+      document.parentElement?.clientHeight || window.innerHeight;
     const contentHeight = Math.min(maxHeight, editor.getContentHeight());
     setContentHeight(contentHeight);
     setEditorHeight(height || contentHeight);
@@ -41,8 +38,8 @@ export const CodeBlock: React.FC<Props> = ({
   return (
     <CodeBlockStyle>
       <Editor
-        className='CodeBlock'
-        {...editorStyleProps({fontSize, editorHeight, contentHeight})}
+        className="CodeBlock"
+        {...editorStyleProps({ fontSize, editorHeight, contentHeight })}
         defaultLanguage="python"
         loading=""
         value={code}

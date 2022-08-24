@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CodeBlock /> snapshot test 1`] = `
+.c0 .CodeBlock > .monaco-editor {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 32px 0 16px;
+  gap: 32px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+<div
+  class="c0"
+>
+  <section
+    style="display:flex;position:relative;text-align:initial;width:100%;height:0"
+  >
+    <div
+      style="display:flex;height:100%;width:100%;justify-content:center;align-items:center"
+    />
+    <div
+      class="CodeBlock"
+      style="width:100%;display:none"
+    />
+  </section>
+</div>
+`;

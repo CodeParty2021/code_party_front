@@ -9,7 +9,6 @@ export const CodeBlockStyle = styled.div<CodeBlockStyleProps>`
   .CodeBlock > .monaco-editor {
     display: flex;
     padding: 0 32px 0 16px;
-    gap: 32px;
 
     width: 100%;
 
@@ -31,7 +30,9 @@ export const editorStyleProps: (
   return {
     theme: "vs-dark",
     height: props.editorHeight,
+    width: "100%",
     options: {
+      fixedOverflowWidgets: false,
       contextmenu: false,
       domReadOnly: true,
       folding: false,

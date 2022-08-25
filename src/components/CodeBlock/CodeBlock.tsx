@@ -14,15 +14,14 @@ export const CodeBlock: React.FC<Props> = ({
   fontSize = 18,
   height = 0,
   editorProps,
+  ...styleProps
 }) => {
   const [editorHeight, setEditorHeight] = useState<number>(0);
-  const [contentHeight, setContentHeight] = useState<number>(0);
 
   const handleEditorDidMount: OnMount = (editor) => {
     const maxHeight =
       document.parentElement?.clientHeight || window.innerHeight;
     const contentHeight = Math.min(maxHeight, editor.getContentHeight());
-    setContentHeight(contentHeight);
     setEditorHeight(height || contentHeight);
     editor.layout({ width: editor.getContentWidth(), height: editorHeight });
 
@@ -36,10 +35,10 @@ export const CodeBlock: React.FC<Props> = ({
   };
 
   return (
-    <CodeBlockStyle>
+    <CodeBlockStyle {...styleProps}>
       <Editor
         className="CodeBlock"
-        {...editorStyleProps({ fontSize, editorHeight, contentHeight })}
+        {...editorStyleProps({ fontSize, editorHeight })}
         defaultLanguage="python"
         loading=""
         value={code}

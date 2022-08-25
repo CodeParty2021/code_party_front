@@ -5,13 +5,16 @@ import { FONT } from "styles/constants/constants";
 
 export type CodeBlockStyleProps = {};
 
+const paddingSize = 16;
+
 export const CodeBlockStyle = styled.div<CodeBlockStyleProps>`
-  .CodeBlock > .monaco-editor {
-    display: flex;
-    padding: 0 32px 0 16px;
-
+  .monaco-editor {
+    padding-left: ${paddingSize}px;
     width: 100%;
+    border-radius: 8px;
+  }
 
+  .overflow-guard {
     border-radius: 8px;
   }
 `;
@@ -19,7 +22,6 @@ export const CodeBlockStyle = styled.div<CodeBlockStyleProps>`
 interface EditorStyleProps {
   fontSize: number;
   editorHeight: number;
-  contentHeight: number;
 }
 
 type EditorPropsExtend = EditorProps & EditorStyleProps;
@@ -30,9 +32,8 @@ export const editorStyleProps: (
   return {
     theme: "vs-dark",
     height: props.editorHeight,
-    width: "100%",
+    width: `calc(100% - ${paddingSize}px)`,
     options: {
-      fixedOverflowWidgets: false,
       contextmenu: false,
       domReadOnly: true,
       folding: false,
@@ -45,17 +46,12 @@ export const editorStyleProps: (
       },
       overviewRulerLanes: 0,
       padding: {
-        top: 16,
-        bottom: 16,
+        top: paddingSize,
+        bottom: paddingSize,
       },
       readOnly: true,
       renderLineHighlight: "none",
       scrollBeyondLastLine: false,
-      scrollbar: {
-        vertical: props.editorHeight < props.contentHeight ? "auto" : "hidden",
-        horizontal: "hidden",
-        handleMouseWheel: props.editorHeight < props.contentHeight,
-      },
     },
   };
 };

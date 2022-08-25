@@ -1,0 +1,311 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CMSRenderer /> snapshot test 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.c6 {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 160%;
+  color: #363E59;
+}
+
+.c8 {
+  border-collapse: collapse;
+}
+
+.c7 {
+  display: inline-block;
+  text-align: center;
+  background-color: #EAEBF1;
+  border-radius: 8px;
+  padding: 8px;
+  color: #242A3D;
+}
+
+.c7 thead {
+  border-bottom: 1px solid #242A3D;
+  margin: 2px 0px;
+}
+
+.c7 th {
+  padding: 2px 16px;
+}
+
+.c7 td {
+  padding: 2px 16px;
+}
+
+.c7 tr {
+  padding: 2px 0px;
+}
+
+.c9 {
+  box-sizing: border-box;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding: 40px 24px 16px;
+  gap: 16px;
+  isolation: isolate;
+  width: 100%;
+  background: #FAFAFA;
+  border: 2px solid #6675FC;
+  border-radius: 8px;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  -webkit-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  position: relative;
+}
+
+.c10 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.c11 {
+  position: relative;
+  left: 20px;
+  top: 1px;
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 22px;
+  font-feature-settings: "palt" on;
+  color: #FFFFFF;
+  -webkit-transform: matrix(0.99,0,-0.1,1,0,0);
+  -ms-transform: matrix(0.99,0,-0.1,1,0,0);
+  transform: matrix(0.99,0,-0.1,1,0,0);
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  -webkit-order: 3;
+  -ms-flex-order: 3;
+  order: 3;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  z-index: 3;
+}
+
+.c12 {
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 160%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 16px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #242A3D;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 16px 0 16px 10px;
+}
+
+.c3 {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+.c2 {
+  position: relative;
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 32px;
+  font-feature-settings: "palt" on;
+  color: #FFFFFF;
+  margin-right: 14px;
+}
+
+.c5 {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 32px;
+  color: #242A3D;
+  -webkit-transform: matrix(1,0,-0.08,1,0,0);
+  -ms-transform: matrix(1,0,-0.08,1,0,0);
+  transform: matrix(1,0,-0.08,1,0,0);
+}
+
+.c4 {
+  padding: 0px 0px 2px 2px;
+  width: 38px;
+  height: 38px;
+  background: #242A3D;
+  border-radius: 6px;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+}
+
+@supports not (gap:16px) {
+  .c0 > *:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+@supports not (gap:16px) {
+  .c12 > *:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+<div
+  class="c0"
+>
+  <div>
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <div
+          class="c3"
+        >
+          1
+        </div>
+        <div
+          class="c4"
+        />
+      </div>
+      <h1
+        class="c5"
+      >
+        ステージ１
+      </h1>
+    </div>
+    <p
+      class="c6"
+    >
+      次の画像のように動こう
+      <br />
+      <br />
+      <img
+        alt=""
+        src="https://images.microcms-assets.io/assets/4712ba13111f4c01bab9c344ae473307/40378f930361435f8596628bd0264402/blog-template-description3.png"
+      />
+    </p>
+  </div>
+  <div>
+    <div
+      class="c7"
+    >
+      <table
+        class="c8"
+      />
+      <table>
+        <thead>
+          <tr>
+            <th>
+              1
+            </th>
+            <th>
+              2
+            </th>
+          </tr>
+          <tr>
+            <td>
+              a
+            </td>
+            <td>
+              b
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <div
+    class="c9"
+  >
+    <div
+      class="c10"
+    >
+      <img
+        src="ClearConditionTitleBar.svg"
+        style="position:absolute;user-select:none;display:block"
+      />
+      <div
+        class="c11"
+      >
+        クリア条件
+      </div>
+    </div>
+    <div
+      class="c12"
+    >
+      <div>
+        まるまるをこれこれしよう
+      </div>
+    </div>
+    <img
+      src="ClearConditionRB.svg"
+      style="position:absolute;right:0;bottom:0;z-index:1;user-select:none;display:block"
+    />
+  </div>
+  <div>
+    ヒントボックスは未実装
+  </div>
+</div>
+`;

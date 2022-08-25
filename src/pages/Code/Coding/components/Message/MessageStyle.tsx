@@ -1,6 +1,6 @@
 import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
-import { BLUE_GRAY_75, LIGHT_BLUE_70, RED_50, WHITE } from "styles/colors";
+import { GRAY_90, RED_50, TURQUOISE_50, WHITE } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
@@ -36,14 +36,14 @@ const defaultStyle = css`
   .message_value {
     font-size: 24px;
     line-height: 150%;
-    color: ${BLUE_GRAY_75};
+    color: ${GRAY_90};
     text-align: center;
   }
 `;
 
 const blueStyle = css`
   .message_title {
-    color: ${LIGHT_BLUE_70};
+    color: ${TURQUOISE_50};
   }
 `;
 

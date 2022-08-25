@@ -1,0 +1,14 @@
+FROM node:16.11.0
+
+RUN apt-get update -y
+
+ENV APP_ROOT /frontend
+WORKDIR ${APP_ROOT}
+
+ADD ./package-lock.json ${APP_ROOT}/package-lock.json
+ADD ./package.json ${APP_ROOT}/package.json
+ADD ./yarn.lock ${APP_ROOT}/yarn.lock
+
+RUN yarn install
+
+CMD ["yarn", "start"]

@@ -5,13 +5,13 @@ exports[`<Tab /> snapshot test 1`] = `
   display: block;
   width: 44px;
   height: 132px;
-  background: #FFF;
+  background: #FFFFFF;
   border-radius: 16px 0px 0px 16px;
   position: relative;
   font-family: "851Gkktt";
   font-size: 29px;
   text-align: center;
-  color: #6074FF;
+  color: #6675FC;
 }
 
 .c0 > span {

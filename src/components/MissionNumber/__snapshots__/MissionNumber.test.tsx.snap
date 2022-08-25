@@ -4,7 +4,7 @@ exports[`<MissionNumber /> snapshot test 1`] = `
 .c0 {
   font-family: "851Gkktt";
   font-size: 30px;
-  color: #F5F5F5;
+  color: #FFFFFF;
   overflow: hidden;
   width: 50px;
   height: 59px;
@@ -26,7 +26,7 @@ exports[`<MissionNumber /> snapshot test 1`] = `
   top: 0;
   width: 100%;
   height: 100%;
-  fill: #2A2C33;
+  fill: #242A3D;
 }
 
 <div

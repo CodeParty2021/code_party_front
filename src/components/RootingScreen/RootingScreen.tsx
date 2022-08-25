@@ -27,13 +27,43 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/start">ログイン画面</Link>
         </li>
         <li>
-          <Link to="/mode-select">モード選択画面</Link>
+          <Link to="/mode-select">選択画面Top</Link>
         </li>
+        <li>
+          <Link to="/free-coding">フリーコーディング</Link>
+        </li>
+        <li>
+          <Link to="/codes">コード一覧</Link>
+        </li>
+        <li>
+          <Link to="/Lp">LP画面</Link>
+        </li>
+      </ul>
+
+      <h1>ロボット開発モード系のページ</h1>
+      <ul>
+        <li>
+          <Link to="/robot-development/top">ロボット開発モードの選択画面</Link>
+        </li>
+
+        <li>
+          <Link to="/robot-development/specification">
+            ロボットの設計仕様書
+          </Link>
+        </li>
+        <li>
+          <Link to="/garage">ロボットのステータスを見る</Link>
+        </li>
+      </ul>
+      <h1>ルーム対戦モード系のページ</h1>
+      <ul>
         <li>
           <Link to="/casual-battle">カジュアルロビー画面</Link>
         </li>
         <li>
-          <Link to="/casual-battle/invitation">カジュアル対戦招待画面</Link>
+          <Link to="/casual-battle/invitation/:roomId">
+            カジュアル対戦招待画面
+          </Link>
         </li>
         <li>
           <Link to="/casual-battle/waiting-room">待機招待画面</Link>
@@ -45,10 +75,28 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/casual-battle/result">観戦画面</Link>
         </li>
         <li>
-          <Link to="/free-coding">フリーコーディング</Link>
+          <Link to="/casual-battle/pick-code">対戦させるロボットを選ぶ</Link>
+        </li>
+      </ul>
+      <h1>チュートリアル系のページ</h1>
+      <ul>
+        <li>
+          <Link to="/tutorial/world/:id/missions">ミッション一覧</Link>
         </li>
         <li>
-          <Link to="/codes">ガレージ画面（コード一覧)</Link>
+          <Link to="/tutorial/world/:world_id/mission/:mission_id/step/:step_id">
+            ミッションの詳細(step)用のページ
+          </Link>
+        </li>
+        <li>
+          <Link to="/tutorial/world/:world_id/mission/:mission_id/end">
+            ミッション終了後のページ
+          </Link>
+        </li>
+        <li>
+          <Link to="/tutorial/world/:world_id/intro">
+            ワールド・ゲームの説明画面
+          </Link>
         </li>
       </ul>
       <h1>イベント系のページ</h1>

@@ -1,0 +1,16 @@
+FROM node:16.11.0
+
+RUN apt-get update -y
+
+RUN apt-get install -y openjdk-11-jre-headless
+
+RUN rm -rf /firebase
+RUN git clone https://github.com/CodeParty2021/code_party_firebase.git /firebase
+
+ENV APP_ROOT /firebase
+WORKDIR ${APP_ROOT}
+
+ADD ./.env.firebase ${APP_ROOT}/.env
+RUN yarn install
+
+CMD ["yarn", "start"]

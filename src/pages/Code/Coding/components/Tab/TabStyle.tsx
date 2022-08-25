@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { BLUE_45, WHITE } from "styles/colors";
+import { BLUE_50, WHITE } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 
 export type TabStyleProps = {};
@@ -17,7 +17,7 @@ const defaultStyle = css`
   font-size: 29px;
   text-align: center;
 
-  color: ${BLUE_45};
+  color: ${BLUE_50};
 
   & > span {
     display: block;

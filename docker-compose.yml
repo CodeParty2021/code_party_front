@@ -1,0 +1,80 @@
+version: "3"
+services:
+  backend:
+    container_name: code_party_backend
+    env_file:
+      - .env.backend
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.backend
+    volumes:
+      - backend:/backend
+    tty: true
+    working_dir: /backend
+    command: pipenv run python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+  firebase:
+    container_name: code_party_firebase
+    env_file:
+      - .env.firebase
+    build:
+      context: .
+      dockerfile: ".docker/Dockerfile.firebase"
+    volumes:
+      - firebase:/firebese
+    tty: true
+    working_dir: /firebase
+    command: yarn start
+    ports:
+      - 4000:4000 # Emulator Suite UI
+      - 9099:9099 # Authentication
+      #- 5000:5000 # Firebase Hosting
+      #- 5001:5001 # Clound Functions
+      - 9000:9000 # Realtime Database
+      #- 8080:8080 # Cloud Firestore
+      #- 8085:8085 # Cloud Pub/Sub
+      - 4400:4400 # Emuylator Hub
+      - 4500:4500 # Other reserved ports
+  frontend:
+    container_name: code_party_frontend
+    env_file:
+      - .env
+    environment:
+      - WATCHPACK_POLLING=true
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.frontend
+    image: code_party_frontend
+    volumes:
+      - .:/frontend
+      - node_modules:/frontend/node_modules
+    tty: true
+    working_dir: /frontend
+    command: yarn start
+    ports:
+      - 3000:3000
+    links:
+      - backend
+      - firebase
+  storybook:
+    container_name: code_party_storybook
+    env_file:
+      - .env
+    environment:
+      - WATCHPACK_POLLING=true
+    image: code_party_frontend
+    volumes:
+      - .:/frontend
+      - node_modules:/frontend/node_modules
+    tty: true
+    working_dir: /frontend
+    command: yarn storybook
+    ports:
+      - 6006:6006
+    links:
+      - frontend
+volumes:
+  backend:
+  firebase:
+  node_modules:

@@ -14,7 +14,7 @@ exports[`<IconCircle /> snapshot test 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #5FC322;
+  background: #30C567;
   width: 64px;
   height: 64px;
   border-radius: 78.75px;
@@ -24,7 +24,7 @@ exports[`<IconCircle /> snapshot test 1`] = `
   display: inline-block;
   width: 32px;
   height: 32px;
-  fill: #FFF;
+  fill: #FFFFFF;
 }
 
 .c1 > span,
@@ -41,7 +41,7 @@ exports[`<IconCircle /> snapshot test 1`] = `
   <span
     class="c1"
     display="inline-block"
-    fill="#FFF"
+    fill="#FFFFFF"
   />
 </div>
 `;

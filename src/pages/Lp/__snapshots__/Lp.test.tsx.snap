@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Lp /> snapshot test 1`] = `
+Array [
+  <div
+    id="overlay"
+  >
+    <div
+      id="content"
+    >
+      <p>
+        宣伝用のページです。
+      </p>
+      <Link
+        to="/"
+      >
+        タイトル画面に進む(Topページ)
+      </Link>
+      <Styled(StarBackground) />
+    </div>
+  </div>,
+]
+`;

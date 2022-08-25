@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import Unity from "react-unity-webgl";
 import styled, { css } from "styled-components";
-import { BLUE_GRAY_70, WHITE } from "styles/colors";
+import { GRAY_90, WHITE } from "styles/colors";
 import { FONT_WEIGHT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 import { AlgoEditor } from "./components/AlgoEditor/AlgoEditor";
@@ -68,7 +68,7 @@ export const BackLink = styled(Link)`
   top: 32px;
   left: 32px;
 
-  color: ${BLUE_GRAY_70};
+  color: ${GRAY_90};
   font-weight: ${FONT_WEIGHT.BOLD};
   font-size: 20px;
   line-height: 160%;

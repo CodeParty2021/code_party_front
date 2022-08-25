@@ -27,14 +27,15 @@ export type IResponse = {
   showLog: boolean;
   showError: boolean;
   description: DescriptionCMSType;
+  unityLoad: boolean;
 };
 
 //TODO:ここstepかstageごとに変更する必要あり
 const unityContext = new UnityContext({
   loaderUrl: "/unity/sp/web.loader.js",
-  dataUrl: "/unity/sp/web.data.unityweb",
-  frameworkUrl: "/unity/sp/web.framework.js.unityweb",
-  codeUrl: "/unity/sp/web.wasm.unityweb",
+  dataUrl: "/unity/sp/web.data",
+  frameworkUrl: "/unity/sp/web.framework.js",
+  codeUrl: "/unity/sp/web.wasm",
 });
 
 export const useCodingState = () => {
@@ -51,11 +52,12 @@ export const useCodingState = () => {
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
   const [showError, setShowError] = useState(false);
+  const [unityLoad, setUnityLoad] = useState<boolean>(true);
   const navigate = useNavigate();
 
-  const { error: errorDescriptionCMS, getDescriptionFromStepID } =
-    useDescriptionCMS();
+  //const { error: errorDescriptionCMS, getDescriptionFromStepID } =useDescriptionCMS();
 
+  const { getDescriptionFromStepID } = useDescriptionCMS();
   const [code, setCode] = useState<CodeType>(); //表示中のコード
   //code の型ガード
   function isCode(code: CodeType | undefined): code is CodeType {
@@ -85,7 +87,6 @@ export const useCodingState = () => {
         navigate(`/free-coding/${code.id}/`);
       }
       await setTimeout(() => {}, 5000);
-      console.log("aa");
       setLoading(false);
       console.log(loading);
     };
@@ -97,6 +98,16 @@ export const useCodingState = () => {
   useEffect(() => {
     unityContext.on("progress", function (progression) {
       setProgression(progression);
+    });
+
+    unityContext.on("GameOver", function () {
+      console.log("GameOver!!Unityから実行されました!");
+    });
+
+    unityContext.on("OnLoad", function () {
+      //ここにボタンを表示する処理を入れる。
+      setUnityLoad(false);
+      console.log("OnLoad!!Unityから実行されました!");
     });
   }, []);
 
@@ -152,20 +163,35 @@ export const useCodingState = () => {
     setShowLog((showLog) => !showLog);
   };
 
-  // エラー発生時の処理
   useEffect(() => {
     if (error) {
       setShowUnity(false);
       setShowLog(false);
       setShowError(true);
     }
-    if (errorDescriptionCMS && errorCodeAPI) {
+  }, [error]);
+
+  useEffect(() => {
+    if (errorCodeAPI) {
+      setError(error + "," + errorCodeAPI);
+    } else {
+      setError(error || errorCodeAPI);
+    }
+  }, [errorCodeAPI]);
+  /* cmsのエラー判定を一旦コメントアウト
+  useEffect(() => {
+    if (error) {
+      setShowUnity(false);
+      setShowLog(false);
+      setShowError(true);
+    }
+    if (errorCodeAPI) {
       setError(errorDescriptionCMS + "," + errorCodeAPI);
     } else {
       setError(errorDescriptionCMS || errorCodeAPI);
     }
   }, [error, errorDescriptionCMS, errorCodeAPI]);
-
+  */
   return {
     code,
     description,
@@ -181,5 +207,6 @@ export const useCodingState = () => {
     toggleLogHandler,
     showLog,
     showError,
+    unityLoad,
   };
 };

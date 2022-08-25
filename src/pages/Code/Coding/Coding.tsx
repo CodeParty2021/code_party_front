@@ -23,7 +23,7 @@ import { LogPanel } from "./components/LogPanel/LogPanel";
 import { LogItem } from "./components/LogItem/LogItem";
 import { IconButton } from "components/IconButton/IconButton";
 import { ArrowLeft } from "components/icons";
-
+import { Loading } from "pages/Loading/Loading";
 type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
@@ -40,7 +40,15 @@ export const CodeCoding: React.FC<Props> = () => {
     toggleLogHandler,
     showLog,
     showError,
+    unityLoad,
   } = useCodingState();
+  if (loading) {
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
+  }
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -67,7 +75,7 @@ export const CodeCoding: React.FC<Props> = () => {
             color="red"
             showInfo={!isCode(code)}
           />
-          <MessageStyle
+          <MessageStyle //ローディング中の文章、消してもいいかも？
             title="ローディングチュウ..."
             value="しばらくお待ちください"
             color="blue"
@@ -96,6 +104,14 @@ export const CodeCoding: React.FC<Props> = () => {
               color="black"
               size="M"
               onClick={closeEditorButtonHandler}
+            />
+          ) : unityLoad ? (
+            <ButtonStyle
+              value="ロード中です"
+              color="pink"
+              size="M"
+              onClick={execCode}
+              status="disabled"
             />
           ) : (
             <ButtonStyle

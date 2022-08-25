@@ -1,9 +1,42 @@
 # CodeParty フロントエンド
+
 目次
-- [スタートアップ](#%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89)
+- [環境構築（Docker）](#環境構築docker)
+- [環境構築（従来）](#環境構築従来)
 - [アイコンシステム](/commands/IconImporter/README.md)
 
-# 環境構築
+# 環境構築（Docker）
+- dockerまたはdocker desktopをインストール
+  - [docker desktopのインストールはこちらから](https://www.docker.com/products/docker-desktop/)
+- dockerまたはdocker desktopを起動
+- リポジトリをクローン
+- プロジェクトディレクトリに以下のファイルを作成
+  - .env
+    - 内容は[こちら](https://www.notion.so/env-6c50632c787043b4a34d58680bf9a4fe)をコピー
+  - .env.backend
+    - 内容は[こちら](https://www.notion.so/750a8dca400848d1a0ee8c8b1613d343)をコピー
+  - .env.firebase
+    - 内容は[こちら](https://www.notion.so/Firebase-9ea6d66210d9401a9ca06fa795ab7500)をコピー
+- プロジェクトディレクトリで以下のコマンドを実行
+```
+$ docker-compose build
+$ docker-compose up -d
+```
+- ここまでで、フロントエンド・Storybook・バックエンド・Firebaseのそれぞれのコンテナが作成されます。
+- node_modulesはホスト側に作成されないので、VSCodeのDocker拡張機能などを利用してコンテナ内で作業することをお勧めします。
+  - 編集内容はホスト側と同期されるので、コンテナを消してもコードの編集内容は残ります。
+
+## Dockerで困ったとき
+- パッケージを追加したい
+  - コンテナ内で`yarn add`をした後に`docker-compose restart`でコンテナを再起動
+- node_modulesを作り直したい
+  - まずはコンテナを削除
+  - frontend-node-modulesというDocker Volumeを削除
+  - `docker-compose up -d`を実行（環境丸ごと作り直したい場合は`docker-compose build --no-cache`）
+- node_modulesがホスト側にあるとDockerが正常に動作しない可能性があります
+  - Volumeのnode_modulesより、ホスト側のnode_modulesが優先的に参照される場合があるみたいです。
+
+# 環境構築（従来）
 
 1. ライブラリインストール
 

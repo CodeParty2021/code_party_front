@@ -6,6 +6,7 @@ import {
   DescriptionCMSType,
   useDescriptionCMS,
 } from "hooks/DescriptionCMSHooks/useDescriptionCMS";
+import { useUnityGame } from "hooks/UnityGameHooks/useUnityGame";
 
 export type RunResponse = {
   unityURL: string;
@@ -30,14 +31,6 @@ export type IResponse = {
   unityLoad: boolean;
 };
 
-//TODO:ここstepかstageごとに変更する必要あり
-const unityContext = new UnityContext({
-  loaderUrl: "/unity/sp/web.loader.js",
-  dataUrl: "/unity/sp/web.data",
-  frameworkUrl: "/unity/sp/web.framework.js",
-  codeUrl: "/unity/sp/web.wasm",
-});
-
 export const useCodingState = () => {
   const { codeId } = useParams<string>(); //code_id
   const {
@@ -52,7 +45,6 @@ export const useCodingState = () => {
   const [json, setJson] = useState<string>("");
   const [turnLog, setTurnLog] = useState<TurnState[]>([]);
   const [showError, setShowError] = useState(false);
-  const [unityLoad, setUnityLoad] = useState<boolean>(true);
   const navigate = useNavigate();
 
   //const { error: errorDescriptionCMS, getDescriptionFromStepID } =useDescriptionCMS();
@@ -93,23 +85,7 @@ export const useCodingState = () => {
     loadCode();
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_progression, setProgression] = useState(0); // this value will change to 1 when the end of the loading.
-  useEffect(() => {
-    unityContext.on("progress", function (progression) {
-      setProgression(progression);
-    });
-
-    unityContext.on("GameOver", function () {
-      console.log("GameOver!!Unityから実行されました!");
-    });
-
-    unityContext.on("OnLoad", function () {
-      //ここにボタンを表示する処理を入れる。
-      setUnityLoad(false);
-      console.log("OnLoad!!Unityから実行されました!");
-    });
-  }, []);
+  const { unityContext, unityStatus, startGame } = useUnityGame("SquarePaint");
 
   const [showUnity, setShowUnity] = useState(false); // unityの表示フラグ
 
@@ -126,17 +102,11 @@ export const useCodingState = () => {
     return editorRef.current?.getValue();
   }
 
-  const loadJson = (json: string) => {
-    //unityContext.send("JSONLoader", "LoadJSON", json);
-    unityContext.send("ReactUnityConnector", "SetSimulationData", json);
-    unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
-  };
-
   // jsonに値が入ればunity描画、空が入ればunity非表示
   useEffect(() => {
-    setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
-    loadJson(json);
-  }, [json]);
+    setShowUnity(json !== "");
+    startGame(json);
+  }, [json, startGame]);
 
   // unityモーダルを閉じる
   const _closeEditorButtonHandler = () => {
@@ -207,6 +177,6 @@ export const useCodingState = () => {
     toggleLogHandler,
     showLog,
     showError,
-    unityLoad,
+    unityLoad: unityStatus.isLoading,
   };
 };

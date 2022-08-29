@@ -5,7 +5,7 @@ export type IResponse = {
   /**
    * Unityコンポーネントで埋め込むコンテキスト
    */
-  unityContext: UnityContext,
+  unityContext: UnityContext;
   /**
    * Unityの状態
    */
@@ -61,12 +61,14 @@ export const useUnityGame = (
   gameType: UnityStatus["gameType"],
   /**
    * Unityがロードされたタイミングで呼ばれるコールバック関数
+   * 基本的にはisLoadingを使用すること
    */
-  onLoading: () => void,
+  onLoading?: () => void,
   /**
-  * Unityのゲームが終了したタイミングで呼ばれるコールバック関数
-  */
-  onGameOver: () => void,
+   * Unityのゲームが終了したタイミングで呼ばれるコールバック関数
+   * 基本的にはisRunningを使用すること
+   */
+  onGameOver?: () => void
 ): IResponse => {
   const [unityStatus, setUnityStatus] = useState<UnityStatus>({
     ...initUnityStatus,
@@ -76,41 +78,43 @@ export const useUnityGame = (
   // コンストラクタ
   useEffect(() => {
     unityContext.on("progress", function (progression) {
-      setUnityStatus(current => ({
+      setUnityStatus((current) => ({
         ...current,
-        loadingProgression: progression
+        loadingProgression: progression,
       }));
-
     });
 
     unityContext.on("OnLoad", function () {
-      setUnityStatus(current => ({
+      setUnityStatus((current) => ({
         ...current,
         isLoading: false,
       }));
-      onLoading();
+      if (onLoading) onLoading();
     });
 
     unityContext.on("GameOver", function () {
-      setUnityStatus(current => ({
+      setUnityStatus((current) => ({
         ...current,
         isRunning: false,
       }));
-      onGameOver();
+      if (onGameOver) onGameOver();
     });
-  }, []);
+  }, [unityContext, onLoading, onGameOver]);
 
-  const startGame = useCallback<IResponse["startGame"]>((json) => {
-    // 状態変化
-    setUnityStatus(current => ({
-      ...current,
-      isRunning: true,
-    }));
+  const startGame = useCallback<IResponse["startGame"]>(
+    (json) => {
+      // 状態変化
+      setUnityStatus((current) => ({
+        ...current,
+        isRunning: true,
+      }));
 
-    // 実行
-    unityContext.send("ReactUnityConnector", "SetSimulationData", json);
-    unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
-  }, []);
+      // 実行
+      unityContext.send("ReactUnityConnector", "SetSimulationData", json);
+      unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
+    },
+    [unityContext]
+  );
 
   return {
     unityContext,

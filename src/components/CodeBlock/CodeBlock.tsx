@@ -19,9 +19,7 @@ export const CodeBlock: React.FC<Props> = ({
   const [editorHeight, setEditorHeight] = useState<number>(0);
 
   const handleEditorDidMount: OnMount = (editor) => {
-    const maxHeight =
-      document.parentElement?.clientHeight || window.innerHeight;
-    const contentHeight = Math.min(maxHeight, editor.getContentHeight());
+    const contentHeight = editor.getContentHeight();
     setEditorHeight(height || contentHeight);
     editor.layout({ width: editor.getContentWidth(), height: editorHeight });
 

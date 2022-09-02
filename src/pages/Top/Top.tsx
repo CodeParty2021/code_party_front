@@ -1,13 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Button } from "components/Button/Button";
+import { Background } from "./components/Background";
+import { useTopState } from "./hooks/useTopState";
+import { ButtonBox, CenterBox, LogoStyle, TopStyle } from "./TopStyle";
 
 type Prop = {};
 
 export const Top: React.FC<Prop> = () => {
+  const { anonymousLoginBtnDisabled, anonymousLoginBtnHandler } = useTopState();
   return (
-    <div>
-      <h1>What is CodeParty</h1>
-      <Link to="/start">ログインページ</Link>
-    </div>
+    <>
+      <TopStyle>
+        <CenterBox>
+          <LogoStyle src="./logo.svg" />
+          <ButtonBox>
+            <Button
+              color="pink"
+              icon={null}
+              onClick={anonymousLoginBtnHandler}
+              size="L"
+              status={anonymousLoginBtnDisabled ? "disabled" : "default"}
+              value="いざスタート！"
+            />
+          </ButtonBox>
+        </CenterBox>
+      </TopStyle>
+      <Background />
+    </>
   );
 };

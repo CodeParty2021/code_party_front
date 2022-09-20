@@ -30,7 +30,6 @@ export const CodeCoding: React.FC<Props> = () => {
   const {
     code,
     loading,
-    isCode,
     execCode,
     turnLog,
     handleEditorDidMount,
@@ -73,7 +72,7 @@ export const CodeCoding: React.FC<Props> = () => {
             title="ヨミコミチュウ！"
             value="しばらくお待ちください"
             color="red"
-            showInfo={!isCode(code)}
+            showInfo={loading}
           />
           <MessageStyle //ローディング中の文章、消してもいいかも？
             title="ローディングチュウ..."
@@ -85,11 +84,11 @@ export const CodeCoding: React.FC<Props> = () => {
             defaultLanguage="python"
             defaultValue={code && code.codeContent}
             onMount={handleEditorDidMount}
-            close={showUnity || loading || showError || !isCode(code)}
+            close={showUnity || loading || showError}
             width="70vw"
             height="90vh"
             showUnity={showUnity}
-            showInfo={loading || showError || !isCode(code)}
+            showInfo={loading || showError}
           />
           {showUnity ? (
             <ButtonStyle
@@ -98,7 +97,7 @@ export const CodeCoding: React.FC<Props> = () => {
               size="M"
               onClick={closeEditorButtonHandler}
             />
-          ) : loading || showError || !isCode(code) ? (
+          ) : loading || showError ? (
             <ButtonStyle
               value="コード画面に戻る"
               color="black"
@@ -123,12 +122,13 @@ export const CodeCoding: React.FC<Props> = () => {
           )}
         </ContainerMain>
         <LogPanel onCloseButtonClick={toggleLogHandler}>
-          {turnLog.map((turn, index) => {
-            const log = turn.players[0].print;
-            if (log) {
-              return <LogItem key={index} turnNum={index + 1} log={log} />;
-            }
-          })}
+          {turnLog &&
+            turnLog.map((turn, index) => {
+              const log = turn.players[0].print;
+              if (log) {
+                return <LogItem key={index} turnNum={index + 1} log={log} />;
+              }
+            })}
         </LogPanel>
       </ContainerWrap>
       <TabStyle value="LOG" onClick={toggleLogHandler} showLog={showLog} />

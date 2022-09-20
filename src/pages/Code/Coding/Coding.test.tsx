@@ -20,9 +20,7 @@ const initialState: IResponse = {
     user: "teruto",
     step: 1,
   },
-  error: undefined,
   loading: false,
-  isCode: () => true,
   execCode: jest.fn(),
   unityLoad: false,
   turnLog: [

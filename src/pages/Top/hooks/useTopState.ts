@@ -34,7 +34,7 @@ export const useFisrtLoginTopState = (): IResponse => {
   };
 };
 
-export const useLoginTopState = (): IResponse2 => {
+export const useNormalLoginTopState = (): IResponse2 => {
   const [NormalLoginBtnDisabled, setNormalLoginBtnDisabled] =
     useState(false);
   const navigate = useNavigate();

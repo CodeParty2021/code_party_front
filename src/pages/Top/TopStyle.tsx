@@ -10,6 +10,7 @@ export const TopStyle = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
 export const LogoStyle = styled.img`
   width: 665px;
   height: 306px;
@@ -24,7 +25,6 @@ export const ButtonBox = styled.div`
 
 export const CenterBox = styled.div`
   display: flex;
-
   align-items: center;
   flex-direction: column;
 `;

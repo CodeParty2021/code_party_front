@@ -3,55 +3,50 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export type IResponse = {
-  anonymousLoginBtnDisabled: boolean;
-  anonymousLoginBtnHandler: () => void;
+  FirstLoginBtnDisabled: boolean;
+  FirstLoginBtnHandler: () => void;
 };
 
 export type IResponse2 = {
-  anonymousLoginBtnDisabled2: boolean;
-  anonymousLoginBtnHandler2: () => void;
+  NormalLoginBtnDisabled: boolean;
+  NormalLoginBtnHandler: () => void;
 };
 
-export const useTopState = (): IResponse => {
-  const [anonymousLoginBtnDisabled, setAnonymousLoginBtnDisabled] =
+export const useFisrtLoginTopState = (): IResponse => {
+  const [FirstLoginBtnDisabled, setFirstLoginBtnDisabled] =
     useState(false);
   const navigate = useNavigate();
 
-  const _anonymousLoginBtnHandler = () => {
-    setAnonymousLoginBtnDisabled(true);
-    signInAnonymously(getAuth())
+  const _FirtstLoginBtnHandler = () => {
+    setFirstLoginBtnDisabled(true);
+    signInAnonymously(getAuth()) //認証部分
       .then(() => {
         navigate("/event/set-name");
       })
       .catch(() => {
-        setAnonymousLoginBtnDisabled(false);
+        setFirstLoginBtnDisabled(false);
       });
   };
 
   return {
-    anonymousLoginBtnDisabled: anonymousLoginBtnDisabled,
-    anonymousLoginBtnHandler: _anonymousLoginBtnHandler,
+    FirstLoginBtnDisabled: FirstLoginBtnDisabled,
+    FirstLoginBtnHandler:  _FirtstLoginBtnHandler,
   };
 };
 
 export const useLoginTopState = (): IResponse2 => {
-  const [anonymousLoginBtnDisabled, setAnonymousLoginBtnDisabled] =
+  const [NormalLoginBtnDisabled, setNormalLoginBtnDisabled] =
     useState(false);
   const navigate = useNavigate();
 
-  const _anonymousLoginBtnHandler = () => {
-    setAnonymousLoginBtnDisabled(true);
-    signInAnonymously(getAuth())
-      .then(() => {
-        navigate("/start");
-      })
-      .catch(() => {
-        setAnonymousLoginBtnDisabled(false);
-      });
+  const _NormalLoginBtnHandler = () => {
+    setNormalLoginBtnDisabled(true);
+    //signInAnonymously(getAuth()) //ここで認証しない？
+    navigate("/start");
   };
 
   return {
-    anonymousLoginBtnDisabled2: anonymousLoginBtnDisabled,
-    anonymousLoginBtnHandler2: _anonymousLoginBtnHandler,
+    NormalLoginBtnDisabled: NormalLoginBtnDisabled,
+    NormalLoginBtnHandler: _NormalLoginBtnHandler,
   };
 };

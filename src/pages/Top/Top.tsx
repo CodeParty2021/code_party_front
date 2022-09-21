@@ -1,15 +1,15 @@
 import React from "react";
 import { Button } from "components/Button/Button";
 import { Background } from "./components/Background";
-import { useTopState } from "./hooks/useTopState";
+import { useFisrtLoginTopState } from "./hooks/useTopState";
 import { useLoginTopState } from "./hooks/useTopState";
 import { ButtonBox, CenterBox, LogoStyle, TopStyle } from "./TopStyle";
 
 type Prop = {};
 
 export const Top: React.FC<Prop> = () => {
-  const { anonymousLoginBtnDisabled, anonymousLoginBtnHandler } = useTopState();
-  const { anonymousLoginBtnDisabled2, anonymousLoginBtnHandler2 } = useLoginTopState();
+  const { FirstLoginBtnDisabled, FirstLoginBtnHandler } = useFisrtLoginTopState();
+  const { NormalLoginBtnDisabled, NormalLoginBtnHandler } = useLoginTopState();
   return (
     <>
       <TopStyle>
@@ -19,19 +19,17 @@ export const Top: React.FC<Prop> = () => {
             <Button
               color="pink"
               icon={null}
-              onClick={anonymousLoginBtnHandler}
+              onClick={FirstLoginBtnHandler}
               size="L"
-              status={anonymousLoginBtnDisabled ? "disabled" : "default"}
+              status={FirstLoginBtnDisabled ? "disabled" : "default"}
               value="初めて遊ぶ！"
             />
-          </ButtonBox>
-          <ButtonBox>
             <Button
               color="blue"
               icon={null}
-              onClick={anonymousLoginBtnHandler2}
+              onClick={NormalLoginBtnHandler}
               size="M"
-              status={anonymousLoginBtnDisabled2 ? "disabled" : "default"}
+              status={NormalLoginBtnDisabled ? "disabled" : "default"}
               value="ログインしてスタート！"
             />
           </ButtonBox>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useMemo, useState } from "react";
 import { UnityContext } from "react-unity-webgl";
 import { useNavigate, useParams } from "react-router-dom";
 import { CodeType, TurnState } from "hooks/CodeAPIHooks/useCodeAPI";
@@ -11,26 +11,44 @@ import { useCode } from "hooks/CodeHooks/useCode";
 import { useResult } from "hooks/ResultHooks/useResult";
 import { useDummyLoading } from "hooks/DummyLoadingHooks/useDummyLoading";
 import { useMonacoEditor } from "hooks/MonacoEditorHooks/useMonacoEditor";
+import { Message } from "../components/Message/Message";
+import { Button } from "components/Button/Button";
 
 export type RunResponse = {
   unityURL: string;
   jsonId: string;
 };
 
+export type CodeState = {
+  showTurnLog: boolean;
+  switchDisplay: "editor" | "unity" | "message";
+  messageType: "loading" | "error";
+  buttonType: "hidden" | "toEditor" | "toGame" | "closeInfo" | "unityLoading";
+};
+
+const initialState: CodeState = {
+  showTurnLog: false,
+  switchDisplay: "message",
+  messageType: "loading",
+  buttonType: "hidden",
+};
+
 export type IResponse = {
+  state: CodeState;
   code?: CodeType;
-  loading: boolean;
-  execCode: () => void;
+  //loading: boolean;
+  //execCode: () => void;
   turnLog?: TurnState[];
   handleEditorDidMount: (editor: any, _monaco: any) => void;
-  closeEditorButtonHandler: () => void;
-  showUnity: boolean;
+  buttonHandler?: () => void;
+  //closeEditorButtonHandler: () => void;
+  //showUnity: boolean;
   unityContext: UnityContext;
-  toggleLogHandler: () => void;
-  showLog: boolean;
-  showError: boolean;
-  description?: DescriptionCMSType;
-  unityLoad: boolean;
+  //toggleLogHandler: () => void;
+  //showLog: boolean;
+  //showError: boolean;
+  //description?: DescriptionCMSType;
+  //unityLoad: boolean;
 };
 
 export const useCodingState = (): IResponse => {
@@ -43,17 +61,27 @@ export const useCodingState = (): IResponse => {
   const { unityContext, unityStatus, startGame } = useUnityGame("SquarePaint");
   const { getDescriptionFromStepID } = useDescriptionCMS();
 
-  const [description, setDescription] = useState<
-    DescriptionCMSType | undefined
-  >(undefined);
-  const [showUnity, setShowUnity] = useState(false);
-  const [showError, setShowError] = useState(false);
+  // const [description, setDescription] = useState<
+  //   DescriptionCMSType | undefined
+  // >(undefined);
+  const [showTurnLog, setShowTurnLog] = useState<CodeState["showTurnLog"]>(initialState["showTurnLog"]);
+  const [switchDisplay, setSwitchDisplay] = useState<CodeState["switchDisplay"]>(initialState["switchDisplay"]);
+  const [messageType, setMessageType] = useState<CodeState["messageType"]>(initialState["messageType"]);
+  // const [showUnity, setShowUnity] = useState(false);
+  // const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const loading = useMemo(
     () => dummyLoadingState.isLoading && codeState.isLoading,
     [dummyLoadingState.isLoading, codeState.isLoading]
   );
+
+  const buttonType = useMemo<CodeState["buttonType"]>(() => (
+    unityStatus.isLoading ? "unityLoading" :
+    switchDisplay === "editor" ? "toGame" :
+    switchDisplay === "message" ? "closeInfo" :
+    switchDisplay === "unity" ? "toEditor" : "hidden"
+  ), []);
 
   const error = useMemo(() => resultState.isFailed, [resultState.isFailed]);
 
@@ -72,20 +100,21 @@ export const useCodingState = (): IResponse => {
   }, []);
 
   // コードのローディングが完了した時の処理
-  useEffect(() => {
-    const code = codeState.code;
-    if (!codeState.isLoading && code) {
-      getDescriptionFromStepID(code.step).then((description) => {
-        setDescription(description);
-      });
-    }
-  }, [codeState.isLoading]);
+  // useEffect(() => {
+  //   const code = codeState.code;
+  //   if (!codeState.isLoading && code) {
+  //     getDescriptionFromStepID(code.step).then((description) => {
+  //       setDescription(description);
+  //     });
+  //   }
+  // }, [codeState.isLoading]);
 
   // jsonに値が入ればunity描画、空が入ればunity非表示
   useEffect(() => {
     const simulationJson = resultState.simulationJson;
-    setShowUnity(simulationJson !== undefined);
+    // setShowUnity(simulationJson !== undefined);
     if (simulationJson !== undefined) {
+      setSwitchDisplay("unity");
       startGame(JSON.stringify(simulationJson));
     }
   }, [resultState.simulationJson, startGame]);
@@ -93,7 +122,8 @@ export const useCodingState = (): IResponse => {
   // エディターを閉じるときの処理
   const closeEditorButtonHandler = () => {
     reset();
-    setShowError(false);
+    setSwitchDisplay("editor");
+    // setShowError(false);
   };
 
   const execCode = useCallback(async () => {
@@ -104,17 +134,23 @@ export const useCodingState = (): IResponse => {
   }, [codeState, updateCodeOnlyFront, saveCode, testCode]);
 
   // ログの表示管理
-  const [showLog, setShowLog] = useState(false);
+  // const [showLog, setShowLog] = useState(false);
 
   const toggleLogHandler = () => {
-    setShowLog((showLog) => !showLog);
+    setShowTurnLog((showLog) => !showLog);
   };
+
+  const buttonHandler = useMemo(() => (
+    buttonType === "toGame" ? execCode :
+    buttonType === "toEditor" || buttonType === "closeInfo" ? closeEditorButtonHandler : undefined
+  ), []);
 
   useEffect(() => {
     if (error) {
-      setShowUnity(false);
-      setShowLog(false);
-      setShowError(true);
+      setSwitchDisplay("message");
+      setMessageType("error");
+      setShowTurnLog(false);
+      // setShowError(true);
     }
   }, [error]);
 
@@ -133,18 +169,25 @@ export const useCodingState = (): IResponse => {
   }, [error, errorDescriptionCMS, errorCodeAPI]);
   */
   return {
+    state: {
+      showTurnLog,
+      switchDisplay,
+      messageType,
+      buttonType,
+    },
     code: codeState.code,
-    description,
-    loading,
-    execCode,
+    // description,
+    // loading,
+    // execCode,
     turnLog: resultState.simulationJson?.turn,
     handleEditorDidMount,
-    closeEditorButtonHandler,
-    showUnity,
+    // closeEditorButtonHandler,
+    buttonHandler,
+    // showUnity,
     unityContext,
-    toggleLogHandler,
-    showLog,
-    showError,
-    unityLoad: unityStatus.isLoading,
+    // toggleLogHandler,
+    // showLog,
+    // showError,
+    // unityLoad: unityStatus.isLoading,
   };
 };

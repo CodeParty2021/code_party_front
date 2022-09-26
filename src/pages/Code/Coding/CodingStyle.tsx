@@ -10,6 +10,8 @@ import { FlexGap } from "styles/FlexGap/FlexGap";
 import { AlgoEditor } from "./components/AlgoEditor/AlgoEditor";
 import { Tab } from "./components/Tab/Tab";
 import { Message } from "./components/Message/Message";
+import { CodeState } from "./hooks/useCodeHooks";
+import { ComponentProps } from "react";
 
 type ShowUnityProps = {
   showUnity?: boolean;
@@ -209,3 +211,37 @@ export const ButtonStyle = styled(Button)`
   bottom: 32px;
   right: 69px;
 `;
+
+export const messageProps = (state: CodeState["messageType"]): ComponentProps<typeof Message> => {
+  if(state === "loading") return {
+    title: "ヨミコミチュウ！",
+    value: "しばらくお待ちください",
+    color: "blue",
+  };
+  else return {
+    title: "エラー",
+    value: "スタッフに聞いてみよう",
+    color: "red",
+  };
+};
+
+export const buttonProps = (state: CodeState["buttonType"]): ComponentProps<typeof Button> => {
+  const size = "M";
+  if(state === "unityLoading") return {
+    value: "ロード中...",
+    color: "pink",
+    size,
+    status: "disabled",
+  }
+  else if(state === "closeInfo" || state === "toEditor") return {
+    value: "コード画面に戻る",
+    color: "black",
+    size,
+  }
+  else if(state === "toGame") return {
+    value: "ゲーム画面で確認",
+    color: "pink",
+    size,
+  }
+  else return {};
+};

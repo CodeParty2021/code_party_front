@@ -28,26 +28,28 @@ type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
   const {
+    state,
     code,
-    loading,
-    execCode,
+    // loading,
+    // execCode,
     turnLog,
     handleEditorDidMount,
-    closeEditorButtonHandler,
-    showUnity,
+    buttonHandler,
+    // closeEditorButtonHandler,
+    // showUnity,
     unityContext,
-    toggleLogHandler,
-    showLog,
-    showError,
-    unityLoad,
+    // toggleLogHandler,
+    // showLog,
+    // showError,
+    // unityLoad,
   } = useCodingState();
-  if (loading) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div>
+  //       <Loading />
+  //     </div>
+  //   );
+  // }
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -70,12 +72,6 @@ export const CodeCoding: React.FC<Props> = () => {
           />
           <MessageStyle
             title="ヨミコミチュウ！"
-            value="しばらくお待ちください"
-            color="red"
-            showInfo={loading}
-          />
-          <MessageStyle //ローディング中の文章、消してもいいかも？
-            title="ローディングチュウ..."
             value="しばらくお待ちください"
             color="blue"
             showInfo={loading}

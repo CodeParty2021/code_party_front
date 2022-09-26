@@ -39,7 +39,6 @@ export const useNormalLoginTopState = (): IResponse2 => {
 
   const _NormalLoginBtnHandler = () => {
     setNormalLoginBtnDisabled(true);
-    //signInAnonymously(getAuth()) //ここで認証しない？
     navigate("/start");
   };
 

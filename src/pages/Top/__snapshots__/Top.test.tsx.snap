@@ -2,15 +2,33 @@
 
 exports[`<Top /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <h1>
-      What is CodeParty
-    </h1>
-    <Link
-      to="/start"
-    >
-      ログインページ
-    </Link>
-  </div>,
+  <React.Fragment>
+    <styled.div>
+      <styled.div>
+        <styled.img
+          src="./logo.svg"
+        />
+        <styled.div>
+          <Button
+            color="pink"
+            icon={null}
+            onClick={[Function]}
+            size="L"
+            status="disabled"
+            value="初めて遊ぶ！"
+          />
+          <Button
+            color="blue"
+            icon={null}
+            onClick={[Function]}
+            size="M"
+            status="disabled"
+            value="ログインしてスタート！"
+          />
+        </styled.div>
+      </styled.div>
+    </styled.div>
+    <Styled(StarBackground) />
+  </React.Fragment>,
 ]
 `;

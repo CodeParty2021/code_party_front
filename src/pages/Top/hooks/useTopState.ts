@@ -1,7 +1,7 @@
 import { getAuth, signInAnonymously } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { BrowserRouter as Router } from "react-router-dom";
 export type IResponse = {
   FirstLoginBtnDisabled: boolean;
   FirstLoginBtnHandler: () => void;

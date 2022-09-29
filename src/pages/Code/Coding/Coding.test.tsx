@@ -11,6 +11,12 @@ jest.mock("react-router-dom");
 const useCodeHooksMock = useCodingState as jest.Mock;
 
 const initialState: IResponse = {
+  state: {
+    showTurnLog: false,
+    switchDisplay: "editor",
+    messageType: "loading",
+    buttonType: "toGame",
+  },
   code: {
     id: "sample-id",
     codeContent: "print(aa);",
@@ -21,8 +27,10 @@ const initialState: IResponse = {
     step: 1,
   },
   loading: false,
-  execCode: jest.fn(),
-  unityLoad: false,
+  buttonHandler: jest.fn(),
+  showMessage: false,
+  // execCode: jest.fn(),
+  // unityLoad: false,
   turnLog: [
     {
       players: [{ print: "aaa" }, { print: "bbb" }],
@@ -32,7 +40,7 @@ const initialState: IResponse = {
     },
   ],
   handleEditorDidMount: jest.fn(),
-  closeEditorButtonHandler: jest.fn(),
+  // closeEditorButtonHandler: jest.fn(),
   unityContext: new UnityContext({
     loaderUrl: "unity/sp/web.loader.js",
     dataUrl: "unity/sp/web.data.unityweb",
@@ -42,28 +50,28 @@ const initialState: IResponse = {
   showUnity: true,
   toggleLogHandler: jest.fn(),
   showLog: false,
-  showError: false,
-  description: {
-    id: "1fawe23df",
-    createdAt: `2020-09-21T12:38:15.655Z`,
-    updatedAt: `2020-09-21T12:38:15.655Z`,
-    publishedAt: `2020-09-21T12:38:15.655Z`,
-    revisedAt: `2020-09-21T12:38:15.655Z`,
-    worldIndex: 1,
-    stageIndex: 0,
-    stepIndex: 0,
-    body: [
-      {
-        fieldId: "body",
-        html: '<h1 id="hc9f08a00f8">ステージ１</h1><p>次の画像のように動こう<br>&lt;table&gt;<br>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;<br>&lt;/table&gt;<br><img src="https://images.microcms-assets.io/assets/4712ba13111f4c01bab9c344ae473307/40378f930361435f8596628bd0264402/blog-template-description3.png" alt=""></p>',
-      },
-      {
-        fieldId: "hintBox",
-        title: "ヒント、関数とは",
-        body: '<h1 id="hb3ab3aee6b">関数とは</h1><p>関数はプログラムの塊</p><pre><code>function func(){\n  console.log(aaa)\n}</code></pre>',
-      },
-    ],
-  },
+  // showError: false,
+  // description: {
+  //   id: "1fawe23df",
+  //   createdAt: `2020-09-21T12:38:15.655Z`,
+  //   updatedAt: `2020-09-21T12:38:15.655Z`,
+  //   publishedAt: `2020-09-21T12:38:15.655Z`,
+  //   revisedAt: `2020-09-21T12:38:15.655Z`,
+  //   worldIndex: 1,
+  //   stageIndex: 0,
+  //   stepIndex: 0,
+  //   body: [
+  //     {
+  //       fieldId: "body",
+  //       html: '<h1 id="hc9f08a00f8">ステージ１</h1><p>次の画像のように動こう<br>&lt;table&gt;<br>&lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;<br>&lt;/table&gt;<br><img src="https://images.microcms-assets.io/assets/4712ba13111f4c01bab9c344ae473307/40378f930361435f8596628bd0264402/blog-template-description3.png" alt=""></p>',
+  //     },
+  //     {
+  //       fieldId: "hintBox",
+  //       title: "ヒント、関数とは",
+  //       body: '<h1 id="hb3ab3aee6b">関数とは</h1><p>関数はプログラムの塊</p><pre><code>function func(){\n  console.log(aaa)\n}</code></pre>',
+  //     },
+  //   ],
+  // },
 };
 
 describe("<CodeCoding />", () => {

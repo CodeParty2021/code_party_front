@@ -212,36 +212,45 @@ export const ButtonStyle = styled(Button)`
   right: 69px;
 `;
 
-export const messageProps = (state: CodeState["messageType"]): ComponentProps<typeof Message> => {
-  if(state === "loading") return {
-    title: "ヨミコミチュウ！",
-    value: "しばらくお待ちください",
-    color: "blue",
-  };
-  else return {
-    title: "エラー",
-    value: "スタッフに聞いてみよう",
-    color: "red",
-  };
+export const messageProps = (
+  state: CodeState["messageType"]
+): ComponentProps<typeof Message> => {
+  if (state === "loading")
+    return {
+      title: "ヨミコミチュウ！",
+      value: "しばらくお待ちください",
+      color: "blue",
+    };
+  else
+    return {
+      title: "エラー",
+      value: "スタッフに聞いてみよう",
+      color: "red",
+    };
 };
 
-export const buttonProps = (state: CodeState["buttonType"]): ComponentProps<typeof Button> => {
+export const buttonProps = (
+  state: CodeState["buttonType"]
+): ComponentProps<typeof Button> => {
   const size = "M";
-  if(state === "unityLoading") return {
-    value: "ロード中...",
-    color: "pink",
-    size,
-    status: "disabled",
-  }
-  else if(state === "closeInfo" || state === "toEditor") return {
-    value: "コード画面に戻る",
-    color: "black",
-    size,
-  }
-  else if(state === "toGame") return {
-    value: "ゲーム画面で確認",
-    color: "pink",
-    size,
-  }
+  if (state === "unityLoading")
+    return {
+      value: "ロード中...",
+      color: "pink",
+      size,
+      status: "disabled",
+    };
+  else if (state === "closeInfo" || state === "toEditor")
+    return {
+      value: "コード画面に戻る",
+      color: "black",
+      size,
+    };
+  else if (state === "toGame")
+    return {
+      value: "ゲーム画面で確認",
+      color: "pink",
+      size,
+    };
   else return {};
 };

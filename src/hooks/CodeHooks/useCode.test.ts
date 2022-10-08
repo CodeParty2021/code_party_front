@@ -1,5 +1,15 @@
-import { act, renderHook, RenderHookResult } from "@testing-library/react-hooks";
-import { CreateCodeResponseType, GetCodeResponseType, UpdateCodeResponseType, useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
+import {
+  act,
+  renderHook,
+  RenderResult,
+  WaitFor,
+} from "@testing-library/react-hooks";
+import {
+  CreateCodeResponseType,
+  GetCodeResponseType,
+  UpdateCodeResponseType,
+  useCodeAPI,
+} from "hooks/CodeAPIHooks/useCodeAPI";
 import { IResponse, useCode } from "./useCode";
 
 jest.mock("hooks/CodeAPIHooks/useCodeAPI");
@@ -48,18 +58,18 @@ const createdCode: CreateCodeResponseType = {
 };
 
 /**
- * APIがエラーだった場合のエラースロー
+ * エラーをスローするテスト関数
  */
-const errorFunc = () => {
-  throw new Error();
+const throwError = () => {
+  throw new Error("test error");
 };
 
 describe("useCode", () => {
-  let hook: RenderHookResult<unknown, IResponse>;
+  let hook: RenderResult<IResponse>;
   beforeEach(() => {
     useCodeAPIMock.mockReturnValue({
       error: undefined,
-      ...codeAPIMockJestFn
+      ...codeAPIMockJestFn,
     });
   });
 
@@ -75,34 +85,10 @@ describe("useCode", () => {
     });
 
     describe("codeIdを引数に与えた場合", () => {
-      beforeEach(() => {
-        hook = renderHook(() => useCode("codeId"));
-      });
-
-      test("APIのgetCode関数が実行される", async () => {
-        expect(codeAPIMockJestFn.getCode).toHaveBeenCalled();
-      });
-
-      test("コードがDBからロードされて更新される", async () => {
-        const { codeState } = hook.result.current;
-        expect(codeState.code).toEqual(gotCode);
-      });
-
-      test("状態が更新される", async () => {
-        const { codeState } = hook.result.current;
-        expect(codeState.isLoading).toBe(false);
-        expect(codeState.isSave).toBe(true);
-        expect(codeState.isOnline).toBe(true);
-        expect(codeState.isExecutable).toBe(true);
-      });
-    });
-
-    describe("loadCodeを実行した場合", () => {
-      beforeEach(() => {
-        hook = renderHook(() => useCode());
-        const { loadCode } = hook.result.current;
-        act(() => {
-          loadCode("codeId");
+      beforeEach(async () => {
+        await act(async () => {
+          const { result } = renderHook(() => useCode("codeId"));
+          hook = result;
         });
       });
 
@@ -111,12 +97,12 @@ describe("useCode", () => {
       });
 
       test("コードがDBからロードされて更新される", async () => {
-        const { codeState } = hook.result.current;
+        const { codeState } = hook.current;
         expect(codeState.code).toEqual(gotCode);
       });
 
       test("状態が更新される", async () => {
-        const { codeState } = hook.result.current;
+        const { codeState } = hook.current;
         expect(codeState.isLoading).toBe(false);
         expect(codeState.isSave).toBe(true);
         expect(codeState.isOnline).toBe(true);
@@ -124,223 +110,269 @@ describe("useCode", () => {
       });
     });
 
-    // describe("createCodeを実行した場合", () => {
-    //   beforeEach(() => {
-    //     hook = renderHook(() => useCode());
-    //     const current = hook.result.current;
-    //     act(() => {
-    //       current.createCode(
-    //         "print('create')'",
-    //         0,
-    //         "python"
-    //       );
-    //     });
-    //   });
+    describe("loadCodeを実行した場合", () => {
+      beforeEach(async () => {
+        const { result, waitFor } = renderHook(() => useCode());
+        hook = result;
+        await act(async () => {
+          await hook.current.loadCode("codeId");
+          await waitFor(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-    //   test("APIのcreateCode関数が実行される", async () => {
-    //     expect(codeAPIMockJestFn.createCode).toHaveBeenCalled();
-    //   });
+      test("APIのgetCode関数が実行される", async () => {
+        expect(codeAPIMockJestFn.getCode).toHaveBeenCalled();
+      });
 
-    //   test("コードが作成される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.code).toEqual(createdCode);
-    //   });
+      test("コードがDBからロードされて更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.code).toEqual(gotCode);
+      });
 
-    //   test("状態が更新される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.isLoading).toBe(false);
-    //     expect(codeState.isSave).toBe(true);
-    //     expect(codeState.isOnline).toBe(true);
-    //     expect(codeState.isExecutable).toBe(true);
-    //   });
-    // });
+      test("状態が更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(true);
+        expect(codeState.isOnline).toBe(true);
+        expect(codeState.isExecutable).toBe(true);
+      });
+    });
 
-    // describe("createCodeDefaultを実行した場合", () => {
-    //   beforeEach(() => {
-    //     hook = renderHook(() => useCode());
-    //     const current = hook.result.current;
-    //     act(() => {
-    //       current.createCodeDefault(0, "python");
-    //     });
-    //   });
+    describe("createCodeを実行した場合", () => {
+      beforeEach(async () => {
+        const { result, waitFor } = renderHook(() => useCode());
+        hook = result;
+        await act(async () => {
+          await hook.current.createCode("print('create')'", 0, "python");
+          await waitFor(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-    //   test("APIのcreateCode関数が実行される", async () => {
-    //     expect(codeAPIMockJestFn.createCode).toHaveBeenCalled();
-    //   });
+      test("APIのcreateCode関数が実行される", async () => {
+        expect(codeAPIMockJestFn.createCode).toHaveBeenCalled();
+      });
 
-    //   test("コードが作成される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.code).toEqual(createdCode);
-    //   });
+      test("コードが作成される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.code).toEqual(createdCode);
+      });
 
-    //   test("状態が更新される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.isLoading).toBe(false);
-    //     expect(codeState.isSave).toBe(true);
-    //     expect(codeState.isOnline).toBe(true);
-    //     expect(codeState.isExecutable).toBe(true);
-    //   });
-    // });
+      test("状態が更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(true);
+        expect(codeState.isOnline).toBe(true);
+        expect(codeState.isExecutable).toBe(true);
+      });
+    });
 
-    // describe("updateCodeOnlyFrontを実行した場合", () => {
-    //   beforeEach(() => {
-    //     // コードは事前にロードしておく
-    //     hook = renderHook(() => useCode("codeId"));
-    //     const current = hook.result.current;
-    //     act(() => {
-    //       current.updateCodeOnlyFront("print('updateFrontOnly')");
-    //     });
-    //   });
+    describe("createCodeDefaultを実行した場合", () => {
+      beforeEach(async () => {
+        const { result, waitFor } = renderHook(() => useCode());
+        hook = result;
+        await act(async () => {
+          await hook.current.createCodeDefault(0, "python");
+          await waitFor(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-    //   test("コードが更新される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.code).toEqual({
-    //       ...gotCode,
-    //       codeContent: "print('updateFrontOnly')",
-    //     });
-    //   });
+      test("APIのcreateCode関数が実行される", async () => {
+        expect(codeAPIMockJestFn.createCode).toHaveBeenCalled();
+      });
 
-    //   test("状態が更新される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.isLoading).toBe(false);
-    //     expect(codeState.isSave).toBe(false);
-    //     expect(codeState.isOnline).toBe(true);
-    //     expect(codeState.isExecutable).toBe(true);
-    //   });
-    // });
+      test("コードが作成される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.code).toEqual(createdCode);
+      });
 
-    // describe("saveCodeを実行した場合", () => {
-    //   beforeEach(() => {
-    //     // コードは事前にロードしておく
-    //     hook = renderHook(() => useCode("codeId"));
-    //     const current = hook.result.current;
-    //     act(() => {
-    //       current.saveCode();
-    //     });
-    //   });
+      test("状態が更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(true);
+        expect(codeState.isOnline).toBe(true);
+        expect(codeState.isExecutable).toBe(true);
+      });
+    });
 
-    //   test("APIのupdateCode関数が実行される", async () => {
-    //     expect(codeAPIMockJestFn.updateCode).toHaveBeenCalled();
-    //   });
+    describe("updateCodeOnlyFrontを実行した場合", () => {
+      beforeEach(async () => {
+        let wait: WaitFor;
+        await act(async () => {
+          const { result, waitFor } = renderHook(() => useCode("codeId"));
+          hook = result;
+          wait = waitFor;
+        });
+        await act(async () => {
+          hook.current.updateCodeOnlyFront("print('updateFrontOnly')");
+          await wait(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-    //   test("コードが更新される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.code).toEqual({
-    //       ...gotCode,
-    //       ...updatedCode,
-    //     });
-    //   });
+      test("コードが更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.code).toEqual({
+          ...gotCode,
+          codeContent: "print('updateFrontOnly')",
+        });
+      });
 
-    //   test("状態が更新される", async () => {
-    //     const { codeState } = hook.result.current;
-    //     expect(codeState.isLoading).toBe(false);
-    //     expect(codeState.isSave).toBe(true);
-    //     expect(codeState.isOnline).toBe(true);
-    //     expect(codeState.isExecutable).toBe(true);
-    //   });
-    // });
+      test("状態が更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(false);
+        expect(codeState.isOnline).toBe(true);
+        expect(codeState.isExecutable).toBe(true);
+      });
+    });
+
+    describe("saveCodeを実行した場合", () => {
+      beforeEach(async () => {
+        let wait: WaitFor;
+        await act(async () => {
+          const { result, waitFor } = renderHook(() => useCode("codeId"));
+          hook = result;
+          wait = waitFor;
+        });
+        await act(async () => {
+          // 変更点がある場合だけsaveが実行される
+          hook.current.updateCodeOnlyFront("print('update')");
+        });
+        await act(async () => {
+          await hook.current.saveCode();
+          await wait(() => hook.current.codeState.isLoading === false);
+        });
+      });
+
+      test("APIのupdateCode関数が実行される", async () => {
+        expect(codeAPIMockJestFn.updateCode).toHaveBeenCalled();
+      });
+
+      test("コードが更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.code).toEqual({
+          ...gotCode,
+          ...updatedCode,
+          step: 0,
+        });
+      });
+
+      test("状態が更新される", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(true);
+        expect(codeState.isOnline).toBe(true);
+        expect(codeState.isExecutable).toBe(true);
+      });
+    });
   });
 
-  // describe("APIエラーの場合", () => {
-  //   beforeEach(() => {
-  //     useCodeAPIMock.mockReturnValue({
-  //       error: "error",
-  //       ...codeAPIMockJestFn
-  //     });
-  //     codeAPIMockJestFn.getCode.mockImplementation(errorFunc);
-  //     codeAPIMockJestFn.updateCode.mockReturnValue(errorFunc);
-  //     codeAPIMockJestFn.createCode.mockReturnValue(errorFunc);
-  //   });
+  describe("APIエラーの場合", () => {
+    beforeEach(() => {
+      useCodeAPIMock.mockReturnValue({
+        error: "error",
+        ...codeAPIMockJestFn,
+      });
+      codeAPIMockJestFn.getCode.mockImplementation(throwError);
+      codeAPIMockJestFn.updateCode.mockImplementation(throwError);
+      codeAPIMockJestFn.createCode.mockImplementation(throwError);
+    });
 
-  //   describe("codeIdを引数に与えてた場合", () => {
-  //     beforeEach(() => {
-  //       hook = renderHook(() => useCode("codeId"));
-  //     });
+    describe("codeIdを引数に与えてた場合", () => {
+      beforeEach(async () => {
+        await act(async () => {
+          hook = renderHook(() => useCode("codeId")).result;
+        });
+      });
 
-  //     test("エラー状態になる", async () => {
-  //       const { codeState } = hook.result.current;
-  //       expect(codeState.isLoading).toBe(false);
-  //       expect(codeState.isSave).toBe(false);
-  //       expect(codeState.isOnline).toBe(false);
-  //       expect(codeState.isExecutable).toBe(false);
-  //     });
-  //   });
+      test("エラー状態になる", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(false);
+        expect(codeState.isOnline).toBe(false);
+        expect(codeState.isExecutable).toBe(false);
+      });
+    });
 
-  //   describe("loadCodeを実行した場合", () => {
-  //     beforeEach(() => {
-  //       hook = renderHook(() => useCode());
-  //       const current = hook.result.current;
-  //       act(() => {
-  //         current.loadCode("codeId");
-  //       });
-  //     });
+    describe("loadCodeを実行した場合", () => {
+      beforeEach(async () => {
+        const { result, waitFor } = renderHook(() => useCode());
+        hook = result;
+        await act(async () => {
+          await hook.current.loadCode("codeId");
+          await waitFor(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-  //     test("エラー状態になる", async () => {
-  //       const { codeState } = hook.result.current;
-  //       expect(codeState.isLoading).toBe(false);
-  //       expect(codeState.isSave).toBe(false);
-  //       expect(codeState.isOnline).toBe(false);
-  //       expect(codeState.isExecutable).toBe(false);
-  //     });
-  //   });
+      test("エラー状態になる", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(false);
+        expect(codeState.isOnline).toBe(false);
+        expect(codeState.isExecutable).toBe(false);
+      });
+    });
 
-  //   describe("createCodeを実行した場合", () => {
-  //     beforeEach(() => {
-  //       hook = renderHook(() => useCode());
-  //       const current = hook.result.current;
-  //       act(() => {
-  //         current.createCode(
-  //           "print('create')'",
-  //           0,
-  //           "python"
-  //         );
-  //       });
-  //     });
+    describe("createCodeを実行した場合", () => {
+      beforeEach(async () => {
+        const { result, waitFor } = renderHook(() => useCode());
+        hook = result;
+        await act(async () => {
+          await hook.current
+            .createCode("print('create')'", 0, "python")
+            .catch(() => {});
+          await waitFor(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-  //     test("エラー状態になる", async () => {
-  //       const { codeState } = hook.result.current;
-  //       expect(codeState.isLoading).toBe(false);
-  //       expect(codeState.isSave).toBe(false);
-  //       expect(codeState.isOnline).toBe(false);
-  //       expect(codeState.isExecutable).toBe(false);
-  //     });
-  //   });
+      test("エラー状態になる", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(false);
+        expect(codeState.isOnline).toBe(false);
+        expect(codeState.isExecutable).toBe(false);
+      });
+    });
 
-  //   describe("createCodeDefaultを実行した場合", () => {
-  //     beforeEach(() => {
-  //       hook = renderHook(() => useCode());
-  //       const current = hook.result.current;
-  //       act(() => {
-  //         current.createCodeDefault(0, "python");
-  //       });
-  //     });
+    describe("createCodeDefaultを実行した場合", () => {
+      beforeEach(async () => {
+        const { result, waitFor } = renderHook(() => useCode());
+        hook = result;
+        await act(async () => {
+          await hook.current.createCodeDefault(0, "python").catch(() => {});
+          await waitFor(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-  //     test("エラー状態になる", async () => {
-  //       const { codeState } = hook.result.current;
-  //       expect(codeState.isLoading).toBe(false);
-  //       expect(codeState.isSave).toBe(false);
-  //       expect(codeState.isOnline).toBe(false);
-  //       expect(codeState.isExecutable).toBe(false);
-  //     });
-  //   });
+      test("エラー状態になる", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(false);
+        expect(codeState.isOnline).toBe(false);
+        expect(codeState.isExecutable).toBe(false);
+      });
+    });
 
-  //   describe("saveCodeを実行した場合", () => {
-  //     beforeEach(() => {
-  //       // コードは事前にロードしておく
-  //       hook = renderHook(() => useCode("codeId"));
-  //       const current = hook.result.current;
-  //       act(() => {
-  //         current.saveCode();
-  //       });
-  //     });
+    describe("saveCodeを実行した場合", () => {
+      beforeEach(async () => {
+        let wait: WaitFor;
+        await act(async () => {
+          const { result, waitFor } = renderHook(() => useCode("codeId"));
+          hook = result;
+          wait = waitFor;
+        });
+        await act(async () => {
+          hook.current.saveCode();
+          await wait(() => hook.current.codeState.isLoading === false);
+        });
+      });
 
-  //     test("エラー状態になる", async () => {
-  //       const { codeState } = hook.result.current;
-  //       expect(codeState.isLoading).toBe(false);
-  //       expect(codeState.isSave).toBe(false);
-  //       expect(codeState.isOnline).toBe(false);
-  //       expect(codeState.isExecutable).toBe(false);
-  //     });
-  //   });
-  // });
+      test("エラー状態になる", async () => {
+        const { codeState } = hook.current;
+        expect(codeState.isLoading).toBe(false);
+        expect(codeState.isSave).toBe(false);
+        expect(codeState.isOnline).toBe(false);
+        expect(codeState.isExecutable).toBe(false);
+      });
+    });
+  });
 });

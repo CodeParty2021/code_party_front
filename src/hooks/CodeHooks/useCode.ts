@@ -14,6 +14,7 @@ export type IResponse = {
   /**
    * ファクトリメソッド
    * コードを新規に作成する
+   * 作成失敗時はエラーがスローされる
    */
   createCode: (
     codeContent: string,
@@ -23,6 +24,7 @@ export type IResponse = {
   /**
    * ファクトリメソッド
    * デフォルトのコードを使用してコードを生成する
+   * 作成失敗時はエラーがスローされる
    */
   createCodeDefault: (stepId: number, language: string) => Promise<string>;
   /**
@@ -97,17 +99,11 @@ export const useCode = (codeId?: string): IResponse => {
   }, []);
 
   const _setIsLoading = useCallback((isLoading: boolean) => {
-    setCodeState((current) => {
-      if (current.code) return { ...current, isLoading };
-      else return { ...current, isLoading: true };
-    });
+    setCodeState((current) => ({ ...current, isLoading }));
   }, []);
 
   const _setIsSave = useCallback((isSave: boolean) => {
-    setCodeState((current) => {
-      if (current.isOnline) return { ...current, isSave };
-      else return { ...current, isSave: false };
-    });
+    setCodeState((current) => ({ ...current, isSave }));
   }, []);
 
   const _setIsOnline = useCallback((isOnline: boolean) => {
@@ -119,25 +115,38 @@ export const useCode = (codeId?: string): IResponse => {
 
   const _updateStateWhenLoaded = useCallback(() => {
     _setIsLoading(false);
-    _setIsSave(true);
     _setIsOnline(true);
+    _setIsSave(true);
+  }, []);
+
+  const _updateStateWhenError = useCallback(() => {
+    _setIsLoading(false);
   }, []);
 
   // publicメソッド
   const loadCode: IResponse["loadCode"] = useCallback(async (codeId) => {
     _setIsLoading(true);
-    const code = await getCodeOnAPI(codeId);
-    _setCode(code);
-    _updateStateWhenLoaded();
+    try {
+      const code = await getCodeOnAPI(codeId);
+      _setCode(code);
+      _updateStateWhenLoaded();
+    } catch {
+      _updateStateWhenError();
+    }
   }, []);
 
   const createCode: IResponse["createCode"] = useCallback(
     async (codeContent, stepId, language) => {
       _setIsLoading(true);
-      const code = await createCodeOnAPI(codeContent, stepId, language);
-      _setCode(code);
-      _updateStateWhenLoaded();
-      return code.id;
+      try {
+        const code = await createCodeOnAPI(codeContent, stepId, language);
+        _setCode(code);
+        _updateStateWhenLoaded();
+        return code.id;
+      } catch (error) {
+        _updateStateWhenError();
+        throw error;
+      }
     },
     []
   );
@@ -166,19 +175,24 @@ export const useCode = (codeId?: string): IResponse => {
   const saveCode: IResponse["saveCode"] = useCallback(async () => {
     const currentCode = codeState.code;
     if (!codeState.isSave && codeState.isOnline && currentCode) {
-      await updateCodeOnAPI(
-        currentCode.id,
-        currentCode.codeContent,
-        currentCode.step,
-        currentCode.language
-      );
+      try {
+        await updateCodeOnAPI(
+          currentCode.id,
+          currentCode.codeContent,
+          currentCode.step,
+          currentCode.language
+        );
+        _setIsSave(true);
+      } catch {
+        _updateStateWhenError();
+      }
     }
   }, [codeState.isSave, codeState.code]);
 
   // コンストラクタ
   useEffect(() => {
     if (codeId) {
-      loadCode(codeId);
+      loadCode(codeId).catch(() => {});
     }
   }, [codeId]);
 

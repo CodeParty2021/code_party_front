@@ -6,11 +6,6 @@ export type IResponse = {
    */
   dummyLoadingState: DummyLoadingState;
   /**
-   * ロード時間を設定する
-   * @params loadTime ロード時間（ms）
-   */
-  setTime: (loadTime: number) => void;
-  /**
    * ロードを開始する
    */
   startDummyLoad: () => Promise<void>;
@@ -35,7 +30,7 @@ const initialState: DummyLoadingState = {
 /**
  * ダミーロードを行うフック
  */
-export const useDummyLoading = (loadTime?: number): IResponse => {
+export const useDummyLoading = (loadTime: number): IResponse => {
   const [dummyLoadingState, setDummyLoadingState] = useState<DummyLoadingState>(
     { ...initialState }
   );
@@ -48,7 +43,7 @@ export const useDummyLoading = (loadTime?: number): IResponse => {
     }));
   }, []);
 
-  const setTime = useCallback<IResponse["setTime"]>((loadTime) => {
+  const setTime = useCallback((loadTime) => {
     if (loadTime < 0) return;
     setDummyLoadingState((current) => ({
       ...current,
@@ -75,12 +70,13 @@ export const useDummyLoading = (loadTime?: number): IResponse => {
   useEffect(() => {
     if (loadTime) {
       setTime(loadTime);
+    } else {
+      throw new Error("loadTimeを指定してください");
     }
-  }, []);
+  }, [loadTime]);
 
   return {
     dummyLoadingState,
-    setTime,
     startDummyLoad,
   };
 };

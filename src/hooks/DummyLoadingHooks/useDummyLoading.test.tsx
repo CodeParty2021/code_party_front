@@ -6,7 +6,7 @@ import {
 } from "@testing-library/react-hooks";
 import { useDummyLoading, IResponse } from "./useDummyLoading";
 
-describe("useCode", () => {
+describe("useDummyLoading", () => {
   let hook: RenderResult<IResponse>;
   let wait: WaitFor;
 

@@ -1,7 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useNavigate } from "react-router-dom";
-import { useFisrtLoginTopState } from "./useTopState";
-import { useNormalLoginTopState } from "./useTopState";
+import { useTopState } from "./useTopState";
 import { getAuth, signInAnonymously } from "firebase/auth";
 
 jest.mock("firebase/auth");
@@ -24,12 +23,12 @@ describe("useFisrtLoginForm", () => {
   });
 
   test("render", async () => {
-    const { result } = renderHook(() => useFisrtLoginTopState());
+    const { result } = renderHook(() => useTopState());
     expect(result.current.FirstLoginBtnDisabled).toEqual(false);
   });
 
   test("exec FirstLoginBtnHandler", async () => {
-    const { result } = renderHook(() => useFisrtLoginTopState());
+    const { result } = renderHook(() => useTopState());
     const { FirstLoginBtnHandler } = result.current;
 
     act(() => {
@@ -50,12 +49,12 @@ describe("useNormalLoginTopState", () => {
   });
 
   test("render", async () => {
-    const { result } = renderHook(() => useFisrtLoginTopState());
+    const { result } = renderHook(() => useTopState());
     expect(result.current.FirstLoginBtnDisabled).toEqual(false);
   });
 
   test("exec NormalLoginBtnHandler", async () => {
-    const { result } = renderHook(() => useNormalLoginTopState());
+    const { result } = renderHook(() => useTopState());
     const { NormalLoginBtnHandler } = result.current;
 
     act(() => {

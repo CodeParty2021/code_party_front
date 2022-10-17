@@ -14,7 +14,7 @@ Array [
             icon={null}
             onClick={[Function]}
             size="L"
-            status="disabled"
+            status="default"
             value="初めて遊ぶ！"
           />
           <Button
@@ -22,7 +22,7 @@ Array [
             icon={null}
             onClick={[Function]}
             size="M"
-            status="disabled"
+            status="default"
             value="ログインしてスタート！"
           />
         </styled.div>

@@ -4,44 +4,32 @@ import { useNavigate } from "react-router-dom";
 export type IResponse = {
   FirstLoginBtnDisabled: boolean;
   FirstLoginBtnHandler: () => void;
-};
-
-export type IResponse2 = {
   NormalLoginBtnDisabled: boolean;
   NormalLoginBtnHandler: () => void;
 };
 
-export const useFisrtLoginTopState = (): IResponse => {
+export const useTopState = (): IResponse => {
   const [FirstLoginBtnDisabled, setFirstLoginBtnDisabled] = useState(false);
+  const [NormalLoginBtnDisabled, setNormalLoginBtnDisabled] = useState(false);
   const navigate = useNavigate();
 
   const _FirtstLoginBtnHandler = () => {
     setFirstLoginBtnDisabled(true);
-    signInAnonymously(getAuth()) //認証部分
+    signInAnonymously(getAuth())
       .then(() => {
-        navigate("/event/set-name");
+        navigate("/set-name");
       })
       .catch(() => {
         setFirstLoginBtnDisabled(false);
       });
   };
-
-  return {
-    FirstLoginBtnDisabled: FirstLoginBtnDisabled,
-    FirstLoginBtnHandler: _FirtstLoginBtnHandler,
-  };
-};
-
-export const useNormalLoginTopState = (): IResponse2 => {
-  const [NormalLoginBtnDisabled, setNormalLoginBtnDisabled] = useState(false);
-  const navigate = useNavigate();
-
   const _NormalLoginBtnHandler = () => {
     setNormalLoginBtnDisabled(true);
     navigate("/start");
   };
-
   return {
+    FirstLoginBtnDisabled: FirstLoginBtnDisabled,
+    FirstLoginBtnHandler: _FirtstLoginBtnHandler,
     NormalLoginBtnDisabled: NormalLoginBtnDisabled,
     NormalLoginBtnHandler: _NormalLoginBtnHandler,
   };

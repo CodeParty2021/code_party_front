@@ -8,8 +8,10 @@ import { ButtonBox, CenterBox, LogoStyle, TopStyle } from "./TopStyle";
 type Prop = {};
 
 export const Top: React.FC<Prop> = () => {
-  const { FirstLoginBtnDisabled, FirstLoginBtnHandler } = useFisrtLoginTopState();
-  const { NormalLoginBtnDisabled, NormalLoginBtnHandler } = useNormalLoginTopState();
+  const { FirstLoginBtnDisabled, FirstLoginBtnHandler } =
+    useFisrtLoginTopState();
+  const { NormalLoginBtnDisabled, NormalLoginBtnHandler } =
+    useNormalLoginTopState();
   return (
     <>
       <TopStyle>

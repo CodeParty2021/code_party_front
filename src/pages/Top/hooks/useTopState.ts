@@ -13,8 +13,7 @@ export type IResponse2 = {
 };
 
 export const useFisrtLoginTopState = (): IResponse => {
-  const [FirstLoginBtnDisabled, setFirstLoginBtnDisabled] =
-    useState(false);
+  const [FirstLoginBtnDisabled, setFirstLoginBtnDisabled] = useState(false);
   const navigate = useNavigate();
 
   const _FirtstLoginBtnHandler = () => {
@@ -30,13 +29,12 @@ export const useFisrtLoginTopState = (): IResponse => {
 
   return {
     FirstLoginBtnDisabled: FirstLoginBtnDisabled,
-    FirstLoginBtnHandler:  _FirtstLoginBtnHandler,
+    FirstLoginBtnHandler: _FirtstLoginBtnHandler,
   };
 };
 
 export const useNormalLoginTopState = (): IResponse2 => {
-  const [NormalLoginBtnDisabled, setNormalLoginBtnDisabled] =
-    useState(false);
+  const [NormalLoginBtnDisabled, setNormalLoginBtnDisabled] = useState(false);
   const navigate = useNavigate();
 
   const _NormalLoginBtnHandler = () => {

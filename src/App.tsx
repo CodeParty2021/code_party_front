@@ -17,6 +17,7 @@ import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingR
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
 import { CasualBattlePickCode } from "pages/CasualBattle/PickCode/PickCode";
+import { SetName } from "pages/SetName/SetName";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
@@ -62,6 +63,7 @@ export const App: React.FC<Props> = () => {
           <Route path="/stages/:id" element={<Stage />} />
           <Route path="/lp" element={<Lp />} />
 
+          <Route path="/set-name" element={<SetName />} />
           <Route
             path="/robot-development/top"
             element={<RobotDevelopmentTop />}

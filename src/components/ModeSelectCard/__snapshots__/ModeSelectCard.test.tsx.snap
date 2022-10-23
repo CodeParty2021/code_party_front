@@ -131,7 +131,7 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
   >
     <img
       alt="訓練モード"
-      src="/img/modeselectcard_solo.png"
+      src="/img/modeselectcard_grab_flag_lobo.png"
     />
     <svg
       class="c2"
@@ -154,9 +154,9 @@ exports[`<ModeSelectCard /> snapshot test 1`] = `
     <span
       class="modeselectcard_description"
     >
-      まずはこのモードでロボットを
+      AIが搭載されたコンピュータと
       <br />
-      動かす練習をしましょう。
+      対戦することが出来ます。
     </span>
   </div>
   <div

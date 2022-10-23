@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { ModeSelectCard } from "./ModeSelectCard";
+import { Description } from "pages/Code/Coding/components/Description/Description";
 
 export default {
   title: "components/ModeSelectCard",
@@ -14,12 +15,18 @@ const Template: ComponentStory<typeof ModeSelectCard> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  mode: "solo",
+  imageName: "grab_flag_lobo",
+  title: "タイトルテキスト",
+  description: <Description>中身の説明文</Description>,
+  icon: "setting",
   disabled: false,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  mode: "battle",
+  imageName: "grab_flag_lobo",
+  title: "タイトルテキスト",
+  description: <Description>中身の説明文</Description>,
+  icon: "setting",
   disabled: true,
 };

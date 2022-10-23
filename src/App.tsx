@@ -92,7 +92,7 @@ export const App: React.FC<Props> = () => {
             element={<PrivateRoute component={CasualBattleWaitingRoom} />}
           />
           <Route
-            path="/casual-battle"
+            path="/room-match/top"
             element={<PrivateRoute component={CasualBattleLobby} />}
           />
           <Route

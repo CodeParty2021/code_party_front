@@ -6,14 +6,36 @@ Array [
     <styled.div>
       <styled.div>
         <ModeSelectCard
-          mode="solo"
+          description={
+            <DescriptionText>
+              <React.Fragment>
+                まずはこのモードでロボットを
+                <br />
+                動かす練習をしましょう。
+              </React.Fragment>
+            </DescriptionText>
+          }
+          icon="setting"
+          imageName="grab_flag_lobo"
           onClick={[Function]}
+          title="訓練モード"
         />
       </styled.div>
       <styled.div>
         <ModeSelectCard
-          mode="battle"
+          description={
+            <DescriptionText>
+              <React.Fragment>
+                AIが搭載されたコンピュータと
+                <br />
+                対戦することが出来ます。
+              </React.Fragment>
+            </DescriptionText>
+          }
+          icon="sword"
+          imageName="walking_lobo"
           onClick={[Function]}
+          title="対戦モード"
         />
       </styled.div>
     </styled.div>

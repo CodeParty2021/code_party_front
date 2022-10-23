@@ -3,14 +3,14 @@ import {
   DescriptionText,
   ModeSelectCard,
 } from "components/ModeSelectCard/ModeSelectCard";
-import { useSelectModeState } from "./hooks/useModeSelectState";
+import { useSelectModeState } from "./hooks/useSelectModeState";
 import { InnerBox, MarginBox } from "./SelectModeStyle";
 
 import { StarBackground } from "components/StarBackground/StarBackground";
 type Props = {};
 
 export const SelectMode: React.FC<Props> = () => {
-  const { beginDevelopHandler, beginRoomBattleHandler } = useSelectModeState();
+  const { beginDevelopHandler, beginRoomMatchHandler } = useSelectModeState();
 
   return (
     <StarBackground>
@@ -45,7 +45,7 @@ export const SelectMode: React.FC<Props> = () => {
               </DescriptionText>
             }
             icon="sword"
-            onClick={beginRoomBattleHandler}
+            onClick={beginRoomMatchHandler}
           ></ModeSelectCard>
         </MarginBox>
       </InnerBox>{" "}

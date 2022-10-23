@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 export type IResponse = {
   beginDevelopHandler: () => void;
-  beginRoomBattleHandler: () => void;
+  beginRoomMatchHandler: () => void;
 };
 
 export const useSelectModeState = (): IResponse => {
@@ -13,12 +13,12 @@ export const useSelectModeState = (): IResponse => {
     navigate(`/robot-development/top`);
   };
 
-  const _beginRoomBattleHandler = () => {
+  const _beginRoomMatchHandler = () => {
     navigate("/room-match/top");
   };
 
   return {
     beginDevelopHandler: _beginDevelopHandler,
-    beginRoomBattleHandler: _beginRoomBattleHandler,
+    beginRoomMatchHandler: _beginRoomMatchHandler,
   };
 };

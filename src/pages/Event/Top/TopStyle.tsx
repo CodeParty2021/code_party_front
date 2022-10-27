@@ -22,6 +22,13 @@ export const ButtonBox = styled.div`
   margin-top:99px;
 `;
 
+export const ButtonBox2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${FlexGap({ gap: "8px", direction: "column" })}
+  margin-top:99px;
+`;
+
 export const CenterBox = styled.div`
   display: flex;
 

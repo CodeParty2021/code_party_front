@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button /> snapshot test 1`] = `
+exports[`<StarBackground /> snapshot test 1`] = `
 .c1 {
   width: 38px;
   height: 38px;

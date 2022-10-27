@@ -1,3 +1,4 @@
+import React from "react";
 import { shallow } from "enzyme";
 import { SelectMode } from "./SelectMode";
 import { IResponse, useSelectModeState } from "./hooks/useSelectModeState";

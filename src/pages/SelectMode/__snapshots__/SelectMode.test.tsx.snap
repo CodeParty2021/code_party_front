@@ -2,43 +2,46 @@
 
 exports[`<ModeSelect /> auth snapshot test 1`] = `
 Array [
-  <StarBackground>
-    <styled.div>
+  <React.Fragment>
+    <Header />
+    <StarBackground>
       <styled.div>
-        <ModeSelectCard
-          description={
-            <DescriptionText>
-              <React.Fragment>
-                開発者として新しくロボットを動かすプログラムを
+        <styled.div>
+          <ModeSelectCard
+            description={
+              <DescriptionText>
+                <React.Fragment>
+                  開発者として新しくロボットを動かすプログラムを
+                  <br />
+                  作成する事ができます。
+                </React.Fragment>
+              </DescriptionText>
+            }
+            disabled={true}
+            icon="setting"
+            imageName="walking_lobo"
+            onClick={[Function]}
+            title="ロボット開発モード"
+          />
+        </styled.div>
+        <styled.div>
+          <ModeSelectCard
+            description={
+              <DescriptionText>
+                過去に作成したプログラムで
                 <br />
-                作成する事ができます。
-              </React.Fragment>
-            </DescriptionText>
-          }
-          disabled={true}
-          icon="setting"
-          imageName="walking_lobo"
-          onClick={[Function]}
-          title="ロボット開発モード"
-        />
+                オンライン対戦することが出来ます。
+              </DescriptionText>
+            }
+            icon="sword"
+            imageName="grab_flag_lobo"
+            onClick={[Function]}
+            title="フレンド対戦モード"
+          />
+        </styled.div>
       </styled.div>
-      <styled.div>
-        <ModeSelectCard
-          description={
-            <DescriptionText>
-              過去に作成したプログラムで
-              <br />
-              オンライン対戦することが出来ます。
-            </DescriptionText>
-          }
-          icon="sword"
-          imageName="grab_flag_lobo"
-          onClick={[Function]}
-          title="フレンド対戦モード"
-        />
-      </styled.div>
-    </styled.div>
-     
-  </StarBackground>,
+       
+    </StarBackground>
+  </React.Fragment>,
 ]
 `;

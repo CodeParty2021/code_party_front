@@ -1,7 +1,7 @@
 import { renderHook, RenderResult } from "@testing-library/react-hooks";
 import { useUnityGame, IResponse } from "./useUnityGame";
 
-describe("useResult", () => {
+describe("useUnityGame", () => {
   let hook: RenderResult<IResponse>;
 
   beforeEach(() => {

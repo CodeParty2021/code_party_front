@@ -1,7 +1,7 @@
 import { renderHook, RenderResult } from "@testing-library/react-hooks";
 import { useMonacoEditor, IResponse } from "./useMonacoEditor";
 
-describe("useResult", () => {
+describe("useMonacoEditor", () => {
   let hook: RenderResult<IResponse>;
 
   beforeEach(() => {

@@ -19,16 +19,18 @@ export const StarBackground: React.FC<Props> = ({
   ...styleProps
 }) => {
   return (
-    <StarBackgroundStyle {...styleProps}>
+    <>
       {children}
-      <Star1 color="purple" />
-      <Star2 color="purple" />
-      <Star3 color="yellow" />
-      <Star4 color="yellow" />
-      <Star5 color="pink" />
-      <Star6 color="purple" />
-      <Star7 color="blue" />
-      <Star8 color="pink" />
-    </StarBackgroundStyle>
+      <StarBackgroundStyle {...styleProps}>
+        <Star1 color="purple" />
+        <Star2 color="purple" />
+        <Star3 color="yellow" />
+        <Star4 color="yellow" />
+        <Star5 color="pink" />
+        <Star6 color="purple" />
+        <Star7 color="blue" />
+        <Star8 color="pink" />
+      </StarBackgroundStyle>
+    </>
   );
 };

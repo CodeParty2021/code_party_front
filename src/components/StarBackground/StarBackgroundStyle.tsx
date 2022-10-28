@@ -5,7 +5,7 @@ import { GRAY_10, GRAY_20 } from "styles/colors";
 export type StarBackgroundStyleProps = {};
 
 const defaultStyle = css`
-  position: relative;
+  position: absolute;
   width: 100vw;
   height: 100vh;
   background-image: linear-gradient(
@@ -23,6 +23,8 @@ const defaultStyle = css`
   background-position: 0 0;
   background-color: ${GRAY_10};
   z-index: -2;
+  top: 0;
+  left: 0;
 `;
 
 export const StarBackgroundStyle = styled.div`

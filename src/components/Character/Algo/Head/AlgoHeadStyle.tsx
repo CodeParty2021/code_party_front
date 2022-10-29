@@ -1,12 +1,18 @@
+import { Properties } from "csstype";
 import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
 import { algo } from "styles/colors";
 
 export type AlgoHeadStyleProps = {
   color?: "turquoise" | "leaf" | "orange" | "magenta";
+  width?: Properties["width"];
+  height?: Properties["height"];
 };
 
-const defaultStyle = css<AlgoHeadStyleProps>``;
+const defaultStyle = css<AlgoHeadStyleProps>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+`;
 
 const turquoiseStyle = css`
   .algohead_color_main {
@@ -43,4 +49,6 @@ export const AlgoHeadStyle = styled(ReactSVG)<AlgoHeadStyleProps>`
 
 AlgoHeadStyle.defaultProps = {
   color: "turquoise",
+  width: "142px",
+  height: "118px",
 };

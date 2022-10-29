@@ -203,5 +203,5 @@ export const avatar = {
   robot: {
     border: WHITE,
     background: BLUE_20,
-  }
+  },
 };

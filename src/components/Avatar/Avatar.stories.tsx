@@ -50,17 +50,17 @@ HasIcon.args = {
 export const User = Template.bind({});
 User.args = {
   ...Default.args,
-  type: "user"
+  type: "user",
 };
 
 export const Anonymous = Template.bind({});
 Anonymous.args = {
   ...Default.args,
-  type: "anonymous"
+  type: "anonymous",
 };
 
 export const Robot = Template.bind({});
 Robot.args = {
   ...Default.args,
-  type: "robot"
+  type: "robot",
 };

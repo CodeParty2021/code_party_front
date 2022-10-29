@@ -11,27 +11,19 @@ describe("<Avatar />", () => {
   });
 
   it("render test user turquoise", () => {
-    expect(
-      render(<Avatar type="user" color="turquoise" />)
-    ).toBeTruthy();
+    expect(render(<Avatar type="user" color="turquoise" />)).toBeTruthy();
   });
 
   it("render test user leaf", () => {
-    expect(
-      render(<Avatar type="user" color="leaf" />)
-    ).toBeTruthy();
+    expect(render(<Avatar type="user" color="leaf" />)).toBeTruthy();
   });
 
   it("render test user orange", () => {
-    expect(
-      render(<Avatar type="user" color="orange" />)
-    ).toBeTruthy();
+    expect(render(<Avatar type="user" color="orange" />)).toBeTruthy();
   });
 
   it("render test user pink", () => {
-    expect(
-      render(<Avatar type="user" color="pink" />)
-    ).toBeTruthy();
+    expect(render(<Avatar type="user" color="pink" />)).toBeTruthy();
   });
 
   it("render test user hasImage", () => {
@@ -41,14 +33,10 @@ describe("<Avatar />", () => {
   });
 
   it("render test anonymous", () => {
-    expect(
-      render(<Avatar type="anonymous" />)
-    ).toBeTruthy();
+    expect(render(<Avatar type="anonymous" />)).toBeTruthy();
   });
 
   it("render test robot", () => {
-    expect(
-      render(<Avatar type="robot" />)
-    ).toBeTruthy();
+    expect(render(<Avatar type="robot" />)).toBeTruthy();
   });
 });

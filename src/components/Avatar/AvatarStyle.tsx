@@ -10,7 +10,7 @@ export type AvatarStyleProps = {
 
 type PrivateProps = {
   imageUrl?: string;
-}
+};
 
 export const AvatarDummyStyle = styled(ReactSVG)`
   width: 32px;
@@ -58,15 +58,14 @@ const leafStyle = css`
 const orangeStyle = css`
   border-color: ${avatar.orange.border};
   background-color: ${avatar.orange.background};
-`
+`;
 
 const pinkStyle = css`
   border-color: ${avatar.pink.border};
   background-color: ${avatar.pink.background};
 `;
 
-const userStyle = css`
-`;
+const userStyle = css``;
 
 const anonymousStyle = css`
   border-color: ${avatar.default.border};

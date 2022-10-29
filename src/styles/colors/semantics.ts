@@ -121,7 +121,8 @@ export const setName = {
 
 export const iconButton = {
   bg: WHITE,
-  icon: BLUE_50,
+  blue: BLUE_50,
+  black: GRAY_90,
 } as const;
 
 export const algoEditor = {

@@ -10,6 +10,7 @@ export type IResponse = {
   nameInputRef: RefObject<HTMLInputElement>;
   startBtnHandler: () => void;
   nameInputHandler: () => void;
+  blackLinkButtonHandler: () => void;
   btnDisabled: boolean;
 };
 
@@ -40,12 +41,16 @@ export const useSetNameState = (): IResponse => {
       setBtnDisabled(false);
     }
   };
+  const blackLinkButtonHandler = () => {
+    navigate("/");
+  };
   return {
     loading,
     error: errorDisplay,
     nameInputRef,
     startBtnHandler: _changeNameHandler,
     nameInputHandler,
+    blackLinkButtonHandler,
     btnDisabled,
   };
 };

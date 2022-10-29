@@ -17,20 +17,38 @@ export const SetNameModal = styled.div`
   position: relative;
   width: 984px;
   height: 532px;
-  backdrop-filter: blur(8px);
-
-  /*background: linear-gradient(239.43deg, #f5f5f5 0.81%, #f7f4ff 100%);
-  background-blend-mode: multiply;*/
   border: 8px solid ${WHITE};
-  backdrop-filter: blur(8px);
-
   border-radius: 32px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
 `;
+
+// 背景色にmix-blend-modeを適用するために重ねている。
+// setnamemodal自体に適用するとその子コンポーネントすべてが透過される。
+export const BackgroundBlur = styled.div`
+  position: absolute;
+  width: 984px;
+  height: 532px;
+  background: linear-gradient(239.43deg, #f5f5f5 0.81%, #f7f4ff 100%);
+  mix-blend-mode: multiply;
+  border: 8px solid ${WHITE};
+  backdrop-filter: blur(4px);
+  border-radius: 32px;
+  z-index: -1;
+`;
+
+export const PlanetPictureWrapperStyle = styled.div`
+  position: absolute;
+  z-index: -2;
+  top: 50%;
+  left: 50%;
+  transform: translateY(calc(-298px / 2 - 532px / 2))
+    translateX(calc(-298px / 2 + 984px / 2));
+`;
+
 export const ModalTitle = styled.div`
   position: absolute;
   top: 0;
@@ -119,4 +137,10 @@ export const NameInput = styled.input`
 
   color: #2a2c33;
   margin-bottom: 48px;
+`;
+
+export const BackLinkPosition = styled.div`
+  position: absolute;
+  top: 32px;
+  left: 32px;
 `;

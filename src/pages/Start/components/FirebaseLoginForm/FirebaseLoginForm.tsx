@@ -5,7 +5,7 @@ type Props = {};
 export const FirebaseLoginForm: React.FC<Props> = () => {
   return (
     <div>
-      <SignInScreen signInSuccessUrl="/mode-select" />
+      <SignInScreen signInSuccessUrl="/select-mode" />
     </div>
   );
 };

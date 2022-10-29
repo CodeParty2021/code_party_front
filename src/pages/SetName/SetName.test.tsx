@@ -13,6 +13,7 @@ const initialState: IResponse = {
   nameInputRef: { current: null },
   startBtnHandler: jest.fn(),
   btnDisabled: true,
+  blackLinkButtonHandler: jest.fn(),
   nameInputHandler: jest.fn(),
 };
 

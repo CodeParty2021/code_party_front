@@ -2,37 +2,49 @@
 
 exports[`<SetName /> auth snapshot test 1`] = `
 Array [
-  <React.Fragment>
-    <StarBackground>
+  <StarBackground>
+    <styled.div>
+      <BackLink
+        backMessage="トップに戻る"
+        iconColor="black"
+        onClick={[MockFunction]}
+      />
+    </styled.div>
+    <styled.div>
+      <PlanetPicture
+        color="blue"
+        size="289px"
+      />
+    </styled.div>
+    <styled.div>
       <styled.div>
         <styled.div>
-          <styled.div>
-            <span>
-              はじめて遊ぶ
-            </span>
-          </styled.div>
-          <styled.div>
-            <Styled(AlgoHead) />
-            <Styled(ReactSVG)
-              src="/img/balloon.svg"
-            />
-            <styled.div>
-              名前を教えてほしい！
-            </styled.div>
-          </styled.div>
-          <styled.input
-            onChange={[MockFunction]}
-            type="text"
-          />
-          <Button
-            color="pink"
-            onClick={[MockFunction]}
-            status="disabled"
-            value="けってい"
-          />
+          <span>
+            はじめて遊ぶ
+          </span>
         </styled.div>
+        <styled.div>
+          <Styled(AlgoHead) />
+          <Styled(ReactSVG)
+            src="/img/balloon.svg"
+          />
+          <styled.div>
+            名前を教えてほしい！
+          </styled.div>
+        </styled.div>
+        <styled.input
+          onChange={[MockFunction]}
+          type="text"
+        />
+        <Button
+          color="pink"
+          onClick={[MockFunction]}
+          status="disabled"
+          value="つぎへ"
+        />
+        <styled.div />
       </styled.div>
-    </StarBackground>
-  </React.Fragment>,
+    </styled.div>
+  </StarBackground>,
 ]
 `;

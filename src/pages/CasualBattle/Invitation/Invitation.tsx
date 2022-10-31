@@ -35,9 +35,7 @@ export const CasualBattleInvitation: React.FC<Props> = () => {
       return (
         <>
           {header}
-          <SignInScreen
-            signInSuccessUrl={`/casual-battle/invitation/${roomId}`}
-          />
+          <SignInScreen signInSuccessUrl={`/room-match/invitation/${roomId}`} />
         </>
       );
     }

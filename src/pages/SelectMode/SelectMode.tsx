@@ -24,11 +24,9 @@ export const SelectMode: React.FC<Props> = () => {
               title="ロボット開発モード"
               description={
                 <DescriptionText>
-                  <>
-                    開発者として新しくロボットを動かすプログラムを
-                    <br />
-                    作成する事ができます。
-                  </>
+                  開発者として新しくロボットを動かすプログラムを
+                  <br />
+                  作成する事ができます。
                 </DescriptionText>
               }
               icon="setting"
@@ -51,7 +49,7 @@ export const SelectMode: React.FC<Props> = () => {
               onClick={beginRoomMatchHandler}
             ></ModeSelectCard>
           </MarginBox>
-        </InnerBox>{" "}
+        </InnerBox>
       </StarBackground>
     </>
   );

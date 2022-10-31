@@ -141,7 +141,7 @@ describe("useWaitingRoomState", () => {
       },
     });
     renderHook(() => useWaitingRoomState());
-    expect(navigateMock).lastCalledWith("/casual-battle");
+    expect(navigateMock).lastCalledWith("/room-match");
   });
 
   it("コードが選択されたら準備ボタンが有効化される", () => {
@@ -179,7 +179,7 @@ describe("useWaitingRoomState", () => {
     });
     renderHook(() => useWaitingRoomState());
     expect(navigateMock).toBeCalledTimes(1);
-    expect(navigateMock).lastCalledWith("/casual-battle/result");
+    expect(navigateMock).lastCalledWith("/room-match/result");
   });
 
   it("自分がkickingのユーザならexecRoomが実行される", () => {

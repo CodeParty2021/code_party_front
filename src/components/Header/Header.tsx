@@ -4,27 +4,25 @@ import {
   LogoStyle,
   HeaderCircleStyle,
   BackLinkArea,
-  BackButtonText,
 } from "./HeaderStyle";
-import { IconButton } from "components/IconButton/IconButton";
-import { ArrowLeft } from "components/icons";
+import { BackLink } from "components/BackLink/BackLink";
 
 type Props = {
-  buttonMessage?: string;
+  backMessage?: string;
   backButtonHandler?: () => void;
 };
 
-export const Header: React.FC<Props> = ({
-  buttonMessage,
-  backButtonHandler,
-}) => {
+export const Header: React.FC<Props> = ({ backMessage, backButtonHandler }) => {
   return (
     <>
       <HeaderStyle>
-        {buttonMessage && backButtonHandler && (
+        {backMessage && backButtonHandler && (
           <BackLinkArea>
-            <IconButton Icon={ArrowLeft} onClick={backButtonHandler} />
-            <BackButtonText>{buttonMessage}</BackButtonText>
+            <BackLink
+              backMessage={backMessage}
+              onClick={backButtonHandler}
+              iconColor={"blue"}
+            ></BackLink>
           </BackLinkArea>
         )}
       </HeaderStyle>

@@ -39,7 +39,7 @@ Array [
         id="invitation-text"
         readOnly={true}
         type="text"
-        value="http://localhost:3000/#/casual-battle/invitation/-MzESfkdu9Xmu8pkOAw5"
+        value="http://localhost:3000/#/room-match/invitation/-MzESfkdu9Xmu8pkOAw5"
       />
       <button
         id="invitation-btn"

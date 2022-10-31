@@ -6,7 +6,7 @@ Array [
   width: 100%;
   height: 80px;
   background-color: #F5F6F8;
-  border: solid #D7DAE4;
+  border-bottom: 1px solid #D7DAE4;
   position: fixed;
   top: 0px;
   left: 0px;

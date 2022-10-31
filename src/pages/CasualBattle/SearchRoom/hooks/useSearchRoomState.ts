@@ -18,7 +18,7 @@ export const useSearchRoomState = (): IResponse => {
 
   useEffect(() => {
     if (room.isEntered) {
-      navigate("/casual-battle/waiting-room");
+      navigate("/room-match/waiting-room");
     }
   }, [room.isEntered]);
 

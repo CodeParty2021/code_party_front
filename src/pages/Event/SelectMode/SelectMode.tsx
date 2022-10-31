@@ -28,11 +28,9 @@ export const EventSelectMode: React.FC<Props> = () => {
             title="訓練モード"
             description={
               <DescriptionText>
-                <>
-                  まずはこのモードでロボットを
-                  <br />
-                  動かす練習をしましょう。
-                </>
+                まずはこのモードでロボットを
+                <br />
+                動かす練習をしましょう。
               </DescriptionText>
             }
             icon="setting"
@@ -45,18 +43,16 @@ export const EventSelectMode: React.FC<Props> = () => {
             title="対戦モード"
             description={
               <DescriptionText>
-                <>
-                  AIが搭載されたコンピュータと
-                  <br />
-                  対戦することが出来ます。
-                </>
+                AIが搭載されたコンピュータと
+                <br />
+                対戦することが出来ます。
               </DescriptionText>
             }
             icon="sword"
             onClick={beginBattleHandler}
           ></ModeSelectCard>
         </MarginBox>
-      </InnerBox>{" "}
+      </InnerBox>
       <Background />
     </>
   );

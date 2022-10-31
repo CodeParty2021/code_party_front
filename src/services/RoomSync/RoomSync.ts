@@ -140,7 +140,7 @@ const roomSlice = createSlice({
   reducers: {
     enterRoom: (state, action: RoomPayload) => {
       state.id = action.payload.id;
-      state.invitationLink = `${window.location.origin}/casual-battle/invitation/${state.id}`;
+      state.invitationLink = `${window.location.origin}/room-match/invitation/${state.id}`;
       state.info = action.payload.data;
       state.isEntered = true;
     },

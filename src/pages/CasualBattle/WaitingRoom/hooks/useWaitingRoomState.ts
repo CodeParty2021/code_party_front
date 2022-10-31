@@ -75,7 +75,7 @@ export const useWaitingRoomState = (): IResponse => {
   // DB上で退出処理が完了したら退出
   useEffect(() => {
     if (!room.isEntered) {
-      navigate("/casual-battle");
+      navigate("/room-match");
     }
   }, [room.isEntered]);
 
@@ -91,7 +91,7 @@ export const useWaitingRoomState = (): IResponse => {
   useEffect(() => {
     if (room.info) {
       if (preRoomStatus == "waiting" && room.info.status == "watching") {
-        navigate("/casual-battle/result");
+        navigate("/room-match/result");
       }
       setPreRoomStatus(room.info?.status);
     }

@@ -84,7 +84,7 @@ describe("useWaitingRoomState", () => {
       },
     });
     renderHook(() => useInvitationState());
-    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
+    expect(navigateMock).lastCalledWith("/room-match/waiting-room");
   });
   it("exec enterBtnClickHandler", () => {
     const { result } = renderHook(() => useInvitationState());

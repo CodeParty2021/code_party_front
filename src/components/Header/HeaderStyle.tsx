@@ -5,7 +5,7 @@ export const HeaderStyle = styled.div`
   width: 100%;
   height: 80px;
   background-color: ${GRAY_10};
-  border: solid ${GRAY_30};
+  border-bottom: 1px solid ${GRAY_30};
   position: fixed;
   top: 0px;
   left: 0px;

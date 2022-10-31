@@ -10,11 +10,9 @@ Array [
           <ModeSelectCard
             description={
               <DescriptionText>
-                <React.Fragment>
-                  開発者として新しくロボットを動かすプログラムを
-                  <br />
-                  作成する事ができます。
-                </React.Fragment>
+                開発者として新しくロボットを動かすプログラムを
+                <br />
+                作成する事ができます。
               </DescriptionText>
             }
             disabled={true}
@@ -40,7 +38,6 @@ Array [
           />
         </styled.div>
       </styled.div>
-       
     </StarBackground>
   </React.Fragment>,
 ]

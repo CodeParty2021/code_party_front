@@ -20,7 +20,7 @@ const state: IResponse = {
   roomInfo: {
     roomId: "room id",
     invitationLink:
-      "http://localhost:3000/#/casual-battle/invitation/-MzESfkdu9Xmu8pkOAw5",
+      "http://localhost:3000/#/room-match/invitation/-MzESfkdu9Xmu8pkOAw5",
     host: {
       displayName: "host user",
       ready: false,

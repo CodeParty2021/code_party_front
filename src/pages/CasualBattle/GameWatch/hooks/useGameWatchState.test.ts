@@ -76,7 +76,7 @@ describe("useGameWatchState", () => {
       },
     });
     renderHook(() => useGameWatchState());
-    expect(navigateMock).lastCalledWith("/casual-battle");
+    expect(navigateMock).lastCalledWith("/room-match");
   });
 
   it("シミュレーション結果のフェッチ", () => {
@@ -103,6 +103,6 @@ describe("useGameWatchState", () => {
     act(() => {
       exitBtnHandler();
     });
-    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
+    expect(navigateMock).lastCalledWith("/room-match/waiting-room");
   });
 });

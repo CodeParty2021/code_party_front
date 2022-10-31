@@ -88,27 +88,27 @@ export const App: React.FC<Props> = () => {
             element={<PrivateRoute component={OnlineMatch} />}
           />
           <Route
-            path="/casual-battle/waiting-room"
+            path="/room-match/waiting-room"
             element={<PrivateRoute component={CasualBattleWaitingRoom} />}
           />
           <Route
-            path="/room-match/top"
+            path="/room-match"
             element={<PrivateRoute component={CasualBattleLobby} />}
           />
           <Route
-            path="/casual-battle/invitation/:roomId"
+            path="/room-match/invitation/:roomId"
             element={<PrivateRoute component={CasualBattleInvitation} />}
           />
           <Route
-            path="/casual-battle/search-room"
+            path="/room-match/search-room"
             element={<PrivateRoute component={CasualBattleSearchRoom} />}
           />
           <Route
-            path="/casual-battle/result"
+            path="/room-match/result"
             element={<PrivateRoute component={CasualBattleGameWatch} />}
           />
           <Route
-            path="/casual-battle/pick-code"
+            path="/room-match/pick-code"
             element={<PrivateRoute component={CasualBattlePickCode} />}
           />
           <Route

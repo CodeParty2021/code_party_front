@@ -19,7 +19,7 @@ const withButtonMessage: ComponentStory<typeof Header> = (args) => (
 
 export const withComponent = withButtonMessage.bind({});
 withComponent.args = {
-  buttonMessage: "戻る",
+  backMessage: "戻る",
   backButtonHandler: () => {
     alert("戻るボタンがクリックされました！");
   },

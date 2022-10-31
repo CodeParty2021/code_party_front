@@ -14,7 +14,7 @@ export const useSelectModeState = (): IResponse => {
   };
 
   const _beginRoomMatchHandler = () => {
-    navigate("/room-match/top");
+    navigate("/room-match");
   };
 
   return {

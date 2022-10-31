@@ -20,6 +20,6 @@ describe("useSelectModeState", () => {
   test("beginRoomMatchHandler", () => {
     const { result } = renderHook(() => useSelectModeState());
     result.current.beginRoomMatchHandler();
-    expect(navigateMock).toHaveBeenCalledWith("/room-match/top");
+    expect(navigateMock).toHaveBeenCalledWith("/room-match");
   });
 });

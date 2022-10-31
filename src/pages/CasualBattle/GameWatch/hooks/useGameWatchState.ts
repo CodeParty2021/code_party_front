@@ -33,7 +33,7 @@ export const useGameWatchState = (): IResponse => {
   // 何らかの理由でルームから出された場合はロビーに戻る
   useEffect(() => {
     if (!room.isEntered) {
-      navigate("/casual-battle");
+      navigate("/room-match");
     }
   }, [room.isEntered]);
 
@@ -46,7 +46,7 @@ export const useGameWatchState = (): IResponse => {
   }, [room.info?.analyzingResult]);
 
   const _exitBtnHandler = () => {
-    navigate("/casual-battle/waiting-room");
+    navigate("/room-match/waiting-room");
   };
 
   return {

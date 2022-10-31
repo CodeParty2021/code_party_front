@@ -15,7 +15,7 @@ export const useLobbyState = (): IResponse => {
 
   useEffect(() => {
     if (room.isEntered) {
-      navigate("/casual-battle/waiting-room");
+      navigate("/room-match/waiting-room");
     }
   }, [room.isEntered]);
 
@@ -27,7 +27,7 @@ export const useLobbyState = (): IResponse => {
   };
 
   const _roomSearchBtnHandler = () => {
-    navigate("/casual-battle/search-room");
+    navigate("/room-match/search-room");
   };
 
   return {

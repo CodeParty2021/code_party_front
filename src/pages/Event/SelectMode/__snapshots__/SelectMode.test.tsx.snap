@@ -8,11 +8,9 @@ Array [
         <ModeSelectCard
           description={
             <DescriptionText>
-              <React.Fragment>
-                まずはこのモードでロボットを
-                <br />
-                動かす練習をしましょう。
-              </React.Fragment>
+              まずはこのモードでロボットを
+              <br />
+              動かす練習をしましょう。
             </DescriptionText>
           }
           icon="setting"
@@ -25,11 +23,9 @@ Array [
         <ModeSelectCard
           description={
             <DescriptionText>
-              <React.Fragment>
-                AIが搭載されたコンピュータと
-                <br />
-                対戦することが出来ます。
-              </React.Fragment>
+              AIが搭載されたコンピュータと
+              <br />
+              対戦することが出来ます。
             </DescriptionText>
           }
           icon="sword"
@@ -39,7 +35,6 @@ Array [
         />
       </styled.div>
     </styled.div>
-     
     <Styled(StarBackground) />
   </React.Fragment>,
 ]

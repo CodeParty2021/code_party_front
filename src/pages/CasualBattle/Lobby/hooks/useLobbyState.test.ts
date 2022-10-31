@@ -49,7 +49,7 @@ describe("useLobbyState", () => {
       },
     });
     renderHook(() => useLobbyState());
-    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
+    expect(navigateMock).lastCalledWith("/room-match/waiting-room");
   });
 
   it("exec roomCreateBtnHandler", () => {
@@ -70,6 +70,6 @@ describe("useLobbyState", () => {
       roomSearchBtnHandler();
     });
     expect(navigateMock).toBeCalledTimes(1);
-    expect(navigateMock).lastCalledWith("/casual-battle/search-room");
+    expect(navigateMock).lastCalledWith("/room-match/search-room");
   });
 });

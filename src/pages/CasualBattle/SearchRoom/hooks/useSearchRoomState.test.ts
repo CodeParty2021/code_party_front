@@ -50,7 +50,7 @@ describe("useWaitingRoomState", () => {
       },
     });
     renderHook(() => useSearchRoomState());
-    expect(navigateMock).lastCalledWith("/casual-battle/waiting-room");
+    expect(navigateMock).lastCalledWith("/room-match/waiting-room");
   });
 
   it("exec roomIdTextBoxChangeHandler", () => {

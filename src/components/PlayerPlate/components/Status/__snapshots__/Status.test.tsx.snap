@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Status /> snapshot test 1`] = `
+.c1 {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  fill: #34C5D5;
+}
+
+.c1 > span,
+.c1 > div,
+.c1 > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+  padding-right: 8px;
+}
+
+.c0 .playerplate-status-message {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  color: #242A3D;
+  -webkit-transform: matrix(1,0,-0.08,1,0,0);
+  -ms-transform: matrix(1,0,-0.08,1,0,0);
+  transform: matrix(1,0,-0.08,1,0,0);
+}
+
+@supports not (gap:16px) {
+  .c0 > *:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+<div
+  class="c0"
+  color="turquoise"
+>
+  <span
+    class="c1"
+    display="inline-block"
+    fill="#34C5D5"
+  />
+  <span
+    class="playerplate-status-message"
+  >
+    message
+  </span>
+</div>
+`;

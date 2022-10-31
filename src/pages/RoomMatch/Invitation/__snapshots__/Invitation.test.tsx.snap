@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CasualBattleInvitation /> snapshot test 1`] = `
+exports[`<RoomMatchInvitation /> snapshot test 1`] = `
 Array [
   <div>
     <Head

@@ -3,7 +3,7 @@ import { useSearchRoomState } from "./hooks/useSearchRoomState";
 
 type Props = {};
 
-export const CasualBattleSearchRoom: React.FC<Props> = () => {
+export const RoomMatchSearchRoom: React.FC<Props> = () => {
   const {
     roomIdTextBoxValue,
     roomIdTextBoxChangeHandler,

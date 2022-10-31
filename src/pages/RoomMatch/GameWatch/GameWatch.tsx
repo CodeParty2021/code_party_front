@@ -12,7 +12,7 @@ const unityContext = new UnityContext({
   codeUrl: "/unity/sp/web.wasm.unityweb",
 });
 
-export const CasualBattleGameWatch: React.FC<Props> = () => {
+export const RoomMatchGameWatch: React.FC<Props> = () => {
   useRunSimulation();
   const { isAnalyzing, analyzingError, result, json, exitBtnHandler } =
     useGameWatchState();

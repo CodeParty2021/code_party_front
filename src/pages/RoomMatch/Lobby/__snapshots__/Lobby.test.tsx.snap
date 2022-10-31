@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CasualBattleLobby /> snapshot test 1`] = `
+exports[`<RoomMatchLobby /> snapshot test 1`] = `
 Array [
   <div>
     <div>

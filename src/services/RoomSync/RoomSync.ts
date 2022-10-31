@@ -45,7 +45,7 @@ export type UserState = {
    * 選択したコードのID
    */
   codeId?: string;
-  //for CasualBattle/WaitingRoom
+  //for RoomMatch/WaitingRoom
   ready: boolean;
 };
 

@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { CasualBattlePickCode } from "./PickCode";
+import { RoomMatchPickCode } from "./PickCode";
 
-describe("<CasualBattlePickCode />", () => {
+describe("<RoomMatchPickCode />", () => {
   it("snapshot test", () => {
-    const wrapper = shallow(<CasualBattlePickCode />);
+    const wrapper = shallow(<RoomMatchPickCode />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });

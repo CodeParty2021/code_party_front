@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { CasualBattleInvitation } from "./Invitation";
+import { RoomMatchInvitation } from "./Invitation";
 import { IResponse, useInvitationState } from "./hooks/useInvitationState";
 
 jest.mock("./hooks/useInvitationState");
@@ -17,7 +17,7 @@ const state: IResponse = {
   hostName: "hostName",
 };
 
-describe("<CasualBattleInvitation />", () => {
+describe("<RoomMatchInvitation />", () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue({
       ...state,
@@ -28,12 +28,12 @@ describe("<CasualBattleInvitation />", () => {
   });
 
   it("snapshot test", () => {
-    const wrapper = shallow(<CasualBattleInvitation />);
+    const wrapper = shallow(<RoomMatchInvitation />);
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 
   it("enter button test", () => {
-    const wrapper = shallow(<CasualBattleInvitation />);
+    const wrapper = shallow(<RoomMatchInvitation />);
     const btn = wrapper.find("#enter-btn");
     btn.simulate("click");
 

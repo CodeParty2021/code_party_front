@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { CasualBattleSearchRoom } from "./SearchRoom";
+import { RoomMatchSearchRoom } from "./SearchRoom";
 import { IResponse, useSearchRoomState } from "./hooks/useSearchRoomState";
 
 jest.mock("./hooks/useSearchRoomState");
@@ -15,7 +15,7 @@ const state: IResponse = {
   roomIdTextBoxValue: "typed value",
 };
 
-describe("<CasualBattleSearchRoom />", () => {
+describe("<RoomMatchSearchRoom />", () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue({
       ...state,
@@ -26,13 +26,13 @@ describe("<CasualBattleSearchRoom />", () => {
   });
 
   it("snapshot test", () => {
-    const wrapper = shallow(<CasualBattleSearchRoom />);
+    const wrapper = shallow(<RoomMatchSearchRoom />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 
   it("enter button test", () => {
-    const wrapper = shallow(<CasualBattleSearchRoom />);
+    const wrapper = shallow(<RoomMatchSearchRoom />);
 
     const btn = wrapper.find("#enter-btn");
     btn.simulate("click");
@@ -41,7 +41,7 @@ describe("<CasualBattleSearchRoom />", () => {
   });
 
   it("room id text box test", () => {
-    const wrapper = shallow(<CasualBattleSearchRoom />);
+    const wrapper = shallow(<RoomMatchSearchRoom />);
 
     const event = {
       target: {

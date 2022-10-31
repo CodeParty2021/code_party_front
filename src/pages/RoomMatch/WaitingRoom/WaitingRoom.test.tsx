@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { CasualBattleWaitingRoom } from "./WaitingRoom";
+import { RoomMatchWaitingRoom } from "./WaitingRoom";
 import { IResponse, useWaitingRoomState } from "./hooks/useWaitingRoomState";
 
 jest.mock("./hooks/useWaitingRoomState");
@@ -102,7 +102,7 @@ const state: IResponse = {
   onChangeSelectedCodeId: jest.fn(),
 };
 
-describe("<CasualBattleWaitingRoom />", () => {
+describe("<RoomMatchWaitingRoom />", () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue({
       ...state,
@@ -113,13 +113,13 @@ describe("<CasualBattleWaitingRoom />", () => {
   });
 
   it("snapshot test", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 
   it("start button test", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     const btn = wrapper.find("#start-btn");
     btn.simulate("click");
@@ -128,7 +128,7 @@ describe("<CasualBattleWaitingRoom />", () => {
   });
 
   it("kick user button test", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     const btn = wrapper.find("#kick-btn-user-id-1");
     btn.simulate("click");
@@ -137,7 +137,7 @@ describe("<CasualBattleWaitingRoom />", () => {
   });
 
   it("exit button test", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     const btn = wrapper.find("#exit-btn");
     btn.simulate("click");
@@ -146,7 +146,7 @@ describe("<CasualBattleWaitingRoom />", () => {
   });
 
   it("ready button test", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     const btn = wrapper.find("#ready-btn");
     btn.simulate("click");
@@ -155,7 +155,7 @@ describe("<CasualBattleWaitingRoom />", () => {
   });
 
   it("inputが変化した時にonChangeSelectedCodeIdが呼ばれるか", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     wrapper.find("input[value='hostCodeId1']").simulate("change", {
       target: {
@@ -167,7 +167,7 @@ describe("<CasualBattleWaitingRoom />", () => {
   });
 
   it("copy button test", () => {
-    const wrapper = shallow(<CasualBattleWaitingRoom />);
+    const wrapper = shallow(<RoomMatchWaitingRoom />);
 
     const btn = wrapper.find("#invitation-btn");
     btn.simulate("click");

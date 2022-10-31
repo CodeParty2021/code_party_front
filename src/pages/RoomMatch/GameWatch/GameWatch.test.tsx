@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { CasualBattleGameWatch } from "./GameWatch";
+import { RoomMatchGameWatch } from "./GameWatch";
 import { IResponse, useGameWatchState } from "./hooks/useGameWatchState";
 
 jest.mock("./hooks/useGameWatchState");
@@ -21,7 +21,7 @@ const state: IResponse = {
   exitBtnHandler: jest.fn(),
 };
 
-describe("<CasualBattleGameWatch />", () => {
+describe("<RoomMatchGameWatch />", () => {
   beforeEach(() => {
     useGameWatchStateMock.mockReturnValue({
       ...state,
@@ -32,13 +32,13 @@ describe("<CasualBattleGameWatch />", () => {
   });
 
   it("snapshot test", () => {
-    const wrapper = shallow(<CasualBattleGameWatch />);
+    const wrapper = shallow(<RoomMatchGameWatch />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 
   it("exit button test", () => {
-    const wrapper = shallow(<CasualBattleGameWatch />);
+    const wrapper = shallow(<RoomMatchGameWatch />);
 
     const btn = wrapper.find("#exit-btn");
     btn.simulate("click");

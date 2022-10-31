@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import { CasualBattleLobby } from "./Lobby";
+import { RoomMatchLobby } from "./Lobby";
 import { IResponse, useLobbyState } from "./hooks/useLobbyState";
 
 jest.mock("./hooks/useLobbyState");
@@ -14,7 +14,7 @@ const state: IResponse = {
   roomSearchBtnHandler: jest.fn(),
 };
 
-describe("<CasualBattleLobby />", () => {
+describe("<RoomMatchLobby />", () => {
   beforeEach(() => {
     useSelectorMock.mockReturnValue({
       ...state,
@@ -25,13 +25,13 @@ describe("<CasualBattleLobby />", () => {
   });
 
   it("snapshot test", () => {
-    const wrapper = shallow(<CasualBattleLobby />);
+    const wrapper = shallow(<RoomMatchLobby />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 
   it("room create button test", () => {
-    const wrapper = shallow(<CasualBattleLobby />);
+    const wrapper = shallow(<RoomMatchLobby />);
 
     const btn = wrapper.find("#create-btn");
     btn.simulate("click");
@@ -40,7 +40,7 @@ describe("<CasualBattleLobby />", () => {
   });
 
   it("room search button test", () => {
-    const wrapper = shallow(<CasualBattleLobby />);
+    const wrapper = shallow(<RoomMatchLobby />);
 
     const btn = wrapper.find("#search-btn");
     btn.simulate("click");

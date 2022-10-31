@@ -5,7 +5,7 @@ import { Head } from "components/Head/Head";
 
 type Props = {};
 
-export const CasualBattleInvitation: React.FC<Props> = () => {
+export const RoomMatchInvitation: React.FC<Props> = () => {
   const {
     isLogin,
     errorMessage,

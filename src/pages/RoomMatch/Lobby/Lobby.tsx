@@ -3,7 +3,7 @@ import { useLobbyState } from "./hooks/useLobbyState";
 
 type Props = {};
 
-export const CasualBattleLobby: React.FC<Props> = () => {
+export const RoomMatchLobby: React.FC<Props> = () => {
   const { roomCreateBtnDisabled, roomCreateBtnHandler, roomSearchBtnHandler } =
     useLobbyState();
 

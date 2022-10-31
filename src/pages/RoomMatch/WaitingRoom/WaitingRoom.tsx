@@ -3,7 +3,7 @@ import { useWaitingRoomState } from "./hooks/useWaitingRoomState";
 
 type Props = {};
 
-export const CasualBattleWaitingRoom: React.FC<Props> = () => {
+export const RoomMatchWaitingRoom: React.FC<Props> = () => {
   const {
     user,
     roomInfo,

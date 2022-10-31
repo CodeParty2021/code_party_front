@@ -12,11 +12,11 @@ import { OnlineMatch } from "pages/OnlineMatch/OnlineMatch";
 import { Garage } from "pages/Garage/Garage";
 import { GarageList } from "pages/Garage/GarageList";
 import { SelectMode } from "pages/SelectMode/SelectMode";
-import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
-import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
-import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
-import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
-import { CasualBattlePickCode } from "pages/CasualBattle/PickCode/PickCode";
+import { RoomMatchLobby } from "pages/RoomMatch/Lobby/Lobby";
+import { RoomMatchWaitingRoom } from "pages/RoomMatch/WaitingRoom/WaitingRoom";
+import { RoomMatchSearchRoom } from "pages/RoomMatch/SearchRoom/SearchRoom";
+import { RoomMatchGameWatch } from "pages/RoomMatch/GameWatch/GameWatch";
+import { RoomMatchPickCode } from "pages/RoomMatch/PickCode/PickCode";
 import { SetName } from "pages/SetName/SetName";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
@@ -26,7 +26,7 @@ import { TutorialMissions } from "pages/Tutorial/TutorialMission/TutorialMission
 import { MissionEnd } from "pages/Tutorial/MissionEnd/MissionEnd";
 import { setCallBackToSyncUser } from "services/user/user";
 import { RootingScreen } from "components/RootingScreen/RootingScreen";
-import { CasualBattleInvitation } from "pages/CasualBattle/Invitation/Invitation";
+import { RoomMatchInvitation } from "pages/RoomMatch/Invitation/Invitation";
 import { EventTop } from "pages/Event/Top/Top";
 import { EventSelectMode } from "pages/Event/SelectMode/SelectMode";
 import { EventSelectAI } from "pages/Event/SelectAI/SelectAI";
@@ -89,27 +89,27 @@ export const App: React.FC<Props> = () => {
           />
           <Route
             path="/room-match/waiting-room"
-            element={<PrivateRoute component={CasualBattleWaitingRoom} />}
+            element={<PrivateRoute component={RoomMatchWaitingRoom} />}
           />
           <Route
             path="/room-match"
-            element={<PrivateRoute component={CasualBattleLobby} />}
+            element={<PrivateRoute component={RoomMatchLobby} />}
           />
           <Route
             path="/room-match/invitation/:roomId"
-            element={<PrivateRoute component={CasualBattleInvitation} />}
+            element={<PrivateRoute component={RoomMatchInvitation} />}
           />
           <Route
             path="/room-match/search-room"
-            element={<PrivateRoute component={CasualBattleSearchRoom} />}
+            element={<PrivateRoute component={RoomMatchSearchRoom} />}
           />
           <Route
             path="/room-match/result"
-            element={<PrivateRoute component={CasualBattleGameWatch} />}
+            element={<PrivateRoute component={RoomMatchGameWatch} />}
           />
           <Route
             path="/room-match/pick-code"
-            element={<PrivateRoute component={CasualBattlePickCode} />}
+            element={<PrivateRoute component={RoomMatchPickCode} />}
           />
           <Route
             path="/codes"

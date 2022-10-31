@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 type Props = {};
 
-export const CasualBattlePickCode: React.FC<Props> = () => {
+export const RoomMatchPickCode: React.FC<Props> = () => {
   return (
     <div>
       <div>ロボットを選択する画面</div>

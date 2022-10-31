@@ -106,6 +106,7 @@ export const algo = {
   leaf: LEAF_50,
   orange: ORANGE_50,
   magenta: PINK_50,
+  blue: BLUE_40,
 } as const;
 
 export const roundedButton = {

@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { algo } from "styles/colors";
 
 export type AlgoHeadStyleProps = {
-  color?: "turquoise" | "leaf" | "orange" | "magenta";
+  color?: "turquoise" | "leaf" | "orange" | "magenta" | "blue";
   width?: Properties["width"];
   height?: Properties["height"];
 };
@@ -38,6 +38,12 @@ const magentaStyle = css`
   }
 `;
 
+const blueStyle = css`
+  .algohead_color_main {
+    fill: ${algo.blue};
+  }
+`;
+
 export const AlgoHeadStyle = styled(ReactSVG)<AlgoHeadStyleProps>`
   ${defaultStyle}
 
@@ -45,6 +51,7 @@ export const AlgoHeadStyle = styled(ReactSVG)<AlgoHeadStyleProps>`
   ${({ color }) => color == "leaf" && leafStyle}
   ${({ color }) => color == "orange" && orangeStyle}
   ${({ color }) => color == "magenta" && magentaStyle}
+  ${({ color }) => color == "blue" && blueStyle}
 `;
 
 AlgoHeadStyle.defaultProps = {

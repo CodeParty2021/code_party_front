@@ -15,4 +15,6 @@ const Template: ComponentStory<typeof AlgoHead> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   color: "turquoise",
+  width: "142px",
+  height: "118px",
 };

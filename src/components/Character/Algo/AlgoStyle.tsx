@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { algo } from "styles/colors";
 
 export type AlgoStyleProps = {
-  color?: "turquoise" | "leaf" | "orange" | "magenta";
+  color?: "turquoise" | "leaf" | "orange" | "magenta" | "blue";
 };
 
 const defaultStyle = css<AlgoStyleProps>``;
@@ -32,6 +32,12 @@ const magentaStyle = css`
   }
 `;
 
+const blueStyle = css`
+  .algo_color_main {
+    fill: ${algo.blue};
+  }
+`;
+
 export const AlgoStyle = styled(ReactSVG)<AlgoStyleProps>`
   ${defaultStyle}
 
@@ -39,6 +45,7 @@ export const AlgoStyle = styled(ReactSVG)<AlgoStyleProps>`
   ${({ color }) => color == "leaf" && leafStyle}
   ${({ color }) => color == "orange" && orangeStyle}
   ${({ color }) => color == "magenta" && magentaStyle}
+  ${({ color }) => color == "blue" && blueStyle}
 `;
 
 AlgoStyle.defaultProps = {

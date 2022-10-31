@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Badge /> snapshot test 1`] = `
+.c1 {
+  width: 19px;
+  height: 19px;
+  fill: #F8919F;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.c0 .badge_name {
+  -webkit-transform: matrix(1,0,-0.08,1,0,0);
+  -ms-transform: matrix(1,0,-0.08,1,0,0);
+  transform: matrix(1,0,-0.08,1,0,0);
+  color: #4A5373;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+@supports not (gap:16px) {
+  .c0 > *:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+<div
+  class="c0"
+>
+  <svg
+    class="c1"
+    color="pink"
+    height="19px"
+    width="19px"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+  <span
+    class="badge_name"
+  >
+    称号なし
+  </span>
+  <svg
+    class="c1"
+    color="pink"
+    height="19px"
+    width="19px"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+</div>
+`;

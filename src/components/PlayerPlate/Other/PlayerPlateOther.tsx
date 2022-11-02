@@ -1,3 +1,4 @@
+import { Avatar } from "components/Avatar/Avatar";
 import { Button } from "components/Button/Button";
 import React from "react";
 import { Badge } from "../components/Badge/Badge";
@@ -7,6 +8,7 @@ import { ColumnBottomStye, ColumnTopStye } from "./PlayerPlateOtherStyle";
 
 type Props = {
   userName?: string;
+  userType?: "user" | "anonymous";
   userPhoto?: string;
   badge?: string;
   color?: "turquoise" | "leaf" | "orange" | "magenta";
@@ -16,6 +18,8 @@ type Props = {
 
 export const PlayerPlateOther: React.FC<Props> = ({
   userName,
+  userType,
+  userPhoto,
   badge,
   color,
   status,
@@ -27,7 +31,29 @@ export const PlayerPlateOther: React.FC<Props> = ({
       status={status}
       viewAlgo={status === "default" || status === "ready" || status === "bot"}
       size="M"
-      playerIcon={<div>avatar</div>}
+      playerIcon={
+        status === "bot" ? undefined : (
+          <Avatar
+            userPhotoUrl={userPhoto}
+            type={
+              status === "disconnecting"
+                ? "anonymous"
+                : status === "waiting"
+                ? "anonymous"
+                : userType || "anonymous"
+            }
+            color={
+              status === "disconnecting"
+                ? "gray"
+                : status === "waiting"
+                ? "gray"
+                : color === "magenta"
+                ? "pink"
+                : color
+            }
+          />
+        )
+      }
       columnTop={
         <ColumnTopStye waiting={status === "waiting"}>
           {status === "waiting" ? (

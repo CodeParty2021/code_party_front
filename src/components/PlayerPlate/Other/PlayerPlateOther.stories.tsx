@@ -15,6 +15,7 @@ const Template: ComponentStory<typeof PlayerPlateOther> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   userName: "ふが次郎",
+  userType: "user",
   userPhoto: "/logo512.png",
   badge: "しがないプログラマ",
   color: "turquoise",

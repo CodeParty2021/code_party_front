@@ -6,7 +6,7 @@ import {
 } from "./PlayerPlateCardStyle";
 
 type Props = PlayerPlateCardStyleProps & {
-  playerIcon: ReactElement;
+  playerIcon?: ReactElement;
   viewAlgo: boolean;
   columnTop: ReactElement;
   columnMiddle?: ReactElement;
@@ -33,7 +33,9 @@ export const PlayerPlateCard: React.FC<Props> = ({
       <div className="playerplatecard_column_bottom">{columnBottom}</div>
 
       {/* absolute要素 */}
-      <div className="playerplatecard_playericon">{playerIcon}</div>
+      {playerIcon && (
+        <div className="playerplatecard_playericon">{playerIcon}</div>
+      )}
       <div className="playerplatecard_border" />
     </PlayerPlateCardStyle>
   );

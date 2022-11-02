@@ -1,6 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PlayerPlateMe /> snapshot test 1`] = `
+.c9 {
+  display: block;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3px solid #FFFFFF;
+  background-color: #EAEBF1;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  border-color: #6CDBE5;
+  background-color: #ECFDFF;
+  background-image: url(/logo512.png);
+}
+
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -393,9 +408,11 @@ exports[`<PlayerPlateMe /> snapshot test 1`] = `
   <div
     class="playerplatecard_playericon"
   >
-    <div>
-      avatar
-    </div>
+    <div
+      class="c9"
+      color="turquoise"
+      type="user"
+    />
   </div>
   <div
     class="playerplatecard_border"

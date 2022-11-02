@@ -1,3 +1,4 @@
+import { Avatar } from "components/Avatar/Avatar";
 import { Button } from "components/Button/Button";
 import React from "react";
 import { Badge } from "../components/Badge/Badge";
@@ -22,6 +23,7 @@ type Props = {
 
 export const PlayerPlateMe: React.FC<Props> = ({
   userName,
+  userPhoto,
   badge,
   color,
   status,
@@ -35,7 +37,13 @@ export const PlayerPlateMe: React.FC<Props> = ({
       status={status}
       viewAlgo={true}
       size="L"
-      playerIcon={<div>avatar</div>}
+      playerIcon={
+        <Avatar
+          userPhotoUrl={userPhoto}
+          type="user"
+          color={color === "magenta" ? "pink" : color}
+        />
+      }
       columnTop={
         <ColumnTopStye>
           <span className="playerplateme-name">{userName}</span>

@@ -33,6 +33,7 @@ import {
   GRAY_100,
   GRAY_20,
   GRAY_30,
+  GRAY_40,
   GRAY_50,
   GRAY_60,
   GRAY_80,
@@ -208,6 +209,10 @@ export const avatar = {
   pink: {
     border: PINK_40,
     background: PINK_10,
+  },
+  gray: {
+    border: GRAY_40,
+    background: GRAY_20,
   },
   anonymous: {
     avatar: GRAY_50,

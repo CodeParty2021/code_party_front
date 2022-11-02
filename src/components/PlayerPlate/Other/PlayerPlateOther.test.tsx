@@ -6,6 +6,7 @@ import { render } from "enzyme";
 describe("<PlayerPlateOther />", () => {
   const defaultProps = {
     userName: "ふが次郎",
+    userType: "user",
     userPhoto: "/logo512.png",
     badge: "しがないプログラマ",
     color: "turquoise",

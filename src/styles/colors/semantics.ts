@@ -163,3 +163,11 @@ export const descriptionPanel = {
   },
   color: GRAY_100,
 } as const;
+
+export const backLink = {
+  bg: WHITE,
+  buttonIconColor: {
+    blue: BLUE_50,
+    black: GRAY_90,
+  },
+};

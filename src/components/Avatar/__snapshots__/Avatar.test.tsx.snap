@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar /> snapshot test 1`] = `
+.c2 {
+  width: 32px;
+  height: 38px;
+}
+
+.c0 {
+  display: block;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 3px solid #FFFFFF;
+  background-color: #EAEBF1;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  border-color: #FFFFFF;
+  background-color: #EAEBF1;
+}
+
+.c0 .c1 {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.c0 .c1 {
+  fill: #8A9CFF;
+}
+
+.c0 .c1 {
+  fill: #A2AAC2;
+}
+
+<div
+  class="c0"
+  color="default"
+  type="anonymous"
+>
+  <svg
+    class="c1 c2"
+    xlink="http://www.w3.org/1999/xlink"
+    xmlns="http://www.w3.org/2000/svg"
+  />
+</div>
+`;

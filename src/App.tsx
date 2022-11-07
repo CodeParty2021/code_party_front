@@ -63,7 +63,10 @@ export const App: React.FC<Props> = () => {
           <Route path="/stages/:id" element={<Stage />} />
           <Route path="/lp" element={<Lp />} />
 
-          <Route path="/set-name" element={<SetName />} />
+          <Route
+            path="/set-name"
+            element={<PrivateRoute component={SetName} />}
+          />
           <Route
             path="/robot-development/top"
             element={<RobotDevelopmentTop />}
@@ -140,7 +143,6 @@ export const App: React.FC<Props> = () => {
             path="/tutorial/world/:world_id/intro"
             element={<PrivateRoute component={GameIntro} />}
           />
-
           <Route path="/event" element={<EventTop />} />
           <Route
             path="/event/select-mode"
@@ -148,7 +150,12 @@ export const App: React.FC<Props> = () => {
               <PrivateRoute component={EventSelectMode} redirectUrl="/event" />
             }
           />
-          <Route path="/event/set-name" element={<EventSetName />} />
+          <Route
+            path="/event/set-name"
+            element={
+              <PrivateRoute component={EventSetName} redirectUrl="/event" />
+            }
+          />
           <Route
             path="/event/select-ai"
             element={

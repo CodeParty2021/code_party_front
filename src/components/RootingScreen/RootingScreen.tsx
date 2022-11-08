@@ -27,7 +27,7 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/start">ログイン画面</Link>
         </li>
         <li>
-          <Link to="/mode-select">選択画面Top</Link>
+          <Link to="/select-mode">選択画面Top</Link>
         </li>
         <li>
           <Link to="/free-coding">フリーコーディング</Link>

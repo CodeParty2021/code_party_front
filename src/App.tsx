@@ -11,12 +11,13 @@ import { Specification } from "pages/RobotDevelopment/Specification/Specificatio
 import { OnlineMatch } from "pages/OnlineMatch/OnlineMatch";
 import { Garage } from "pages/Garage/Garage";
 import { GarageList } from "pages/Garage/GarageList";
-import { ModeSelect } from "pages/ModeSelect/ModeSelect";
+import { SelectMode } from "pages/SelectMode/SelectMode";
 import { CasualBattleLobby } from "pages/CasualBattle/Lobby/Lobby";
 import { CasualBattleWaitingRoom } from "pages/CasualBattle/WaitingRoom/WaitingRoom";
 import { CasualBattleSearchRoom } from "pages/CasualBattle/SearchRoom/SearchRoom";
 import { CasualBattleGameWatch } from "pages/CasualBattle/GameWatch/GameWatch";
 import { CasualBattlePickCode } from "pages/CasualBattle/PickCode/PickCode";
+import { SetName } from "pages/SetName/SetName";
 import { CodeCoding } from "pages/Code/Coding/Coding";
 import { CodeList } from "pages/Code/CodeList/CodeList";
 import { PrivateRoute } from "utils/PrivateRoute";
@@ -63,6 +64,10 @@ export const App: React.FC<Props> = () => {
           <Route path="/lp" element={<Lp />} />
 
           <Route
+            path="/set-name"
+            element={<PrivateRoute component={SetName} />}
+          />
+          <Route
             path="/robot-development/top"
             element={<RobotDevelopmentTop />}
           />
@@ -71,7 +76,7 @@ export const App: React.FC<Props> = () => {
             element={<Specification />}
           />
           <Route path="/start" element={<Start />} />
-          <Route path="/mode-select" element={<ModeSelect />} />
+          <Route path="/select-mode" element={<SelectMode />} />
           <Route
             path="/garage"
             element={<PrivateRoute component={GarageList} />}
@@ -138,7 +143,6 @@ export const App: React.FC<Props> = () => {
             path="/tutorial/world/:world_id/intro"
             element={<PrivateRoute component={GameIntro} />}
           />
-
           <Route path="/event" element={<EventTop />} />
           <Route
             path="/event/select-mode"
@@ -146,7 +150,12 @@ export const App: React.FC<Props> = () => {
               <PrivateRoute component={EventSelectMode} redirectUrl="/event" />
             }
           />
-          <Route path="/event/set-name" element={<EventSetName />} />
+          <Route
+            path="/event/set-name"
+            element={
+              <PrivateRoute component={EventSetName} redirectUrl="/event" />
+            }
+          />
           <Route
             path="/event/select-ai"
             element={

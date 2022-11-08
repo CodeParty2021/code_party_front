@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 type Props = {};
 
-export const ModeSelect: React.FC<Props> = () => {
+export const SelectMode: React.FC<Props> = () => {
   return (
     <div>
       <div>遊ぶモードを決める</div>

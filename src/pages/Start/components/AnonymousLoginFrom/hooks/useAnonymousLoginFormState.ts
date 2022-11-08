@@ -16,7 +16,7 @@ export const useAnonymousLoginFormState = (): IResponse => {
     setAnonymousLoginBtnDisabled(true);
     signInAnonymously(getAuth())
       .then(() => {
-        navigate("/mode-select");
+        navigate("/select-mode");
       })
       .catch(() => {
         setAnonymousLoginBtnDisabled(false);

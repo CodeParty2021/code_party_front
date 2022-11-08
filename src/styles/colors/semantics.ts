@@ -132,7 +132,8 @@ export const setName = {
 
 export const iconButton = {
   bg: WHITE,
-  icon: BLUE_50,
+  blue: BLUE_50,
+  black: GRAY_90,
 } as const;
 
 export const algoEditor = {
@@ -174,6 +175,14 @@ export const descriptionPanel = {
   color: GRAY_100,
 } as const;
 
+export const backLink = {
+  bg: WHITE,
+  buttonIconColor: {
+    blue: BLUE_50,
+    black: GRAY_90,
+  },
+} as const;
+
 export const avatar = {
   default: {
     border: WHITE,
@@ -205,4 +214,4 @@ export const avatar = {
     border: WHITE,
     background: BLUE_20,
   },
-};
+} as const;

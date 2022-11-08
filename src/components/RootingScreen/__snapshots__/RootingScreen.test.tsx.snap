@@ -38,7 +38,7 @@ Array [
       </li>
       <li>
         <Link
-          to="/mode-select"
+          to="/select-mode"
         >
           選択画面Top
         </Link>

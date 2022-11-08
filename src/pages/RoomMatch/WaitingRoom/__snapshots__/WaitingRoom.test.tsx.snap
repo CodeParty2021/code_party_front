@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RoomMatchWaitingRoom /> snapshot test 1`] = `
+Array [
+  <div>
+    <div>
+      ルーム待機画面
+    </div>
+    <div>
+      <button
+        disabled={false}
+        id="start-btn"
+        onClick={[MockFunction]}
+      >
+        マッチ開始
+      </button>
+    </div>
+    <button
+      disabled={false}
+      id="ready-btn"
+      onClick={[MockFunction]}
+    >
+      取り消し
+    </button>
+    <button
+      id="exit-btn"
+      onClick={[MockFunction]}
+    >
+      退出
+    </button>
+    <div
+      style={
+        Object {
+          "display": "flex",
+        }
+      }
+    >
+      <input
+        id="invitation-text"
+        readOnly={true}
+        type="text"
+        value="http://localhost:3000/#/room-match/invitation/-MzESfkdu9Xmu8pkOAw5"
+      />
+      <button
+        id="invitation-btn"
+        onClick={[MockFunction]}
+      >
+        招待リンクをコピーする
+      </button>
+    </div>
+    <ul>
+      <li>
+        Room ID: 
+        room id
+      </li>
+      <li>
+        Host: 
+        host user
+      </li>
+      <li>
+        Status: 
+        waiting
+      </li>
+      <li>
+        I am 
+        
+         a host.
+      </li>
+      <li>
+        Members:
+      </li>
+      <li>
+        host user
+         :
+         
+        準備中
+        <button
+          id="kick-btn-host-user-id"
+          onClick={[Function]}
+        >
+          キックする
+        </button>
+      </li>
+      <li>
+        user 1
+         :
+         
+        観戦中
+        <button
+          id="kick-btn-user-id-1"
+          onClick={[Function]}
+        >
+          キックする
+        </button>
+      </li>
+      <li>
+        user 2
+         :
+         
+        切断
+      </li>
+    </ul>
+    <div>
+      <h3>
+        コード選択
+      </h3>
+      <React.Fragment>
+        <label>
+          <input
+            checked={false}
+            name="codes"
+            onChange={[Function]}
+            type="radio"
+            value="hostCodeId1"
+          />
+          ステップ：
+          3
+          , 作成日：
+          2022-02-16T05:05:46.315585+09:00
+          , 内容:
+           
+          print('hel
+          <br />
+        </label>
+        <label>
+          <input
+            checked={false}
+            name="codes"
+            onChange={[Function]}
+            type="radio"
+            value="hostCodeId2"
+          />
+          ステップ：
+          3
+          , 作成日：
+          2022-02-16T10:00:46.315585+09:00
+          , 内容:
+           
+          alert('hel
+          <br />
+        </label>
+      </React.Fragment>
+    </div>
+  </div>,
+]
+`;

@@ -58,24 +58,24 @@ export const RootingScreen: React.FC<Props> = () => {
       <h1>ルーム対戦モード系のページ</h1>
       <ul>
         <li>
-          <Link to="/casual-battle">カジュアルロビー画面</Link>
+          <Link to="/room-match">カジュアルロビー画面</Link>
         </li>
         <li>
-          <Link to="/casual-battle/invitation/:roomId">
+          <Link to="/room-match/invitation/:roomId">
             カジュアル対戦招待画面
           </Link>
         </li>
         <li>
-          <Link to="/casual-battle/waiting-room">待機招待画面</Link>
+          <Link to="/room-match/waiting-room">待機招待画面</Link>
         </li>
         <li>
-          <Link to="/casual-battle/search-room">ルーム参加画面</Link>
+          <Link to="/room-match/search-room">ルーム参加画面</Link>
         </li>
         <li>
-          <Link to="/casual-battle/result">観戦画面</Link>
+          <Link to="/room-match/result">観戦画面</Link>
         </li>
         <li>
-          <Link to="/casual-battle/pick-code">対戦させるロボットを選ぶ</Link>
+          <Link to="/room-match/pick-code">対戦させるロボットを選ぶ</Link>
         </li>
       </ul>
       <h1>チュートリアル系のページ</h1>

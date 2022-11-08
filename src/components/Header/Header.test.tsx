@@ -1,11 +1,11 @@
 import React from "react";
-import { StarBackground } from "./StarBackground";
+import { Header } from "./Header";
 import "jest-styled-components";
 import { render } from "enzyme";
 
-describe("<StarBackground />", () => {
+describe("<Header />", () => {
   it("snapshot test", () => {
-    const wrapper = render(<StarBackground />);
+    const wrapper = render(<Header />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -39,7 +39,7 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
 
   useEffect(() => {
     if (isLogin && auth.currentUser && !auth.currentUser?.isAnonymous) {
-      navigate(redirectUrl);
+      navigate(redirectUrl, { replace: true });
     }
   }, [isLogin, auth.currentUser?.isAnonymous]);
 

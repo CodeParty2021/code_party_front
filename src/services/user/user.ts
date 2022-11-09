@@ -123,7 +123,9 @@ export const signInAsync = (user: FirebaseUser) => {
             }
           }
         })
-        .catch();
+        .catch(() => {
+          dispatch(signOut());
+        });
     });
   };
 };
@@ -142,6 +144,8 @@ export const setCallBackToSyncUser = () => {
       if (user) {
         console.log("setCallBackToSyncUser", user);
         dispatch(signInAsync(user));
+      } else {
+        dispatch(signOut());
       }
     });
     dispatch(setUnRegisterObserver(observer));

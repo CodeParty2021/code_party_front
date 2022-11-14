@@ -84,7 +84,7 @@ export const useCodingState = () => {
           1,
           "1"
         );
-        navigate(`/free-coding/${code.id}/`);
+        navigate(`/free-coding/${code.id}/`, { replace: true });
       }
       await setTimeout(() => {}, 5000);
       setLoading(false);

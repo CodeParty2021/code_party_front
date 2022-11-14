@@ -2,13 +2,16 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import { useNavigate } from "react-router-dom";
 import { useTopState } from "./useTopState";
 import { getAuth, signInAnonymously } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 jest.mock("firebase/auth");
 jest.mock("react-router-dom");
+jest.mock("react-redux");
 
 const getAuthMock = getAuth as jest.Mock;
 const signInAnonymouslyMock = signInAnonymously as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
+const useSelectorMock = useSelector as jest.Mock;
 
 const navigateMock = jest.fn();
 
@@ -17,6 +20,9 @@ describe("useFisrtLoginForm", () => {
     getAuthMock.mockReturnValue({});
     useNavigateMock.mockReturnValue(navigateMock);
     signInAnonymouslyMock.mockResolvedValue({});
+    useSelectorMock.mockReturnValue({
+      isLogin: true,
+    });
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -43,6 +49,9 @@ describe("useFisrtLoginForm", () => {
 describe("useNormalLoginTopState", () => {
   beforeEach(() => {
     useNavigateMock.mockReturnValue(navigateMock);
+    useSelectorMock.mockReturnValue({
+      isLogin: true,
+    });
   });
   afterEach(() => {
     jest.resetAllMocks();

@@ -9,7 +9,7 @@ type Props = {};
 export const RootingScreen: React.FC<Props> = () => {
   const { user, isLogin } = useSelector((state: RootState) => state.user);
   return (
-    <div>
+    <div style={{ marginBottom: "50px" }}>
       <p> ==============</p>
       <h3>以下開発用画面</h3>
 

@@ -2,7 +2,13 @@
 
 exports[`<RootingScreen /> RootingScreen snapshot test 1`] = `
 Array [
-  <div>
+  <div
+    style={
+      Object {
+        "marginBottom": "50px",
+      }
+    }
+  >
     <p>
        ==============
     </p>

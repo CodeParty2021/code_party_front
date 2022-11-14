@@ -23,13 +23,15 @@ export const SignInScreen: React.FC<Props> = (props: Props) => {
   const uiConfig: firebaseui.auth.Config = {
     autoUpgradeAnonymousUsers: true,
     signInFlow: "popup",
-    signInSuccessUrl: redirectUrl, // 成功後の遷移先
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
-      signInSuccessWithAuthResult: () => true,
+      signInSuccessWithAuthResult: () => {
+        navigate(redirectUrl, { replace: true });
+        return true;
+      },
       signInFailure: async (error: firebaseui.auth.AuthUIError) => {
         console.log(error);
         await signInWithCredential(getAuth(), error.credential);

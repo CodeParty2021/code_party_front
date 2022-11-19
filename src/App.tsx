@@ -100,7 +100,7 @@ export const App: React.FC<Props> = () => {
           />
           <Route
             path="/room-match/invitation/:roomId"
-            element={<PrivateRoute component={RoomMatchInvitation} />}
+            element={<RoomMatchInvitation />}
           />
           <Route
             path="/room-match/search-room"

@@ -1,22 +1,76 @@
+import { BackLink } from "components/BackLink/BackLink";
+import { Google, Facebook, Mail, Twitter } from "components/icons";
+import { StarBackground } from "components/StarBackground/StarBackground";
+import { AccountServiceType } from "hooks/FirebaseAuthHooks/useFirebaseAuthHooks";
+import { Loading } from "pages/Loading/Loading";
+import { BackgroundBlur } from "pages/SetName/SetNameStyle";
 import React from "react";
+import { Icon24 } from "types/utils";
 import { useStartState } from "./hooks/useStartState";
-import { PlanetPicture } from "components/PlanetPicture/PlanetPicture";
-import { AnonymousLoginForm } from "./components/AnonymousLoginFrom/AnonymousLoginForm";
-import { FirebaseLoginForm } from "./components/FirebaseLoginForm/FirebaseLoginForm";
+import {
+  AlgoBox,
+  AlgoHeadMini,
+  BackLinkPosition,
+  Balloon,
+  ButtonText,
+  IconArea,
+  Message,
+  ModalTitle,
+  SetNameModal,
+  SetNameStyle,
+  SignInButton,
+} from "./Startstyle";
+type ButtonServiceType = {
+  service: AccountServiceType;
+  Icon: React.ComponentType<Icon24>;
+  text: string;
+};
 
-type Props = {};
-
-export const Start: React.FC<Props> = () => {
-  const { anonymousLoginFormDisplay, firebaseLoginFormDisplay } =
+export const Start: React.FC = () => {
+  const { loading, algoMessage, signInButtonsHandler, backLinkButtonHandler } =
     useStartState();
-  return (
-    <div>
-      <div>これはスタート画面です。</div>
+  const buttonServices: Array<ButtonServiceType> = [
+    { service: "google", Icon: Google, text: "Googleでログイン" },
+    { service: "twitter", Icon: Twitter, text: "Twitterでログイン" },
+    { service: "facebook", Icon: Facebook, text: "Facebookでログイン" },
+    { service: "email", Icon: Mail, text: "メールアドレスでログイン" },
+  ];
 
-      <PlanetPicture size="161px" color="blue" />
-
-      {anonymousLoginFormDisplay ? <AnonymousLoginForm /> : undefined}
-      {firebaseLoginFormDisplay ? <FirebaseLoginForm /> : undefined}
-    </div>
+  return loading ? (
+    <Loading />
+  ) : (
+    <StarBackground>
+      <BackLinkPosition>
+        <BackLink
+          backMessage="トップに戻る"
+          onClick={backLinkButtonHandler}
+          iconColor="black"
+        />
+      </BackLinkPosition>
+      <SetNameStyle>
+        <SetNameModal>
+          <ModalTitle>
+            <span>ログインして遊ぶ</span>
+          </ModalTitle>
+          <AlgoBox>
+            <AlgoHeadMini />
+            <Balloon src="/img/balloon.svg" />
+            <Message>{algoMessage}</Message>
+          </AlgoBox>
+          {buttonServices.map((buttonService) => (
+            <SignInButton
+              key={buttonService.service}
+              onClick={() => signInButtonsHandler(buttonService.service)}
+            >
+              <IconArea>
+                <buttonService.Icon size={24} />
+              </IconArea>
+              <ButtonText>{buttonService.text}</ButtonText>
+            </SignInButton>
+          ))}
+          <BackgroundBlur />
+        </SetNameModal>
+      </SetNameStyle>
+    </StarBackground>
   );
 };

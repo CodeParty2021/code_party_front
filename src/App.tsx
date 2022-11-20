@@ -8,7 +8,6 @@ import { Start } from "./pages/Start/Start";
 import { Lp } from "./pages/Lp/Lp";
 import { RobotDevelopmentTop } from "./pages/RobotDevelopment/Top/Top";
 import { Specification } from "pages/RobotDevelopment/Specification/Specification";
-import { OnlineMatch } from "pages/OnlineMatch/OnlineMatch";
 import { Garage } from "pages/Garage/Garage";
 import { GarageList } from "pages/Garage/GarageList";
 import { SelectMode } from "pages/SelectMode/SelectMode";
@@ -84,11 +83,6 @@ export const App: React.FC<Props> = () => {
           <Route
             path="/garage/:id"
             element={<PrivateRoute component={Garage} />}
-          />
-
-          <Route
-            path="/online-match"
-            element={<PrivateRoute component={OnlineMatch} />}
           />
           <Route
             path="/room-match/waiting-room"

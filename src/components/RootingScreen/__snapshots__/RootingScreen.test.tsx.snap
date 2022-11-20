@@ -5,7 +5,8 @@ Array [
   <div
     style={
       Object {
-        "marginBottom": "50px",
+        "position": "absolute",
+        "top": "100%",
       }
     }
   >

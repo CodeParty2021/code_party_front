@@ -1,14 +1,23 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useNavigate } from "react-router-dom";
-
 import { useLobbyState } from "./useLobbyState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
+import { useRef } from "react";
 
 jest.mock("react-router-dom");
 jest.mock("hooks/RoomSyncHooks/useRoomSync");
+jest.mock("react", () => {
+  const originReact = jest.requireActual("react");
+  const mUseRef = jest.fn();
+  return {
+    ...originReact,
+    useRef: mUseRef,
+  };
+});
 
 const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
+const useRefMock = useRef as jest.Mock;
 
 const initialRoomState = {
   isEntered: false,
@@ -21,6 +30,7 @@ const initialRoomState = {
 const initialRoomSyncState = {
   room: { ...initialRoomState },
   createRoom: jest.fn(),
+  enterRoom: jest.fn(),
 };
 
 const navigateMock = jest.fn();
@@ -54,22 +64,53 @@ describe("useLobbyState", () => {
 
   it("exec roomCreateBtnHandler", () => {
     const { result } = renderHook(() => useLobbyState());
-    const { roomCreateBtnHandler } = result.current;
-    expect(result.current.roomCreateBtnDisabled).toBe(false);
+    const { createRoomHandler } = result.current;
     act(() => {
-      roomCreateBtnHandler();
+      createRoomHandler();
     });
-    expect(result.current.roomCreateBtnDisabled).toBe(true);
     expect(initialRoomSyncState.createRoom).toBeCalledTimes(1);
   });
 
-  it("exec roomSearchBtnHandler", () => {
+  it("exec enterRoomHandler 正常系", () => {
+    const mRef = { current: { value: "roomId" } };
+    useRefMock.mockReturnValue(mRef);
+    initialRoomSyncState.enterRoom.mockResolvedValue({});
+
     const { result } = renderHook(() => useLobbyState());
-    const { roomSearchBtnHandler } = result.current;
+    const { enterRoomHandler } = result.current;
     act(() => {
-      roomSearchBtnHandler();
+      enterRoomHandler();
     });
-    expect(navigateMock).toBeCalledTimes(1);
-    expect(navigateMock).lastCalledWith("/room-match/search-room");
+    expect(result.current.errorMessage).toBe("");
+    expect(initialRoomSyncState.enterRoom).toBeCalledTimes(1);
+    expect(initialRoomSyncState.enterRoom).toHaveBeenCalledWith("roomId");
+  });
+
+  it("exec enterRoomHandler 不正入力", () => {
+    const mRef = { current: { value: 0 } };
+    useRefMock.mockReturnValue(mRef);
+    initialRoomSyncState.enterRoom.mockResolvedValue({});
+
+    const { result } = renderHook(() => useLobbyState());
+    const { enterRoomHandler } = result.current;
+    act(() => {
+      enterRoomHandler();
+    });
+    expect(result.current.errorMessage).toBe("入力が不正です。");
+    expect(initialRoomSyncState.enterRoom).toBeCalledTimes(0);
+  });
+
+  it("exec enterRoomHandler 空入力", () => {
+    const mRef = { current: { value: "" } };
+    useRefMock.mockReturnValue(mRef);
+    initialRoomSyncState.enterRoom.mockResolvedValue({});
+
+    const { result } = renderHook(() => useLobbyState());
+    const { enterRoomHandler } = result.current;
+    act(() => {
+      enterRoomHandler();
+    });
+    expect(result.current.errorMessage).toBe("値を入力してください。");
+    expect(initialRoomSyncState.enterRoom).toBeCalledTimes(0);
   });
 });

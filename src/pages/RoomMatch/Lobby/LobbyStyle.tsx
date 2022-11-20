@@ -1,6 +1,6 @@
 import { Sword } from "components/icons";
 import styled from "styled-components";
-import { GRAY_100, GRAY_40, TURQUOISE_50 } from "styles/colors";
+import { GRAY_100, GRAY_40, RED_70, TURQUOISE_50 } from "styles/colors";
 
 export const TitlePosition = styled.div`
   position: absolute;
@@ -26,6 +26,7 @@ export const Card = styled.div`
   width: 1511px;
   border-radius: 32px;
   margin: 51px;
+  background-color: white;
 `;
 
 export const AlgoStarBanner = styled.img`
@@ -41,11 +42,9 @@ export const AlgoGatherBanner = styled.img`
 `;
 
 export const ContentsArea = styled.div`
-  background-color: white;
   align-items: center;
-  padding: 82px 52px;
   flex-grow: 1;
-  height: 100%;
+  margin: auto 52px auto 52px;
   border-radius: 0 32px 32px 0;
 `;
 
@@ -70,7 +69,6 @@ export const Form = styled.input`
   height: 76px;
   border: 2px solid ${GRAY_40};
   border-radius: 12px;
-
   padding: 24px;
   font-size: 24px;
   &:focus {
@@ -93,4 +91,11 @@ export const Description = styled.p`
   font-weight: 400;
   font-size: 24px;
   line-height: 35px;
+`;
+
+export const ErrorMessage = styled.span`
+  color: ${RED_70};
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
 `;

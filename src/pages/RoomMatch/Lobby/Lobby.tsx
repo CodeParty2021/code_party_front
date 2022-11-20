@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "components/Button/Button";
 import { Header } from "components/Header/Header";
 import { StarBackground } from "components/StarBackground/StarBackground";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Loading } from "pages/Loading/Loading";
+import React from "react";
 import { useLobbyState } from "./hooks/useLobbyState";
 import {
   Container,
@@ -17,20 +16,25 @@ import {
   Form,
   AlgoGatherBanner,
   AlgoStarBanner,
+  ErrorMessage,
 } from "./LobbyStyle";
 
 type Props = {};
 
 export const RoomMatchLobby: React.FC<Props> = () => {
-  const { roomCreateBtnDisabled, roomCreateBtnHandler, roomSearchBtnHandler } =
-    useLobbyState();
-  const devFlag = true;
-  const navigate = useNavigate();
-  const backButtonHandler = () => {
-    navigate("/select-mode");
-  };
-  const [roomInputValue, setRoomInputValue] = useState("");
-  return devFlag ? (
+  const {
+    isLoading,
+    errorMessage,
+    roomIdRef,
+    createRoomHandler,
+    createRoomDisabled,
+    enterRoomHandler,
+    enterRoomDisabled,
+    backButtonHandler,
+  } = useLobbyState();
+  return isLoading ? (
+    <Loading />
+  ) : (
     <StarBackground>
       <Header
         backMessage="ゲーム選択へ戻る"
@@ -46,7 +50,13 @@ export const RoomMatchLobby: React.FC<Props> = () => {
           <ContentsArea>
             <WithButton>
               <Title>新しくルームを作成する</Title>
-              <Button color="blue" size="M" value="作成" />
+              <Button
+                color="blue"
+                size="M"
+                value="作成"
+                onClick={createRoomHandler}
+                status={createRoomDisabled ? "disabled" : "default"}
+              />
             </WithButton>
           </ContentsArea>
         </Card>
@@ -57,28 +67,24 @@ export const RoomMatchLobby: React.FC<Props> = () => {
             <Description>
               フレンドから教えてもらったルームIDを入力して参加
             </Description>
-
             <WithButton>
-              <Form type="text" placeholder="ルームIDを入力"></Form>
-              <Button color="blue" size="M" value="入室" />
+              <Form
+                type="text"
+                ref={roomIdRef}
+                placeholder="ルームIDを入力"
+              ></Form>
+              <Button
+                color="blue"
+                size="M"
+                value="入室"
+                onClick={enterRoomHandler}
+                status={enterRoomDisabled ? "disabled" : "default"}
+              />
             </WithButton>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
           </ContentsArea>
         </Card>
       </Container>
     </StarBackground>
-  ) : (
-    <div>
-      <div>ルーム待機画面</div>
-      <button
-        id="create-btn"
-        onClick={roomCreateBtnHandler}
-        disabled={roomCreateBtnDisabled}
-      >
-        ルームを建てる
-      </button>
-      <button id="search-btn" onClick={roomSearchBtnHandler}>
-        ルームを探す
-      </button>
-    </div>
   );
 };

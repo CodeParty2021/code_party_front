@@ -13,7 +13,6 @@ import { GarageList } from "pages/Garage/GarageList";
 import { SelectMode } from "pages/SelectMode/SelectMode";
 import { RoomMatchLobby } from "pages/RoomMatch/Lobby/Lobby";
 import { RoomMatchWaitingRoom } from "pages/RoomMatch/WaitingRoom/WaitingRoom";
-import { RoomMatchSearchRoom } from "pages/RoomMatch/SearchRoom/SearchRoom";
 import { RoomMatchGameWatch } from "pages/RoomMatch/GameWatch/GameWatch";
 import { RoomMatchPickCode } from "pages/RoomMatch/PickCode/PickCode";
 import { SetName } from "pages/SetName/SetName";

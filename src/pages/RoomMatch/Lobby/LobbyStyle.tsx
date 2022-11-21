@@ -75,8 +75,6 @@ export const Form = styled.input`
     border: 2px solid ${TURQUOISE_50};
   }
   &::placeholder {
-    font-family: "Noto Sans JP";
-    font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 150%;
@@ -86,8 +84,6 @@ export const Form = styled.input`
 
 export const Description = styled.p`
   margin: 32px 0;
-  font-family: "Noto Sans JP";
-  font-style: normal;
   font-weight: 400;
   font-size: 24px;
   line-height: 35px;

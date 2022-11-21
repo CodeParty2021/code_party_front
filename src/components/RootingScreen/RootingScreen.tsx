@@ -69,9 +69,6 @@ export const RootingScreen: React.FC<Props> = () => {
           <Link to="/room-match/waiting-room">待機招待画面</Link>
         </li>
         <li>
-          <Link to="/room-match/search-room">ルーム参加画面</Link>
-        </li>
-        <li>
           <Link to="/room-match/result">観戦画面</Link>
         </li>
         <li>

@@ -96,10 +96,7 @@ export const App: React.FC<Props> = () => {
             path="/room-match/invitation/:roomId"
             element={<PrivateRoute component={RoomMatchInvitation} />}
           />
-          <Route
-            path="/room-match/search-room"
-            element={<PrivateRoute component={RoomMatchSearchRoom} />}
-          />
+
           <Route
             path="/room-match/result"
             element={<PrivateRoute component={RoomMatchGameWatch} />}

@@ -3,6 +3,7 @@
 exports[`privateRoute privateRoute snapshot test 1`] = `
 Array [
   <Navigate
+    replace={true}
     to="/event"
   />,
 ]

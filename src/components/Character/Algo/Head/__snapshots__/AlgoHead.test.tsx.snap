@@ -1,6 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AlgoHead /> snapshot test 1`] = `
+.c0 {
+  width: 142px;
+  height: 118px;
+}
+
 .c0 .algohead_color_main {
   fill: #34C5D5;
 }
@@ -8,5 +13,7 @@ exports[`<AlgoHead /> snapshot test 1`] = `
 <div
   class="c0"
   color="turquoise"
+  height="118px"
+  width="142px"
 />
 `;

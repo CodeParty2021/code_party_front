@@ -1,28 +1,30 @@
 import { Star } from "components/Star/Star";
 import styled, { css } from "styled-components";
-import { GRAY_10, GRAY_20 } from "styles/colors";
+import { GRAY_10, GRAY_30 } from "styles/colors";
 
 export type StarBackgroundStyleProps = {};
 
 const defaultStyle = css`
-  position: relative;
+  position: absolute;
   width: 100vw;
   height: 100vh;
   background-image: linear-gradient(
       0deg,
       transparent calc(100% - 1px),
-      ${GRAY_20} calc(100% - 1px)
+      ${GRAY_30} calc(100% - 1px)
     ),
     linear-gradient(
       90deg,
       transparent calc(100% - 1px),
-      ${GRAY_20} calc(100% - 1px)
+      ${GRAY_30} calc(100% - 1px)
     );
   background-size: 64px 64px;
   background-repeat: repeat;
   background-position: 0 0;
   background-color: ${GRAY_10};
-  z-index: -2;
+  z-index: -10;
+  top: 0;
+  left: 0;
 `;
 
 export const StarBackgroundStyle = styled.div`
@@ -31,7 +33,7 @@ export const StarBackgroundStyle = styled.div`
 
 const starStyle = css`
   position: absolute;
-  z-index: -1;
+  z-index: -9;
 `;
 export const Star1 = styled(Star)`
   ${starStyle}

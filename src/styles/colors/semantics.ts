@@ -1,13 +1,23 @@
 import {
+  BLUE_20,
+  BLUE_40,
   BLUE_50,
   BLUE_60,
   GREEN_50,
   GREEN_60,
+  LEAF_10,
+  LEAF_40,
   LEAF_50,
+  ORANGE_10,
+  ORANGE_40,
   ORANGE_50,
+  PINK_10,
+  PINK_40,
   PINK_50,
   PURPLE_40,
   RED_40,
+  TURQUOISE_10,
+  TURQUOISE_40,
   TURQUOISE_50,
 } from "./colorful";
 import {
@@ -96,6 +106,7 @@ export const algo = {
   leaf: LEAF_50,
   orange: ORANGE_50,
   magenta: PINK_50,
+  blue: BLUE_40,
 } as const;
 
 export const roundedButton = {
@@ -121,7 +132,8 @@ export const setName = {
 
 export const iconButton = {
   bg: WHITE,
-  icon: BLUE_50,
+  blue: BLUE_50,
+  black: GRAY_90,
 } as const;
 
 export const algoEditor = {
@@ -161,4 +173,45 @@ export const descriptionPanel = {
     notCleared: GRAY_30,
   },
   color: GRAY_100,
+} as const;
+
+export const backLink = {
+  bg: WHITE,
+  buttonIconColor: {
+    blue: BLUE_50,
+    black: GRAY_90,
+  },
+} as const;
+
+export const avatar = {
+  default: {
+    border: WHITE,
+    background: GRAY_20,
+  },
+  turquoise: {
+    border: TURQUOISE_40,
+    background: TURQUOISE_10,
+  },
+  leaf: {
+    border: LEAF_40,
+    background: LEAF_10,
+  },
+  orange: {
+    border: ORANGE_40,
+    background: ORANGE_10,
+  },
+  pink: {
+    border: PINK_40,
+    background: PINK_10,
+  },
+  anonymous: {
+    avatar: GRAY_50,
+  },
+  noImage: {
+    avatar: BLUE_40,
+  },
+  robot: {
+    border: WHITE,
+    background: BLUE_20,
+  },
 } as const;

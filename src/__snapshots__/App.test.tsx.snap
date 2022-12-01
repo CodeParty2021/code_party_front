@@ -1,0 +1,232 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> isClose == true 1`] = `
+Array [
+  <div>
+    <BrowserRouter>
+      <Close />
+    </BrowserRouter>
+  </div>,
+]
+`;
+
+exports[`<App /> isDev == true 1`] = `
+Array [
+  <div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          element={<Top />}
+          path="/"
+        />
+        <Route
+          element={<StageList />}
+          path="/stages"
+        />
+        <Route
+          element={<Stage />}
+          path="/stages/:id"
+        />
+        <Route
+          element={<Lp />}
+          path="/lp"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/set-name"
+        />
+        <Route
+          element={<RobotDevelopmentTop />}
+          path="/robot-development/top"
+        />
+        <Route
+          element={<Specification />}
+          path="/robot-development/specification"
+        />
+        <Route
+          element={<Start />}
+          path="/start"
+        />
+        <Route
+          element={<SelectMode />}
+          path="/select-mode"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/garage"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/garage/:id"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/online-match"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/room-match/waiting-room"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/room-match"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/room-match/invitation/:roomId"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/room-match/search-room"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/room-match/result"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/room-match/pick-code"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/codes"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/free-coding"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/free-coding/:codeId"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/tutorial/world/:id/missions"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/tutorial/world/:world_id/mission/:mission_id/step/:step_id"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/tutorial/world/:world_id/mission/:mission_id/end"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+            />
+          }
+          path="/tutorial/world/:world_id/intro"
+        />
+        <Route
+          element={<EventTop />}
+          path="/event"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+              redirectUrl="/event"
+            />
+          }
+          path="/event/select-mode"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+              redirectUrl="/event"
+            />
+          }
+          path="/event/set-name"
+        />
+        <Route
+          element={
+            <PrivateRoute
+              component={[Function]}
+              redirectUrl="/event"
+            />
+          }
+          path="/event/select-ai"
+        />
+      </Routes>
+      <RootingScreen />
+    </BrowserRouter>
+  </div>,
+]
+`;
+
+exports[`<App /> isLoading == true 1`] = `
+Array [
+  <div>
+    <BrowserRouter>
+      <Loading />
+    </BrowserRouter>
+  </div>,
+]
+`;

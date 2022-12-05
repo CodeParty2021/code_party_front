@@ -21,6 +21,7 @@ const defaultStyle = css`
   display: block;
   width: 54px;
   height: 54px;
+  /* ボーダーからはみ出ないように中身は1px内側に描画する */
   padding: 1px;
 
   position: relative;
@@ -49,6 +50,7 @@ const defaultStyle = css`
     }
   }
 
+  /* ボーダーは上から重ねる */
   .avatar_circle {
     position: absolute;
     width: 100%;

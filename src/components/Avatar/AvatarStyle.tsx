@@ -1,6 +1,5 @@
-import { AlgoHeadStyle } from "components/Character/Algo/Head/AlgoHeadStyle";
-import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
+import { ReactSVG } from "react-svg";
 import { avatar } from "styles/colors";
 
 export type AvatarStyleProps = {
@@ -13,6 +12,7 @@ type PrivateProps = {
 };
 
 export const AvatarDummyStyle = styled(ReactSVG)`
+  display: block;
   width: 32px;
   height: 38px;
 `;
@@ -21,73 +21,133 @@ const defaultStyle = css`
   display: block;
   width: 54px;
   height: 54px;
-  border-radius: 50%;
-  border: 3px solid ${avatar.default.border};
-  background-color: ${avatar.default.background};
-  background-size: cover;
-
-  overflow: hidden;
+  padding: 1px;
 
   position: relative;
 
-  ${AvatarDummyStyle} {
-    position: absolute;
-    bottom: 0px;
-    left: 50%;
-    transform: translateX(-50%);
+  .avatar_main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: ${avatar.default.background};
+
+    ${AvatarDummyStyle} {
+      align-self: flex-end;
+      fill: ${avatar.default.avatar};
+    }
+
+    .avatar_img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
   }
 
-  ${AlgoHeadStyle} {
+  .avatar_circle {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    border: 3px solid ${avatar.default.border};
   }
 `;
 
 const turquoiseStyle = css`
-  border-color: ${avatar.turquoise.border};
-  background-color: ${avatar.turquoise.background};
+  .avatar_main {
+    background-color: ${avatar.turquoise.background};
+
+    ${AvatarDummyStyle} {
+      fill: ${avatar.turquoise.avatar};
+    }
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.turquoise.border};
+  }
 `;
 
 const leafStyle = css`
-  border-color: ${avatar.leaf.border};
-  background-color: ${avatar.leaf.background};
+  .avatar_main {
+    background-color: ${avatar.leaf.background};
+
+    ${AvatarDummyStyle} {
+      fill: ${avatar.leaf.avatar};
+    }
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.leaf.border};
+  }
 `;
 
 const orangeStyle = css`
-  border-color: ${avatar.orange.border};
-  background-color: ${avatar.orange.background};
+  .avatar_main {
+    background-color: ${avatar.orange.background};
+
+    ${AvatarDummyStyle} {
+      fill: ${avatar.orange.avatar};
+    }
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.orange.border};
+  }
 `;
 
 const pinkStyle = css`
-  border-color: ${avatar.pink.border};
-  background-color: ${avatar.pink.background};
+  .avatar_main {
+    background-color: ${avatar.pink.background};
+
+    ${AvatarDummyStyle} {
+      fill: ${avatar.pink.avatar};
+    }
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.pink.border};
+  }
 `;
 
 const userStyle = css``;
 
 const anonymousStyle = css`
-  border-color: ${avatar.default.border};
-  background-color: ${avatar.default.background};
-  ${AvatarDummyStyle} {
-    fill: ${avatar.anonymous.avatar};
+  .avatar_main {
+    background-color: ${avatar.anonymous.background};
+
+    ${AvatarDummyStyle} {
+      fill: ${avatar.anonymous.avatar};
+    }
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.anonymous.border};
   }
 `;
 
-const imageStyle = css<PrivateProps>`
-  background-image: url(${({ imageUrl }) => imageUrl});
-`;
+const imageStyle = css<PrivateProps>``;
 
 const noImageStyle = css`
-  ${AvatarDummyStyle} {
-    fill: ${avatar.noImage.avatar};
+  .avatar_main {
+    background: ${avatar.default.noImage.background};
   }
 `;
 
 const robotStyle = css`
-  border-color: ${avatar.robot.border};
-  background-color: ${avatar.robot.background};
+  .avatar_main {
+    background-color: ${avatar.robot.background};
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.robot.border};
+  }
 `;
 
 export const AvatarStyle = styled.div<AvatarStyleProps & PrivateProps>`
@@ -99,7 +159,7 @@ export const AvatarStyle = styled.div<AvatarStyleProps & PrivateProps>`
   ${({ color }) => color === "pink" && pinkStyle}
 
   ${({ imageUrl }) => imageUrl && imageStyle}
-  ${({ imageUrl }) => !imageUrl && noImageStyle}
+  ${({ color, imageUrl }) => color === "default" && !imageUrl && noImageStyle}
 
   ${({ type }) => type === "user" && userStyle}
   ${({ type }) => type === "anonymous" && anonymousStyle}

@@ -1,4 +1,5 @@
 import {
+  BLUE_10,
   BLUE_20,
   BLUE_40,
   BLUE_50,
@@ -185,30 +186,37 @@ export const backLink = {
 
 export const avatar = {
   default: {
+    avatar: BLUE_40,
     border: WHITE,
     background: GRAY_20,
+    noImage: {
+      background: BLUE_10,
+    },
   },
   turquoise: {
+    avatar: TURQUOISE_40,
     border: TURQUOISE_40,
     background: TURQUOISE_10,
   },
   leaf: {
+    avatar: LEAF_40,
     border: LEAF_40,
     background: LEAF_10,
   },
   orange: {
+    avatar: ORANGE_40,
     border: ORANGE_40,
     background: ORANGE_10,
   },
   pink: {
+    avatar: PINK_40,
     border: PINK_40,
     background: PINK_10,
   },
   anonymous: {
     avatar: GRAY_50,
-  },
-  noImage: {
-    avatar: BLUE_40,
+    border: WHITE,
+    background: GRAY_20,
   },
   robot: {
     border: WHITE,

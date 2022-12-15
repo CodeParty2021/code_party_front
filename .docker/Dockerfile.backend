@@ -5,7 +5,9 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip && \
   pip install pipenv
 RUN rm -rf /backend
-RUN git clone https://$GIT_USER:$GIT_TOKEN@github.com/CodeParty2021/code_party_back /backend
+ARG GIT_USER
+ARG GIT_TOKEN
+RUN git clone https://${GIT_USER:?err}:${GIT_TOKEN:?err}@github.com/CodeParty2021/code_party_back /backend
 
 ENV APP_ROOT /backend
 WORKDIR ${APP_ROOT}

@@ -7,6 +7,9 @@ services:
     build:
       context: .
       dockerfile: ./.docker/Dockerfile.backend
+      args:
+        - GIT_USER=${GIT_USER}
+        - GIT_TOKEN=${GIT_TOKEN}
     volumes:
       - backend:/backend
     tty: true
@@ -21,6 +24,9 @@ services:
     build:
       context: .
       dockerfile: ".docker/Dockerfile.firebase"
+      args:
+        - GIT_USER=${GIT_USER}
+        - GIT_TOKEN=${GIT_TOKEN}
     volumes:
       - firebase:/firebese
     tty: true

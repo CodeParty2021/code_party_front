@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN apt-get install -y openjdk-11-jre-headless
 
 RUN rm -rf /firebase
-RUN git clone https://github.com/CodeParty2021/code_party_firebase.git /firebase
+RUN git clone https://$GIT_USER:$GIT_TOKEN@github.com/CodeParty2021/code_party_firebase.git /firebase
 
 ENV APP_ROOT /firebase
 WORKDIR ${APP_ROOT}

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> snapshot test 1`] = `
+Array [
+  .c0 {
+  width: 100%;
+  height: 80px;
+  background-color: #F5F6F8;
+  border-bottom: 1px solid #D7DAE4;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 3;
+}
+
+<div
+    class="c0"
+  />,
+  .c0 {
+  position: fixed;
+  top: 78px;
+  left: calc(50% - 232px / 2);
+  width: 232px;
+  height: 42px;
+  z-index: 4;
+}
+
+<img
+    class="c0"
+    src="./img/header-circle.svg"
+  />,
+  .c0 {
+  width: 178px;
+  height: 81px;
+  left: calc(50% - 178px / 2);
+  top: 15px;
+  position: fixed;
+  z-index: 5;
+}
+
+<img
+    class="c0"
+    src="./logo.svg"
+  />,
+]
+`;

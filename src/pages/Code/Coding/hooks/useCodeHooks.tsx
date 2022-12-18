@@ -137,7 +137,7 @@ export const useCodingState = (): IResponse => {
     startDummyLoad();
     if (!codeId) {
       const codeId = createCodeDefault(1, "1");
-      navigate(`/free-coding/${codeId}/`);
+      navigate(`/free-coding/${codeId}/`, { replace: true });
     }
   }, []);
 

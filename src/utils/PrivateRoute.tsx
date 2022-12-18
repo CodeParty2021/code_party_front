@@ -19,6 +19,6 @@ export const PrivateRoute: React.FC<Props> = ({
   } else if (isLogin) {
     return <RouteComponent />;
   } else {
-    return <Navigate to={redirectUrl || "/start"} />;
+    return <Navigate replace to={redirectUrl || "/start"} />;
   }
 };

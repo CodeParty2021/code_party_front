@@ -131,8 +131,6 @@ export const useCodingState = (): IResponse => {
         : "hidden",
     [unityStatus.isLoading, switchDisplay]
   );
-  /** シミュレーションが失敗したかどうか */
-  const error = useMemo(() => resultState.isFailed, [resultState.isFailed]);
 
   // 初期処理
   useEffect(() => {
@@ -152,12 +150,12 @@ export const useCodingState = (): IResponse => {
 
   // エラー時の処理
   useEffect(() => {
-    if (error) {
+    if (resultState.isFailed) {
       setSwitchDisplay("message");
       setMessageType("error");
       setShowTurnLog(false);
     }
-  }, [error]);
+  }, [resultState.isFailed]);
 
   // jsonに値が入ればunity描画、空が入ればunity非表示
   useEffect(() => {

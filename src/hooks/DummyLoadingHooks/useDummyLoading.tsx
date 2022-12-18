@@ -43,7 +43,7 @@ export const useDummyLoading = (loadTime: number): IResponse => {
     }));
   }, []);
 
-  const setTime = useCallback((loadTime) => {
+  const _setTime = useCallback((loadTime) => {
     if (loadTime < 0) return;
     setDummyLoadingState((current) => ({
       ...current,
@@ -69,7 +69,7 @@ export const useDummyLoading = (loadTime: number): IResponse => {
   // コンストラクタ
   useEffect(() => {
     if (loadTime) {
-      setTime(loadTime);
+      _setTime(loadTime);
     } else {
       throw new Error("loadTimeを指定してください");
     }

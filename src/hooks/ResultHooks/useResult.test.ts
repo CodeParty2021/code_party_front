@@ -3,7 +3,6 @@ import {
   TestCodeResponseType,
   useCodeAPI,
 } from "hooks/CodeAPIHooks/useCodeAPI";
-import { CodeState } from "hooks/CodeHooks/useCode";
 import { useResult, IResponse } from "./useResult";
 
 jest.mock("hooks/CodeAPIHooks/useCodeAPI");
@@ -14,21 +13,7 @@ const apiMockFuncs = {
   testCode: jest.fn(),
 };
 
-const testCodeState: CodeState = {
-  code: {
-    id: "codeId",
-    codeContent: "print('hoge')",
-    language: "python",
-    step: 0,
-    user: "userId",
-    createdAt: "2022-10-13 00:00:00",
-    updatedAt: "2022-10-13 00:00:00",
-  },
-  isLoading: false,
-  isOnline: true,
-  isSave: true,
-  isExecutable: true,
-};
+const codeId = "0";
 
 const testSimulationJson: TestCodeResponseType = {
   json: {
@@ -71,7 +56,7 @@ describe("useResult", () => {
 
     test("testCodeを実行すると値が正常に更新される", async () => {
       await act(async () => {
-        await hook.current.testCode(testCodeState);
+        await hook.current.testCode(codeId);
       });
 
       const { resultState } = hook.current;
@@ -82,7 +67,7 @@ describe("useResult", () => {
     test("resetを実行すると状態がリセットされる", async () => {
       // シミュレーションを実行して状態を変更
       await act(async () => {
-        await hook.current.testCode(testCodeState);
+        await hook.current.testCode(codeId);
       });
 
       await act(async () => {
@@ -110,7 +95,7 @@ describe("useResult", () => {
 
     test("testCodeを実行すると失敗した状態になる", async () => {
       await act(async () => {
-        hook.current.testCode(testCodeState);
+        hook.current.testCode(codeId);
       });
 
       const { resultState } = hook.current;

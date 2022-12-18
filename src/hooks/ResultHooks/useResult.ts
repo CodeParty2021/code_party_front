@@ -1,5 +1,4 @@
 import { JSONLog, useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
-import { CodeState } from "hooks/CodeHooks/useCode";
 import { useCallback, useState } from "react";
 
 export type IResponse = {
@@ -8,7 +7,7 @@ export type IResponse = {
    * コードをテスト実行する
    * 結果はresultStateに格納される
    */
-  testCode: (codeState: CodeState) => Promise<JSONLog | undefined>;
+  testCode: (codeState: string) => Promise<JSONLog | undefined>;
   /**
    * 状態をリセットする
    */
@@ -47,24 +46,18 @@ export const useResult = (): IResponse => {
     }));
   }, []);
 
-  const testCode = useCallback<IResponse["testCode"]>(async (codeState) => {
-    const currentCode = codeState.code;
-    if (codeState.isExecutable && currentCode) {
-      try {
-        const { json } = await testCodeOnAPI(currentCode.id);
-        setResultState((current) => ({
-          ...current,
-          simulationJson: json,
-        }));
-        _setIsFailed(false);
-        return json;
-      } catch (error) {
-        _setIsFailed(true);
-        return undefined;
-      }
-    } else {
+  const testCode = useCallback<IResponse["testCode"]>(async (codeId) => {
+    try {
+      const { json } = await testCodeOnAPI(codeId);
+      setResultState((current) => ({
+        ...current,
+        simulationJson: json,
+      }));
+      _setIsFailed(false);
+      return json;
+    } catch (error) {
       _setIsFailed(true);
-      throw new Error("This code is not executable.");
+      return undefined;
     }
   }, []);
 

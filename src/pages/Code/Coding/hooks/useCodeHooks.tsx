@@ -180,9 +180,10 @@ export const useCodingState = (): IResponse => {
    * ゲーム画面への遷移は、Resultが更新されたタイミングで遷移
    */
   const execCode = useCallback(async () => {
-    if (codeState && codeState.isExecutable) {
+    const codeId = codeState.code?.id;
+    if(codeId){
       await saveCode();
-      await testCode(codeState);
+      await testCode(codeId);
     }
   }, [codeState, updateCodeOnlyFront, saveCode, testCode]);
 

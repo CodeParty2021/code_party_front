@@ -17,25 +17,25 @@ export type CodeState = {
   /** ターンログを表示するか */
   showTurnLog: boolean;
   /**
-   * 現在の表示画面を決める  
-   * editor: エディタ表示中  
-   * unity: ゲーム画面表示中  
-   * message: なんらかのメッセージを表示中  
+   * 現在の表示画面を決める
+   * editor: エディタ表示中
+   * unity: ゲーム画面表示中
+   * message: なんらかのメッセージを表示中
    * loading: ロード中
    */
   switchDisplay: "editor" | "unity" | "message" | "loading";
   /**
-   * メッセージの種類を決める  
-   * loading: ロード中メッセージを表示  
+   * メッセージの種類を決める
+   * loading: ロード中メッセージを表示
    * error: エラーメッセージを表示
    */
   messageType: "loading" | "error";
   /**
-   * ボタンの種類を決める  
-   * hidden: 非表示  
-   * toEditor: 押すとエディタ画面に移動する状態  
-   * toGame: 押すとゲーム画面に移動する状態  
-   * closeInfo: 押すとメッセージを非表示にする（エディタ画面に戻る）  
+   * ボタンの種類を決める
+   * hidden: 非表示
+   * toEditor: 押すとエディタ画面に移動する状態
+   * toGame: 押すとゲーム画面に移動する状態
+   * closeInfo: 押すとメッセージを非表示にする（エディタ画面に戻る）
    * unityLoading: ユニティをロード中で押せない状態
    */
   buttonType: "hidden" | "toEditor" | "toGame" | "closeInfo" | "unityLoading";
@@ -181,7 +181,7 @@ export const useCodingState = (): IResponse => {
    */
   const execCode = useCallback(async () => {
     const codeId = codeState.code?.id;
-    if(codeId){
+    if (codeId) {
       await saveCode();
       await testCode(codeId);
     }

@@ -34,9 +34,32 @@ export type CodeType = {
   step: number;
 };
 
+export const isCodeType = (instance: any): instance is CodeType => {
+  return (
+    instance !== undefined &&
+    "id" in instance &&
+    "codeContent" in instance &&
+    "language" in instance &&
+    "updatedAt" in instance &&
+    "createdAt" in instance &&
+    "user" in instance &&
+    "step" in instance
+  );
+};
+
 export type GetCodeResponseType = CodeType;
 
+export const isGetCodeResponseType = isCodeType;
+
 export type GetCodesResponseType = CodeType[];
+
+export const isGetCodesResponseType = (
+  instance: any
+): instance is GetCodesResponseType => {
+  return (
+    Array.isArray(instance) && instance.every((value) => isCodeType(value))
+  );
+};
 
 export type UpdateCodeResponseType = {
   codeContent: string;
@@ -44,20 +67,69 @@ export type UpdateCodeResponseType = {
   language: string;
 };
 
+export const isUpdateCodeResponseType = (
+  instance: any
+): instance is CodeType => {
+  return (
+    instance !== undefined &&
+    "codeContent" in instance &&
+    "language" in instance &&
+    "step" in instance
+  );
+};
+
 export type CreateCodeResponseType = CodeType;
+
+export const isCreateCodeResponseType = isCodeType;
 
 export type TestCodeResponseType = {
   unityURL: string;
   json: JSONLog;
 };
+
+export const isTestCodeResponseType = (
+  instance: any
+): instance is TestCodeResponseType => {
+  return (
+    instance !== undefined &&
+    "unityURL" in instance &&
+    "json" in instance &&
+    isJSONLog(instance.json)
+  );
+};
+
 export type JSONLog = {
   turn: TurnState[];
 };
+
+export const isJSONLog = (instance: any): instance is JSONLog => {
+  return (
+    instance !== undefined &&
+    "turn" in instance &&
+    Array.isArray(instance.turn) &&
+    instance.turn.every((value: any) => isTurnState(value))
+  );
+};
+
 export type TurnState = {
   players: PlayerState[];
 };
+
+export const isTurnState = (instance: any): instance is TurnState => {
+  return (
+    instance !== undefined &&
+    "players" in instance &&
+    Array.isArray(instance.players) &&
+    instance.players.every((value: any) => isPlayerState(value))
+  );
+};
+
 export type PlayerState = {
   print: string;
+};
+
+export const isPlayerState = (instance: any): instance is PlayerState => {
+  return instance !== undefined && "print" in instance;
 };
 
 export const useCodeAPI = (): IResponse => {
@@ -74,6 +146,12 @@ export const useCodeAPI = (): IResponse => {
       axiosWithIdToken
         .get("/codes/" + codeId + "/", {})
         .then((response: AxiosResponse<GetCodeResponseType>) => {
+          if (!isGetCodeResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of GetCodeResponseType"
+            );
+          }
+
           setLoading(false);
           return resolve(response.data);
         })
@@ -105,6 +183,12 @@ export const useCodeAPI = (): IResponse => {
           },
         })
         .then((response: AxiosResponse<GetCodesResponseType>) => {
+          if (!isGetCodesResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of GetCodesResponseType"
+            );
+          }
+
           setLoading(false);
           return resolve(response.data);
         })
@@ -139,6 +223,12 @@ export const useCodeAPI = (): IResponse => {
           language,
         })
         .then((response: AxiosResponse<UpdateCodeResponseType>) => {
+          if (!isUpdateCodeResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of UpdateCodeResponseType"
+            );
+          }
+
           setLoading(false);
           return resolve(response.data);
         })
@@ -171,6 +261,12 @@ export const useCodeAPI = (): IResponse => {
           language,
         })
         .then((response: AxiosResponse<CreateCodeResponseType>) => {
+          if (!isCreateCodeResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of CreateCodeResponseType"
+            );
+          }
+
           setLoading(false);
           return resolve(response.data);
         })
@@ -193,6 +289,12 @@ export const useCodeAPI = (): IResponse => {
       axiosWithIdToken
         .get(`/codes/${codeId}/test`)
         .then((response: AxiosResponse<TestCodeResponseType>) => {
+          if (!isTestCodeResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of TestCodeResponseType"
+            );
+          }
+
           setLoading(false);
           return resolve(response.data);
         })
@@ -203,6 +305,7 @@ export const useCodeAPI = (): IResponse => {
         });
     });
   };
+
   return {
     loading,
     error,

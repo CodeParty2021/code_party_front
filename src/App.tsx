@@ -7,13 +7,11 @@ import { Start } from "./pages/Start/Start";
 import { Lp } from "./pages/Lp/Lp";
 import { RobotDevelopmentTop } from "./pages/RobotDevelopment/Top/Top";
 import { Specification } from "pages/RobotDevelopment/Specification/Specification";
-import { OnlineMatch } from "pages/OnlineMatch/OnlineMatch";
 import { Garage } from "pages/Garage/Garage";
 import { GarageList } from "pages/Garage/GarageList";
 import { SelectMode } from "pages/SelectMode/SelectMode";
 import { RoomMatchLobby } from "pages/RoomMatch/Lobby/Lobby";
 import { RoomMatchWaitingRoom } from "pages/RoomMatch/WaitingRoom/WaitingRoom";
-import { RoomMatchSearchRoom } from "pages/RoomMatch/SearchRoom/SearchRoom";
 import { RoomMatchGameWatch } from "pages/RoomMatch/GameWatch/GameWatch";
 import { RoomMatchPickCode } from "pages/RoomMatch/PickCode/PickCode";
 import { SetName } from "pages/SetName/SetName";
@@ -77,10 +75,6 @@ export const App: React.FC<Props> = () => {
               element={<PrivateRoute component={Garage} />}
             />
             <Route
-              path="/online-match"
-              element={<PrivateRoute component={OnlineMatch} />}
-            />
-            <Route
               path="/room-match/waiting-room"
               element={<PrivateRoute component={RoomMatchWaitingRoom} />}
             />
@@ -91,10 +85,6 @@ export const App: React.FC<Props> = () => {
             <Route
               path="/room-match/invitation/:roomId"
               element={<PrivateRoute component={RoomMatchInvitation} />}
-            />
-            <Route
-              path="/room-match/search-room"
-              element={<PrivateRoute component={RoomMatchSearchRoom} />}
             />
             <Route
               path="/room-match/result"

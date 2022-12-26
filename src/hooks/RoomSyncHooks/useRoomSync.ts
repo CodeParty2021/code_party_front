@@ -168,11 +168,13 @@ export const enterRoomAsync = (
   user: User
 ): ThunkResult<void> => {
   return async (dispatch: any) => {
-    if (roomId == "") return;
+    if (roomId == "") throw new Error(`roomId is empty`);
     const data = await getRoomAsync(roomId);
     //ルームが存在したら入室処理
     if (data) {
       dispatch(_enterRoomAsync(roomId, user));
+    } else {
+      throw new Error(`roomId is not found`);
     }
   };
 };

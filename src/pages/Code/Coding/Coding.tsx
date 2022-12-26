@@ -1,18 +1,17 @@
 import React from "react";
 import { useCodingState } from "./hooks/useCodeHooks";
 
-// import Editor from "@monaco-editor/react";
-// import Unity from "react-unity-webgl";
-// import styled from "styled-components";
 import {
   AlgoEditorStyle,
   Background,
   BackLink,
+  buttonProps,
   ButtonStyle,
   CodingStyle,
   ContainerMain,
   ContainerUnity,
   ContainerWrap,
+  messageProps,
   MessageStyle,
   TabStyle,
   UnityStyle,
@@ -28,19 +27,21 @@ type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
   const {
-    code,
+    // 状態変数
+    state,
+    // 状態変数を扱いやすくしたもの
     loading,
-    isCode,
-    execCode,
+    showUnity,
+    showLog,
+    showMessage,
+    // データ
+    code,
     turnLog,
     handleEditorDidMount,
-    closeEditorButtonHandler,
-    showUnity,
     unityContext,
+    // コールバック関数
+    buttonHandler,
     toggleLogHandler,
-    showLog,
-    showError,
-    unityLoad,
   } = useCodingState();
   if (loading) {
     return (
@@ -64,71 +65,32 @@ export const CodeCoding: React.FC<Props> = () => {
             <WatchingLogo src="/img/watching_logo.svg" wrapper="svg" />
           </ContainerUnity>
           <MessageStyle
-            title="エラー！"
-            value="スタッフに聞いてみよう"
-            color="red"
-            showInfo={showError}
-          />
-          <MessageStyle
-            title="ヨミコミチュウ！"
-            value="しばらくお待ちください"
-            color="red"
-            showInfo={!isCode(code)}
-          />
-          <MessageStyle //ローディング中の文章、消してもいいかも？
-            title="ローディングチュウ..."
-            value="しばらくお待ちください"
-            color="blue"
-            showInfo={loading}
+            {...messageProps(state.messageType)}
+            showInfo={showMessage}
           />
           <AlgoEditorStyle
             defaultLanguage="python"
             defaultValue={code && code.codeContent}
             onMount={handleEditorDidMount}
-            close={showUnity || loading || showError || !isCode(code)}
+            close={showUnity || showMessage}
             width="70vw"
             height="90vh"
             showUnity={showUnity}
-            showInfo={loading || showError || !isCode(code)}
+            showInfo={showMessage}
           />
-          {showUnity ? (
-            <ButtonStyle
-              value="コード画面に戻る"
-              color="blue"
-              size="M"
-              onClick={closeEditorButtonHandler}
-            />
-          ) : loading || showError || !isCode(code) ? (
-            <ButtonStyle
-              value="コード画面に戻る"
-              color="black"
-              size="M"
-              onClick={closeEditorButtonHandler}
-            />
-          ) : unityLoad ? (
-            <ButtonStyle
-              value="ロード中です"
-              color="pink"
-              size="M"
-              onClick={execCode}
-              status="disabled"
-            />
-          ) : (
-            <ButtonStyle
-              value="ゲーム画面で確認"
-              color="pink"
-              size="M"
-              onClick={execCode}
-            />
-          )}
+          <ButtonStyle
+            {...buttonProps(state.buttonType)}
+            onClick={buttonHandler}
+          />
         </ContainerMain>
         <LogPanel onCloseButtonClick={toggleLogHandler}>
-          {turnLog.map((turn, index) => {
-            const log = turn.players[0].print;
-            if (log) {
-              return <LogItem key={index} turnNum={index + 1} log={log} />;
-            }
-          })}
+          {turnLog &&
+            turnLog.map((turn, index) => {
+              const log = turn.players[0].print;
+              if (log) {
+                return <LogItem key={index} turnNum={index + 1} log={log} />;
+              }
+            })}
         </LogPanel>
       </ContainerWrap>
       <TabStyle value="LOG" onClick={toggleLogHandler} showLog={showLog} />

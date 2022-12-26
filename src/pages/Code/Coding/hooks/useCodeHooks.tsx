@@ -1,212 +1,228 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { UnityContext } from "react-unity-webgl";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCodeAPI, CodeType, TurnState } from "hooks/CodeAPIHooks/useCodeAPI";
-import {
-  DescriptionCMSType,
-  useDescriptionCMS,
-} from "hooks/DescriptionCMSHooks/useDescriptionCMS";
+import { CodeType, TurnState } from "hooks/CodeAPIHooks/useCodeAPI";
+import { useUnityGame } from "hooks/UnityGameHooks/useUnityGame";
+import { useCode } from "hooks/CodeHooks/useCode";
+import { useResult } from "hooks/ResultHooks/useResult";
+import { useDummyLoading } from "hooks/DummyLoadingHooks/useDummyLoading";
+import { useMonacoEditor } from "hooks/MonacoEditorHooks/useMonacoEditor";
 
 export type RunResponse = {
   unityURL: string;
   jsonId: string;
 };
 
-export type IResponse = {
-  code: CodeType;
-  error: string | undefined;
-  loading: boolean;
-  isCode: (code: CodeType | undefined) => boolean;
-  execCode: (content: string, step: string, language: string) => void;
-  turnLog: TurnState[];
-  handleEditorDidMount: (editor: any, _monaco: any) => void;
-  closeEditorButtonHandler: () => void;
-  showUnity: boolean;
-  unityContext: UnityContext;
-  toggleLogHandler: () => void;
-  showLog: boolean;
-  showError: boolean;
-  description: DescriptionCMSType;
-  unityLoad: boolean;
+export type CodeState = {
+  /** ターンログを表示するか */
+  showTurnLog: boolean;
+  /**
+   * 現在の表示画面を決める
+   * editor: エディタ表示中
+   * unity: ゲーム画面表示中
+   * message: なんらかのメッセージを表示中
+   * loading: ロード中
+   */
+  switchDisplay: "editor" | "unity" | "message" | "loading";
+  /**
+   * メッセージの種類を決める
+   * loading: ロード中メッセージを表示
+   * error: エラーメッセージを表示
+   */
+  messageType: "loading" | "error";
+  /**
+   * ボタンの種類を決める
+   * hidden: 非表示
+   * toEditor: 押すとエディタ画面に移動する状態
+   * toGame: 押すとゲーム画面に移動する状態
+   * closeInfo: 押すとメッセージを非表示にする（エディタ画面に戻る）
+   * unityLoading: ユニティをロード中で押せない状態
+   */
+  buttonType: "hidden" | "toEditor" | "toGame" | "closeInfo" | "unityLoading";
 };
 
-//TODO:ここstepかstageごとに変更する必要あり
-const unityContext = new UnityContext({
-  loaderUrl: "/unity/sp/web.loader.js",
-  dataUrl: "/unity/sp/web.data",
-  frameworkUrl: "/unity/sp/web.framework.js",
-  codeUrl: "/unity/sp/web.wasm",
-});
+const initialState: CodeState = {
+  showTurnLog: false,
+  switchDisplay: "loading",
+  messageType: "loading",
+  buttonType: "hidden",
+};
 
-export const useCodingState = () => {
-  const { codeId } = useParams<string>(); //code_id
-  const {
-    error: errorCodeAPI,
-    getCode,
-    updateCode,
-    createCode,
-    testCode,
-  } = useCodeAPI(); //api通信用カスタムフック
-  const [error, setError] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [json, setJson] = useState<string>("");
-  const [turnLog, setTurnLog] = useState<TurnState[]>([]);
-  const [showError, setShowError] = useState(false);
-  const [unityLoad, setUnityLoad] = useState<boolean>(true);
+export type IResponse = {
+  // 状態変数
+  /** ページの状態 */
+  state: CodeState;
+
+  // 状態変数を扱いやすくしたもの
+  /** ページがロード中か */
+  loading: boolean;
+  /** Unityを表示するか */
+  showUnity: boolean;
+  /** ログを表示するか */
+  showLog: boolean;
+  /** メッセージを表示するか */
+  showMessage: boolean;
+
+  // データ
+  /** コード内容 */
+  code?: CodeType;
+  /** ターン毎に出力されたログ */
+  turnLog?: TurnState[];
+  /** Editorへの参照 */
+  handleEditorDidMount: (editor: any, _monaco: any) => void;
+  /** unityへの参照 */
+  unityContext: UnityContext;
+
+  // コールバック関数
+  /** ボタン押下時のコールバック関数 */
+  buttonHandler?: () => void;
+  /** ログの開閉コールバック関数 */
+  toggleLogHandler: () => void;
+};
+
+export const useCodingState = (): IResponse => {
+  // コードID取得
+  const { codeId } = useParams<string>();
+
+  // hooksの宣言
+  const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode } =
+    useCode(codeId);
+  const { resultState, testCode, reset } = useResult();
+  const { dummyLoadingState, startDummyLoad } = useDummyLoading(5000);
+  const { monacoEditorState, handleEditorDidMount } = useMonacoEditor();
+  const { unityContext, unityStatus, startGame } = useUnityGame("SquarePaint");
+
+  // エディタの更新をコードに反映する
+  useEffect(() => {
+    updateCodeOnlyFront(monacoEditorState.content);
+  }, [monacoEditorState.content]);
+
+  // 状態の宣言
+  const [showTurnLog, setShowTurnLog] = useState<CodeState["showTurnLog"]>(
+    initialState["showTurnLog"]
+  );
+  const [switchDisplay, setSwitchDisplay] = useState<
+    CodeState["switchDisplay"]
+  >(initialState["switchDisplay"]);
+  const [messageType, setMessageType] = useState<CodeState["messageType"]>(
+    initialState["messageType"]
+  );
+
+  // その他
   const navigate = useNavigate();
 
-  //const { error: errorDescriptionCMS, getDescriptionFromStepID } =useDescriptionCMS();
+  // 状態から定義できる変数の宣言
+  /** ページがロード中か */
+  const loading = useMemo(
+    () => dummyLoadingState.isLoading || codeState.isLoading,
+    [dummyLoadingState.isLoading, codeState.isLoading]
+  );
+  /** 表示するボタンの種類 */
+  const buttonType = useMemo<CodeState["buttonType"]>(
+    () =>
+      unityStatus.isLoading
+        ? "unityLoading"
+        : switchDisplay === "editor"
+        ? "toGame"
+        : switchDisplay === "message"
+        ? "closeInfo"
+        : switchDisplay === "unity"
+        ? "toEditor"
+        : "hidden",
+    [unityStatus.isLoading, switchDisplay]
+  );
 
-  const { getDescriptionFromStepID } = useDescriptionCMS();
-  const [code, setCode] = useState<CodeType>(); //表示中のコード
-  //code の型ガード
-  function isCode(code: CodeType | undefined): code is CodeType {
-    return code?.id !== undefined;
-  }
-  const [description, setDescription] = useState<
-    DescriptionCMSType | undefined
-  >(undefined);
-  //code, Descriptionの更新
+  // 初期処理
   useEffect(() => {
-    const loadCode = async () => {
-      setLoading(true);
-      if (codeId) {
-        const code = await getCode(codeId as string); //TODO エラー処理
-        setCode(code);
-        const description = await getDescriptionFromStepID(code.step);
-        setDescription(description);
-        console.log({ description });
-        setLoading(false);
-      } else {
-        // 新規コード作成時（/free-coding遷移時）、新規コードを作成して再度リダイレクトする（urlに統一性を持たせるため）
-        const code = await createCode(
-          "def select(field,my_pos,other_pos):\n  return 0",
-          1,
-          "1"
-        );
-        navigate(`/free-coding/${code.id}/`, { replace: true });
-      }
-      await setTimeout(() => {}, 5000);
-      setLoading(false);
-      console.log(loading);
-    };
-    loadCode();
+    startDummyLoad();
+    if (!codeId) {
+      const codeId = createCodeDefault(1, "1");
+      navigate(`/free-coding/${codeId}/`, { replace: true });
+    }
   }, []);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_progression, setProgression] = useState(0); // this value will change to 1 when the end of the loading.
+  // ローディング後の切り替え処理
   useEffect(() => {
-    unityContext.on("progress", function (progression) {
-      setProgression(progression);
-    });
+    if (!loading) {
+      setSwitchDisplay("editor");
+    }
+  }, [loading]);
 
-    unityContext.on("GameOver", function () {
-      console.log("GameOver!!Unityから実行されました!");
-    });
-
-    unityContext.on("OnLoad", function () {
-      //ここにボタンを表示する処理を入れる。
-      setUnityLoad(false);
-      console.log("OnLoad!!Unityから実行されました!");
-    });
-  }, []);
-
-  const [showUnity, setShowUnity] = useState(false); // unityの表示フラグ
-
-  const editorRef = useRef(
-    null
-  ) as React.MutableRefObject<null | HTMLInputElement>;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  function handleEditorDidMount(editor: any, _monaco: any) {
-    editorRef.current = editor; //ここにeditorの内容が返ってくる
-  }
-  function getInputCode(): string {
-    if (editorRef.current == null) throw "editorRefが初期化されてません";
-    // @ts-ignore
-    return editorRef.current?.getValue();
-  }
-
-  const loadJson = (json: string) => {
-    //unityContext.send("JSONLoader", "LoadJSON", json);
-    unityContext.send("ReactUnityConnector", "SetSimulationData", json);
-    unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
-  };
+  // エラー時の処理
+  useEffect(() => {
+    if (resultState.isFailed) {
+      setSwitchDisplay("message");
+      setMessageType("error");
+      setShowTurnLog(false);
+    }
+  }, [resultState.isFailed]);
 
   // jsonに値が入ればunity描画、空が入ればunity非表示
   useEffect(() => {
-    setShowUnity(json !== ""); //jsonがセットされている場合はUnityを表示する
-    loadJson(json);
-  }, [json]);
-
-  // unityモーダルを閉じる
-  const _closeEditorButtonHandler = () => {
-    setJson("");
-    setShowError(false);
-  };
-
-  const execCode = async () => {
-    const inputCode = getInputCode();
-    if (isCode(code)) {
-      setCode({ ...code, codeContent: inputCode });
-      console.log({ code });
-      await updateCode(code.id, inputCode, code.step, code.language);
-      const { json } = await testCode(code.id);
-      setJson(JSON.stringify(json));
-      setTurnLog(json.turn);
+    const simulationJson = resultState.simulationJson;
+    if (simulationJson !== undefined) {
+      setSwitchDisplay("unity");
+      startGame(JSON.stringify(simulationJson));
     }
+  }, [resultState.simulationJson, startGame]);
+
+  /**
+   * エディターに切り替える際の処理
+   */
+  const toEditorButtonHandler = () => {
+    // Resultをリセットして、再度Unityに遷移しないようにする
+    reset();
+    setSwitchDisplay("editor");
   };
 
-  // ログの表示管理
-  const [showLog, setShowLog] = useState(false);
+  /**
+   * コードを実行する
+   * ゲーム画面への遷移は、Resultが更新されたタイミングで遷移
+   */
+  const execCode = useCallback(async () => {
+    const codeId = codeState.code?.id;
+    if (codeId) {
+      await saveCode();
+      await testCode(codeId);
+    }
+  }, [codeState, updateCodeOnlyFront, saveCode, testCode]);
 
+  /**
+   * ボタンを押した時のコールバック
+   */
+  const buttonHandler = useMemo(
+    () =>
+      buttonType === "toGame"
+        ? execCode
+        : buttonType === "toEditor" || buttonType === "closeInfo"
+        ? toEditorButtonHandler
+        : undefined,
+    [buttonType, execCode, toEditorButtonHandler]
+  );
+
+  /**
+   * ログの表示切り替えコールバック
+   */
   const toggleLogHandler = () => {
-    setShowLog((showLog) => !showLog);
+    setShowTurnLog((showLog) => !showLog);
   };
 
-  useEffect(() => {
-    if (error) {
-      setShowUnity(false);
-      setShowLog(false);
-      setShowError(true);
-    }
-  }, [error]);
-
-  useEffect(() => {
-    if (errorCodeAPI) {
-      setError(error + "," + errorCodeAPI);
-    } else {
-      setError(error || errorCodeAPI);
-    }
-  }, [errorCodeAPI]);
-  /* cmsのエラー判定を一旦コメントアウト
-  useEffect(() => {
-    if (error) {
-      setShowUnity(false);
-      setShowLog(false);
-      setShowError(true);
-    }
-    if (errorCodeAPI) {
-      setError(errorDescriptionCMS + "," + errorCodeAPI);
-    } else {
-      setError(errorDescriptionCMS || errorCodeAPI);
-    }
-  }, [error, errorDescriptionCMS, errorCodeAPI]);
-  */
   return {
-    code,
-    description,
-    error,
+    state: {
+      showTurnLog,
+      switchDisplay,
+      messageType,
+      buttonType,
+    },
     loading,
-    isCode,
-    execCode,
-    turnLog,
+    showUnity: switchDisplay === "unity",
+    showLog: showTurnLog,
+    showMessage: switchDisplay === "message" || loading,
+    code: codeState.code,
+    turnLog: resultState.simulationJson?.turn,
     handleEditorDidMount,
-    closeEditorButtonHandler: _closeEditorButtonHandler,
-    showUnity,
     unityContext,
+    buttonHandler,
     toggleLogHandler,
-    showLog,
-    showError,
-    unityLoad,
   };
 };

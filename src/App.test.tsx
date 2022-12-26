@@ -1,30 +1,38 @@
 import React from "react";
-import { render } from "@testing-library/react";
 import App from "./App";
-import { AnyAction, configureStore, Store } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import userReducer from "services/user/user";
+import { shallow } from "enzyme";
+import { useAppState } from "hooks/AppHooks/useAppState";
 
-jest.mock("firebase/database");
-jest.mock("firebase/auth");
+jest.mock("hooks/AppHooks/useAppState");
 
-describe("XXX Component Test Cases", () => {
-  // テスト用のstore
-  let store: Store<any, AnyAction>;
-  beforeEach(() => {
-    store = configureStore({
-      reducer: {
-        user: userReducer,
-      },
+const useAppStateMock = useAppState as jest.Mock;
+
+describe("<App />", () => {
+  it("isLoading == true", async () => {
+    useAppStateMock.mockReturnValue({
+      isLoading: true,
+      isClose: false,
+      isDev: false,
     });
+    const wrapper = shallow(<App />);
+    expect(wrapper.getElements()).toMatchSnapshot();
   });
-
-  it("テストケース1", async () => {
-    render(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    );
-    // screen.debug();
+  it("isClose == true", async () => {
+    useAppStateMock.mockReturnValue({
+      isLoading: false,
+      isClose: true,
+      isDev: false,
+    });
+    const wrapper = shallow(<App />);
+    expect(wrapper.getElements()).toMatchSnapshot();
+  });
+  it("isDev == true", async () => {
+    useAppStateMock.mockReturnValue({
+      isLoading: false,
+      isClose: false,
+      isDev: true,
+    });
+    const wrapper = shallow(<App />);
+    expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

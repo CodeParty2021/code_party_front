@@ -4,7 +4,7 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { useSelector } from "react-redux";
 import { LoginUserState } from "services/user/user";
-import { useFetchCodes } from "./getCodesHooks";
+import { useCodeListState } from "./useCodeListState";
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
 import { uri } from "config";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const useNavigateMock = useNavigate as jest.Mock;
 let createCodeMock = jest.fn();
 const navigateMock = jest.fn();
 
-describe("useFetchCodes", () => {
+describe("useCodeListState", () => {
   beforeEach(() => {
     // selectorのレスポンスを設定する
     useSelectorMock.mockReturnValue({
@@ -62,7 +62,7 @@ describe("useFetchCodes", () => {
     mock.onGet(url).reply(200, mockResponseDeta); // モックAPIを定義
 
     //実行
-    const { result, waitForNextUpdate } = renderHook(() => useFetchCodes());
+    const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
     expect(result.current.codes).toEqual([]);
 
     expect(result.current.error).toEqual(undefined);
@@ -95,10 +95,10 @@ describe("useFetchCodes", () => {
         });
       })
     );
-    const { result, waitForNextUpdate } = renderHook(() => useFetchCodes());
+    const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
     await waitForNextUpdate();
     const newCodeButtonHandler = result.current.newCodeButtonHandler;
     await newCodeButtonHandler();
-    expect(navigateMock).lastCalledWith("/free-coding/123/");
+    expect(navigateMock).lastCalledWith("/free-coding/123/codes");
   });
 });

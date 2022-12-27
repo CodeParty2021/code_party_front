@@ -1,6 +1,6 @@
 import React from "react";
-import { CodeCard } from "../components/CodeCard";
-import { useFetchCodes } from "./hooks/getCodesHooks";
+import { CodeCard } from "./components/CodeCard";
+import { useCodeListState } from "./hooks/useCodeListState";
 
 type Props = {};
 
@@ -15,30 +15,26 @@ type Code = {
 };
 
 export const CodeList: React.FC<Props> = () => {
-  const { codes, loading, newCodeButtonHandler } = useFetchCodes();
+  const { codes, loading, newCodeButtonHandler } = useCodeListState();
   if (loading) {
     return <div>ロード中</div>;
   }
-  if (codes) {
-    return (
+  return (
+    <div>
+      <h1>コード一覧</h1>
       <div>
-        <h1>コード一覧</h1>
-        <div>
-          {codes.map((code: Code) => {
-            return (
-              <CodeCard
-                key={code.id}
-                id={code.id}
-                codeContent={code.codeContent}
-                updatedAt={code.updatedAt}
-              ></CodeCard>
-            );
-          })}
-        </div>
-        <button onClick={newCodeButtonHandler}>新しくコードを追加する</button>
+        {codes.map((code: Code) => {
+          return (
+            <CodeCard
+              key={code.id}
+              id={code.id}
+              codeContent={code.codeContent}
+              updatedAt={code.updatedAt}
+            ></CodeCard>
+          );
+        })}
       </div>
-    );
-  } else {
-    return <div>ログインが必要です</div>;
-  }
+      <button onClick={newCodeButtonHandler}>新しくコードを追加する</button>
+    </div>
+  );
 };

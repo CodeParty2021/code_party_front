@@ -6,6 +6,7 @@ import { uri } from "config";
 import { isUser } from "services/user/user";
 import { useNavigate } from "react-router-dom";
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
+import { BASIC_INIT_CODE } from "pages/Code/assets/InitCodes";
 
 export type IResponse = {
   codes: CodeType[];
@@ -24,14 +25,9 @@ export type CodeType = {
   step: string;
 };
 
-const FREE_INIT_CODE = `
-def select(field, my_pos, other_pos):
-   return 0
-`;
-
 const FREE_STEP_ID = 1;
 
-export const useFetchCodes = (): IResponse => {
+export const useCodeListState = (): IResponse => {
   const { user } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const { createCode } = useCodeAPI();
@@ -66,9 +62,9 @@ export const useFetchCodes = (): IResponse => {
   const _newCodeButtonHandler = async () => {
     let codeId: string;
     if (isUser(user)) {
-      const code = await createCode(FREE_INIT_CODE, FREE_STEP_ID, "1");
+      const code = await createCode(BASIC_INIT_CODE, FREE_STEP_ID, "1");
       codeId = code.id;
-      navigate(`/free-coding/${codeId}/`);
+      navigate(`/free-coding/${codeId}/codes`);
     }
   };
 

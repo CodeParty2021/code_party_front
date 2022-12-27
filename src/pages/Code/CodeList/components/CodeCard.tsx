@@ -22,7 +22,7 @@ export const CodeCard: React.FC<Props> = (props: Props) => {
     <Card>
       <pre>{props.codeContent}</pre>
       <p>UpdatedAt:{props.updatedAt} </p>
-      <Link to={"/free-coding/" + props.id}>編集</Link>
+      <Link to={"/free-coding/" + props.id + "/codes"}>編集</Link>
     </Card>
   );
 };

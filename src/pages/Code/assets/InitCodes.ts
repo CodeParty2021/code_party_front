@@ -49,3 +49,23 @@ def select(turn_num, field, my_pos, other_pos):
   }
   return meirei[turn_num]
 `;
+
+export const BASIC_INIT_CODE = `
+"""
+ ロボットは4番の位置にいて、次のターンそれぞれの番号のところにいどうするよ！
+     0
+     ↑
+ 3 ← 4 → 1
+     ↓
+     2
+
+ 0 => 上にすすむよ!
+ 1 => 右にすすむよ!
+ 2 => 下にすすむよ!
+ 3 => 左にすすむよ!
+ 4 => そのまま止まるよ！
+"""
+
+def select(turn_num, field, my_pos, other_pos):
+  return meirei[turn_num]
+`;

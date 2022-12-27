@@ -15,7 +15,6 @@ Array [
                 作成する事ができます。
               </DescriptionText>
             }
-            disabled={true}
             icon="setting"
             imageName="walking_lobo"
             onClick={[Function]}

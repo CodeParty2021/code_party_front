@@ -78,11 +78,26 @@ export type IResponse = {
   buttonHandler?: () => void;
   /** ログの開閉コールバック関数 */
   toggleLogHandler: () => void;
+  backLinkRoute: string;
 };
 
 export const useCodingState = (): IResponse => {
   // コードID取得
-  const { codeId } = useParams<string>();
+  const { codeId, beforePage } = useParams<string>();
+
+  const [backLinkRoute, setBackLinkRoute] = useState<string>("");
+
+  useEffect(() => {
+    setBackLinkRoute(
+      beforePage == "eventAI"
+        ? "/event/select-ai"
+        : beforePage == "codes"
+        ? "/codes"
+        : beforePage == "eventTrain"
+        ? "/event/select-mode"
+        : ""
+    );
+  }, []);
 
   // hooksの宣言
   const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode } =
@@ -224,5 +239,6 @@ export const useCodingState = (): IResponse => {
     unityContext,
     buttonHandler,
     toggleLogHandler,
+    backLinkRoute,
   };
 };

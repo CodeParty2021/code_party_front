@@ -31,7 +31,6 @@ export const SelectMode: React.FC<Props> = () => {
               }
               icon="setting"
               onClick={beginDevelopHandler}
-              disabled={true}
             ></ModeSelectCard>
           </MarginBox>
           <MarginBox>

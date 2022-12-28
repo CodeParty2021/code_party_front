@@ -1,11 +1,10 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
-import { uri } from "config";
 import { isUser } from "services/user/user";
 import { useNavigate } from "react-router-dom";
-import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
+import { CodeType, useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
 import { BASIC_INIT_CODE } from "pages/Code/assets/InitCodes";
 
 export type IResponse = {
@@ -13,16 +12,7 @@ export type IResponse = {
   error: AxiosError | undefined;
   loading: boolean;
   newCodeButtonHandler: () => void;
-};
-
-export type CodeType = {
-  id: string;
-  codeContent: string;
-  language: string;
-  updatedAt: string;
-  createdAt: string;
-  user: string;
-  step: string;
+  deleteHandler: (id: string) => void;
 };
 
 const FREE_STEP_ID = 1;
@@ -30,34 +20,24 @@ const FREE_STEP_ID = 1;
 export const useCodeListState = (): IResponse => {
   const { user } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
-  const { createCode } = useCodeAPI();
+  const { createCode, getCodesFilterUserId, deleteCode } = useCodeAPI();
   const [codes, setCodes] = useState<CodeType[]>([]);
   const [error, setError] = useState<AxiosError | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
+    setLoading(true);
     if (user) {
-      fetchRequest(user.id);
+      getCodesFilterUserId(user.id)
+        .then((res) => {
+          setCodes(res);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err);
+          setLoading(false);
+        });
     }
   }, []);
-
-  const fetchRequest = (userID: string) => {
-    setLoading(true);
-    // TODO: hooksを使うように書き換える
-    axios
-      .get(`${uri}/codes`, {
-        params: {
-          user: userID,
-          step: FREE_STEP_ID,
-        },
-      })
-      .then((response: AxiosResponse<CodeType[]>) => {
-        setCodes(response.data);
-      })
-      .catch((error: AxiosError) => {
-        setError(error);
-      });
-    setLoading(false);
-  };
 
   const _newCodeButtonHandler = async () => {
     let codeId: string;
@@ -68,10 +48,20 @@ export const useCodeListState = (): IResponse => {
     }
   };
 
+  const _deleteHandler = async (id: string) => {
+    setLoading(true);
+    await deleteCode(id).catch((error: AxiosError) => {
+      setError(error);
+    });
+    setCodes(codes.filter((code) => code.id !== id));
+    setLoading(false);
+  };
+
   return {
     loading,
     error,
     codes,
     newCodeButtonHandler: _newCodeButtonHandler,
+    deleteHandler: _deleteHandler,
   };
 };

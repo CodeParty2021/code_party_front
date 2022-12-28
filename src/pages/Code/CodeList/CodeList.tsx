@@ -4,18 +4,9 @@ import { useCodeListState } from "./hooks/useCodeListState";
 
 type Props = {};
 
-type Code = {
-  id: string;
-  codeContent: string;
-  language: string;
-  updatedAt: string;
-  createdAt: string;
-  user: string;
-  step: string;
-};
-
 export const CodeList: React.FC<Props> = () => {
-  const { codes, loading, newCodeButtonHandler } = useCodeListState();
+  const { codes, loading, newCodeButtonHandler, deleteHandler } =
+    useCodeListState();
   if (loading) {
     return <div>ロード中</div>;
   }
@@ -23,13 +14,14 @@ export const CodeList: React.FC<Props> = () => {
     <div>
       <h1>コード一覧</h1>
       <div>
-        {codes.map((code: Code) => {
+        {codes.map((code) => {
           return (
             <CodeCard
               key={code.id}
               id={code.id}
               codeContent={code.codeContent}
               updatedAt={code.updatedAt}
+              deleteHandler={deleteHandler}
             ></CodeCard>
           );
         })}

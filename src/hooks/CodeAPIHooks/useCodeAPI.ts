@@ -6,6 +6,7 @@ export type IResponse = {
   loading: boolean;
   error: string | undefined;
   getCode: (codeId: string) => Promise<GetCodeResponseType>;
+  getCodesFilterUserId: (userId: string) => Promise<GetCodesResponseType>;
   getCodesFilterStepIdAndUserId: (
     stepId: number,
     userId: string
@@ -21,6 +22,7 @@ export type IResponse = {
     stepId: number,
     language: string
   ) => Promise<CreateCodeResponseType>;
+  deleteCode: (id: string) => Promise<void>;
   testCode: (codeId: string) => Promise<TestCodeResponseType>;
 };
 
@@ -135,6 +137,7 @@ export const isPlayerState = (instance: any): instance is PlayerState => {
 export const useCodeAPI = (): IResponse => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
+
   /**
    * codeIdからコードを取得する
    * @param {string} codeId コードID
@@ -158,6 +161,40 @@ export const useCodeAPI = (): IResponse => {
         .catch((error: AxiosError) => {
           setLoading(false);
           return rejects(new Error(`updateCodeError${error}`));
+        });
+    });
+  };
+
+  /**
+   * ユーザIDを満たすコードを取得する. updated_atでソートする
+   * @param {string} userId ユーザID
+   */
+  const getCodesFilterUserId = async (
+    userId: string
+  ): Promise<GetCodesResponseType> => {
+    return new Promise((resolve, rejects) => {
+      setError(undefined);
+      setLoading(true);
+      axiosWithIdToken
+        .get(`/codes`, {
+          params: {
+            user: userId,
+            order_by: "updated_at",
+          },
+        })
+        .then((response: AxiosResponse<GetCodesResponseType>) => {
+          if (!isGetCodesResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of GetCodesResponseType"
+            );
+          }
+          setLoading(false);
+          return resolve(response.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(`getCodesFilterUserIdAPIError${err}`);
+          return rejects(new Error(error));
         });
     });
   };
@@ -194,7 +231,7 @@ export const useCodeAPI = (): IResponse => {
         })
         .catch((err) => {
           setLoading(false);
-          setError(`testCodeAPIError${err}`);
+          setError(`getCodesFilterStepIdAndUserIdCodeAPIError${err}`);
           return rejects(new Error(error));
         });
     });
@@ -279,6 +316,33 @@ export const useCodeAPI = (): IResponse => {
   };
 
   /**
+   * コードを削除する
+   * @param {string} codeId コードID
+   */
+  const deleteCode = async (codeId: string): Promise<void> => {
+    return new Promise((resolve, rejects) => {
+      setError(undefined);
+      setLoading(true);
+      axiosWithIdToken
+        .delete(`/codes/${codeId}`)
+        .then((response: AxiosResponse<void>) => {
+          if (!isTestCodeResponseType(response.data)) {
+            throw new Error(
+              "Response data is not instance of DeleteCodeResponseType"
+            );
+          }
+          setLoading(false);
+          return resolve(response.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(`deleteCodeAPIError${err}`);
+          return rejects(new Error(error));
+        });
+    });
+  };
+
+  /**
    * コードを実行する。対戦相手はランダムで選ばれる
    * @param {string} codeId コードID
    */
@@ -310,9 +374,11 @@ export const useCodeAPI = (): IResponse => {
     loading,
     error,
     getCode,
+    getCodesFilterUserId,
     getCodesFilterStepIdAndUserId,
     updateCode,
     createCode,
+    deleteCode,
     testCode,
   };
 };

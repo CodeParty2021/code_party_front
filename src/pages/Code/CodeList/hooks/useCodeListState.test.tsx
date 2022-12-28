@@ -1,12 +1,8 @@
-// hooks/useCounter.spec.ts
-import { renderHook } from "@testing-library/react-hooks";
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
+import { renderHook, act } from "@testing-library/react-hooks";
 import { useSelector } from "react-redux";
 import { LoginUserState } from "services/user/user";
 import { useCodeListState } from "./useCodeListState";
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
-import { uri } from "config";
 import { useNavigate } from "react-router-dom";
 
 jest.mock("react-redux");
@@ -21,7 +17,29 @@ const useNavigateMock = useNavigate as jest.Mock;
 // jest mockの第一引数にモジュールを入れることでモジュールをmockできます
 
 let createCodeMock = jest.fn();
+let deleteCodeMock = jest.fn();
+let getCodesFilterUserIdMock = jest.fn();
 const navigateMock = jest.fn();
+
+const codeSample1 = {
+  id: "sample1",
+  codeContent: "print('hello')",
+  language: "python",
+  updatedAt: "20220303",
+  createdAt: "20220303",
+  user: "teru",
+  step: "1",
+};
+
+const codeSample2 = {
+  id: "sample2",
+  codeContent: "print('hello')",
+  language: "python",
+  updatedAt: "20220303",
+  createdAt: "20220303",
+  user: "teru",
+  step: "1",
+};
 
 describe("useCodeListState", () => {
   beforeEach(() => {
@@ -40,65 +58,61 @@ describe("useCodeListState", () => {
       loading: false,
     });
     useCodeAPIMock.mockReturnValue({
+      getCodesFilterUserId: getCodesFilterUserIdMock,
       createCode: createCodeMock,
+      deleteCode: deleteCodeMock,
     });
     useNavigateMock.mockReturnValue(navigateMock);
+    getCodesFilterUserIdMock.mockReturnValue(
+      new Promise((resolve) => resolve([codeSample1, codeSample2]))
+    );
   });
 
   test("正常系のテスト", async () => {
-    const mock = new MockAdapter(axios);
-    const mockResponseDeta = [
-      {
-        id: "123",
-        codeContent: "print('hello')",
-        language: "python",
-        updatedAt: "20220303",
-        createdAt: "20220303",
-        user: "teru",
-        step: "1",
-      },
-    ];
-    const url = `${uri}/codes`;
-    mock.onGet(url).reply(200, mockResponseDeta); // モックAPIを定義
-
     //実行
     const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
     expect(result.current.codes).toEqual([]);
-
     expect(result.current.error).toEqual(undefined);
+
     await waitForNextUpdate();
-    expect(result.current.codes).toEqual([
-      {
-        id: "123",
-        codeContent: "print('hello')",
-        language: "python",
-        updatedAt: "20220303",
-        createdAt: "20220303",
-        user: "teru",
-        step: "1",
-      },
-    ]);
+    expect(result.current.codes).toEqual([codeSample1, codeSample2]);
     expect(result.current.error).toEqual(undefined);
     expect(result.current.loading).toEqual(false);
   });
-  test("newCOdeButtonHandlerのテスト", async () => {
+
+  test("newCodeButtonHandlerのテスト", async () => {
     createCodeMock.mockReturnValue(
       new Promise((resolve) => {
-        return resolve({
-          id: "123",
-          codeContent: "print('hello')",
-          language: "python",
-          updatedAt: "20220303",
-          createdAt: "20220303",
-          user: "teru",
-          step: "1",
-        });
+        return resolve(codeSample1);
       })
     );
     const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
     await waitForNextUpdate();
     const newCodeButtonHandler = result.current.newCodeButtonHandler;
     await newCodeButtonHandler();
-    expect(navigateMock).lastCalledWith("/free-coding/123/codes");
+    expect(navigateMock).lastCalledWith("/free-coding/sample1/codes");
+  });
+
+  test("deleteCodeButtonHandlerのテスト", async () => {
+    deleteCodeMock.mockReturnValue(
+      new Promise((resolve) => {
+        return resolve(undefined);
+      })
+    );
+
+    const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
+
+    await waitForNextUpdate();
+
+    expect(result.current.codes).toEqual([codeSample1, codeSample2]);
+    const deleteHandler = result.current.deleteHandler;
+
+    act(() => {
+      deleteHandler("sample2");
+    });
+
+    await waitForNextUpdate();
+
+    expect(result.current.codes).toEqual([codeSample1]); // #削除したのでからになる
   });
 });

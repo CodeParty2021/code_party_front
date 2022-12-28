@@ -125,15 +125,7 @@ Array [
               component={[Function]}
             />
           }
-          path="/free-coding"
-        />
-        <Route
-          element={
-            <PrivateRoute
-              component={[Function]}
-            />
-          }
-          path="/free-coding/:codeId"
+          path="/free-coding/:codeId/:beforePage"
         />
         <Route
           element={

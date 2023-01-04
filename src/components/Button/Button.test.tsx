@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import "jest-styled-components";
 import { render, shallow } from "enzyme";
+import { Times } from "components/icons";
 
 describe("<Button />", () => {
   it("snapshot test", () => {
@@ -31,6 +32,21 @@ describe("<Button />", () => {
   it("render test green L", () => {
     expect(
       render(<Button color="green" size="L" status="default" value="テスト" />)
+    ).toBeTruthy();
+  });
+
+  it("render test white S icon", () => {
+    expect(
+      render(
+        <Button
+          color="white"
+          size="S"
+          status="default"
+          value="テスト"
+          icon="left"
+          Icon={Times}
+        />
+      )
     ).toBeTruthy();
   });
 

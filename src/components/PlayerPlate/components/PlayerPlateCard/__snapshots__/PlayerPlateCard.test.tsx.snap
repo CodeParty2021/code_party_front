@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PlayerPlateCard /> snapshot test 1`] = `
+.c2 .algo_color_main {
+  fill: #34C5D5;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 32px;
+  gap: 16px;
+  position: relative;
+  border-radius: 48px;
+  background-color: #FAFAFA;
+  width: 320px;
+  height: 408px;
+}
+
+.c0 .playerplatecard_playericon {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.c0 .playerplatecard_window {
+  position: relative;
+  border-radius: 24px;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.c0 .playerplatecard_window .c1 {
+  position: absolute;
+  bottom: -48px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.c0 .playerplatecard_column_top,
+.c0 .playerplatecard_column_middle,
+.c0 .playerplatecard_column_bottom {
+  width: 100%;
+}
+
+.c0 .playerplatecard_column_top,
+.c0 .playerplatecard_column_middle {
+  border-bottom: 1px solid #D7DAE4;
+}
+
+.c0 .playerplatecard_border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border: 1px solid #D7DAE4;
+  border-radius: 48px;
+}
+
+.c0 .playerplatecard_window {
+  background-color: #A7ECF1;
+}
+
+.c0 .playerplatecard_border {
+  border-color: #34C5D5;
+}
+
+.c0 .playerplatecard_border {
+  border-color: #D7DAE4;
+}
+
+@supports not (gap:16px) {
+  .c0 > *:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+<div
+  class="c0"
+  color="turquoise"
+>
+  <div
+    class="playerplatecard_window"
+  >
+    <div
+      class="c1 c2"
+      color="turquoise"
+    />
+  </div>
+  <div
+    class="playerplatecard_column_top"
+  >
+    top
+  </div>
+  <div
+    class="playerplatecard_column_middle"
+  >
+    middle
+  </div>
+  <div
+    class="playerplatecard_column_bottom"
+  >
+    bottom
+  </div>
+  <div
+    class="playerplatecard_playericon"
+  >
+    icon
+  </div>
+  <div
+    class="playerplatecard_border"
+  />
+</div>
+`;

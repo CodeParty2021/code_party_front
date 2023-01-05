@@ -31,7 +31,6 @@ export const SelectMode: React.FC<Props> = () => {
               }
               icon="setting"
               onClick={beginDevelopHandler}
-              disabled={true}
             ></ModeSelectCard>
           </MarginBox>
           <MarginBox>
@@ -45,6 +44,7 @@ export const SelectMode: React.FC<Props> = () => {
                   オンライン対戦することが出来ます。
                 </DescriptionText>
               }
+              disabled={true}
               icon="sword"
               onClick={beginRoomMatchHandler}
             ></ModeSelectCard>

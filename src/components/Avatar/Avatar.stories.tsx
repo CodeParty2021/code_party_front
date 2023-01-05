@@ -41,6 +41,12 @@ Pink.args = {
   color: "pink",
 };
 
+export const Gray = Template.bind({});
+Gray.args = {
+  ...Default.args,
+  color: "gray",
+};
+
 export const HasIcon = Template.bind({});
 HasIcon.args = {
   ...Default.args,

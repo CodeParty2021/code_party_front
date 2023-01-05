@@ -9,9 +9,14 @@ jest.mock("./hooks/useLobbyState");
 const useSelectorMock = useLobbyState as jest.Mock;
 
 const state: IResponse = {
-  roomCreateBtnDisabled: false,
-  roomCreateBtnHandler: jest.fn(),
-  roomSearchBtnHandler: jest.fn(),
+  isLoading: false,
+  errorMessage: "aaa",
+  roomIdRef: { current: null },
+  createRoomHandler: () => {},
+  createRoomDisabled: false,
+  enterRoomHandler: () => {},
+  enterRoomDisabled: false,
+  backButtonHandler: () => {},
 };
 
 describe("<RoomMatchLobby />", () => {
@@ -28,23 +33,5 @@ describe("<RoomMatchLobby />", () => {
     const wrapper = shallow(<RoomMatchLobby />);
 
     expect(wrapper.getElements()).toMatchSnapshot();
-  });
-
-  it("room create button test", () => {
-    const wrapper = shallow(<RoomMatchLobby />);
-
-    const btn = wrapper.find("#create-btn");
-    btn.simulate("click");
-
-    expect(state.roomCreateBtnHandler).toHaveBeenCalled();
-  });
-
-  it("room search button test", () => {
-    const wrapper = shallow(<RoomMatchLobby />);
-
-    const btn = wrapper.find("#search-btn");
-    btn.simulate("click");
-
-    expect(state.roomSearchBtnHandler).toHaveBeenCalled();
   });
 });

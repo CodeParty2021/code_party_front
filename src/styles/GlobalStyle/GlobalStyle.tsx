@@ -11,6 +11,8 @@ export const GlobalStyle = createGlobalStyle<Props>`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: ${FONT_WEIGHT.REGULAR};
+    font-feature-settings: 'palt' on;
+    color: ${global.font};
 
     // Base Color
     background-color: ${global.base};

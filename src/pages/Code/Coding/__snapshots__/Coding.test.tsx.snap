@@ -10,7 +10,7 @@ Array [
       showUnity={true}
     />
     <Styled(Component)
-      to="/event/select-mode"
+      to="/"
     >
       <IconButton
         Icon={[Function]}
@@ -47,21 +47,9 @@ Array [
           />
         </styled.div>
         <Styled(Message)
-          color="red"
-          showInfo={false}
-          title="エラー！"
-          value="スタッフに聞いてみよう"
-        />
-        <Styled(Message)
-          color="red"
-          showInfo={false}
-          title="ヨミコミチュウ！"
-          value="しばらくお待ちください"
-        />
-        <Styled(Message)
           color="blue"
           showInfo={false}
-          title="ローディングチュウ..."
+          title="ヨミコミチュウ！"
           value="しばらくお待ちください"
         />
         <Styled(AlgoEditor)
@@ -75,10 +63,10 @@ Array [
           width="70vw"
         />
         <Styled(Button)
-          color="blue"
+          color="pink"
           onClick={[MockFunction]}
           size="M"
-          value="コード画面に戻る"
+          value="ゲーム画面で確認"
         />
       </styled.div>
       <LogPanel

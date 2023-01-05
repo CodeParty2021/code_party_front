@@ -72,6 +72,7 @@ const initialState: IResponse = {
   //     },
   //   ],
   // },
+  backLinkRoute: "/",
 };
 
 describe("<CodeCoding />", () => {

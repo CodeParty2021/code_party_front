@@ -11,11 +11,18 @@ Array [
       123
        
     </p>
-    <Link
-      to="/free-coding/123"
-    >
-      編集
-    </Link>
+    <div>
+      <Link
+        to="/free-coding/123/codes"
+      >
+        編集
+      </Link>
+      <button
+        onClick={[Function]}
+      >
+        削除
+      </button>
+    </div>
   </styled.div>,
 ]
 `;

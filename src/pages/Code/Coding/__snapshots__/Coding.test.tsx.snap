@@ -10,7 +10,7 @@ Array [
       showUnity={true}
     />
     <Styled(Component)
-      to="/event/select-mode"
+      to="/"
     >
       <IconButton
         Icon={[Function]}

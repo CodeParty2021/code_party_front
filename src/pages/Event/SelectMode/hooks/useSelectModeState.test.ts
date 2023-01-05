@@ -59,7 +59,7 @@ describe("useSelectModeState", () => {
     const { beginTrainHandler } = result.current;
     await beginTrainHandler();
     expect(navigateMock).toBeCalledTimes(1);
-    expect(navigateMock).lastCalledWith("/free-coding/123/");
+    expect(navigateMock).lastCalledWith("/free-coding/123/eventTrain");
   });
   test("該当ステップにユーザのコードが存在していないとき、新しくcodeを生成してそのIDでnavigateする", async () => {
     const apiState = initialUseCodeAPIState;
@@ -79,7 +79,7 @@ describe("useSelectModeState", () => {
     const { beginTrainHandler } = result.current;
     await beginTrainHandler();
     expect(navigateMock).toBeCalledTimes(1);
-    expect(navigateMock).lastCalledWith("/free-coding/123/");
+    expect(navigateMock).lastCalledWith("/free-coding/123/eventTrain");
   });
   test("訓練モードが実行できる", async () => {
     const apiState = initialUseCodeAPIState;

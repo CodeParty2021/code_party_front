@@ -15,7 +15,6 @@ Array [
                 作成する事ができます。
               </DescriptionText>
             }
-            disabled={true}
             icon="setting"
             imageName="walking_lobo"
             onClick={[Function]}
@@ -31,6 +30,7 @@ Array [
                 オンライン対戦することが出来ます。
               </DescriptionText>
             }
+            disabled={true}
             icon="sword"
             imageName="grab_flag_lobo"
             onClick={[Function]}

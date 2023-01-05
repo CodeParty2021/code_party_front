@@ -5,7 +5,12 @@ import { CodeCard } from "./CodeCard";
 describe("<CodeCard />", () => {
   it("auth snapshot test", () => {
     const wrapper = shallow(
-      <CodeCard id={"123"} codeContent={"123"} updatedAt={"123"} />
+      <CodeCard
+        id={"123"}
+        codeContent={"123"}
+        updatedAt={"123"}
+        deleteHandler={() => {}}
+      />
     );
 
     expect(wrapper.getElements()).toMatchSnapshot();

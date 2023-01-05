@@ -34,6 +34,7 @@ import {
   GRAY_100,
   GRAY_20,
   GRAY_30,
+  GRAY_40,
   GRAY_50,
   GRAY_60,
   GRAY_80,
@@ -44,6 +45,7 @@ import {
 export const global = {
   base: GRAY_00,
   main: TURQUOISE_50,
+  font: GRAY_100,
 } as const;
 
 export const button = {
@@ -51,6 +53,7 @@ export const button = {
   black: {
     surface: GRAY_90,
     side: GRAY_100,
+    font: WHITE,
     hover: {
       surface: GRAY_80,
       side: GRAY_90,
@@ -59,18 +62,27 @@ export const button = {
   blue: {
     surface: BLUE_TO_PURPLE,
     side: BLUE_TO_PURPLE_SHADOW,
+    font: WHITE,
   },
   pink: {
     surface: PINK_TO_ORANGE,
     side: PINK_TO_ORANGE_SHADOW,
+    font: WHITE,
   },
   green: {
     surface: GREEN_50,
     side: GREEN_60,
+    font: WHITE,
+  },
+  white: {
+    surface: GRAY_10,
+    side: GRAY_30,
+    font: GRAY_80,
   },
   disabled: {
     surface: GRAY_50,
     side: GRAY_60,
+    font: WHITE,
   },
 } as const;
 
@@ -98,8 +110,11 @@ export const star = {
   pink: RED_40,
   yellow: "#FFC047",
   purple: PURPLE_40,
-  blue: TURQUOISE_50,
+  turquoise: TURQUOISE_50,
   gray: GRAY_30,
+  leaf: LEAF_50,
+  orange: ORANGE_50,
+  magenta: PINK_50,
 } as const;
 
 export const algo = {
@@ -212,6 +227,10 @@ export const avatar = {
     avatar: PINK_40,
     border: PINK_40,
     background: PINK_10,
+  },
+  gray: {
+    border: GRAY_40,
+    background: GRAY_20,
   },
   anonymous: {
     avatar: GRAY_50,

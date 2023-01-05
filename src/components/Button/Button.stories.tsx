@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Button } from "./Button";
+import { Times } from "components/icons";
 
 export default {
   title: "components/Button",
@@ -38,6 +39,15 @@ SmallGreen.args = {
   ...Default.args,
   color: "green",
   size: "S",
+};
+
+export const IconWhite = Template.bind({});
+IconWhite.args = {
+  ...Default.args,
+  color: "white",
+  size: "S",
+  icon: "left",
+  Icon: Times,
 };
 
 export const Disabled = Template.bind({});

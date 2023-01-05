@@ -2,16 +2,31 @@
 
 exports[`<CodeList /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <h1>
-      コード一覧
-    </h1>
-    <div />
-    <button
-      onClick={[Function]}
-    >
-      新しくコードを追加する
-    </button>
-  </div>,
+  <React.Fragment>
+    <Header
+      backButtonHandler={[Function]}
+      backMessage="モード選たくにもどる"
+    />
+    <StarBackground>
+      <styled.div>
+        <styled.div>
+          <styled.div>
+            <SettingIcon />
+            <styled.div>
+              ガレージ
+            </styled.div>
+          </styled.div>
+          <styled.div>
+            ロボットは作成した順番にならんでいます
+          </styled.div>
+          <styled.div>
+            <CreateCodeCard
+              newCodeButtonHandler={[Function]}
+            />
+          </styled.div>
+        </styled.div>
+      </styled.div>
+    </StarBackground>
+  </React.Fragment>,
 ]
 `;

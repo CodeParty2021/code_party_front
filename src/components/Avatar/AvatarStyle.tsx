@@ -3,7 +3,7 @@ import { ReactSVG } from "react-svg";
 import { avatar } from "styles/colors";
 
 export type AvatarStyleProps = {
-  color?: "default" | "turquoise" | "leaf" | "orange" | "pink";
+  color?: "default" | "turquoise" | "leaf" | "orange" | "pink" | "gray";
   type?: "user" | "anonymous" | "robot";
 };
 
@@ -118,6 +118,11 @@ const pinkStyle = css`
   }
 `;
 
+const grayStyle = css`
+  border-color: ${avatar.gray.border};
+  background-color: ${avatar.gray.background};
+`;
+
 const userStyle = css``;
 
 const anonymousStyle = css`
@@ -166,6 +171,8 @@ export const AvatarStyle = styled.div<AvatarStyleProps & PrivateProps>`
   ${({ type }) => type === "user" && userStyle}
   ${({ type }) => type === "anonymous" && anonymousStyle}
   ${({ type }) => type === "robot" && robotStyle}
+
+  ${({ color }) => color === "gray" && grayStyle}
 `;
 
 AvatarStyle.defaultProps = {

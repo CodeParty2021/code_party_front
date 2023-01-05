@@ -25,12 +25,27 @@ Purple.args = {
   color: "purple",
 };
 
-export const Blue = Template.bind({});
-Blue.args = {
-  color: "blue",
+export const Turquoise = Template.bind({});
+Turquoise.args = {
+  color: "turquoise",
 };
 
 export const Gray = Template.bind({});
 Gray.args = {
   color: "gray",
+};
+
+export const Leaf = Template.bind({});
+Leaf.args = {
+  color: "leaf",
+};
+
+export const Orange = Template.bind({});
+Orange.args = {
+  color: "orange",
+};
+
+export const Magenta = Template.bind({});
+Magenta.args = {
+  color: "magenta",
 };

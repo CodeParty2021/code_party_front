@@ -10,7 +10,7 @@ export const useSelectModeState = (): IResponse => {
 
   //該当ステップにユーザのコードが存在していればそれをロードするなければ新しく作ってそれをロードする
   const _beginDevelopHandler = () => {
-    navigate(`/robot-development/top`);
+    navigate(`/codes`);
   };
 
   const _beginRoomMatchHandler = () => {

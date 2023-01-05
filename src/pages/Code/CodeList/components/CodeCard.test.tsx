@@ -10,6 +10,8 @@ describe("<CodeCard />", () => {
         codeContent={"123"}
         updatedAt={"123"}
         deleteHandler={() => {}}
+        editHandler={() => {}}
+        number={1}
       />
     );
 

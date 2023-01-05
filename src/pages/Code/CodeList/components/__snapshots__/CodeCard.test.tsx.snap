@@ -3,26 +3,35 @@
 exports[`<CodeCard /> auth snapshot test 1`] = `
 Array [
   <styled.div>
-    <pre>
+    <styled.div>
+      <styled.div>
+        <Styled(MissionNumber)
+          number={1}
+        />
+        <Styled(Algo) />
+      </styled.div>
+    </styled.div>
+    <styled.div>
       123
-    </pre>
-    <p>
-      UpdatedAt:
-      123
-       
-    </p>
-    <div>
-      <Link
-        to="/free-coding/123/codes"
-      >
-        編集
-      </Link>
-      <button
+    </styled.div>
+    <styled.div>
+      <Button
+        color="blue"
+        icon={null}
         onClick={[Function]}
-      >
-        削除
-      </button>
-    </div>
+        size="S"
+        status="default"
+        value="へんしゅう"
+      />
+      <Button
+        color="pink"
+        icon={null}
+        onClick={[Function]}
+        size="S"
+        status="default"
+        value="さくじょ"
+      />
+    </styled.div>
   </styled.div>,
 ]
 `;

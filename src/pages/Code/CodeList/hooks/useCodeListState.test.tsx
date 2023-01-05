@@ -115,4 +115,25 @@ describe("useCodeListState", () => {
 
     expect(result.current.codes).toEqual([codeSample1]); // #削除したのでからになる
   });
+
+  test("editHandlerのテスト", async () => {
+    createCodeMock.mockReturnValue(
+      new Promise((resolve) => {
+        return resolve(codeSample1);
+      })
+    );
+    const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
+    await waitForNextUpdate();
+    const editHandler = result.current.editHandler;
+    await editHandler("sample1");
+    expect(navigateMock).lastCalledWith("/free-coding/sample1/codes");
+  });
+
+  test("backHandlerのテスト", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useCodeListState());
+    await waitForNextUpdate();
+    const backHandler = result.current.backHandler;
+    await backHandler();
+    expect(navigateMock).lastCalledWith("/select-mode");
+  });
 });

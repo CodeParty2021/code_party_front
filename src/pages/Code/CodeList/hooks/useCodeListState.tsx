@@ -5,7 +5,7 @@ import { RootState } from "store";
 import { isUser } from "services/user/user";
 import { useNavigate } from "react-router-dom";
 import { CodeType, useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
-import { BASIC_INIT_CODE } from "pages/Code/assets/InitCodes";
+import { EVENT1ON1_INIT_CODE } from "pages/Code/assets/InitCodes";
 
 export type IResponse = {
   codes: CodeType[];
@@ -13,9 +13,11 @@ export type IResponse = {
   loading: boolean;
   newCodeButtonHandler: () => void;
   deleteHandler: (id: string) => void;
+  editHandler: (id: string) => void;
+  backHandler: () => void;
 };
 
-const FREE_STEP_ID = 1;
+const FREE_STEP_ID = 2;
 
 export const useCodeListState = (): IResponse => {
   const { user } = useSelector((state: RootState) => state.user);
@@ -42,7 +44,7 @@ export const useCodeListState = (): IResponse => {
   const _newCodeButtonHandler = async () => {
     let codeId: string;
     if (isUser(user)) {
-      const code = await createCode(BASIC_INIT_CODE, FREE_STEP_ID, "1");
+      const code = await createCode(EVENT1ON1_INIT_CODE, FREE_STEP_ID, "1");
       codeId = code.id;
       navigate(`/free-coding/${codeId}/codes`);
     }
@@ -57,11 +59,21 @@ export const useCodeListState = (): IResponse => {
     setLoading(false);
   };
 
+  const backHandler = () => {
+    navigate("/select-mode");
+  };
+
+  const editHandler = (id: string) => {
+    navigate("/free-coding/" + id + "/codes");
+  };
+
   return {
     loading,
     error,
     codes,
     newCodeButtonHandler: _newCodeButtonHandler,
     deleteHandler: _deleteHandler,
+    backHandler: backHandler,
+    editHandler: editHandler,
   };
 };

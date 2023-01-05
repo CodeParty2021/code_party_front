@@ -9,7 +9,7 @@ export const HeaderStyle = styled.div`
   position: fixed;
   top: 0px;
   left: 0px;
-  z-index: 3;
+  z-index: 103;
 `;
 
 export const LogoStyle = styled.img`
@@ -18,7 +18,7 @@ export const LogoStyle = styled.img`
   left: calc(50% - 178px / 2);
   top: 15px;
   position: fixed;
-  z-index: 5;
+  z-index: 105;
 `;
 
 export const HeaderCircleStyle = styled.img`
@@ -27,7 +27,7 @@ export const HeaderCircleStyle = styled.img`
   left: calc(50% - 232px / 2);
   width: 232px;
   height: 42px;
-  z-index: 4;
+  z-index: 104;
 `;
 
 export const BackLinkArea = styled.div`

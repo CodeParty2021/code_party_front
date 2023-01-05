@@ -1,4 +1,5 @@
 export const EVENT1ON1_INIT_CODE = `
+#ロボットの名前
 """
  ロボットは4番の位置にいて、次のターンそれぞれの番号のところにいどうするよ！
      0
@@ -51,6 +52,7 @@ def select(turn_num, field, my_pos, other_pos):
 `;
 
 export const BASIC_INIT_CODE = `
+#ロボットの名前
 """
  ロボットは4番の位置にいて、次のターンそれぞれの番号のところにいどうするよ！
      0

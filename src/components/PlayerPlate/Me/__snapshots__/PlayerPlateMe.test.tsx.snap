@@ -5,15 +5,56 @@ exports[`<PlayerPlateMe /> snapshot test 1`] = `
   display: block;
   width: 54px;
   height: 54px;
+  padding: 1px;
+  position: relative;
+}
+
+.c9 .avatar_main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 2px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #EAEBF1;
+}
+
+.c9 .avatar_main .avatar_img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c9 .avatar_circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   border-radius: 50%;
   border: 3px solid #FFFFFF;
-  background-color: #EAEBF1;
-  background-size: cover;
-  overflow: hidden;
-  position: relative;
-  border-color: #6CDBE5;
+}
+
+.c9 .avatar_main {
   background-color: #ECFDFF;
-  background-image: url(/logo512.png);
+}
+
+.c9 .avatar_circle {
+  border-color: #6CDBE5;
 }
 
 .c7 {
@@ -412,7 +453,20 @@ exports[`<PlayerPlateMe /> snapshot test 1`] = `
       class="c9"
       color="turquoise"
       type="user"
-    />
+    >
+      <div
+        class="avatar_main"
+      >
+        <img
+          alt="ユーザアバター"
+          class="avatar_img"
+          src="/logo512.png"
+        />
+      </div>
+      <div
+        class="avatar_circle"
+      />
+    </div>
   </div>
   <div
     class="playerplatecard_border"

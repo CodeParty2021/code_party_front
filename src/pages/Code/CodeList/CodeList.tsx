@@ -1,5 +1,6 @@
 import { Header } from "components/Header/Header";
 import { StarBackground } from "components/StarBackground/StarBackground";
+import { Loading } from "pages/Loading/Loading";
 import React from "react";
 import {
   Content,
@@ -27,7 +28,11 @@ export const CodeList: React.FC<Props> = () => {
   } = useCodeListState();
 
   if (loading) {
-    return <div>ロード中</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
   return (
     <>

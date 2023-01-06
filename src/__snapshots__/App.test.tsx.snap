@@ -52,6 +52,14 @@ Array [
           path="/start"
         />
         <Route
+          element={<StartEmail />}
+          path="/start-email"
+        />
+        <Route
+          element={<StartEmailFirstTime />}
+          path="/start-email-first-time"
+        />
+        <Route
           element={<SelectMode />}
           path="/select-mode"
         />
@@ -88,11 +96,7 @@ Array [
           path="/room-match"
         />
         <Route
-          element={
-            <PrivateRoute
-              component={[Function]}
-            />
-          }
+          element={<RoomMatchInvitation />}
           path="/room-match/invitation/:roomId"
         />
         <Route

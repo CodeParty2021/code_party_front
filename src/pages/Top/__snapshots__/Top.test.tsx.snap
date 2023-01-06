@@ -25,6 +25,14 @@ Array [
             status="default"
             value="ログインしてスタート！"
           />
+          <Button
+            color="black"
+            icon={null}
+            onClick={[Function]}
+            size="S"
+            status="default"
+            value="新しくアカウントを作る"
+          />
         </styled.div>
       </styled.div>
     </styled.div>

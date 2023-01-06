@@ -12,6 +12,8 @@ const initialState: IResponse = {
   FirstLoginBtnHandler: () => {},
   NormalLoginBtnDisabled: false,
   NormalLoginBtnHandler: () => {},
+  CreateUserBtnDisabled: false,
+  CreateUserBtnHandler: () => {},
 };
 
 describe("<Top />", () => {

@@ -31,6 +31,8 @@ import { GameIntro } from "pages/Tutorial/GameIntro/GameIntro";
 import { Loading } from "pages/Loading/Loading";
 import { Close } from "pages/Close/Close";
 import { useAppState } from "hooks/AppHooks/useAppState";
+import { StartEmail } from "pages/StartEmail/StartEmail";
+import { StartEmailFirstTime } from "pages/StartEmailFirstTime/StartEmailFirstTime";
 
 type Props = {};
 
@@ -65,6 +67,11 @@ export const App: React.FC<Props> = () => {
               element={<Specification />}
             />
             <Route path="/start" element={<Start />} />
+            <Route path="/start-email" element={<StartEmail />} />
+            <Route
+              path="/start-email-first-time"
+              element={<StartEmailFirstTime />}
+            />
             <Route path="/select-mode" element={<SelectMode />} />
             <Route
               path="/garage"

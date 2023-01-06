@@ -20,7 +20,6 @@ export const useStartState = (): IResponse => {
   const [loading, setLoading] = useState(true);
   const { signInOfFirebase } = useFirebaseAuth();
   const [algoMessage, setAlgoMessage] = useState("ログイン方法を選んでね");
-
   useEffect(() => {
     dispatch(signOutAsync());
     setLoading(false);
@@ -28,6 +27,9 @@ export const useStartState = (): IResponse => {
 
   const signInButtonsHandler = (accountService: AccountServiceType): void => {
     setLoading(true);
+    if (accountService === "email") {
+      navigate("/start-email");
+    }
     signInOfFirebase({
       accountService,
       signInSuccessUrl: "/select-mode",

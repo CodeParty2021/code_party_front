@@ -1,5 +1,5 @@
 import { BackLink } from "components/BackLink/BackLink";
-import { Google, Facebook, Mail, Twitter } from "components/icons";
+import { Google, Mail } from "components/icons";
 import { StarBackground } from "components/StarBackground/StarBackground";
 import { AccountServiceType } from "hooks/FirebaseAuthHooks/useFirebaseAuthHooks";
 import { Loading } from "pages/Loading/Loading";
@@ -31,8 +31,6 @@ export const Start: React.FC = () => {
     useStartState();
   const buttonServices: Array<ButtonServiceType> = [
     { service: "google", Icon: Google, text: "Googleでログイン" },
-    { service: "twitter", Icon: Twitter, text: "Twitterでログイン" },
-    { service: "facebook", Icon: Facebook, text: "Facebookでログイン" },
     { service: "email", Icon: Mail, text: "メールアドレスでログイン" },
   ];
 

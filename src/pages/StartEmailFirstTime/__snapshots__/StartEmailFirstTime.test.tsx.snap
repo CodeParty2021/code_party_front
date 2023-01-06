@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Start /> auth snapshot test 1`] = `
+exports[`<StartEmailFirstTime /> auth snapshot test 1`] = `
 Array [
   <StarBackground>
     <styled.div>
@@ -26,30 +26,22 @@ Array [
             ログインしてください
           </styled.div>
         </styled.div>
-        <styled.button
-          onClick={[Function]}
-        >
-          <styled.div>
-            <Google
-              size={24}
-            />
-          </styled.div>
-          <styled.p>
-            Googleでログイン
-          </styled.p>
-        </styled.button>
-        <styled.button
-          onClick={[Function]}
-        >
-          <styled.div>
-            <Mail
-              size={24}
-            />
-          </styled.div>
-          <styled.p>
-            メールアドレスでログイン
-          </styled.p>
-        </styled.button>
+        <styled.input
+          onChange={[MockFunction]}
+          placeholder="メールアドレス"
+          type="email"
+        />
+        <styled.input
+          onChange={[MockFunction]}
+          placeholder="パスワード"
+          type="password"
+        />
+        <Button
+          color="pink"
+          onClick={[MockFunction]}
+          status="default"
+          value="けってい"
+        />
         <styled.div />
       </styled.div>
     </styled.div>

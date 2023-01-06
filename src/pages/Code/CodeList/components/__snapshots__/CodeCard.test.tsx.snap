@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CodeCard /> auth snapshot test 1`] = `
+Array [
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        <Styled(MissionNumber)
+          number={1}
+        />
+        <Styled(Algo) />
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      123
+    </styled.div>
+    <styled.div>
+      <Button
+        color="blue"
+        icon={null}
+        onClick={[Function]}
+        size="S"
+        status="default"
+        value="へんしゅう"
+      />
+      <Button
+        color="pink"
+        icon={null}
+        onClick={[Function]}
+        size="S"
+        status="default"
+        value="さくじょ"
+      />
+    </styled.div>
+  </styled.div>,
+]
+`;

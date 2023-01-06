@@ -1,61 +1,58 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Start /> anonymousLogin: false, firebaseLogin: false 1`] = `
+exports[`<Start /> auth snapshot test 1`] = `
 Array [
-  <div>
-    <div>
-      これはスタート画面です。
-    </div>
-    <PlanetPicture
-      color="blue"
-      size="161px"
-    />
-  </div>,
-]
-`;
-
-exports[`<Start /> anonymousLogin: false, firebaseLogin: true 1`] = `
-Array [
-  <div>
-    <div>
-      これはスタート画面です。
-    </div>
-    <PlanetPicture
-      color="blue"
-      size="161px"
-    />
-    <FirebaseLoginForm />
-  </div>,
-]
-`;
-
-exports[`<Start /> anonymousLogin: true, firebaseLogin: false 1`] = `
-Array [
-  <div>
-    <div>
-      これはスタート画面です。
-    </div>
-    <PlanetPicture
-      color="blue"
-      size="161px"
-    />
-    <AnonymousLoginForm />
-  </div>,
-]
-`;
-
-exports[`<Start /> anonymousLogin: true, firebaseLogin: true 1`] = `
-Array [
-  <div>
-    <div>
-      これはスタート画面です。
-    </div>
-    <PlanetPicture
-      color="blue"
-      size="161px"
-    />
-    <AnonymousLoginForm />
-    <FirebaseLoginForm />
-  </div>,
+  <StarBackground>
+    <styled.div>
+      <BackLink
+        backMessage="トップに戻る"
+        iconColor="black"
+        onClick={[MockFunction]}
+      />
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <styled.div>
+          <span>
+            ログインして遊ぶ
+          </span>
+        </styled.div>
+        <styled.div>
+          <Styled(AlgoHead) />
+          <Styled(ReactSVG)
+            src="/img/balloon.svg"
+          />
+          <styled.div>
+            ログインしてください
+          </styled.div>
+        </styled.div>
+        <styled.button
+          onClick={[Function]}
+        >
+          <styled.div>
+            <Google
+              size={24}
+            />
+          </styled.div>
+          <styled.p>
+            Googleでログイン
+          </styled.p>
+        </styled.button>
+        <styled.button
+          onClick={[Function]}
+        >
+          <styled.div>
+            <Mail
+              size={24}
+            />
+          </styled.div>
+          <styled.p>
+            メールアドレスでログイン
+          </styled.p>
+        </styled.button>
+        <styled.div />
+      </styled.div>
+    </styled.div>
+  </StarBackground>,
 ]
 `;

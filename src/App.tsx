@@ -7,13 +7,11 @@ import { Start } from "./pages/Start/Start";
 import { Lp } from "./pages/Lp/Lp";
 import { RobotDevelopmentTop } from "./pages/RobotDevelopment/Top/Top";
 import { Specification } from "pages/RobotDevelopment/Specification/Specification";
-import { OnlineMatch } from "pages/OnlineMatch/OnlineMatch";
 import { Garage } from "pages/Garage/Garage";
 import { GarageList } from "pages/Garage/GarageList";
 import { SelectMode } from "pages/SelectMode/SelectMode";
 import { RoomMatchLobby } from "pages/RoomMatch/Lobby/Lobby";
 import { RoomMatchWaitingRoom } from "pages/RoomMatch/WaitingRoom/WaitingRoom";
-import { RoomMatchSearchRoom } from "pages/RoomMatch/SearchRoom/SearchRoom";
 import { RoomMatchGameWatch } from "pages/RoomMatch/GameWatch/GameWatch";
 import { RoomMatchPickCode } from "pages/RoomMatch/PickCode/PickCode";
 import { SetName } from "pages/SetName/SetName";
@@ -33,6 +31,8 @@ import { GameIntro } from "pages/Tutorial/GameIntro/GameIntro";
 import { Loading } from "pages/Loading/Loading";
 import { Close } from "pages/Close/Close";
 import { useAppState } from "hooks/AppHooks/useAppState";
+import { StartEmail } from "pages/StartEmail/StartEmail";
+import { StartEmailFirstTime } from "pages/StartEmailFirstTime/StartEmailFirstTime";
 
 type Props = {};
 
@@ -67,6 +67,11 @@ export const App: React.FC<Props> = () => {
               element={<Specification />}
             />
             <Route path="/start" element={<Start />} />
+            <Route path="/start-email" element={<StartEmail />} />
+            <Route
+              path="/start-email-first-time"
+              element={<StartEmailFirstTime />}
+            />
             <Route path="/select-mode" element={<SelectMode />} />
             <Route
               path="/garage"
@@ -75,10 +80,6 @@ export const App: React.FC<Props> = () => {
             <Route
               path="/garage/:id"
               element={<PrivateRoute component={Garage} />}
-            />
-            <Route
-              path="/online-match"
-              element={<PrivateRoute component={OnlineMatch} />}
             />
             <Route
               path="/room-match/waiting-room"
@@ -90,11 +91,7 @@ export const App: React.FC<Props> = () => {
             />
             <Route
               path="/room-match/invitation/:roomId"
-              element={<PrivateRoute component={RoomMatchInvitation} />}
-            />
-            <Route
-              path="/room-match/search-room"
-              element={<PrivateRoute component={RoomMatchSearchRoom} />}
+              element={<RoomMatchInvitation />}
             />
             <Route
               path="/room-match/result"
@@ -109,11 +106,7 @@ export const App: React.FC<Props> = () => {
               element={<PrivateRoute component={CodeList} />}
             />
             <Route
-              path="/free-coding"
-              element={<PrivateRoute component={CodeCoding} />}
-            />
-            <Route
-              path="/free-coding/:codeId"
+              path="/free-coding/:codeId/:beforePage"
               element={<PrivateRoute component={CodeCoding} />}
             />
             <Route

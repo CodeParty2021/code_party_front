@@ -1,14 +1,17 @@
-import React from "react";
-import { ButtonStyle, ButtonStyleProps } from "./ButtonStyle";
+import React, { ComponentType } from "react";
+import { Icon16 } from "types/utils";
+import { ButtonStyle, ButtonStyleProps, IconProps } from "./ButtonStyle";
 
 type Props = ButtonStyleProps & {
   icon?: "right" | "left" | null;
+  Icon?: ComponentType<Icon16>;
   value?: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Button: React.FC<Props> = ({
   icon,
+  Icon,
   value,
   onClick,
   ...styleProps
@@ -20,9 +23,9 @@ export const Button: React.FC<Props> = ({
       {...styleProps}
     >
       <div className="frame">
-        {icon == "left" && <div>icon</div>}
+        {icon == "left" && Icon && <Icon {...IconProps(styleProps)} />}
         <span>{value}</span>
-        {icon == "right" && <div>icon</div>}
+        {icon == "right" && Icon && <Icon {...IconProps(styleProps)} />}
       </div>
     </ButtonStyle>
   );

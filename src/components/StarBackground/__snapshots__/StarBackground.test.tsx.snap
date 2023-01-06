@@ -117,48 +117,64 @@ exports[`<StarBackground /> snapshot test 1`] = `
   <svg
     class="c1 c2"
     color="purple"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c1 c3"
     color="purple"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c4 c5"
     color="yellow"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c4 c6"
     color="yellow"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c7 c8"
     color="pink"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c1 c9"
     color="purple"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c10 c11"
-    color="blue"
+    color="turquoise"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />
   <svg
     class="c7 c12"
     color="pink"
+    height="38px"
+    width="38px"
     xlink="http://www.w3.org/1999/xlink"
     xmlns="http://www.w3.org/2000/svg"
   />

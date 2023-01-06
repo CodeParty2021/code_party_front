@@ -2,9 +2,10 @@ import styled, { css } from "styled-components";
 import { button } from "styles/colors";
 import { FONT_WEIGHT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
+import { Icon16 } from "types/utils";
 
 export type ButtonStyleProps = {
-  color?: "black" | "blue" | "pink" | "green";
+  color?: "black" | "blue" | "pink" | "green" | "white";
   size?: "S" | "M" | "L";
   status?: "default" | "disabled";
 };
@@ -63,6 +64,15 @@ const greenStyle = css`
   }
 `;
 
+const whiteStyle = css`
+  background: ${button.white.side};
+  color: ${button.white.font};
+  .frame {
+    border: 1px solid ${button.white.side};
+    background: ${button.white.surface};
+  }
+`;
+
 const sStyle = css`
   border-radius: 8px;
   padding-bottom: 4px;
@@ -101,8 +111,10 @@ const lStyle = css`
 
 const disabledStyle = css`
   background: ${button.disabled.side};
+  color: ${button.font};
   .frame {
     background: ${button.disabled.surface};
+    border: none;
     & > * {
       opacity: 0.2;
     }
@@ -122,6 +134,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   ${({ color }) => color == "blue" && blueStyle}
   ${({ color }) => color == "pink" && pinkStyle}
   ${({ color }) => color == "green" && greenStyle}
+  ${({ color }) => color == "white" && whiteStyle}
 
   ${({ size }) => size == "S" && sStyle}
   ${({ size }) => size == "M" && mStyle}
@@ -134,4 +147,26 @@ ButtonStyle.defaultProps = {
   color: "black",
   size: "M",
   status: "default",
+};
+
+export const IconProps = ({ color, status }: ButtonStyleProps): Icon16 => {
+  const fill =
+    status === "disabled"
+      ? button.black.font
+      : color === "black"
+      ? button.black.font
+      : color === "blue"
+      ? button.blue.font
+      : color === "pink"
+      ? button.pink.font
+      : color === "green"
+      ? button.green.font
+      : color === "white"
+      ? button.white.font
+      : button.black.font;
+
+  return {
+    size: 16,
+    fill: fill,
+  };
 };

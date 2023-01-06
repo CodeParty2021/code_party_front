@@ -39,4 +39,8 @@ describe("<Avatar />", () => {
   it("render test robot", () => {
     expect(render(<Avatar type="robot" />)).toBeTruthy();
   });
+
+  it("render test user gray", () => {
+    expect(render(<Avatar type="user" color="gray" />)).toBeTruthy();
+  });
 });

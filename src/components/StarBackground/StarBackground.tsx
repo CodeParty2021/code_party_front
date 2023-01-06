@@ -28,7 +28,7 @@ export const StarBackground: React.FC<Props> = ({
         <Star4 color="yellow" />
         <Star5 color="pink" />
         <Star6 color="purple" />
-        <Star7 color="blue" />
+        <Star7 color="turquoise" />
         <Star8 color="pink" />
       </StarBackgroundStyle>
     </>

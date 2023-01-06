@@ -1,5 +1,5 @@
 import { useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
-import { EVENT1ON1_INIT_CODE } from "pages/Event/assets/InitCodes";
+import { EVENT1ON1_INIT_CODE } from "pages/Code/assets/InitCodes";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { isUser } from "services/user/user";
@@ -39,7 +39,7 @@ export const useSelectModeState = (): IResponse => {
         codeId = code.id;
       }
 
-      navigate(`/free-coding/${codeId}/`);
+      navigate(`/free-coding/${codeId}/eventTrain`);
     }
   };
 

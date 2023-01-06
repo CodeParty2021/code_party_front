@@ -15,7 +15,7 @@ describe("useSelectModeState", () => {
   test("beginDevelopHandler", () => {
     const { result } = renderHook(() => useSelectModeState());
     result.current.beginDevelopHandler();
-    expect(navigateMock).toHaveBeenCalledWith("/robot-development/top");
+    expect(navigateMock).toHaveBeenCalledWith("/codes");
   });
   test("beginRoomMatchHandler", () => {
     const { result } = renderHook(() => useSelectModeState());

@@ -5,7 +5,8 @@ Array [
   <div
     style={
       Object {
-        "marginBottom": "50px",
+        "position": "absolute",
+        "top": "100%",
       }
     }
   >
@@ -120,13 +121,6 @@ Array [
           to="/room-match/waiting-room"
         >
           待機招待画面
-        </Link>
-      </li>
-      <li>
-        <Link
-          to="/room-match/search-room"
-        >
-          ルーム参加画面
         </Link>
       </li>
       <li>

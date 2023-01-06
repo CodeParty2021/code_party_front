@@ -27,7 +27,6 @@ describe("<SetName />", () => {
 
   it("auth snapshot test", () => {
     const wrapper = shallow(<SetName />);
-
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

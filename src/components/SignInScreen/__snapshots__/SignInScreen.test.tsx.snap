@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<SignInScreen /> dispatches add stage action 1`] = `
-Array [
-  null,
-]
-`;

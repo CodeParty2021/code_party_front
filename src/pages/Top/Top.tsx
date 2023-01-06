@@ -12,6 +12,8 @@ export const Top: React.FC<Prop> = () => {
     FirstLoginBtnHandler,
     NormalLoginBtnDisabled,
     NormalLoginBtnHandler,
+    CreateUserBtnDisabled,
+    CreateUserBtnHandler,
   } = useTopState();
   return (
     <>
@@ -34,6 +36,15 @@ export const Top: React.FC<Prop> = () => {
               size="M"
               status={NormalLoginBtnDisabled ? "disabled" : "default"}
               value="ログインしてスタート！"
+            />
+
+            <Button
+              color="black"
+              icon={null}
+              onClick={CreateUserBtnHandler}
+              size="S"
+              status={CreateUserBtnDisabled ? "disabled" : "default"}
+              value="新しくアカウントを作る"
             />
           </ButtonBox>
         </CenterBox>

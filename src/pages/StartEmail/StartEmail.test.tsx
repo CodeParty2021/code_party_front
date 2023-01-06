@@ -1,20 +1,25 @@
 import React from "react";
-import { IResponse, useStartState } from "./hooks/useStartState";
+import { IResponse, useStartState } from "./hooks/useStartEmailState";
 import { shallow } from "enzyme";
-import { Start } from "./Start";
+import { StartEmail } from "./StartEmail";
 
-jest.mock("./hooks/useStartState");
+jest.mock("./hooks/useStartEmailState");
 
 const useStartStateMock = useStartState as jest.Mock;
 
 const initialState: IResponse = {
   loading: false,
   algoMessage: "ログインしてください",
-  signInButtonsHandler: jest.fn(),
+  emailRef: { current: null },
+  passwordRef: { current: null },
+  emailChangeHandler: jest.fn(),
+  passwordChangeHandler: jest.fn(),
+  startBtnHandler: jest.fn(),
+  btnDisabled: false,
   backLinkButtonHandler: jest.fn(),
 };
 
-describe("<Start />", () => {
+describe("<StartEmailFirstTime />", () => {
   beforeEach(() => {
     useStartStateMock.mockReturnValue({ ...initialState });
   });
@@ -22,7 +27,7 @@ describe("<Start />", () => {
     jest.resetAllMocks();
   });
   it("auth snapshot test", () => {
-    const wrapper = shallow(<Start />);
+    const wrapper = shallow(<StartEmail />);
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 });

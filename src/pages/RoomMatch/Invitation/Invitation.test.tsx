@@ -38,5 +38,4 @@ describe("<RoomMatchInvitation />", () => {
     const wrapper = shallow(<RoomMatchInvitation />);
     expect(wrapper.getElements()).toMatchSnapshot();
   });
-
 });

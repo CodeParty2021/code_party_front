@@ -25,3 +25,53 @@ export const ButtonText = styled.p`
   font-weight: 700;
   color: ${GRAY_80};
 `;
+
+export const Modal = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+  z-index: 51;
+  background: #ffffff;
+
+  box-shadow: 0px 4px 16px -2px rgba(40, 45, 62, 0.1);
+  border-radius: 32px;
+  padding: 32px 40px 32px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 1200px;
+`;
+
+export const Description = styled.div`
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  /* identical to box height */
+
+  font-feature-settings: "palt" on;
+
+  /* GRAY_90 */
+
+  color: #363e59;
+`;
+export const Title = styled.div`
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
+  /* identical to box height */
+
+  font-feature-settings: "palt" on;
+
+  /* GRAY_90 */
+
+  color: #363e59;
+
+  transform: matrix(1, 0, -0.08, 1, 0, 0);
+`;

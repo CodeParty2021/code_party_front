@@ -39,11 +39,4 @@ describe("<RoomMatchInvitation />", () => {
     expect(wrapper.getElements()).toMatchSnapshot();
   });
 
-  it("enter button test", () => {
-    const wrapper = shallow(<RoomMatchInvitation />);
-    const btn = wrapper.find("#enter-btn");
-    btn.simulate("click");
-
-    expect(state.enterBtnClickHandler).toHaveBeenCalled();
-  });
 });

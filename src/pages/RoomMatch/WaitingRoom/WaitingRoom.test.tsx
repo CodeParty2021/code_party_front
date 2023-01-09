@@ -7,7 +7,15 @@ import { IResponse, useWaitingRoomState } from "./hooks/useWaitingRoomState";
 jest.mock("./hooks/useWaitingRoomState");
 
 const useSelectorMock = useWaitingRoomState as jest.Mock;
-
+const code1 = {
+  id: "hostCodeId1",
+  codeContent: "print('hello world)'",
+  createdAt: "2022-02-16T05:05:46.315585+09:00",
+  updatedAt: "2022-02-16T06:33:00.058575+09:00",
+  language: "1",
+  step: "3",
+  user: "host user id",
+};
 const state: IResponse = {
   user: {
     id: "user-id-2",
@@ -77,15 +85,7 @@ const state: IResponse = {
   kickUserHandler: jest.fn(),
   code: {
     codes: [
-      {
-        id: "hostCodeId1",
-        codeContent: "print('hello world)'",
-        createdAt: "2022-02-16T05:05:46.315585+09:00",
-        updatedAt: "2022-02-16T06:33:00.058575+09:00",
-        language: "1",
-        step: "3",
-        user: "host user id",
-      },
+      code1,
       {
         id: "hostCodeId2",
         codeContent: "alert('hello world)'",
@@ -98,8 +98,11 @@ const state: IResponse = {
     ],
     loading: false,
   },
-  selectedCodeId: "codeId1",
-  onChangeSelectedCodeId: jest.fn(),
+  selectedCode: code1,
+  onChangeSelectedCode: jest.fn(),
+  showCodeSelectModal: false,
+  openCodeSelectModal: () => {},
+  closeCodeSelectModal: () => {},
 };
 
 describe("<RoomMatchWaitingRoom />", () => {
@@ -162,8 +165,8 @@ describe("<RoomMatchWaitingRoom />", () => {
         value: "selectedCodeId",
       },
     });
-    expect(state.onChangeSelectedCodeId).toBeCalledTimes(1);
-    expect(state.onChangeSelectedCodeId).lastCalledWith("selectedCodeId");
+    expect(state.onChangeSelectedCode).toBeCalledTimes(1);
+    expect(state.onChangeSelectedCode).lastCalledWith("selectedCode");
   });
 
   it("copy button test", () => {

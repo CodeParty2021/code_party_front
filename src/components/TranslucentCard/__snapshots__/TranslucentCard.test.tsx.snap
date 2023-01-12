@@ -183,6 +183,9 @@ exports[`<TranslucentCard /> snapshot test 1`] = `
         algoMessage
       </div>
     </div>
+    <div>
+      children
+    </div>
     <div
       class="c8"
     />

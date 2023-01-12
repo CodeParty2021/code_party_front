@@ -1,21 +1,11 @@
 import { BackLink } from "components/BackLink/BackLink";
 import { Button } from "components/Button/Button";
 import { StarBackground } from "components/StarBackground/StarBackground";
+import { TranslucentCard } from "components/TranslucentCard/TranslucentCard";
 import { Loading } from "pages/Loading/Loading";
-import { BackgroundBlur } from "pages/SetName/SetNameStyle";
 import React from "react";
 import { useStartState } from "./hooks/useStartEmailState";
-import {
-  AlgoBox,
-  AlgoHeadMini,
-  BackLinkPosition,
-  Balloon,
-  Message,
-  ModalTitle,
-  SetNameModal,
-  SetNameStyle,
-  TextInput,
-} from "./StartEmailstyle";
+import { BackLinkPosition, TextInput } from "./StartEmailStyle";
 
 export const StartEmail: React.FC = () => {
   const {
@@ -40,39 +30,27 @@ export const StartEmail: React.FC = () => {
           iconColor="black"
         />
       </BackLinkPosition>
-      <SetNameStyle>
-        <SetNameModal>
-          <ModalTitle>
-            <span>ログインして遊ぶ</span>
-          </ModalTitle>
-          <AlgoBox>
-            <AlgoHeadMini />
-            <Balloon src="/img/balloon.svg" />
-            <Message>{algoMessage}</Message>
-          </AlgoBox>
-
-          <TextInput
-            ref={emailRef}
-            type="email"
-            onChange={emailChangeHandler}
-            placeholder="メールアドレス"
-          ></TextInput>
-
-          <TextInput
-            ref={passwordRef}
-            type="password"
-            onChange={passwordChangeHandler}
-            placeholder="パスワード"
-          ></TextInput>
-          <Button
-            onClick={startBtnHandler}
-            color="pink"
-            value="けってい"
-            status={btnDisabled ? "disabled" : "default"}
-          />
-          <BackgroundBlur />
-        </SetNameModal>
-      </SetNameStyle>
+      <TranslucentCard modalTitle="ログインして遊ぶ" algoMessage={algoMessage}>
+        <TextInput
+          ref={emailRef}
+          type="email"
+          onChange={emailChangeHandler}
+          placeholder="メールアドレス"
+        ></TextInput>
+        <TextInput
+          ref={passwordRef}
+          type="password"
+          onChange={passwordChangeHandler}
+          placeholder="パスワード"
+        ></TextInput>
+        <Button
+          onClick={startBtnHandler}
+          color="pink"
+          size="M"
+          value="ログイン"
+          status={btnDisabled ? "disabled" : "default"}
+        />
+      </TranslucentCard>
     </StarBackground>
   );
 };

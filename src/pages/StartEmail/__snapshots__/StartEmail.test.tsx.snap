@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<StartEmailFirstTime /> auth snapshot test 1`] = `
+exports[`<StartEmail /> auth snapshot test 1`] = `
 Array [
   <StarBackground>
     <styled.div>
@@ -10,41 +10,28 @@ Array [
         onClick={[MockFunction]}
       />
     </styled.div>
-    <styled.div>
-      <styled.div>
-        <styled.div>
-          <span>
-            ログインして遊ぶ
-          </span>
-        </styled.div>
-        <styled.div>
-          <Styled(AlgoHead) />
-          <Styled(ReactSVG)
-            src="/img/balloon.svg"
-          />
-          <styled.div>
-            ログインしてください
-          </styled.div>
-        </styled.div>
-        <styled.input
-          onChange={[MockFunction]}
-          placeholder="メールアドレス"
-          type="email"
-        />
-        <styled.input
-          onChange={[MockFunction]}
-          placeholder="パスワード"
-          type="password"
-        />
-        <Button
-          color="pink"
-          onClick={[MockFunction]}
-          status="default"
-          value="けってい"
-        />
-        <styled.div />
-      </styled.div>
-    </styled.div>
+    <TranslucentCard
+      algoMessage="ログインしてください"
+      modalTitle="ログインして遊ぶ"
+    >
+      <styled.input
+        onChange={[MockFunction]}
+        placeholder="メールアドレス"
+        type="email"
+      />
+      <styled.input
+        onChange={[MockFunction]}
+        placeholder="パスワード"
+        type="password"
+      />
+      <Button
+        color="pink"
+        onClick={[MockFunction]}
+        size="M"
+        status="default"
+        value="ログイン"
+      />
+    </TranslucentCard>
   </StarBackground>,
 ]
 `;

@@ -23,7 +23,7 @@ Array [
             onClick={[Function]}
             size="M"
             status="default"
-            value="ログインしてスタート！"
+            value="ログインして遊ぶ！"
           />
           <Button
             color="black"

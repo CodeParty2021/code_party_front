@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { GRAY_80, WHITE } from "styles/colors";
 import { FONT } from "styles/constants/constants";
 
-export const SetNameStyle = styled.div`
+export const ModalPosition = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,17 +13,18 @@ export const SetNameStyle = styled.div`
   min-height: 540px;
 `;
 
-export const SetNameModal = styled.div`
+export const ModalStyle = styled.div`
   position: relative;
   width: 984px;
-  height: 532px;
+  min-height: 532px;
   border: 8px solid ${WHITE};
   border-radius: 32px;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
+  padding: 0 32px;
 `;
 
 export const SignInButton = styled.button`
@@ -129,21 +130,16 @@ export const BackLinkPosition = styled.div`
   left: 32px;
 `;
 
-export const TextInput = styled.input`
-  width: 453px;
-  height: 64px;
-
-  background: ${WHITE};
-  border-radius: 8px;
-
-  font-family: ${FONT.NOTO_SANS};
-  font-style: normal;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 150%;
-
-  text-align: center;
-
-  color: #2a2c33;
-  margin-bottom: 48px;
+// 背景色にmix-blend-modeを適用するために重ねている。
+// setnamemodal自体に適用するとその子コンポーネントすべてが透過される。
+export const BackgroundBlur = styled.div`
+  position: absolute;
+  width: 984px;
+  height: 532px;
+  background: linear-gradient(239.43deg, #f5f5f5 0.81%, #f7f4ff 100%);
+  mix-blend-mode: multiply;
+  border: 8px solid ${WHITE};
+  backdrop-filter: blur(4px);
+  border-radius: 32px;
+  z-index: -1;
 `;

@@ -1,21 +1,15 @@
 import { BackLink } from "components/BackLink/BackLink";
 import { Button } from "components/Button/Button";
 import { StarBackground } from "components/StarBackground/StarBackground";
+import { TranslucentCard } from "components/TranslucentCard/TranslucentCard";
 import { Loading } from "pages/Loading/Loading";
-import { BackgroundBlur } from "pages/SetName/SetNameStyle";
 import React from "react";
-import { useStartState } from "./hooks/useStartEmailState";
+import { useStartEmailState } from "./hooks/useStartEmailState";
 import {
-  AlgoBox,
-  AlgoHeadMini,
   BackLinkPosition,
-  Balloon,
-  Message,
-  ModalTitle,
-  SetNameModal,
   SetNameStyle,
   TextInput,
-} from "./StartEmailstyle";
+} from "./StartEmailFirstTimeStyle";
 
 export const StartEmailFirstTime: React.FC = () => {
   const {
@@ -28,7 +22,7 @@ export const StartEmailFirstTime: React.FC = () => {
     startBtnHandler,
     backLinkButtonHandler,
     btnDisabled,
-  } = useStartState();
+  } = useStartEmailState();
   return loading ? (
     <Loading />
   ) : (
@@ -41,16 +35,10 @@ export const StartEmailFirstTime: React.FC = () => {
         />
       </BackLinkPosition>
       <SetNameStyle>
-        <SetNameModal>
-          <ModalTitle>
-            <span>ログインして遊ぶ</span>
-          </ModalTitle>
-          <AlgoBox>
-            <AlgoHeadMini />
-            <Balloon src="/img/balloon.svg" />
-            <Message>{algoMessage}</Message>
-          </AlgoBox>
-
+        <TranslucentCard
+          algoMessage={algoMessage}
+          modalTitle="アカウントを作る"
+        >
           <TextInput
             ref={emailRef}
             type="email"
@@ -67,11 +55,11 @@ export const StartEmailFirstTime: React.FC = () => {
           <Button
             onClick={startBtnHandler}
             color="pink"
-            value="けってい"
+            value="アカウントを作る"
+            size="M"
             status={btnDisabled ? "disabled" : "default"}
           />
-          <BackgroundBlur />
-        </SetNameModal>
+        </TranslucentCard>
       </SetNameStyle>
     </StarBackground>
   );

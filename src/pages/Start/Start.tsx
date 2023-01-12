@@ -1,23 +1,16 @@
 import { BackLink } from "components/BackLink/BackLink";
 import { Google, Mail } from "components/icons";
 import { StarBackground } from "components/StarBackground/StarBackground";
+import { TranslucentCard } from "components/TranslucentCard/TranslucentCard";
 import { AccountServiceType } from "hooks/FirebaseAuthHooks/useFirebaseAuthHooks";
 import { Loading } from "pages/Loading/Loading";
-import { BackgroundBlur } from "pages/SetName/SetNameStyle";
 import React from "react";
 import { Icon24 } from "types/utils";
 import { useStartState } from "./hooks/useStartState";
 import {
-  AlgoBox,
-  AlgoHeadMini,
   BackLinkPosition,
-  Balloon,
   ButtonText,
   IconArea,
-  Message,
-  ModalTitle,
-  SetNameModal,
-  SetNameStyle,
   SignInButton,
 } from "./Startstyle";
 type ButtonServiceType = {
@@ -45,30 +38,19 @@ export const Start: React.FC = () => {
           iconColor="black"
         />
       </BackLinkPosition>
-      <SetNameStyle>
-        <SetNameModal>
-          <ModalTitle>
-            <span>ログインして遊ぶ</span>
-          </ModalTitle>
-          <AlgoBox>
-            <AlgoHeadMini />
-            <Balloon src="/img/balloon.svg" />
-            <Message>{algoMessage}</Message>
-          </AlgoBox>
-          {buttonServices.map((buttonService) => (
-            <SignInButton
-              key={buttonService.service}
-              onClick={() => signInButtonsHandler(buttonService.service)}
-            >
-              <IconArea>
-                <buttonService.Icon size={24} />
-              </IconArea>
-              <ButtonText>{buttonService.text}</ButtonText>
-            </SignInButton>
-          ))}
-          <BackgroundBlur />
-        </SetNameModal>
-      </SetNameStyle>
+      <TranslucentCard modalTitle="ログインして遊ぶ" algoMessage={algoMessage}>
+        {buttonServices.map((buttonService) => (
+          <SignInButton
+            key={buttonService.service}
+            onClick={() => signInButtonsHandler(buttonService.service)}
+          >
+            <IconArea>
+              <buttonService.Icon size={24} />
+            </IconArea>
+            <ButtonText>{buttonService.text}</ButtonText>
+          </SignInButton>
+        ))}
+      </TranslucentCard>
     </StarBackground>
   );
 };

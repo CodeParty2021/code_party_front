@@ -35,9 +35,8 @@ export const Top: React.FC<Prop> = () => {
               onClick={NormalLoginBtnHandler}
               size="M"
               status={NormalLoginBtnDisabled ? "disabled" : "default"}
-              value="ログインしてスタート！"
+              value="ログインして遊ぶ！"
             />
-
             <Button
               color="black"
               icon={null}

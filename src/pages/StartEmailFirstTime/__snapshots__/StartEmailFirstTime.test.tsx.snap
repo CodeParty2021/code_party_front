@@ -11,21 +11,10 @@ Array [
       />
     </styled.div>
     <styled.div>
-      <styled.div>
-        <styled.div>
-          <span>
-            ログインして遊ぶ
-          </span>
-        </styled.div>
-        <styled.div>
-          <Styled(AlgoHead) />
-          <Styled(ReactSVG)
-            src="/img/balloon.svg"
-          />
-          <styled.div>
-            ログインしてください
-          </styled.div>
-        </styled.div>
+      <TranslucentCard
+        algoMessage="ログインしてください"
+        modalTitle="アカウントを作る"
+      >
         <styled.input
           onChange={[MockFunction]}
           placeholder="メールアドレス"
@@ -39,11 +28,11 @@ Array [
         <Button
           color="pink"
           onClick={[MockFunction]}
+          size="M"
           status="default"
-          value="けってい"
+          value="アカウントを作る"
         />
-        <styled.div />
-      </styled.div>
+      </TranslucentCard>
     </styled.div>
   </StarBackground>,
 ]

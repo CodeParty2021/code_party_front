@@ -19,7 +19,7 @@ const initialState: IResponse = {
   backLinkButtonHandler: jest.fn(),
 };
 
-describe("<StartEmailFirstTime />", () => {
+describe("<StartEmail />", () => {
   beforeEach(() => {
     useStartStateMock.mockReturnValue({ ...initialState });
   });

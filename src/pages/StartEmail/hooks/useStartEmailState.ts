@@ -69,7 +69,7 @@ export const useStartState = (): IResponse => {
   };
 
   if (isLogin && auth.currentUser && !auth.currentUser?.isAnonymous) {
-    navigate("/set-name", { replace: true });
+    navigate("/select-mode", { replace: true });
   }
 
   return {

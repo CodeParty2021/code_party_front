@@ -18,7 +18,7 @@ export type IResponse = {
   backLinkButtonHandler: () => void;
 };
 
-export const useStartState = (): IResponse => {
+export const useStartEmailState = (): IResponse => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const emailInputRef = useRef<HTMLInputElement>(null);

@@ -1,11 +1,11 @@
 import React from "react";
-import { IResponse, useStartState } from "./hooks/useStartEmailState";
+import { IResponse, useStartEmailState } from "./hooks/useStartEmailState";
 import { shallow } from "enzyme";
 import { StartEmailFirstTime } from "./StartEmailFirstTime";
 
 jest.mock("./hooks/useStartEmailState");
 
-const useStartStateMock = useStartState as jest.Mock;
+const useStartStateMock = useStartEmailState as jest.Mock;
 
 const initialState: IResponse = {
   loading: false,

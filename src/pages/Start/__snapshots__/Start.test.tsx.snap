@@ -10,49 +10,35 @@ Array [
         onClick={[MockFunction]}
       />
     </styled.div>
-    <styled.div>
-      <styled.div>
+    <TranslucentCard
+      algoMessage="ログインしてください"
+      modalTitle="ログインして遊ぶ"
+    >
+      <styled.button
+        onClick={[Function]}
+      >
         <styled.div>
-          <span>
-            ログインして遊ぶ
-          </span>
-        </styled.div>
-        <styled.div>
-          <Styled(AlgoHead) />
-          <Styled(ReactSVG)
-            src="/img/balloon.svg"
+          <Google
+            size={24}
           />
-          <styled.div>
-            ログインしてください
-          </styled.div>
         </styled.div>
-        <styled.button
-          onClick={[Function]}
-        >
-          <styled.div>
-            <Google
-              size={24}
-            />
-          </styled.div>
-          <styled.p>
-            Googleでログイン
-          </styled.p>
-        </styled.button>
-        <styled.button
-          onClick={[Function]}
-        >
-          <styled.div>
-            <Mail
-              size={24}
-            />
-          </styled.div>
-          <styled.p>
-            メールアドレスでログイン
-          </styled.p>
-        </styled.button>
-        <styled.div />
-      </styled.div>
-    </styled.div>
+        <styled.p>
+          Googleでログイン
+        </styled.p>
+      </styled.button>
+      <styled.button
+        onClick={[Function]}
+      >
+        <styled.div>
+          <Mail
+            size={24}
+          />
+        </styled.div>
+        <styled.p>
+          メールアドレスでログイン
+        </styled.p>
+      </styled.button>
+    </TranslucentCard>
   </StarBackground>,
 ]
 `;

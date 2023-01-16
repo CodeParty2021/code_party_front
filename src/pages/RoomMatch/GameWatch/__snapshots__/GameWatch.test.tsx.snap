@@ -2,23 +2,54 @@
 
 exports[`<RoomMatchGameWatch /> snapshot test 1`] = `
 Array [
-  <div>
-    <div>
-      結果
-    </div>
-    <div>
-      ステータス：
-      観戦中
-    </div>
-    <div>
-      {"id":"resultId","jsonPath":"/tmp/resultId","step":15,"codes":["codeid1","codeid2","codeid3"]}
-    </div>
-    <button
-      id="exit-btn"
-      onClick={[MockFunction]}
+  <styled.div
+    state="Analyzing"
+  >
+    <Styled(PlanetPicture)
+      color="blue"
+    />
+    <div
+      className="gamewatch_unity"
     >
-      退出
-    </button>
-  </div>,
+      <Styled(Unity)
+        unityContext={
+          UnityContext {
+            "eventMap": Map {},
+            "htmlCanvasElement": null,
+            "unityConfig": Object {
+              "codeUrl": "",
+              "dataUrl": "",
+              "frameworkUrl": "",
+              "loaderUrl": "",
+            },
+            "unityInstance": null,
+          }
+        }
+      />
+      <Styled(ReactSVG)
+        src="/img/watching_logo.svg"
+        wrapper="svg"
+      />
+    </div>
+    <BackLink
+      backMessage="待機部屋に戻る"
+      iconColor="blue"
+      onClick={[MockFunction]}
+    />
+    <div
+      className="gamewatch_message"
+    >
+      <Message
+        color="blue"
+        title="シミュレーションチュウ"
+        value="しばらくお待ちください"
+      />
+      <AlgoHead
+        color="blue"
+        height="117px"
+        width="142px"
+      />
+    </div>
+  </styled.div>,
 ]
 `;

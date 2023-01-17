@@ -1,65 +1,40 @@
-import React, { useEffect, useState } from "react";
-import Unity, { UnityContext } from "react-unity-webgl";
+import React from "react";
 import { useGameWatchState } from "./hooks/useGameWatchState";
 import { useRunSimulation } from "./hooks/useRunSimulation";
+import { Background } from "pages/Code/Coding/CodingStyle";
+import { BackLink } from "components/BackLink/BackLink";
+import {
+  GameWatchStyle,
+  messageProps,
+  UnityStyle,
+  WatchingLogo,
+} from "./GameWatchStyle";
+import { Message } from "components/Message/Message";
+import { AlgoHead } from "components/Character/Algo/Head/AlgoHead";
 
 type Props = {};
-//TODO:ここstepかstageごとに変更する必要あり
-const unityContext = new UnityContext({
-  loaderUrl: "/unity/sp/web.loader.js",
-  dataUrl: "/unity/sp/web.data.unityweb",
-  frameworkUrl: "/unity/sp/web.framework.js.unityweb",
-  codeUrl: "/unity/sp/web.wasm.unityweb",
-});
 
 export const RoomMatchGameWatch: React.FC<Props> = () => {
   useRunSimulation();
-  const { isAnalyzing, analyzingError, result, json, exitBtnHandler } =
+  const { unityContext, exitBtnHandler, state, messageType } =
     useGameWatchState();
-  const [progression, setProgression] = useState(0);
-
-  const loadJson = (json: string) => {
-    //unityContext.send("JSONLoader", "LoadJSON", json);
-    unityContext.send("ReactUnityConnector", "SetSimulationData", json);
-    unityContext.send("ReactUnityConnector", "LoadStage", "SquarePaint");
-  };
-
-  useEffect(() => {
-    // Unityロード時にprogressionが0=>1になる
-    unityContext.on("progress", function (progression) {
-      setProgression(progression);
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log(progression);
-    if (progression == 1 && json) {
-      window.setTimeout(() => loadJson(json), 3000);
-    }
-  }, [progression]);
 
   return (
-    <div>
-      <div>結果</div>
-      <div>
-        ステータス：
-        {analyzingError
-          ? "シミュレーションエラー"
-          : isAnalyzing
-          ? "解析中"
-          : "観戦中"}
+    <GameWatchStyle state={state}>
+      <Background color="blue" />
+      <div className="gamewatch_unity">
+        <UnityStyle unityContext={unityContext} />
+        <WatchingLogo src="/img/watching_logo.svg" wrapper="svg" />
       </div>
-      {result ? <div>{JSON.stringify(result)}</div> : undefined}
-      {json ? (
-        <Unity
-          unityContext={unityContext}
-          style={{ width: "800px", height: "600px" }}
-        />
-      ) : undefined}
-
-      <button id="exit-btn" onClick={exitBtnHandler}>
-        退出
-      </button>
-    </div>
+      <BackLink
+        iconColor="blue"
+        backMessage="待機部屋に戻る"
+        onClick={exitBtnHandler}
+      />
+      <div className="gamewatch_message">
+        <Message {...messageProps(messageType)} />
+        <AlgoHead width="142px" height="117px" color="blue" />
+      </div>
+    </GameWatchStyle>
   );
 };

@@ -9,7 +9,7 @@ import { FONT_WEIGHT } from "styles/constants/constants";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 import { AlgoEditor } from "./components/AlgoEditor/AlgoEditor";
 import { Tab } from "./components/Tab/Tab";
-import { Message } from "./components/Message/Message";
+import { Message } from "../../../components/Message/Message";
 import { CodeState } from "./hooks/useCodeHooks";
 import { ComponentProps } from "react";
 

@@ -16,6 +16,7 @@ const initialState: IResponse = {
     switchDisplay: "editor",
     messageType: "loading",
     buttonType: "toGame",
+    showSetting: false,
   },
   code: {
     id: "sample-id",
@@ -73,6 +74,11 @@ const initialState: IResponse = {
   //   ],
   // },
   backLinkRoute: "/",
+  showSetting: false,
+  toggleSettingHandler: jest.fn(),
+  closePanelHandler: jest.fn(),
+  panelState: "log",
+  changeStep:jest.fn()
 };
 
 describe("<CodeCoding />", () => {

@@ -7,6 +7,7 @@ import { useCode } from "hooks/CodeHooks/useCode";
 import { useResult } from "hooks/ResultHooks/useResult";
 import { useDummyLoading } from "hooks/DummyLoadingHooks/useDummyLoading";
 import { useMonacoEditor } from "hooks/MonacoEditorHooks/useMonacoEditor";
+import { PanelState } from "../components/LogPanel/LogPanel";
 
 export type RunResponse = {
   unityURL: string;
@@ -16,6 +17,8 @@ export type RunResponse = {
 export type CodeState = {
   /** ターンログを表示するか */
   showTurnLog: boolean;
+  /** セッティング表示するか */
+  showSetting: boolean;
   /**
    * 現在の表示画面を決める
    * editor: エディタ表示中
@@ -43,6 +46,7 @@ export type CodeState = {
 
 const initialState: CodeState = {
   showTurnLog: false,
+  showSetting: false,
   switchDisplay: "loading",
   messageType: "loading",
   buttonType: "hidden",
@@ -58,8 +62,10 @@ export type IResponse = {
   loading: boolean;
   /** Unityを表示するか */
   showUnity: boolean;
-  /** ログを表示するか */
+  /** パネルを表示するか */
   showLog: boolean;
+  showSetting: boolean;
+  panelState:PanelState
   /** メッセージを表示するか */
   showMessage: boolean;
 
@@ -76,9 +82,12 @@ export type IResponse = {
   // コールバック関数
   /** ボタン押下時のコールバック関数 */
   buttonHandler?: () => void;
-  /** ログの開閉コールバック関数 */
+  /** パネルの開閉コールバック関数 */
   toggleLogHandler: () => void;
+  toggleSettingHandler: () => void;
+  closePanelHandler: () => void;
   backLinkRoute: string;
+  changeStep: (step:number) => void;
 };
 
 export const useCodingState = (): IResponse => {
@@ -100,7 +109,7 @@ export const useCodingState = (): IResponse => {
   }, []);
 
   // hooksの宣言
-  const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode } =
+  const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode , changeStep } =
     useCode(codeId);
   const { resultState, testCode, reset } = useResult();
   const { dummyLoadingState, startDummyLoad } = useDummyLoading(5000);
@@ -116,13 +125,16 @@ export const useCodingState = (): IResponse => {
   const [showTurnLog, setShowTurnLog] = useState<CodeState["showTurnLog"]>(
     initialState["showTurnLog"]
   );
+  const [showSetting, setShowSetting] = useState<CodeState["showSetting"]>(
+    initialState["showSetting"]
+  );
   const [switchDisplay, setSwitchDisplay] = useState<
     CodeState["switchDisplay"]
   >(initialState["switchDisplay"]);
   const [messageType, setMessageType] = useState<CodeState["messageType"]>(
     initialState["messageType"]
   );
-
+  const [panelState,setPanelState] = useState<IResponse["panelState"]>("log");
   // その他
   const navigate = useNavigate();
 
@@ -201,7 +213,7 @@ export const useCodingState = (): IResponse => {
       await testCode(codeId);
     }
   }, [codeState, updateCodeOnlyFront, saveCode, testCode]);
-
+  
   /**
    * ボタンを押した時のコールバック
    */
@@ -216,18 +228,27 @@ export const useCodingState = (): IResponse => {
   );
 
   /**
-   * ログの表示切り替えコールバック
+   * パネルの表示切り替えコールバック
    */
   const toggleLogHandler = () => {
+    setPanelState("log");
     setShowTurnLog((showLog) => !showLog);
   };
-
+  const toggleSettingHandler = () => {
+    setPanelState("setting");
+    setShowSetting((showSetting) => !showSetting);
+  };
+  const closePanelHandler = () => {
+    if(showSetting)setShowSetting(false);
+    if(showTurnLog)setShowTurnLog(false);
+  };
   return {
     state: {
       showTurnLog,
       switchDisplay,
       messageType,
       buttonType,
+      showSetting
     },
     loading,
     showUnity: switchDisplay === "unity",
@@ -240,5 +261,10 @@ export const useCodingState = (): IResponse => {
     buttonHandler,
     toggleLogHandler,
     backLinkRoute,
+    toggleSettingHandler,
+    showSetting,
+    closePanelHandler,
+    panelState,
+    changeStep
   };
 };

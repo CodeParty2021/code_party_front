@@ -7,12 +7,15 @@ import {
   PlanetPictureStyle,
 } from "./LogPanelStyle";
 
+export type PanelState = "log"|"setting"
 type Props = LogPanelStyleProps & {
   onCloseButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
+  state:PanelState
 };
 
 export const LogPanel: React.FC<Props> = ({
   onCloseButtonClick,
+  state,
   children,
   ...styleProps
 }) => {
@@ -24,7 +27,7 @@ export const LogPanel: React.FC<Props> = ({
           <PlanetPictureStyle color="blue" size="87px" />
           <IconButtonStyle Icon={Times} onClick={onCloseButtonClick} />
         </div>
-        <span className="logpanel_title">LOG</span>
+        <span className="logpanel_title">{state}</span>
       </div>
       <div className="logpanel_container_main">{children}</div>
     </LogPanelStyle>

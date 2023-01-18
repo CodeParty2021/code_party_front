@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof LogItem>;
 
 const Template: ComponentStory<typeof LogItem> = (args) => (
-  <LogPanel>
+  <LogPanel state="log">
     <LogItem {...args} />
   </LogPanel>
 );

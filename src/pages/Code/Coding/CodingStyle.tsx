@@ -18,7 +18,7 @@ type ShowUnityProps = {
 };
 
 type ShowLogProps = {
-  showLog?: boolean;
+  show?: boolean;
 };
 
 type ShowInfoProps = {
@@ -82,18 +82,21 @@ export const BackLink = styled(Link)`
   }
 `;
 
-export const TabStyle = styled(Tab)<ShowLogProps>`
+export const TabWrap = styled.div<ShowLogProps>`
   position: absolute;
   top: 26px;
   right: 0;
-
+  display:flex;
+  flex-direction:column;
   transition: all 0.5s ease;
-
-  ${({ showLog }) =>
-    showLog &&
+  ${FlexGap({ gap: "16px", direction: "column" })}
+  ${({ show }) =>
+    !show &&
     css`
-      right: -44px;
+      right:-44px;
     `}
+`;
+export const TabStyle = styled(Tab)`
 `;
 
 export const ContainerWrap = styled.div<ShowLogProps>`
@@ -106,8 +109,8 @@ export const ContainerWrap = styled.div<ShowLogProps>`
 
   transition: width 0.5s ease;
 
-  ${({ showLog }) =>
-    showLog &&
+  ${({ show }) =>
+    show &&
     css`
       width: 100%;
     `}

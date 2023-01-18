@@ -14,6 +14,7 @@ import {
   messageProps,
   MessageStyle,
   TabStyle,
+  TabWrap,
   UnityStyle,
   WatchingLogo,
   WhiteBackground,
@@ -29,10 +30,12 @@ export const CodeCoding: React.FC<Props> = () => {
   const {
     // 状態変数
     state,
+    panelState,
     // 状態変数を扱いやすくしたもの
     loading,
     showUnity,
     showLog,
+    showSetting,
     showMessage,
     // データ
     code,
@@ -42,6 +45,9 @@ export const CodeCoding: React.FC<Props> = () => {
     // コールバック関数
     buttonHandler,
     toggleLogHandler,
+    toggleSettingHandler,
+    closePanelHandler,
+    changeStep,
     // その他
     backLinkRoute,
   } = useCodingState();
@@ -52,6 +58,7 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   }
+  
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -60,7 +67,7 @@ export const CodeCoding: React.FC<Props> = () => {
         <IconButton Icon={ArrowLeft} />
         <span>モード選択に戻る</span>
       </BackLink>
-      <ContainerWrap showLog={showLog}>
+      <ContainerWrap show={showLog||showSetting}>
         <ContainerMain>
           <ContainerUnity showUnity={showUnity}>
             <UnityStyle unityContext={unityContext} />
@@ -85,17 +92,31 @@ export const CodeCoding: React.FC<Props> = () => {
             onClick={buttonHandler}
           />
         </ContainerMain>
-        <LogPanel onCloseButtonClick={toggleLogHandler}>
-          {turnLog &&
+        <LogPanel onCloseButtonClick={closePanelHandler} state={panelState} >
+          {turnLog && panelState=="log" &&
             turnLog.map((turn, index) => {
               const log = turn.players[0].print;
               if (log) {
                 return <LogItem key={index} turnNum={index + 1} log={log} />;
               }
             })}
+          {panelState=="setting" && <>
+            <button onClick={()=>changeStep(1)}>1</button>
+            <button onClick={()=>changeStep(2)}>2</button>
+            <button onClick={()=>changeStep(3)}>3</button>
+            </>
+          }
         </LogPanel>
+        
       </ContainerWrap>
-      <TabStyle value="LOG" onClick={toggleLogHandler} showLog={showLog} />
+      <TabWrap show={!(showLog||showSetting)}>
+        {" "}
+        <TabStyle value="LOG" onClick={toggleLogHandler} />
+        <TabStyle
+          value="SETTING"
+          onClick={toggleSettingHandler}
+        />
+      </TabWrap>
     </CodingStyle>
   );
 };

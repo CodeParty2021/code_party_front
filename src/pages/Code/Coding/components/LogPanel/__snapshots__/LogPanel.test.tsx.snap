@@ -194,7 +194,7 @@ exports[`<LogPanel /> snapshot test 1`] = `
     <span
       class="logpanel_title"
     >
-      LOG
+      log
     </span>
   </div>
   <div

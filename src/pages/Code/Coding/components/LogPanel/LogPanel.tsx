@@ -7,10 +7,10 @@ import {
   PlanetPictureStyle,
 } from "./LogPanelStyle";
 
-export type PanelState = "log"|"setting"
+export type PanelState = "log" | "setting";
 type Props = LogPanelStyleProps & {
   onCloseButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
-  state:PanelState
+  state: PanelState;
 };
 
 export const LogPanel: React.FC<Props> = ({

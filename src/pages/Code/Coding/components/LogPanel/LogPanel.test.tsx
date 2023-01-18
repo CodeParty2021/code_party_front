@@ -5,7 +5,7 @@ import { render } from "enzyme";
 
 describe("<LogPanel />", () => {
   it("snapshot test", () => {
-    const wrapper = render(<LogPanel state="log"/>);
+    const wrapper = render(<LogPanel state="log" />);
 
     expect(wrapper).toMatchSnapshot();
   });

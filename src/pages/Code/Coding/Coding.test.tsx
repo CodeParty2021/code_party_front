@@ -78,7 +78,7 @@ const initialState: IResponse = {
   toggleSettingHandler: jest.fn(),
   closePanelHandler: jest.fn(),
   panelState: "log",
-  changeStep:jest.fn()
+  changeStep: jest.fn(),
 };
 
 describe("<CodeCoding />", () => {

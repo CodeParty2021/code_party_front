@@ -59,7 +59,17 @@ export const WhiteBackground = styled.div<ShowUnityProps>`
       opacity: 0.5;
     `}
 `;
+export const PanelText = styled.div`
+  font-family: "Noto Sans JP";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 35px;
 
+  font-feature-settings: "palt" on;
+
+  color: ${GRAY_90};
+`;
 export const BackLink = styled(Link)`
   display: flex;
   flex-direction: row;
@@ -86,18 +96,17 @@ export const TabWrap = styled.div<ShowLogProps>`
   position: absolute;
   top: 26px;
   right: 0;
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   transition: all 0.5s ease;
   ${FlexGap({ gap: "16px", direction: "column" })}
   ${({ show }) =>
     !show &&
     css`
-      right:-44px;
+      right: -44px;
     `}
 `;
-export const TabStyle = styled(Tab)`
-`;
+export const TabStyle = styled(Tab)``;
 
 export const ContainerWrap = styled.div<ShowLogProps>`
   display: flex;

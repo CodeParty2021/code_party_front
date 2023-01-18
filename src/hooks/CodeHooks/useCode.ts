@@ -34,12 +34,11 @@ export type IResponse = {
   /**
    * ステップを変更する
    */
-  changeStep: (step:number)=> Promise<void>;
+  changeStep: (step: number) => Promise<void>;
   /**
    * コードを保存する
    */
   saveCode: () => Promise<void>;
-  
 };
 
 export type CodeState = {
@@ -194,9 +193,9 @@ export const useCode = (codeId?: string): IResponse => {
     }
   }, [codeState.isSave, codeState.code]);
 
-  const changeStep: IResponse["changeStep"] = async (step:number) => {
+  const changeStep: IResponse["changeStep"] = async (step: number) => {
     const currentCode = codeState.code;
-    if ( /*!codeState.isSave &&*/ codeState.isOnline && currentCode) { 
+    if (/*!codeState.isSave &&*/ codeState.isOnline && currentCode) {
       try {
         await updateCodeOnAPI(
           currentCode.id,
@@ -205,6 +204,8 @@ export const useCode = (codeId?: string): IResponse => {
           currentCode.language
         );
         _setIsSave(true);
+        currentCode.step = step;
+        setCodeState({ ...codeState, code: currentCode });
       } catch {
         _updateStateWhenError();
       }
@@ -231,6 +232,6 @@ export const useCode = (codeId?: string): IResponse => {
     createCodeDefault,
     updateCodeOnlyFront,
     saveCode,
-    changeStep
+    changeStep,
   };
 };

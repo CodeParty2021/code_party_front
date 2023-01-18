@@ -65,7 +65,7 @@ export type IResponse = {
   /** パネルを表示するか */
   showLog: boolean;
   showSetting: boolean;
-  panelState:PanelState
+  panelState: PanelState;
   /** メッセージを表示するか */
   showMessage: boolean;
 
@@ -87,7 +87,7 @@ export type IResponse = {
   toggleSettingHandler: () => void;
   closePanelHandler: () => void;
   backLinkRoute: string;
-  changeStep: (step:number) => void;
+  changeStep: (step: number) => void;
 };
 
 export const useCodingState = (): IResponse => {
@@ -109,8 +109,13 @@ export const useCodingState = (): IResponse => {
   }, []);
 
   // hooksの宣言
-  const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode , changeStep } =
-    useCode(codeId);
+  const {
+    codeState,
+    createCodeDefault,
+    updateCodeOnlyFront,
+    saveCode,
+    changeStep,
+  } = useCode(codeId);
   const { resultState, testCode, reset } = useResult();
   const { dummyLoadingState, startDummyLoad } = useDummyLoading(5000);
   const { monacoEditorState, handleEditorDidMount } = useMonacoEditor();
@@ -134,7 +139,7 @@ export const useCodingState = (): IResponse => {
   const [messageType, setMessageType] = useState<CodeState["messageType"]>(
     initialState["messageType"]
   );
-  const [panelState,setPanelState] = useState<IResponse["panelState"]>("log");
+  const [panelState, setPanelState] = useState<IResponse["panelState"]>("log");
   // その他
   const navigate = useNavigate();
 
@@ -213,7 +218,7 @@ export const useCodingState = (): IResponse => {
       await testCode(codeId);
     }
   }, [codeState, updateCodeOnlyFront, saveCode, testCode]);
-  
+
   /**
    * ボタンを押した時のコールバック
    */
@@ -239,8 +244,8 @@ export const useCodingState = (): IResponse => {
     setShowSetting((showSetting) => !showSetting);
   };
   const closePanelHandler = () => {
-    if(showSetting)setShowSetting(false);
-    if(showTurnLog)setShowTurnLog(false);
+    if (showSetting) setShowSetting(false);
+    if (showTurnLog) setShowTurnLog(false);
   };
   return {
     state: {
@@ -248,7 +253,7 @@ export const useCodingState = (): IResponse => {
       switchDisplay,
       messageType,
       buttonType,
-      showSetting
+      showSetting,
     },
     loading,
     showUnity: switchDisplay === "unity",
@@ -265,6 +270,6 @@ export const useCodingState = (): IResponse => {
     showSetting,
     closePanelHandler,
     panelState,
-    changeStep
+    changeStep,
   };
 };

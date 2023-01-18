@@ -13,6 +13,7 @@ import {
   ContainerWrap,
   messageProps,
   MessageStyle,
+  PanelText,
   TabStyle,
   TabWrap,
   UnityStyle,
@@ -24,6 +25,7 @@ import { LogItem } from "./components/LogItem/LogItem";
 import { IconButton } from "components/IconButton/IconButton";
 import { ArrowLeft } from "components/icons";
 import { Loading } from "pages/Loading/Loading";
+import { SettingItems } from "./components/SettingItem/SettingItems";
 type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
@@ -58,7 +60,7 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   }
-  
+  console.log(code?.step);
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -67,7 +69,7 @@ export const CodeCoding: React.FC<Props> = () => {
         <IconButton Icon={ArrowLeft} />
         <span>モード選択に戻る</span>
       </BackLink>
-      <ContainerWrap show={showLog||showSetting}>
+      <ContainerWrap show={showLog || showSetting}>
         <ContainerMain>
           <ContainerUnity showUnity={showUnity}>
             <UnityStyle unityContext={unityContext} />
@@ -92,30 +94,56 @@ export const CodeCoding: React.FC<Props> = () => {
             onClick={buttonHandler}
           />
         </ContainerMain>
-        <LogPanel onCloseButtonClick={closePanelHandler} state={panelState} >
-          {turnLog && panelState=="log" &&
+        <LogPanel onCloseButtonClick={closePanelHandler} state={panelState}>
+          {turnLog &&
+            panelState == "log" &&
             turnLog.map((turn, index) => {
               const log = turn.players[0].print;
               if (log) {
                 return <LogItem key={index} turnNum={index + 1} log={log} />;
               }
             })}
-          {panelState=="setting" && <>
-            <button onClick={()=>changeStep(1)}>1</button>
-            <button onClick={()=>changeStep(2)}>2</button>
-            <button onClick={()=>changeStep(3)}>3</button>
+          {code && panelState == "setting" && (
+            <>
+              <PanelText>モードを選択</PanelText>
+              <SettingItems
+                robotProperty={[
+                  {
+                    step: 2,
+                    name: "一人用モード",
+                  },
+                  {
+                    step: 3,
+                    name: "ロボット1",
+                  },
+                  {
+                    step: 4,
+                    name: "ロボット2",
+                  },
+                  {
+                    step: 5,
+                    name: "ロボット3",
+                  },
+                  {
+                    step: 6,
+                    name: "ロボット4",
+                  },
+                  {
+                    step: 7,
+                    name: "最強ロボ",
+                  },
+                ]}
+                stepChange={changeStep}
+                selected={code.step}
+              />
             </>
-          }
+          )}
         </LogPanel>
-        
       </ContainerWrap>
-      <TabWrap show={!(showLog||showSetting)}>
+      <TabWrap show={!(showLog || showSetting)}>
         {" "}
         <TabStyle value="LOG" onClick={toggleLogHandler} />
-        <TabStyle
-          value="SETTING"
-          onClick={toggleSettingHandler}
-        />
+        <TabStyle value="SETTING" onClick={toggleSettingHandler} />
       </TabWrap>
     </CodingStyle>
   );

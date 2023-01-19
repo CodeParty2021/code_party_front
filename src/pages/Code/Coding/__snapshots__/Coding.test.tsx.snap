@@ -20,7 +20,7 @@ Array [
       </span>
     </Styled(Component)>
     <styled.div
-      showLog={false}
+      show={false}
     >
       <styled.div>
         <styled.div
@@ -71,6 +71,7 @@ Array [
       </styled.div>
       <LogPanel
         onCloseButtonClick={[MockFunction]}
+        state="log"
       >
         <LogItem
           log="aaa"
@@ -82,11 +83,19 @@ Array [
         />
       </LogPanel>
     </styled.div>
-    <Styled(Tab)
-      onClick={[MockFunction]}
-      showLog={false}
-      value="LOG"
-    />
+    <styled.div
+      show={true}
+    >
+       
+      <Styled(Tab)
+        onClick={[MockFunction]}
+        value="LOG"
+      />
+      <Styled(Tab)
+        onClick={[MockFunction]}
+        value="SETTING"
+      />
+    </styled.div>
   </styled.div>,
 ]
 `;

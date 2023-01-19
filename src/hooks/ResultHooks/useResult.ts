@@ -12,6 +12,7 @@ export type IResponse = {
    * 状態をリセットする
    */
   reset: () => void;
+  error: string | undefined;
 };
 
 export type ResultState = {
@@ -37,7 +38,7 @@ export const useResult = (): IResponse => {
   const [resultState, setResultState] = useState<ResultState>({
     ...initialState,
   });
-  const { testCode: testCodeOnAPI } = useCodeAPI();
+  const { testCode: testCodeOnAPI, error } = useCodeAPI();
 
   const _setIsFailed = useCallback((isFailed: boolean) => {
     setResultState((current) => ({
@@ -69,5 +70,6 @@ export const useResult = (): IResponse => {
     resultState,
     testCode,
     reset,
+    error,
   };
 };

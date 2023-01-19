@@ -88,6 +88,8 @@ export type IResponse = {
   closePanelHandler: () => void;
   backLinkRoute: string;
   changeStep: (step: number) => void;
+  /** エラーレスポンス */
+  error: string | undefined;
 };
 
 export const useCodingState = (): IResponse => {
@@ -109,6 +111,7 @@ export const useCodingState = (): IResponse => {
   }, []);
 
   // hooksの宣言
+<<<<<<< HEAD
   const {
     codeState,
     createCodeDefault,
@@ -117,6 +120,11 @@ export const useCodingState = (): IResponse => {
     changeStep,
   } = useCode(codeId);
   const { resultState, testCode, reset } = useResult();
+=======
+  const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode } =
+    useCode(codeId);
+  const { resultState, testCode, reset, error } = useResult();
+>>>>>>> 0dfd007 (エラーメッセージをログに表示)
   const { dummyLoadingState, startDummyLoad } = useDummyLoading(5000);
   const { monacoEditorState, handleEditorDidMount } = useMonacoEditor();
   const { unityContext, unityStatus, startGame } = useUnityGame("SquarePaint");
@@ -260,6 +268,7 @@ export const useCodingState = (): IResponse => {
     showLog: showTurnLog,
     showMessage: switchDisplay === "message" || loading,
     code: codeState.code,
+    error,
     turnLog: resultState.simulationJson?.turn,
     handleEditorDidMount,
     unityContext,

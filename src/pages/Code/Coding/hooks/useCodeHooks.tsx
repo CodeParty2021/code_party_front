@@ -111,7 +111,6 @@ export const useCodingState = (): IResponse => {
   }, []);
 
   // hooksの宣言
-<<<<<<< HEAD
   const {
     codeState,
     createCodeDefault,
@@ -119,12 +118,7 @@ export const useCodingState = (): IResponse => {
     saveCode,
     changeStep,
   } = useCode(codeId);
-  const { resultState, testCode, reset } = useResult();
-=======
-  const { codeState, createCodeDefault, updateCodeOnlyFront, saveCode } =
-    useCode(codeId);
   const { resultState, testCode, reset, error } = useResult();
->>>>>>> 0dfd007 (エラーメッセージをログに表示)
   const { dummyLoadingState, startDummyLoad } = useDummyLoading(5000);
   const { monacoEditorState, handleEditorDidMount } = useMonacoEditor();
   const { unityContext, unityStatus, startGame } = useUnityGame("SquarePaint");

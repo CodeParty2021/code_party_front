@@ -62,7 +62,6 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   }
-  console.log(code?.step);
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -97,8 +96,7 @@ export const CodeCoding: React.FC<Props> = () => {
           />
         </ContainerMain>
         <LogPanel onCloseButtonClick={closePanelHandler} state={panelState}>
-          {panelState == "log" &&<>
-          {error}</>}
+          {panelState == "log" && <>{error}</>}
           {turnLog &&
             panelState == "log" &&
             turnLog.map((turn, index) => {

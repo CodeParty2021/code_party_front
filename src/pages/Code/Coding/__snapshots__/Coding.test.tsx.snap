@@ -73,6 +73,7 @@ Array [
         onCloseButtonClick={[MockFunction]}
         state="log"
       >
+        <React.Fragment />
         <LogItem
           log="aaa"
           turnNum={1}

@@ -15,7 +15,7 @@ export const EVENT1ON1_INIT_CODE = `
  4 => そのまま止まるよ！
 """
 
-def select(turn_num, field, my_pos, other_pos):
+def select(turn, field, my_pos, other_pos):
   meirei = {
     1: 4,
     2: 4,
@@ -48,7 +48,7 @@ def select(turn_num, field, my_pos, other_pos):
     29: 4,
     30: 4,
   }
-  return meirei[turn_num]
+  return meirei[turn]
 `;
 
 export const BASIC_INIT_CODE = `
@@ -68,6 +68,6 @@ export const BASIC_INIT_CODE = `
  4 => そのまま止まるよ！
 """
 
-def select(turn_num, field, my_pos, other_pos):
-  return meirei[turn_num]
+def select(turn, field, my_pos, other_pos):
+  return meirei[turn]
 `;

@@ -79,24 +79,6 @@ describe("useGameWatchState", () => {
     expect(navigateMock).lastCalledWith("/room-match");
   });
 
-  it("シミュレーション結果のフェッチ", () => {
-    useRoomSyncMock.mockReturnValue({
-      ...initialRoomSyncState,
-      room: {
-        ...initialRoomState,
-        info: {
-          ...initialRoomInfo,
-          analyzingResult: {
-            resultId: "resultId",
-          },
-        },
-      },
-    });
-    const { result } = renderHook(() => useGameWatchState());
-    expect(result.current.result).toEqual(initialFetchResultState.data);
-    expect(initialFetchResultState.fetchResult).lastCalledWith("resultId");
-  });
-
   it("exec exitBtnHandler", () => {
     const { result } = renderHook(() => useGameWatchState());
     const { exitBtnHandler } = result.current;

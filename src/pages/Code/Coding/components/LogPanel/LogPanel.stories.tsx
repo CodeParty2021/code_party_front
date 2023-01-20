@@ -13,4 +13,4 @@ const Template: ComponentStory<typeof LogPanel> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { state: "log" };

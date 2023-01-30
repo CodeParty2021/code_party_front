@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GRAY_80, WHITE } from "styles/colors";
+import { GRAY_80, GRAY_90, WHITE } from "styles/colors";
 
 export const SignInButton = styled.button`
   width: 306px;
@@ -33,7 +33,7 @@ export const Modal = styled.div`
   transform: translateY(-50%) translateX(-50%);
   transform: translateY(-50%) translateX(-50%);
   z-index: 51;
-  background: #ffffff;
+  background: ${WHITE};
 
   box-shadow: 0px 4px 16px -2px rgba(40, 45, 62, 0.1);
   border-radius: 32px;
@@ -54,10 +54,7 @@ export const Description = styled.div`
   /* identical to box height */
 
   font-feature-settings: "palt" on;
-
-  /* GRAY_90 */
-
-  color: #363e59;
+  color: ${GRAY_90};
 `;
 export const Title = styled.div`
   font-family: "Noto Sans JP";
@@ -68,10 +65,7 @@ export const Title = styled.div`
   /* identical to box height */
 
   font-feature-settings: "palt" on;
-
-  /* GRAY_90 */
-
-  color: #363e59;
+  color: ${GRAY_90};
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;

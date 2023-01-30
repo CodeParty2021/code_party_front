@@ -132,7 +132,11 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
                         color={color(roomInfo.memberKeys, key)}
                         onClickChangeCPU={() => {}}
                         status={
-                          roomInfo.members[key].ready ? "ready" : "default"
+                          roomInfo.members[key].ready
+                            ? "ready"
+                            : roomInfo.members[key].status === "disconnect"
+                            ? "disconnecting"
+                            : "default"
                         }
                         userName={roomInfo.members[key].displayName}
                         userPhoto="/logo512.png"
@@ -145,6 +149,7 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
                   (i) =>
                     i >= roomInfo.memberKeys.length && (
                       <PlayerPlateOther
+                        key={i}
                         badge=""
                         color="turquoise"
                         onClickChangeCPU={undefined}

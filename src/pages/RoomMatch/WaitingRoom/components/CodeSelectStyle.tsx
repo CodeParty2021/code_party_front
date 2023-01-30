@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { BLUE_50, GRAY_40 } from "styles/colors";
+import {
+  BLUE_50,
+  BLUE_60,
+  GRAY_20,
+  GRAY_40,
+  GRAY_90,
+  WHITE,
+} from "styles/colors";
 
 export const BackBlur = styled.div`
   position: absolute;
@@ -14,6 +21,7 @@ export const BackBlur = styled.div`
   width: 100vw;
   height: 100vh;
 `;
+
 export const Modal = styled.div`
   position: absolute;
   top: 50%;
@@ -21,7 +29,7 @@ export const Modal = styled.div`
   transform: translateY(-50%) translateX(-50%);
   transform: translateY(-50%) translateX(-50%);
   z-index: 51;
-  background: #ffffff;
+  background: ${WHITE};
 
   box-shadow: 0px 4px 16px -2px rgba(40, 45, 62, 0.1);
   border-radius: 32px;
@@ -40,14 +48,17 @@ export const LeftPanel = styled.form`
   flex-direction: column;
   gap: 8px 8px;
 `;
+
 export const RightPanel = styled.div`
   width: 50%;
 `;
+
 export const TitlePanel = styled.div`
   width: 100%;
   position: relative;
   padding: 0 16px 0 0;
 `;
+
 export const Description = styled.div`
   display: inline-block;
   padding: 0 0 0 16px;
@@ -59,20 +70,18 @@ export const Description = styled.div`
   /* identical to box height */
 
   font-feature-settings: "palt" on;
-
-  /* GRAY_90 */
-
-  color: #363e59;
+  color: ${GRAY_90};
 `;
+
 export const Container = styled.div`
   display: flex;
   gap: 32px;
   width: 100%;
   height: 546px;
 `;
+
 export const Title = styled.div`
   display: inline-block;
-
   font-family: "Noto Sans JP";
   font-style: normal;
   font-weight: 700;
@@ -81,10 +90,7 @@ export const Title = styled.div`
   /* identical to box height */
 
   font-feature-settings: "palt" on;
-
-  /* GRAY_90 */
-
-  color: #363e59;
+  color: ${GRAY_90};
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;
@@ -103,13 +109,12 @@ export const CodeLabel = styled.label`
   width: 100%;
   /* identical to box height, or 27px */
 
-  /* BLUE_60 */
-
-  color: #545eed;
-  border: 3px solid #eaebf1;
+  color: ${BLUE_60};
+  border: 3px solid ${GRAY_20};
   border-radius: 12px;
   overflow: hidden;
 `;
+
 export const CodeInput = styled.input`
   display: none;
   &:checked + label {
@@ -122,12 +127,13 @@ export const BottomPanel = styled.div`
   justify-content: flex-end;
   width: 100%;
 `;
+
 export const Close = styled.div`
-  position:absolute;
-  top:0;
-  right:0;
+  position: absolute;
+  top: 0;
+  right: 0;
   font-weight: 400;
   font-size: 18px;
-  color=${GRAY_40};
-  cursor:pointer;
+  color: ${GRAY_40};
+  cursor: pointer;
 `;

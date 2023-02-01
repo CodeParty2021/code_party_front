@@ -364,7 +364,11 @@ export const useCodeAPI = (): IResponse => {
         })
         .catch((err) => {
           setLoading(false);
-          setError(`testCodeAPIError${err}`);
+          const errorResponse = String(err.response.data);
+          const end = errorResponse.indexOf("Request"); //上手く検索できなかった
+          const displayText =
+            end != -1 ? errorResponse.substr(0, end) : errorResponse;
+          setError(displayText);
           return rejects(new Error(error));
         });
     });

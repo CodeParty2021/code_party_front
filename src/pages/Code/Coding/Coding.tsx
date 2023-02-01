@@ -52,6 +52,8 @@ export const CodeCoding: React.FC<Props> = () => {
     changeStep,
     // その他
     backLinkRoute,
+    //エラーレスポンス
+    error,
   } = useCodingState();
   if (loading) {
     return (
@@ -60,7 +62,6 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   }
-  console.log(code?.step);
   return (
     <CodingStyle>
       <Background color="blue" />
@@ -95,6 +96,7 @@ export const CodeCoding: React.FC<Props> = () => {
           />
         </ContainerMain>
         <LogPanel onCloseButtonClick={closePanelHandler} state={panelState}>
+          {panelState == "log" && <>{error}</>}
           {turnLog &&
             panelState == "log" &&
             turnLog.map((turn, index) => {

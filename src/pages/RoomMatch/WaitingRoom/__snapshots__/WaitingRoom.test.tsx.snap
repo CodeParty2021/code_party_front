@@ -2,145 +2,101 @@
 
 exports[`<RoomMatchWaitingRoom /> snapshot test 1`] = `
 Array [
-  <div>
-    <div>
-      ルーム待機画面
-    </div>
-    <div>
-      <button
-        disabled={false}
-        id="start-btn"
-        onClick={[MockFunction]}
-      >
-        マッチ開始
-      </button>
-    </div>
-    <button
-      disabled={false}
-      id="ready-btn"
-      onClick={[MockFunction]}
-    >
-      取り消し
-    </button>
-    <button
-      id="exit-btn"
-      onClick={[MockFunction]}
-    >
-      退出
-    </button>
-    <div
-      style={
-        Object {
-          "display": "flex",
-        }
-      }
-    >
-      <input
-        id="invitation-text"
-        readOnly={true}
-        type="text"
-        value="http://localhost:3000/#/room-match/invitation/-MzESfkdu9Xmu8pkOAw5"
-      />
-      <button
-        id="invitation-btn"
-        onClick={[MockFunction]}
-      >
-        招待リンクをコピーする
-      </button>
-    </div>
-    <ul>
-      <li>
-        Room ID: 
-        room id
-      </li>
-      <li>
-        Host: 
-        host user
-      </li>
-      <li>
-        Status: 
-        waiting
-      </li>
-      <li>
-        I am 
-        
-         a host.
-      </li>
-      <li>
-        Members:
-      </li>
-      <li>
-        host user
-         :
-         
-        準備中
-        <button
-          id="kick-btn-host-user-id"
-          onClick={[Function]}
-        >
-          キックする
-        </button>
-      </li>
-      <li>
-        user 1
-         :
-         
-        観戦中
-        <button
-          id="kick-btn-user-id-1"
-          onClick={[Function]}
-        >
-          キックする
-        </button>
-      </li>
-      <li>
-        user 2
-         :
-         
-        切断
-      </li>
-    </ul>
-    <div>
-      <h3>
-        コード選択
-      </h3>
-      <React.Fragment>
-        <label>
-          <input
-            checked={false}
-            name="codes"
-            onChange={[Function]}
-            type="radio"
-            value="hostCodeId1"
-          />
-          ステップ：
-          3
-          , 作成日：
-          2022-02-16T05:05:46.315585+09:00
-          , 内容:
-           
-          print('hel
-          <br />
-        </label>
-        <label>
-          <input
-            checked={false}
-            name="codes"
-            onChange={[Function]}
-            type="radio"
-            value="hostCodeId2"
-          />
-          ステップ：
-          3
-          , 作成日：
-          2022-02-16T10:00:46.315585+09:00
-          , 内容:
-           
-          alert('hel
-          <br />
-        </label>
-      </React.Fragment>
-    </div>
-  </div>,
+  <styled.div>
+    <StarBackground />
+    <Header
+      backButtonHandler={[MockFunction]}
+      backMessage="ロビーへ戻る"
+    />
+    <styled.div>
+      <styled.div>
+        <Styled(Sword) />
+        <styled.h2>
+          フレンド対戦モード
+        </styled.h2>
+      </styled.div>
+      <styled.div>
+        <PlayerPlateMe
+          badge="膳所学童"
+          color="turquoise"
+          onClickSelectCode={[Function]}
+          onClickSelectOtherCode={[Function]}
+          selectedCodeName="print('hello world)'"
+          status="ready"
+          userName="user 2"
+          userPhoto="/logo512.png"
+        />
+        <styled.div>
+          <styled.div>
+            <styled.div>
+              ルームID
+              <styled.div>
+                room id
+              </styled.div>
+            </styled.div>
+            <Button
+              Icon={[Function]}
+              color="black"
+              icon="left"
+              onClick={[MockFunction]}
+              size="S"
+              status="default"
+              value="招待リンクをコピー"
+            />
+          </styled.div>
+          <styled.div>
+            <div>
+              <PlayerPlateOther
+                badge="膳所学童"
+                color="magenta"
+                onClickChangeCPU={[Function]}
+                status="default"
+                userName="host user"
+                userPhoto="/logo512.png"
+                userType="user"
+              />
+            </div>
+            <div>
+              <PlayerPlateOther
+                badge="膳所学童"
+                color="leaf"
+                onClickChangeCPU={[Function]}
+                status="ready"
+                userName="user 1"
+                userPhoto="/logo512.png"
+                userType="user"
+              />
+            </div>
+            <PlayerPlateOther
+              badge=""
+              color="turquoise"
+              status="waiting"
+              userName=""
+              userPhoto="/logo512.png"
+              userType="user"
+            />
+          </styled.div>
+        </styled.div>
+      </styled.div>
+      <styled.div>
+        <Button
+          color="black"
+          icon={null}
+          onClick={[MockFunction]}
+          size="M"
+          status="default"
+          value="退出する"
+        />
+        <Button
+          color="pink"
+          icon={null}
+          onClick={[MockFunction]}
+          size="M"
+          status="default"
+          value="ゲームスタート"
+        />
+      </styled.div>
+    </styled.div>
+  </styled.div>,
 ]
 `;

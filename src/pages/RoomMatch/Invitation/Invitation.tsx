@@ -2,12 +2,21 @@ import React from "react";
 import { useInvitationState } from "./hooks/useInvitationState";
 import { Head } from "components/Head/Head";
 import { Facebook, Google, Mail, Twitter } from "components/icons";
-import { ButtonText, IconArea, SignInButton } from "./InvitationStyle";
+import {
+  ButtonText,
+  IconArea,
+  Modal,
+  SignInButton,
+  Title,
+  Description,
+} from "./InvitationStyle";
 import {
   AccountServiceType,
   useFirebaseAuth,
 } from "hooks/FirebaseAuthHooks/useFirebaseAuthHooks";
 import { Icon24 } from "types/utils";
+import { StarBackground } from "components/StarBackground/StarBackground";
+import { Button } from "components/Button/Button";
 
 type ButtonServiceType = {
   service: AccountServiceType;
@@ -31,7 +40,7 @@ export const RoomMatchInvitation: React.FC<Props> = () => {
       title="ALGOSMO"
       ogDescription={
         hostName
-          ? `${hostName}からカジュアル対戦に招待されています！`
+          ? `${hostName}からルーム対戦に招待されています！`
           : "ルーム情報が見つかりませんでした。"
       }
       ogType="article"
@@ -81,16 +90,21 @@ export const RoomMatchInvitation: React.FC<Props> = () => {
     else {
       return (
         <div>
+          <StarBackground />
           {header}
-          <h1>次のルームに招待されています。</h1>
-          <p>RoomID:{roomId}</p>
-          <button
-            onClick={enterBtnClickHandler}
-            disabled={enterBtnDisabled}
-            id="enter-btn"
-          >
-            入場する
-          </button>
+          <Modal>
+            <Title>{`${hostName}からルーム対戦に招待されています！`}</Title>
+            <Description>RoomID:{roomId}</Description>
+
+            <Button
+              color="blue"
+              icon={null}
+              onClick={enterBtnClickHandler}
+              size="L"
+              status={enterBtnDisabled ? "disabled" : "default"}
+              value="入室する"
+            />
+          </Modal>
         </div>
       );
     }

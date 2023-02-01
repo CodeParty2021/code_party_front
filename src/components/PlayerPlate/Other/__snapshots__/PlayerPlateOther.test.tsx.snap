@@ -196,6 +196,10 @@ exports[`<PlayerPlateOther /> snapshot test 1`] = `
   -webkit-transform: matrix(1,0,-0.08,1,0,0);
   -ms-transform: matrix(1,0,-0.08,1,0,0);
   transform: matrix(1,0,-0.08,1,0,0);
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @supports not (gap:16px) {

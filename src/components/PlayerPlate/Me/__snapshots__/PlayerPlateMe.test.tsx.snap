@@ -245,6 +245,10 @@ exports[`<PlayerPlateMe /> snapshot test 1`] = `
   -webkit-transform: matrix(1,0,-0.08,1,0,0);
   -ms-transform: matrix(1,0,-0.08,1,0,0);
   transform: matrix(1,0,-0.08,1,0,0);
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .c6 {
@@ -279,6 +283,10 @@ exports[`<PlayerPlateMe /> snapshot test 1`] = `
   line-height: 150%;
   color: #4A5373;
   text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 @supports not (gap:10px) {

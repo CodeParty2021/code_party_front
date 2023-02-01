@@ -163,6 +163,7 @@ describe("Test Cases for Reducers of DBOperator", () => {
       expect(updateMock).toBeCalledTimes(1);
       expect(updateMock).lastCalledWith("/RoomApp/members/roomId/" + user.id, {
         displayName: user.displayName,
+        picture: user.picture,
         ready: false,
         status: "waiting",
       });

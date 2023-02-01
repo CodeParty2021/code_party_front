@@ -1,5 +1,6 @@
 import { child, get, push, set, update } from "firebase/database";
 import { User } from "services/user/user";
+import { removeUndefinedFromObject } from "utils/RemoveUndefinedFromObject";
 import {
   ActionsRef,
   MembersRef,
@@ -62,6 +63,7 @@ export const getMemberAsync = async (roomId: string, memberId: string) => {
   //メンバー情報にキャスト
   const member: UserState = {
     displayName: data.displayName,
+    picture: data.picture,
     ready: data.ready,
     status: data.status,
     codeId: data.codeId,
@@ -70,8 +72,10 @@ export const getMemberAsync = async (roomId: string, memberId: string) => {
   //チェック
   if (
     member.displayName === undefined ||
+    // pictureはundefined許容
     member.ready === undefined ||
     member.status === undefined
+    // codeIdはundefined許容
   )
     return;
 
@@ -123,6 +127,7 @@ export const initMemberAsync = async (
   user: User,
   userState: UserState = {
     displayName: user.displayName,
+    picture: user.picture,
     status: "waiting",
     ready: false,
   }
@@ -142,7 +147,8 @@ export const updateMemberAsync = async (
   userState: UserStateUpdate
 ) => {
   if (roomId == "" || id == "") return;
-  await update(child(MembersRef(), `${roomId}/${id}`), userState);
+  const updateData = removeUndefinedFromObject(userState);
+  await update(child(MembersRef(), `${roomId}/${id}`), updateData);
 };
 
 /**

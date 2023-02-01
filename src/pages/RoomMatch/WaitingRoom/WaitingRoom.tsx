@@ -101,7 +101,7 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
               selectedCodeName={labelize(selectedCode?.codeContent)}
               status={ready ? "ready" : "default"}
               userName={user.displayName}
-              userPhoto="/logo512.png"
+              userPhoto={user.picture}
             />
 
             <RightPanel>
@@ -139,12 +139,13 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
                             : "default"
                         }
                         userName={roomInfo.members[key].displayName}
-                        userPhoto="/logo512.png"
+                        userPhoto={roomInfo.members[key].picture}
                         userType="user"
                       />
                     </div>
                   );
                 })}
+                {/* 待機中 */}
                 {[1, 2, 3].map(
                   (i) =>
                     i >= roomInfo.memberKeys.length && (
@@ -155,7 +156,7 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
                         onClickChangeCPU={undefined}
                         status="waiting"
                         userName=""
-                        userPhoto="/logo512.png"
+                        userPhoto=""
                         userType="user"
                       />
                     )

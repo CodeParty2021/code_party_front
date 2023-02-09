@@ -3,6 +3,8 @@ import { User } from "services/user/user";
 import { removeUndefinedFromObject } from "utils/RemoveUndefinedFromObject";
 import {
   ActionsRef,
+  EncodeRoomId,
+  GenerateRoomId,
   MembersRef,
   RoomInfo,
   RoomInfoUpdate,
@@ -12,6 +14,11 @@ import {
   UserState,
   UserStateUpdate,
 } from "../RoomSync";
+
+/**
+ * コンフリクトを避けるために生成できるIDの最大数
+ */
+const MAX_ID_ITERATION = 10;
 
 // ---- Realtime DBへのset・update・push・removeファンクション群 ----- //
 
@@ -23,8 +30,11 @@ import {
 export const getRoomAsync = async (roomId: string) => {
   if (roomId == "") return;
 
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+
   //DBからGET
-  const ss = await get(child(RoomsRef(), roomId));
+  const ss = await get(child(RoomsRef(), encodedRoomId));
   const data = ss.val();
 
   //データが存在しない場合はundefined
@@ -53,8 +63,11 @@ export const getRoomAsync = async (roomId: string) => {
 export const getMemberAsync = async (roomId: string, memberId: string) => {
   if (roomId == "" || memberId == "") return;
 
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+
   //DBからGET
-  const ss = await get(child(child(MembersRef(), roomId), memberId));
+  const ss = await get(child(child(MembersRef(), encodedRoomId), memberId));
   const data = ss.val();
 
   //データが存在しない場合はundefined
@@ -85,11 +98,27 @@ export const getMemberAsync = async (roomId: string, memberId: string) => {
 /**
  * ルーム情報を追加する
  * @param roomInfo ルーム情報
- * @returns DB上のルームへの参照
+ * @returns IDとルーム情報
  */
 export const pushRoomAsync = async (roomInfo: RoomInfo) => {
-  const dbRef = await push(RoomsRef(), roomInfo);
-  return dbRef;
+  let id: string | undefined = undefined;
+
+  for (let i = 0; i < MAX_ID_ITERATION; i++) {
+    const t_id = GenerateRoomId();
+    const conflictedRoom = await getRoomAsync(t_id);
+    if (conflictedRoom === undefined) {
+      id = t_id;
+      break;
+    }
+  }
+
+  if (id === undefined) return;
+
+  await set(child(RoomsRef(), id), roomInfo);
+  return {
+    key: id,
+    data: roomInfo,
+  };
 };
 
 /**
@@ -102,7 +131,9 @@ export const updateRoomAsync = async (
   roomInfo: RoomInfoUpdate
 ) => {
   if (roomId == "") return;
-  await update(child(RoomsRef(), roomId), roomInfo);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await update(child(RoomsRef(), encodedRoomId), roomInfo);
 };
 
 /**
@@ -111,9 +142,11 @@ export const updateRoomAsync = async (
  */
 export const destroyRoomAsync = async (roomId: string) => {
   if (roomId == "") return;
-  await set(child(RoomsRef(), roomId), null);
-  await set(child(MembersRef(), roomId), null);
-  await set(child(ActionsRef(), roomId), null);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await set(child(RoomsRef(), encodedRoomId), null);
+  await set(child(MembersRef(), encodedRoomId), null);
+  await set(child(ActionsRef(), encodedRoomId), null);
 };
 
 /**
@@ -132,7 +165,9 @@ export const initMemberAsync = async (
     ready: false,
   }
 ) => {
-  await updateMemberAsync(roomId, user.id, userState);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await updateMemberAsync(encodedRoomId, user.id, userState);
 };
 
 /**
@@ -147,8 +182,10 @@ export const updateMemberAsync = async (
   userState: UserStateUpdate
 ) => {
   if (roomId == "" || id == "") return;
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
   const updateData = removeUndefinedFromObject(userState);
-  await update(child(MembersRef(), `${roomId}/${id}`), updateData);
+  await update(child(MembersRef(), `${encodedRoomId}/${id}`), updateData);
 };
 
 /**
@@ -158,7 +195,9 @@ export const updateMemberAsync = async (
  */
 export const removeMemberAsync = async (roomId: string, id: string) => {
   if (roomId == "" || id == "") return;
-  await set(child(MembersRef(), `${roomId}/${id}`), null);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await set(child(MembersRef(), `${encodedRoomId}/${id}`), null);
 };
 
 /**
@@ -171,7 +210,9 @@ export const addActionAsync = async (
   userAction: UserAction
 ) => {
   if (roomId == "") return;
-  await push(child(ActionsRef(), roomId), userAction);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await push(child(ActionsRef(), encodedRoomId), userAction);
 };
 
 /**
@@ -186,7 +227,9 @@ export const updateActionAsync = async (
   userAction: UserActionUpdate
 ) => {
   if (roomId == "" || id == "") return;
-  await update(child(ActionsRef(), `${roomId}/${id}`), userAction);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await update(child(ActionsRef(), `${encodedRoomId}/${id}`), userAction);
 };
 
 /**
@@ -196,5 +239,7 @@ export const updateActionAsync = async (
  */
 export const removeActionAsync = async (roomId: string, id: string) => {
   if (roomId == "" || id == "") return;
-  await set(child(ActionsRef(), `${roomId}/${id}`), null);
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await set(child(ActionsRef(), `${encodedRoomId}/${id}`), null);
 };

@@ -19,6 +19,7 @@ import {
   ActionsRef,
   addAction,
   addMember,
+  EncodeRoomId,
   enterRoom,
   exitRoom,
   ListReducerArg,
@@ -46,8 +47,15 @@ import {
 export const startRoomDBSync = (roomId: string): ThunkResult<void> => {
   return (dispatch: any) => {
     if (roomId == "") return;
+    //roomIdはBase32なのでエンコードしてから使用する
+    const encodedRoomId = EncodeRoomId(roomId);
     dispatch(
-      _startValueDBSync("rooms", child(RoomsRef(), roomId), enterRoom, exitRoom)
+      _startValueDBSync(
+        "rooms",
+        child(RoomsRef(), encodedRoomId),
+        enterRoom,
+        exitRoom
+      )
     );
   };
 };
@@ -70,10 +78,12 @@ export const stopRoomDBSync = (): ThunkResult<void> => {
 export const startMembersDBSync = (roomId: string): ThunkResult<void> => {
   return (dispatch: any) => {
     if (roomId == "") return;
+    //roomIdはBase32なのでエンコードしてから使用する
+    const encodedRoomId = EncodeRoomId(roomId);
     dispatch(
       _startListDBSync(
         "members",
-        child(MembersRef(), roomId),
+        child(MembersRef(), encodedRoomId),
         addMember,
         updateMember,
         moveMember,
@@ -106,8 +116,10 @@ export const setUserStateOnDisconnect = async (
   value: UserState
 ) => {
   if (userId == "") return;
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
   await _setValueOnDisconnect(
-    child(MembersRef(), `${roomId}/${userId}`),
+    child(MembersRef(), `${encodedRoomId}/${userId}`),
     value
   );
 };
@@ -124,8 +136,13 @@ export const updateUserStateOnDisconnect = async (
   userId: string,
   value: UserStateUpdate
 ) => {
-  if (userId == "") return;
-  await _updateOnDisconnect(child(MembersRef(), `${roomId}/${userId}`), value);
+  if (roomId == "" || userId == "") return;
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await _updateOnDisconnect(
+    child(MembersRef(), `${encodedRoomId}/${userId}`),
+    value
+  );
 };
 
 /**
@@ -138,8 +155,10 @@ export const removeUserStateOnDisconnect = async (
   roomId: string,
   userId: string
 ) => {
-  if (userId == "") return;
-  await _removeOnDisconnect(child(MembersRef(), `${roomId}/${userId}`));
+  if (roomId == "" || userId == "") return;
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await _removeOnDisconnect(child(MembersRef(), `${encodedRoomId}/${userId}`));
 };
 
 /**
@@ -157,8 +176,10 @@ export const setUserStateWithPriorityOnDisconnect = async (
   priority: string | number | null
 ) => {
   if (userId == "") return;
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
   await _setWithPriorityOnDisconnect(
-    child(MembersRef(), `${roomId}/${userId}`),
+    child(MembersRef(), `${encodedRoomId}/${userId}`),
     value,
     priority
   );
@@ -174,8 +195,10 @@ export const cancelUserStateOnDisconnect = async (
   roomId: string,
   userId: string
 ) => {
-  if (userId == "") return;
-  await _cancelOnDisconnect(child(MembersRef(), `${roomId}/${userId}`));
+  if (roomId == "" || userId == "") return;
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+  await _cancelOnDisconnect(child(MembersRef(), `${encodedRoomId}/${userId}`));
 };
 
 /**
@@ -186,10 +209,12 @@ export const cancelUserStateOnDisconnect = async (
 export const startActionsDBSync = (roomId: string): ThunkResult<void> => {
   return (dispatch: any) => {
     if (roomId == "") return;
+    //roomIdはBase32なのでエンコードしてから使用する
+    const encodedRoomId = EncodeRoomId(roomId);
     dispatch(
       _startListDBSync(
         "actions",
-        child(ActionsRef(), roomId),
+        child(ActionsRef(), encodedRoomId),
         addAction,
         updateAction,
         moveAction,

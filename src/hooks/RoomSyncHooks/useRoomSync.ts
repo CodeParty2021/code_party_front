@@ -149,8 +149,9 @@ export const createRoomAsync = (
       host: user.id,
       status: "waiting",
     };
-    const dbRef = await pushRoomAsync(roomInfo);
-    const key = dbRef.key;
+    const room = await pushRoomAsync(roomInfo);
+    const key = room?.key;
+    // TODO: 部屋に入れなかった時の処理がいつか必要
     if (key) {
       await dispatch(_enterRoomAsync(key, user));
     }

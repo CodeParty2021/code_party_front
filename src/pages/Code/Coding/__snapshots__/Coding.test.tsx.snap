@@ -95,6 +95,10 @@ Array [
         onClick={[MockFunction]}
         value="SETTING"
       />
+      <Styled(Tab)
+        onClick={[MockFunction]}
+        value="HELP"
+      />
     </styled.div>
   </styled.div>,
 ]

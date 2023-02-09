@@ -8,3 +8,6 @@ export const FONT_WEIGHT = {
   REGULAR: 400,
   BOLD: 700,
 };
+
+/** ルームIDのID長 */
+export const ROOM_ID_LENGTH = 4;

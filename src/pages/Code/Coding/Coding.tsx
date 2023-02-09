@@ -50,6 +50,7 @@ export const CodeCoding: React.FC<Props> = () => {
     toggleSettingHandler,
     closePanelHandler,
     changeStep,
+    linkToNotion,
     // その他
     backLinkRoute,
   } = useCodingState();
@@ -144,6 +145,7 @@ export const CodeCoding: React.FC<Props> = () => {
         {" "}
         <TabStyle value="LOG" onClick={toggleLogHandler} />
         <TabStyle value="SETTING" onClick={toggleSettingHandler} />
+        <TabStyle value="HELP" onClick={linkToNotion} />
       </TabWrap>
     </CodingStyle>
   );

@@ -88,6 +88,7 @@ export type IResponse = {
   closePanelHandler: () => void;
   backLinkRoute: string;
   changeStep: (step: number) => void;
+  linkToNotion: () => void;
 };
 
 export const useCodingState = (): IResponse => {
@@ -247,6 +248,12 @@ export const useCodingState = (): IResponse => {
     if (showSetting) setShowSetting(false);
     if (showTurnLog) setShowTurnLog(false);
   };
+  const linkToNotion = () => {
+    window.open(
+      "https://four-forest-c7b.notion.site/4cb8096d110c47e19891d2df8a445122",
+      "_blank"
+    );
+  };
   return {
     state: {
       showTurnLog,
@@ -271,5 +278,6 @@ export const useCodingState = (): IResponse => {
     closePanelHandler,
     panelState,
     changeStep,
+    linkToNotion,
   };
 };

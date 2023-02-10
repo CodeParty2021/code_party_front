@@ -30,7 +30,6 @@ Array [
                 オンライン対戦することが出来ます。
               </DescriptionText>
             }
-            disabled={true}
             icon="sword"
             imageName="grab_flag_lobo"
             onClick={[Function]}

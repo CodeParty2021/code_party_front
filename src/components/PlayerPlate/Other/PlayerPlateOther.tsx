@@ -13,7 +13,7 @@ type Props = {
   badge?: string;
   color?: "turquoise" | "leaf" | "orange" | "magenta";
   status: "default" | "ready" | "disconnecting" | "bot" | "waiting";
-  onClickChangeCPU?: () => void;
+  onClickChangeCPU?: () => void | undefined;
 };
 
 export const PlayerPlateOther: React.FC<Props> = ({
@@ -56,7 +56,7 @@ export const PlayerPlateOther: React.FC<Props> = ({
       }
       columnTop={
         <ColumnTopStye waiting={status === "waiting"}>
-          {status === "waiting" ? (
+          {status === "waiting" && onClickChangeCPU != undefined ? (
             <Button
               color="white"
               size="S"

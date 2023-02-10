@@ -27,7 +27,7 @@ Array [
 
 <img
     class="c0"
-    src="./img/header-circle.svg"
+    src="/img/header-circle.svg"
   />,
   .c0 {
   width: 178px;
@@ -40,7 +40,7 @@ Array [
 
 <img
     class="c0"
-    src="./logo.svg"
+    src="/logo.svg"
   />,
 ]
 `;

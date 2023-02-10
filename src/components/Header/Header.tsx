@@ -26,8 +26,8 @@ export const Header: React.FC<Props> = ({ backMessage, backButtonHandler }) => {
           </BackLinkArea>
         )}
       </HeaderStyle>
-      <HeaderCircleStyle src="./img/header-circle.svg" />
-      <LogoStyle src="./logo.svg"></LogoStyle>
+      <HeaderCircleStyle src="/img/header-circle.svg" />
+      <LogoStyle src="/logo.svg"></LogoStyle>
     </>
   );
 };

@@ -4,11 +4,16 @@ import { AnyAction } from "redux";
 import "firebase_config";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "store";
+import { EncodeBase32, GenerateBase32ID } from "utils/Base32";
+import { ROOM_ID_LENGTH } from "styles/constants/constants";
 
 export const RootRef = () => ref(getDatabase(), "/RoomApp");
 export const RoomsRef = () => child(RootRef(), "rooms");
 export const MembersRef = () => child(RootRef(), "members");
 export const ActionsRef = () => child(RootRef(), "actions");
+
+export const GenerateRoomId = () => GenerateBase32ID(ROOM_ID_LENGTH);
+export const EncodeRoomId = (roomId: string) => EncodeBase32(roomId);
 
 /**
  * ルーム情報
@@ -35,6 +40,7 @@ export type RoomInfo = {
  */
 export type UserState = {
   displayName: string;
+  picture?: string;
   /**
    * - waiting: 待機画面に居る
    * - watching: GameWatching画面にいる

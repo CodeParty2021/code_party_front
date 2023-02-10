@@ -1,5 +1,26 @@
+import { Button } from "components/Button/Button";
+import { Header } from "components/Header/Header";
+import Link from "components/icons/Link";
+import { PlayerPlateMe } from "components/PlayerPlate/Me/PlayerPlateMe";
+import { PlayerPlateOther } from "components/PlayerPlate/Other/PlayerPlateOther";
+import { StarBackground } from "components/StarBackground/StarBackground";
 import React from "react";
+import { SwordIcon } from "../Lobby/LobbyStyle";
+import { CodeSelect } from "./components/CodeSelect";
 import { useWaitingRoomState } from "./hooks/useWaitingRoomState";
+import {
+  BottomPanel,
+  Container,
+  InfoPanel,
+  Others,
+  PlayerBox,
+  RightPanel,
+  RoomID,
+  RoomInfo,
+  Title,
+  TitlePosition,
+  WaitingRoomStyle,
+} from "./WaitingRoomStyle";
 
 type Props = {};
 
@@ -8,110 +29,163 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
     user,
     roomInfo,
     isHost,
-    status,
     ready,
     readyBtnHandler,
-    readyBtnDisabled,
     exitBtnHandler,
-    startBtnDisabled,
     startBtnHandler,
-    isCopyBtnClicked,
     invitationBtnHandler,
-    kickUserHandler,
     code,
-    selectedCodeId,
-    onChangeSelectedCodeId,
+    selectedCode,
+    onChangeSelectedCode,
+    openCodeSelectModal,
+    closeCodeSelectModal,
+    showCodeSelectModal,
+    startBtnDisabled,
+    readyBtnDisabled,
   } = useWaitingRoomState();
+
+  const labelize = (codeContent: string | undefined) => {
+    if (codeContent == undefined) return "";
+    const firstLine = codeContent.split("\n")[0];
+    return firstLine;
+  };
+  const color: (
+    memberKeys: string[],
+    userId: string
+  ) => "turquoise" | "leaf" | "orange" | "magenta" = (
+    memberkeys: string[],
+    userId: string
+  ) => {
+    switch (memberkeys.indexOf(userId)) {
+      case 0:
+        return "magenta";
+      case 1:
+        return "leaf";
+      case 2:
+        return "turquoise";
+      case 3:
+        return "orange";
+    }
+    return "magenta";
+  };
+
   if (user) {
     return (
-      <div>
-        <div>ルーム待機画面</div>
-        <div>
-          <button
-            id="start-btn"
-            onClick={startBtnHandler}
-            disabled={startBtnDisabled}
-          >
-            マッチ開始
-          </button>
-        </div>
-        <button
-          id="ready-btn"
-          onClick={readyBtnHandler}
-          disabled={readyBtnDisabled}
-        >
-          {ready ? "取り消し" : "準備完了！"}
-        </button>
-        <button id="exit-btn" onClick={exitBtnHandler}>
-          退出
-        </button>
-        <div style={{ display: "flex" }}>
-          <input
-            type="text"
-            id="invitation-text"
-            value={roomInfo.invitationLink}
-            readOnly
-          ></input>
-          <button id="invitation-btn" onClick={invitationBtnHandler}>
-            招待リンクをコピーする
-          </button>
-          {isCopyBtnClicked && <p>コピーしました</p>}
-        </div>
-        <ul>
-          <li>Room ID: {roomInfo.roomId}</li>
-          <li>Host: {roomInfo.host.displayName}</li>
-          <li>Status: {status}</li>
-          <li>I am {isHost ? "" : "not"} a host.</li>
-          <li>Members:</li>
-          {roomInfo.memberKeys.map((key) => (
-            <li key={key}>
-              {roomInfo.members[key].displayName} :{" "}
-              {roomInfo.members[key].status == "watching"
-                ? "観戦中"
-                : roomInfo.members[key].status == "disconnect"
-                ? "切断"
-                : roomInfo.members[key].status == "waiting"
-                ? roomInfo.members[key].ready
-                  ? "準備完了"
-                  : "準備中"
-                : "No Status"}
-              {user.id !== key ? (
-                <button
-                  id={`kick-btn-${key}`}
-                  onClick={() => kickUserHandler(key)}
-                >
-                  キックする
-                </button>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-        <div>
-          <h3>コード選択</h3>
-          {code.loading ? (
-            "コード一覧を取得中"
-          ) : code.codes.length == 0 ? (
-            "コードが見つかりませんでした"
-          ) : (
-            <>
-              {code.codes.map((code) => (
-                <label key={code.id}>
-                  <input
-                    type="radio"
-                    name="codes"
-                    value={code.id}
-                    checked={code.id === selectedCodeId}
-                    onChange={(e) => onChangeSelectedCodeId(e.target.value)}
-                  />
-                  ステップ：{code.step}, 作成日：{code.createdAt}, 内容:{" "}
-                  {code.codeContent.slice(0, 10)}
-                  <br />
-                </label>
-              ))}
-            </>
-          )}
-        </div>
-      </div>
+      <WaitingRoomStyle>
+        {showCodeSelectModal && code && (
+          <CodeSelect
+            codeList={code.codes}
+            onSelect={onChangeSelectedCode}
+            onClose={closeCodeSelectModal}
+            selected={selectedCode}
+            onReady={() => {
+              if (!ready) readyBtnHandler();
+            }}
+            readyBtnDisabled={readyBtnDisabled}
+          />
+        )}
+
+        <StarBackground />
+        <Header backMessage="ロビーへ戻る" backButtonHandler={exitBtnHandler} />
+        <Container>
+          <TitlePosition>
+            <SwordIcon></SwordIcon>
+            <Title>フレンド対戦モード</Title>
+          </TitlePosition>
+          <PlayerBox>
+            <PlayerPlateMe
+              badge="膳所学童"
+              color={color(roomInfo.memberKeys, user.id)}
+              onClickSelectCode={openCodeSelectModal}
+              onClickSelectOtherCode={openCodeSelectModal}
+              selectedCodeName={labelize(selectedCode?.codeContent)}
+              status={ready ? "ready" : "default"}
+              userName={user.displayName}
+              userPhoto={user.picture}
+            />
+
+            <RightPanel>
+              <InfoPanel>
+                <RoomInfo>
+                  ルームID
+                  <RoomID>{roomInfo.roomId}</RoomID>
+                </RoomInfo>
+
+                <Button
+                  Icon={Link}
+                  color="black"
+                  icon="left"
+                  onClick={invitationBtnHandler}
+                  size="S"
+                  status="default"
+                  value="招待リンクをコピー"
+                />
+              </InfoPanel>
+
+              <Others>
+                {roomInfo.memberKeys.map((key) => {
+                  if (key == user.id) return;
+                  return (
+                    <div key={key}>
+                      <PlayerPlateOther
+                        badge="膳所学童"
+                        color={color(roomInfo.memberKeys, key)}
+                        onClickChangeCPU={() => {}}
+                        status={
+                          roomInfo.members[key].ready
+                            ? "ready"
+                            : roomInfo.members[key].status === "disconnect"
+                            ? "disconnecting"
+                            : "default"
+                        }
+                        userName={roomInfo.members[key].displayName}
+                        userPhoto={roomInfo.members[key].picture}
+                        userType="user"
+                      />
+                    </div>
+                  );
+                })}
+                {/* 待機中 */}
+                {[1, 2, 3].map(
+                  (i) =>
+                    i >= roomInfo.memberKeys.length && (
+                      <PlayerPlateOther
+                        key={i}
+                        badge=""
+                        color="turquoise"
+                        onClickChangeCPU={undefined}
+                        status="waiting"
+                        userName=""
+                        userPhoto=""
+                        userType="user"
+                      />
+                    )
+                )}
+              </Others>
+            </RightPanel>
+          </PlayerBox>
+          <BottomPanel>
+            <Button
+              color="black"
+              icon={null}
+              onClick={exitBtnHandler}
+              size="M"
+              status="default"
+              value="退出する"
+            />
+            {isHost && (
+              <Button
+                color="pink"
+                icon={null}
+                onClick={startBtnHandler}
+                size="M"
+                status={startBtnDisabled ? "disabled" : "default"}
+                value="ゲームスタート"
+              />
+            )}
+          </BottomPanel>
+        </Container>
+      </WaitingRoomStyle>
     );
   } else {
     return <div>ログインが必要です</div>;

@@ -3,28 +3,32 @@
 exports[`<RoomMatchInvitation /> snapshot test 1`] = `
 Array [
   <div>
+    <StarBackground />
     <Head
-      ogDescription="hostNameからカジュアル対戦に招待されています！"
+      ogDescription="hostNameからルーム対戦に招待されています！"
       ogImage="https://codeparty.netlify.app/img/modeselectcard_battle.png"
       ogImageHeight="412"
       ogImageWidth="616"
       ogType="article"
       title="ALGOSMO"
     />
-    <h1>
-      次のルームに招待されています。
-    </h1>
-    <p>
-      RoomID:
-      sampleID
-    </p>
-    <button
-      disabled={true}
-      id="enter-btn"
-      onClick={[MockFunction]}
-    >
-      入場する
-    </button>
+    <styled.div>
+      <styled.div>
+        hostNameからルーム対戦に招待されています！
+      </styled.div>
+      <styled.div>
+        RoomID:
+        sampleID
+      </styled.div>
+      <Button
+        color="blue"
+        icon={null}
+        onClick={[MockFunction]}
+        size="L"
+        status="disabled"
+        value="入室する"
+      />
+    </styled.div>
   </div>,
 ]
 `;

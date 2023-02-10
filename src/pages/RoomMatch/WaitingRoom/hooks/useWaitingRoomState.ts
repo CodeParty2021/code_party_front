@@ -35,8 +35,11 @@ export type IResponse = {
     codes: CodeType[];
     loading: boolean;
   };
-  selectedCodeId: string;
-  onChangeSelectedCodeId: (codeId: string) => void;
+  selectedCode: CodeType | null;
+  onChangeSelectedCode: (code: CodeType) => void;
+  showCodeSelectModal: boolean;
+  openCodeSelectModal: () => void;
+  closeCodeSelectModal: () => void;
 };
 
 export const useWaitingRoomState = (): IResponse => {
@@ -52,7 +55,7 @@ export const useWaitingRoomState = (): IResponse => {
   const [preRoomStatus, setPreRoomStatus] = useState<"waiting" | "watching">(
     "watching"
   );
-  const [selectedCodeId, setSelectedCodeId] = useState("");
+  const [selectedCode, setSelectedCode] = useState<CodeType | null>(null);
   const [ready, setReady] = useState(false);
   const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
   const [startBtnDisabled, setStartBtnDisabled] = useState(true);
@@ -82,10 +85,10 @@ export const useWaitingRoomState = (): IResponse => {
   // 準備ボタンの有効化
   useEffect(() => {
     //コードが選択されたら準備完了ボタンを押せるようにする
-    if (selectedCodeId != "") {
+    if (selectedCode != null) {
       setReadyBtnDisabled(false);
     }
-  }, [selectedCodeId]);
+  }, [selectedCode]);
 
   // ルームステータスがwaitingからwatchingになったら観戦画面に遷移
   useEffect(() => {
@@ -101,7 +104,7 @@ export const useWaitingRoomState = (): IResponse => {
   useEffect(() => {
     updateMember({
       ready: ready,
-      codeId: selectedCodeId,
+      codeId: selectedCode ? selectedCode.id : "",
     });
   }, [ready]);
 
@@ -162,8 +165,8 @@ export const useWaitingRoomState = (): IResponse => {
     });
   };
 
-  const _onChangeSelectedCodeId = (codeId: string) => {
-    setSelectedCodeId(codeId);
+  const _onChangeSelectedCode = (code: CodeType) => {
+    setSelectedCode(code);
   };
 
   //invitationURLのコピーボタン
@@ -176,6 +179,16 @@ export const useWaitingRoomState = (): IResponse => {
   };
   const _kickUserBtnHandler = (userId: string) => {
     updateOtherMember(userId, { status: "kicking" });
+  };
+
+  //モーダル表示非表示
+  const [showCodeSelectModal, setShowCodeSelectModal] =
+    useState<boolean>(false);
+  const openCodeSelectModal = () => {
+    setShowCodeSelectModal(true);
+  };
+  const closeCodeSelectModal = () => {
+    setShowCodeSelectModal(false);
   };
 
   return {
@@ -207,7 +220,10 @@ export const useWaitingRoomState = (): IResponse => {
       codes: codes,
       loading: loading,
     },
-    selectedCodeId: selectedCodeId,
-    onChangeSelectedCodeId: _onChangeSelectedCodeId,
+    selectedCode: selectedCode,
+    onChangeSelectedCode: _onChangeSelectedCode,
+    showCodeSelectModal,
+    openCodeSelectModal,
+    closeCodeSelectModal,
   };
 };

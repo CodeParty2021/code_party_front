@@ -20,6 +20,11 @@ export const ColumnTopStye = styled.div<ColumnTopProps>`
     font-size: 30px;
     line-height: 43px;
     transform: matrix(1, 0, -0.08, 1, 0, 0);
+
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 `;
 

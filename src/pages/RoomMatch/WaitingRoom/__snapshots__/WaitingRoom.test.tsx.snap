@@ -24,7 +24,7 @@ Array [
           selectedCodeName="print('hello world)'"
           status="ready"
           userName="user 2"
-          userPhoto="/logo512.png"
+          userPhoto="picture"
         />
         <styled.div>
           <styled.div>
@@ -52,7 +52,6 @@ Array [
                 onClickChangeCPU={[Function]}
                 status="default"
                 userName="host user"
-                userPhoto="/logo512.png"
                 userType="user"
               />
             </div>
@@ -63,7 +62,6 @@ Array [
                 onClickChangeCPU={[Function]}
                 status="ready"
                 userName="user 1"
-                userPhoto="/logo512.png"
                 userType="user"
               />
             </div>
@@ -72,7 +70,7 @@ Array [
               color="turquoise"
               status="waiting"
               userName=""
-              userPhoto="/logo512.png"
+              userPhoto=""
               userType="user"
             />
           </styled.div>

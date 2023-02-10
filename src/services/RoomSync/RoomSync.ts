@@ -40,6 +40,7 @@ export type RoomInfo = {
  */
 export type UserState = {
   displayName: string;
+  picture?: string;
   /**
    * - waiting: 待機画面に居る
    * - watching: GameWatching画面にいる

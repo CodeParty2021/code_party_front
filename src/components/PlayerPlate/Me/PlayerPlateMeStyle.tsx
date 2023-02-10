@@ -15,6 +15,10 @@ export const ColumnTopStye = styled.div`
     font-size: 30px;
     line-height: 43px;
     transform: matrix(1, 0, -0.08, 1, 0, 0);
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -36,6 +40,10 @@ export const ColumnMiddleStye = styled.div`
     line-height: 150%;
     color: ${PlayerPlateColors.badge};
     text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
 

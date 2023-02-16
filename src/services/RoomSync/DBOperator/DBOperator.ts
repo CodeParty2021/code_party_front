@@ -96,6 +96,28 @@ export const getMemberAsync = async (roomId: string, memberId: string) => {
 };
 
 /**
+ * ルーム内のメンバー数を取得する
+ * @param roomId ルームID
+ * @returns メンバー数
+ */
+export const getMemberCountAsync = async (roomId: string) => {
+  if (roomId == "") return;
+
+  //roomIdはBase32なのでエンコードしてから使用する
+  const encodedRoomId = EncodeRoomId(roomId);
+
+  //DBからGET
+  const ss = await get(child(MembersRef(), encodedRoomId));
+  const data = ss.val();
+
+  //ルームが存在しない場合はundefined
+  if (!data) return;
+
+  const members = Object.entries(data);
+  return members.length;
+};
+
+/**
  * ルーム情報を追加する
  * @param roomInfo ルーム情報
  * @returns IDとルーム情報

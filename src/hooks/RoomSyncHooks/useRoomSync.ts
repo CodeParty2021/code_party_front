@@ -36,6 +36,11 @@ import {
 import { User } from "services/user/user";
 import { RootState } from "store";
 
+/**
+ * ルームに入れるメンバー数の上限
+ */
+const MAX_MEMBER_COUNT = 4;
+
 export const useRoomSync = () => {
   const room = useSelector((state: RootState) => state.room);
   const { user } = useSelector((state: RootState) => state.user);
@@ -176,7 +181,7 @@ export const enterRoomAsync = (
     //ルームが存在し、満員でないなら入室処理
     if (!room || !memberCount) {
       throw new Error(`roomId is not found`);
-    } else if (memberCount >= 4) {
+    } else if (memberCount >= MAX_MEMBER_COUNT) {
       throw new Error(`room is full`);
     } else {
       dispatch(_enterRoomAsync(roomId, user));

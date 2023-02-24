@@ -94,7 +94,7 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
           </TitlePosition>
           <PlayerBox>
             <PlayerPlateMe
-              badge="膳所学童"
+              badge="称号無し"
               color={color(roomInfo.memberKeys, user.id)}
               onClickSelectCode={openCodeSelectModal}
               onClickSelectOtherCode={openCodeSelectModal}
@@ -128,7 +128,7 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
                   return (
                     <div key={key}>
                       <PlayerPlateOther
-                        badge="膳所学童"
+                        badge="称号無し"
                         color={color(roomInfo.memberKeys, key)}
                         onClickChangeCPU={() => {}}
                         status={

@@ -17,7 +17,7 @@ Array [
       </styled.div>
       <styled.div>
         <PlayerPlateMe
-          badge="膳所学童"
+          badge="称号無し"
           color="turquoise"
           onClickSelectCode={[Function]}
           onClickSelectOtherCode={[Function]}
@@ -47,7 +47,7 @@ Array [
           <styled.div>
             <div>
               <PlayerPlateOther
-                badge="膳所学童"
+                badge="称号無し"
                 color="magenta"
                 onClickChangeCPU={[Function]}
                 status="default"
@@ -57,7 +57,7 @@ Array [
             </div>
             <div>
               <PlayerPlateOther
-                badge="膳所学童"
+                badge="称号無し"
                 color="leaf"
                 onClickChangeCPU={[Function]}
                 status="ready"

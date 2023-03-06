@@ -34,6 +34,8 @@ const defaultStyle = css`
 
     transition: border-radius 0.5s ease;
 
+    pointer-events: all;
+
     align-self: stretch;
     flex-grow: 1;
     flex-shrink: 1;

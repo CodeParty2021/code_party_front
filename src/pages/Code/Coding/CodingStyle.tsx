@@ -146,7 +146,7 @@ export const ContainerUnity = styled.div<ShowUnityProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 12px 48px 0;
+  margin: 12px 0 0;
   ${FlexGap({ gap: "8px", direction: "column" })}
 
   height: 100%;
@@ -162,6 +162,7 @@ export const ContainerUnity = styled.div<ShowUnityProps>`
     !showUnity &&
     css`
       opacity: 0;
+      pointer-events: none;
     `}
 `;
 
@@ -188,6 +189,8 @@ export const AlgoEditorStyle = styled(AlgoEditor)<
   transform: translate(-50%, -50%);
 
   transition: all 0.5s ease;
+
+  pointer-events: none;
 
   ${({ showUnity }) =>
     showUnity &&

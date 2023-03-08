@@ -52,7 +52,7 @@ export const CodeCoding: React.FC<Props> = () => {
     changeStep,
     linkToNotion,
     // その他
-    backLinkRoute,
+    backLinkState,
   } = useCodingState();
   if (loading) {
     return (
@@ -66,9 +66,9 @@ export const CodeCoding: React.FC<Props> = () => {
     <CodingStyle>
       <Background color="blue" />
       <WhiteBackground showUnity={showUnity} />
-      <BackLink to={backLinkRoute}>
+      <BackLink to={backLinkState.route}>
         <IconButton Icon={ArrowLeft} />
-        <span>モード選択に戻る</span>
+        <span>{backLinkState.label}</span>
       </BackLink>
       <ContainerWrap show={showLog || showSetting}>
         <ContainerMain>

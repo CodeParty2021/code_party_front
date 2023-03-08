@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useWaitingRoomState } from "./useWaitingRoomState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
@@ -16,6 +16,7 @@ const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
 const useFetchCodesMock = useFetchCodes as jest.Mock;
 const useSelectorMock = useSelector as jest.Mock;
+const useSearchParamsMock = useSearchParams as jest.Mock;
 
 const users: { [id: string]: UserState } = {
   userid1: {
@@ -107,6 +108,11 @@ describe("useWaitingRoomState", () => {
       unRegisterObserver: null,
       loading: false,
     });
+    useSearchParamsMock.mockReturnValue([
+      {
+        get: (paramName: string) => (paramName === "modal" ? "on" : undefined),
+      },
+    ]);
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -446,5 +452,38 @@ describe("useWaitingRoomState", () => {
 
   describe("isCopyBtnClicked", () => {
     // TODO コピー部分のテストを書きたかったが難しかったため挫折...
+  });
+
+  describe("ページ開始時にモーダルが開かれているかどうか", () => {
+    describe("modal=onがGETクエリに指定された場合", () => {
+      beforeEach(() => {
+        useSearchParamsMock.mockReturnValue([
+          {
+            get: (paramName: string) =>
+              paramName === "modal" ? "on" : undefined,
+          },
+        ]);
+      });
+
+      it("モーダルが開かれている", () => {
+        const { result } = renderHook(() => useWaitingRoomState());
+        expect(result.current.showCodeSelectModal).toBe(true);
+      });
+    });
+
+    describe("modal=onがない場合", () => {
+      beforeEach(() => {
+        useSearchParamsMock.mockReturnValue([
+          {
+            get: () => undefined,
+          },
+        ]);
+      });
+
+      it("モーダルが開かれていない", () => {
+        const { result } = renderHook(() => useWaitingRoomState());
+        expect(result.current.showCodeSelectModal).toBe(false);
+      });
+    });
   });
 });

@@ -100,6 +100,7 @@ const state: IResponse = {
   },
   selectedCode: code1,
   onChangeSelectedCode: jest.fn(),
+  onStartToEditCode: jest.fn(),
   showCodeSelectModal: false,
   openCodeSelectModal: () => {},
   closeCodeSelectModal: () => {},

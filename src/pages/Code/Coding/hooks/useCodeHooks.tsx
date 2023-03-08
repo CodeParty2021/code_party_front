@@ -52,6 +52,11 @@ const initialState: CodeState = {
   buttonType: "hidden",
 };
 
+type BackLinkState = {
+  label: string;
+  route: string;
+};
+
 export type IResponse = {
   // 状態変数
   /** ページの状態 */
@@ -86,7 +91,7 @@ export type IResponse = {
   toggleLogHandler: () => void;
   toggleSettingHandler: () => void;
   closePanelHandler: () => void;
-  backLinkRoute: string;
+  backLinkState: BackLinkState;
   changeStep: (step: number) => void;
   linkToNotion: () => void;
 };
@@ -95,18 +100,32 @@ export const useCodingState = (): IResponse => {
   // コードID取得
   const { codeId, beforePage } = useParams<string>();
 
-  const [backLinkRoute, setBackLinkRoute] = useState<string>("");
+  const [backLinkState, setBackLinkState] = useState<BackLinkState>({
+    label: "モード選択に戻る",
+    route: "/event/select-mode",
+  });
 
   useEffect(() => {
-    setBackLinkRoute(
-      beforePage == "eventAI"
-        ? "/event/select-ai"
-        : beforePage == "codes"
-        ? "/codes"
-        : beforePage == "eventTrain"
-        ? "/event/select-mode"
-        : ""
-    );
+    switch (beforePage) {
+      case "eventAI":
+        setBackLinkState({ label: "AI選択に戻る", route: "/event/select-ai" });
+        break;
+      case "codes":
+        setBackLinkState({ label: "コード一覧に戻る", route: "/codes" });
+        break;
+      case "eventTrain":
+        setBackLinkState({
+          label: "モード選択に戻る",
+          route: "/event/select-mode",
+        });
+        break;
+      case "selectCode":
+        setBackLinkState({
+          label: "待機部屋に戻る",
+          route: "/room-match/waiting-room?modal=on",
+        });
+        break;
+    }
   }, []);
 
   // hooksの宣言
@@ -272,7 +291,7 @@ export const useCodingState = (): IResponse => {
     unityContext,
     buttonHandler,
     toggleLogHandler,
-    backLinkRoute,
+    backLinkState,
     toggleSettingHandler,
     showSetting,
     closePanelHandler,

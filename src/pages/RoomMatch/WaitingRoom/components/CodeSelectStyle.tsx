@@ -7,6 +7,7 @@ import {
   GRAY_90,
   WHITE,
 } from "styles/colors";
+import { FlexGap } from "styles/FlexGap/FlexGap";
 
 export const BackBlur = styled.div`
   position: absolute;
@@ -126,6 +127,7 @@ export const BottomPanel = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  ${FlexGap({ gap: "16px", direction: "row" })}
 `;
 
 export const Close = styled.div`

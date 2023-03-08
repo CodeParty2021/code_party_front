@@ -23,6 +23,12 @@ describe("<Button />", () => {
     ).toBeTruthy();
   });
 
+  it("render test blue M2", () => {
+    expect(
+      render(<Button color="blue" size="M2" status="default" value="テスト" />)
+    ).toBeTruthy();
+  });
+
   it("render test pink L", () => {
     expect(
       render(<Button color="pink" size="L" status="default" value="テスト" />)

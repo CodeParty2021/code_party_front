@@ -99,7 +99,7 @@ export const useCodingState = (): IResponse => {
 
   // ボタンがクリックされたか
   const [hasClicked, setHasClicked] = useState<boolean>(false);
-  
+
   useEffect(() => {
     setBackLinkRoute(
       beforePage == "eventAI"

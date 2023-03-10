@@ -49,6 +49,8 @@ export const useLobbyState = (): IResponse => {
             setErrorMessage("値を入力してください。");
           } else if (e.message == "roomId is not found") {
             setErrorMessage("ルームIDが無効です。");
+          } else if (e.message == "room is full") {
+            setErrorMessage("ルームが満員です。");
           }
         });
       }

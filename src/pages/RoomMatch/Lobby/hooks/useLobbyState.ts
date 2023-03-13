@@ -35,28 +35,39 @@ export const useLobbyState = (): IResponse => {
     });
   }, []);
 
-  const _enterRoomHandler = useCallback(() => {
+  const _enterRoomHandler = useCallback(async () => {
     const value = roomIdRef.current?.value;
 
-    setCreateRoomDisabled(true);
-    setEnterRoomDisabled(true);
-    if (typeof value === "string") {
-      if (value == "") {
-        setErrorMessage("値を入力してください。");
-      } else {
-        enterRoom(value).catch((e) => {
-          if (e.message == "roomId is empty") {
-            setErrorMessage("値を入力してください。");
-          } else if (e.message == "roomId is not found") {
-            setErrorMessage("ルームIDが無効です。");
-          }
-        });
-      }
-    } else {
-      setErrorMessage("入力が不正です。");
+    const preprocess = () => {
+      setCreateRoomDisabled(true);
+      setEnterRoomDisabled(true);
+    };
+
+    const postprocess = () => {
+      setCreateRoomDisabled(false);
+      setEnterRoomDisabled(false);
+    };
+
+    // 前処理
+    preprocess();
+
+    if (typeof value !== "string" || value === "") {
+      setErrorMessage("正しいルームIDを入力してください。");
+      // 後処理
+      postprocess();
+      return;
     }
-    setCreateRoomDisabled(false);
-    setEnterRoomDisabled(false);
+
+    await enterRoom(value).catch(async (e) => {
+      if (e.message == "roomId is empty") {
+        setErrorMessage("値を入力してください。");
+      } else if (e.message == "roomId is not found") {
+        setErrorMessage("ルームIDが無効です。");
+      }
+    });
+
+    // 後処理
+    postprocess();
   }, []);
 
   // 戻るボタン

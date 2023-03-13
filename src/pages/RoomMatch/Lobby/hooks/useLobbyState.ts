@@ -8,7 +8,7 @@ export type IResponse = {
   roomIdRef: RefObject<HTMLInputElement>;
   createRoomHandler: () => void;
   createRoomDisabled: boolean;
-  enterRoomHandler: () => void;
+  enterRoomHandler: () => Promise<void>;
   enterRoomDisabled: boolean;
   backButtonHandler: () => void;
 };

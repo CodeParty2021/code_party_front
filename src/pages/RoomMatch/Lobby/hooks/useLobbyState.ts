@@ -35,7 +35,7 @@ export const useLobbyState = (): IResponse => {
     });
   }, []);
 
-  const _enterRoomHandler = useCallback(() => {
+  const _enterRoomHandler = useCallback(async () => {
     const value = roomIdRef.current?.value;
 
     setCreateRoomDisabled(true);
@@ -44,7 +44,8 @@ export const useLobbyState = (): IResponse => {
       if (value == "") {
         setErrorMessage("値を入力してください。");
       } else {
-        enterRoom(value).catch((e) => {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        await enterRoom(value).catch((e) => {
           if (e.message == "roomId is empty") {
             setErrorMessage("値を入力してください。");
           } else if (e.message == "roomId is not found") {

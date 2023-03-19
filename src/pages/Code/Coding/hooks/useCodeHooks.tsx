@@ -97,6 +97,9 @@ export const useCodingState = (): IResponse => {
 
   const [backLinkRoute, setBackLinkRoute] = useState<string>("");
 
+  // ボタンがクリックされたか
+  const [hasClicked, setHasClicked] = useState<boolean>(false);
+
   useEffect(() => {
     setBackLinkRoute(
       beforePage == "eventAI"
@@ -223,7 +226,7 @@ export const useCodingState = (): IResponse => {
   /**
    * ボタンを押した時のコールバック
    */
-  const buttonHandler = useMemo(
+  const clickEventHandler = useMemo(
     () =>
       buttonType === "toGame"
         ? execCode
@@ -232,6 +235,19 @@ export const useCodingState = (): IResponse => {
         : undefined,
     [buttonType, execCode, toEditorButtonHandler]
   );
+
+  // clickEventHandlerを1回だけ実行する
+  const buttonHandler = () => {
+    if (!clickEventHandler || hasClicked) return;
+    setHasClicked(true);
+
+    clickEventHandler();
+  };
+
+  // コード画面/ゲーム画面切り替え時にリセットして押せるように
+  useEffect(() => {
+    setHasClicked(false);
+  }, [buttonType]);
 
   /**
    * パネルの表示切り替えコールバック

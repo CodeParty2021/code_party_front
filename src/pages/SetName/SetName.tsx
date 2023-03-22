@@ -60,6 +60,7 @@ export const SetName: React.FC<Props> = () => {
           <NameInput
             ref={nameInputRef}
             type="text"
+            autoFocus={true}
             onChange={nameInputChangeHandler}
             onKeyDown={nameInputKeydownHandler}
           ></NameInput>

@@ -43,6 +43,7 @@ export const StartEmailFirstTime: React.FC = () => {
           <TextInput
             ref={emailRef}
             type="email"
+            autoFocus={true}
             onChange={emailChangeHandler}
             onKeyDown={enterSubmitHandler}
             placeholder="メールアドレス"

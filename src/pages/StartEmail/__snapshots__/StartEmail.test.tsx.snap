@@ -15,6 +15,7 @@ Array [
       modalTitle="ログインして遊ぶ"
     >
       <styled.input
+        autoFocus={true}
         onChange={[MockFunction]}
         onKeyDown={[MockFunction]}
         placeholder="メールアドレス"

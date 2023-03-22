@@ -16,6 +16,7 @@ Array [
         modalTitle="アカウントを作る"
       >
         <styled.input
+          autoFocus={true}
           onChange={[MockFunction]}
           onKeyDown={[MockFunction]}
           placeholder="メールアドレス"

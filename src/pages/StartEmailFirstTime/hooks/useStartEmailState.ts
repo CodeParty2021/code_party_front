@@ -1,6 +1,12 @@
 import { getAuth } from "firebase/auth";
 import { useFirebaseAuth } from "hooks/FirebaseAuthHooks/useFirebaseAuthHooks";
-import { RefObject, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEventHandler,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signOutAsync } from "services/user/user";
@@ -16,6 +22,7 @@ export type IResponse = {
   startBtnHandler: () => void;
   btnDisabled: boolean;
   backLinkButtonHandler: () => void;
+  enterSubmitHandler: KeyboardEventHandler<HTMLInputElement>;
 };
 
 export const useStartEmailState = (): IResponse => {
@@ -66,6 +73,13 @@ export const useStartEmailState = (): IResponse => {
     });
   };
 
+  const enterSubmitHandler: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    // enterで送信
+    if (!e.nativeEvent.isComposing && e.key === "Enter") {
+      startBtnHandler();
+    }
+  };
+
   if (isLogin && auth.currentUser && !auth.currentUser?.isAnonymous) {
     navigate("/set-name", { replace: true });
   }
@@ -79,5 +93,6 @@ export const useStartEmailState = (): IResponse => {
     startBtnHandler,
     backLinkButtonHandler,
     btnDisabled,
+    enterSubmitHandler,
   };
 };

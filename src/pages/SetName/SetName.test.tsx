@@ -14,7 +14,8 @@ const initialState: IResponse = {
   startBtnHandler: jest.fn(),
   btnDisabled: true,
   blackLinkButtonHandler: jest.fn(),
-  nameInputHandler: jest.fn(),
+  nameInputChangeHandler: jest.fn(),
+  nameInputKeydownHandler: jest.fn(),
 };
 
 describe("<SetName />", () => {

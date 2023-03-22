@@ -34,6 +34,7 @@ Array [
         </styled.div>
         <styled.input
           onChange={[MockFunction]}
+          onKeyDown={[MockFunction]}
           type="text"
         />
         <Button

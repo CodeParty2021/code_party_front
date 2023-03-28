@@ -1,5 +1,5 @@
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export type IResponse = {
@@ -16,11 +16,16 @@ export type IResponse = {
 export const useLobbyState = (): IResponse => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [createRoomDisabled, setCreateRoomDisabled] = useState<boolean>(false);
-  const [enterRoomDisabled, setEnterRoomDisabled] = useState<boolean>(false);
+  const [isProcessingAny, setIsProcessingAny] = useState<boolean>(false);
+  const [succeedEnterRoom, setSucceedEnterRoom] = useState<boolean>(false);
   const { room, createRoom, enterRoom } = useRoomSync();
   const navigate = useNavigate();
   const roomIdRef = useRef<HTMLInputElement>(null!);
+
+  const createEnterButtonDisabled = useMemo(() => (
+    isProcessingAny || room.isEntered || succeedEnterRoom
+  ), [isProcessingAny, room.isEntered]);
+
   useEffect(() => {
     if (room.isEntered) {
       navigate("/room-match/waiting-room");
@@ -28,24 +33,31 @@ export const useLobbyState = (): IResponse => {
   }, [room.isEntered]);
 
   // ルーム
-  const _createRoomHandler = useCallback(() => {
+  const _createRoomHandler = useCallback(async () => {
     setIsLoading(true);
-    createRoom().catch(() => {
-      navigate("/error");
-    });
+    setIsProcessingAny(true);
+    await createRoom()
+      .then(() => {
+        setSucceedEnterRoom(true);
+      })
+      .catch(() => {
+        navigate("/error");
+      });
+    setIsProcessingAny(false);
   }, []);
 
   const _enterRoomHandler = useCallback(async () => {
     const value = roomIdRef.current?.value;
 
-    setCreateRoomDisabled(true);
-    setEnterRoomDisabled(true);
+    setIsProcessingAny(true);
     if (typeof value === "string") {
       if (value == "") {
         setErrorMessage("値を入力してください。");
       } else {
         await new Promise((resolve) => setTimeout(resolve, 500));
-        await enterRoom(value).catch((e) => {
+        await enterRoom(value).then(() => {
+          setSucceedEnterRoom(true);
+        }).catch((e) => {
           if (e.message == "roomId is empty") {
             setErrorMessage("値を入力してください。");
           } else if (e.message == "roomId is not found") {
@@ -58,8 +70,7 @@ export const useLobbyState = (): IResponse => {
     } else {
       setErrorMessage("入力が不正です。");
     }
-    setCreateRoomDisabled(false);
-    setEnterRoomDisabled(false);
+    setIsProcessingAny(false);
   }, []);
 
   // 戻るボタン
@@ -72,9 +83,9 @@ export const useLobbyState = (): IResponse => {
     errorMessage,
     roomIdRef,
     createRoomHandler: _createRoomHandler,
-    createRoomDisabled,
+    createRoomDisabled: createEnterButtonDisabled,
     enterRoomHandler: _enterRoomHandler,
-    enterRoomDisabled,
+    enterRoomDisabled: createEnterButtonDisabled,
     backButtonHandler: _backButtonHandler,
   };
 };

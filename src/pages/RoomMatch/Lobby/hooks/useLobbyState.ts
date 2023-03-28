@@ -54,7 +54,6 @@ export const useLobbyState = (): IResponse => {
       if (value == "") {
         setErrorMessage("値を入力してください。");
       } else {
-        await new Promise((resolve) => setTimeout(resolve, 500));
         await enterRoom(value).then(() => {
           setSucceedEnterRoom(true);
         }).catch((e) => {

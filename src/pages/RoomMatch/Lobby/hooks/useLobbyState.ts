@@ -1,5 +1,12 @@
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
-import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 
 export type IResponse = {
@@ -22,9 +29,10 @@ export const useLobbyState = (): IResponse => {
   const navigate = useNavigate();
   const roomIdRef = useRef<HTMLInputElement>(null!);
 
-  const createEnterButtonDisabled = useMemo(() => (
-    isProcessingAny || room.isEntered || succeedEnterRoom
-  ), [isProcessingAny, room.isEntered]);
+  const createEnterButtonDisabled = useMemo(
+    () => isProcessingAny || room.isEntered || succeedEnterRoom,
+    [isProcessingAny, room.isEntered]
+  );
 
   useEffect(() => {
     if (room.isEntered) {
@@ -54,17 +62,19 @@ export const useLobbyState = (): IResponse => {
       if (value == "") {
         setErrorMessage("値を入力してください。");
       } else {
-        await enterRoom(value).then(() => {
-          setSucceedEnterRoom(true);
-        }).catch((e) => {
-          if (e.message == "roomId is empty") {
-            setErrorMessage("値を入力してください。");
-          } else if (e.message == "roomId is not found") {
-            setErrorMessage("ルームIDが無効です。");
-          } else if (e.message == "room is full") {
-            setErrorMessage("ルームが満員です。");
-          }
-        });
+        await enterRoom(value)
+          .then(() => {
+            setSucceedEnterRoom(true);
+          })
+          .catch((e) => {
+            if (e.message == "roomId is empty") {
+              setErrorMessage("値を入力してください。");
+            } else if (e.message == "roomId is not found") {
+              setErrorMessage("ルームIDが無効です。");
+            } else if (e.message == "room is full") {
+              setErrorMessage("ルームが満員です。");
+            }
+          });
       }
     } else {
       setErrorMessage("入力が不正です。");

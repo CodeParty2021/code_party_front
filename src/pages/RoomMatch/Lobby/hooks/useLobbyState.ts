@@ -31,7 +31,7 @@ export const useLobbyState = (): IResponse => {
 
   const createEnterButtonDisabled = useMemo(
     () => isProcessingAny || room.isEntered || succeedEnterRoom,
-    [isProcessingAny, room.isEntered]
+    [isProcessingAny, room.isEntered, succeedEnterRoom]
   );
 
   useEffect(() => {
@@ -58,6 +58,7 @@ export const useLobbyState = (): IResponse => {
     const value = roomIdRef.current?.value;
 
     setIsProcessingAny(true);
+    await new Promise<void>((resolve) => window.setTimeout(() => resolve(), 500))
     if (typeof value === "string") {
       if (value == "") {
         setErrorMessage("値を入力してください。");

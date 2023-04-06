@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { CodeType, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
@@ -37,6 +37,7 @@ export type IResponse = {
   };
   selectedCode: CodeType | null;
   onChangeSelectedCode: (code: CodeType) => void;
+  onStartToEditCode: () => void;
   showCodeSelectModal: boolean;
   openCodeSelectModal: () => void;
   closeCodeSelectModal: () => void;
@@ -62,11 +63,17 @@ export const useWaitingRoomState = (): IResponse => {
   const [isCopyBtnClicked, setIsCopyBtnClicked] = useState(false);
   let { user } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const dummyUser: UserState = {
     displayName: "",
     status: "disconnect",
     ready: false,
   };
+
+  const modalOn = useMemo(
+    () => (searchParams.get("modal") === "on" ? true : false),
+    []
+  );
 
   // ユーザ状態を更新
   useEffect(() => {
@@ -107,6 +114,13 @@ export const useWaitingRoomState = (): IResponse => {
       codeId: selectedCode ? selectedCode.id : "",
     });
   }, [ready]);
+
+  // クエリパラメータにmodal=onを渡されたらモーダルを表示
+  useEffect(() => {
+    if (modalOn) {
+      setShowCodeSelectModal(true);
+    }
+  }, [modalOn]);
 
   // ホストの処理
   useEffect(() => {
@@ -169,6 +183,12 @@ export const useWaitingRoomState = (): IResponse => {
     setSelectedCode(code);
   };
 
+  const _onStartToEditCode = () => {
+    if (selectedCode) {
+      navigate(`/free-coding/${selectedCode.id}/selectCode`);
+    }
+  };
+
   //invitationURLのコピーボタン
   const _invitationBtnHandler = () => {
     if (room.invitationLink) {
@@ -222,6 +242,7 @@ export const useWaitingRoomState = (): IResponse => {
     },
     selectedCode: selectedCode,
     onChangeSelectedCode: _onChangeSelectedCode,
+    onStartToEditCode: _onStartToEditCode,
     showCodeSelectModal,
     openCodeSelectModal,
     closeCodeSelectModal,

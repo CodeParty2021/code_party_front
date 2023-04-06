@@ -119,8 +119,13 @@ const pinkStyle = css`
 `;
 
 const grayStyle = css`
-  border-color: ${avatar.gray.border};
-  background-color: ${avatar.gray.background};
+  .avatar_main {
+    background-color: ${avatar.gray.background};
+  }
+
+  .avatar_circle {
+    border-color: ${avatar.gray.border};
+  }
 `;
 
 const userStyle = css``;

@@ -1,6 +1,5 @@
+import React, { FC } from "react";
 import { CodeType } from "hooks/CodeAPIHooks/useFetchCodes";
-import { FC } from "react";
-import React from "react";
 import { Button } from "components/Button/Button";
 import {
   BackBlur,
@@ -24,7 +23,9 @@ interface CodeSelectProps {
   onSelect: (code: CodeType) => void;
   onClose: () => void;
   onReady: () => void;
+  onStartToEdit: () => void;
   readyBtnDisabled: boolean;
+  startToEditBtnDisabled: boolean;
 }
 
 export const CodeSelect: FC<CodeSelectProps> = ({
@@ -33,7 +34,9 @@ export const CodeSelect: FC<CodeSelectProps> = ({
   onClose,
   onSelect,
   onReady,
+  onStartToEdit,
   readyBtnDisabled,
+  startToEditBtnDisabled,
 }) => {
   return (
     <>
@@ -71,17 +74,23 @@ export const CodeSelect: FC<CodeSelectProps> = ({
             )}
           </LeftPanel>
           <RightPanel>
-            {
-              <CodeBlock
-                code={selected ? selected.codeContent : ""}
-                editorProps={{}}
-                fontSize={18}
-                height={546}
-              />
-            }
+            <CodeBlock
+              code={selected ? selected.codeContent : ""}
+              editorProps={{}}
+              fontSize={18}
+              height={546}
+            />
           </RightPanel>
         </Container>
         <BottomPanel>
+          <Button
+            color="pink"
+            icon={null}
+            onClick={onStartToEdit}
+            size="M2"
+            status={startToEditBtnDisabled ? "disabled" : "default"}
+            value="へんしゅう"
+          />
           <Button
             color="blue"
             icon={null}
@@ -89,7 +98,7 @@ export const CodeSelect: FC<CodeSelectProps> = ({
               onReady();
               onClose();
             }}
-            size="M"
+            size="M2"
             status={readyBtnDisabled ? "disabled" : "default"}
             value="このコードで対戦する"
           />

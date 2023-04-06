@@ -39,6 +39,7 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
     onChangeSelectedCode,
     openCodeSelectModal,
     closeCodeSelectModal,
+    onStartToEditCode,
     showCodeSelectModal,
     startBtnDisabled,
     readyBtnDisabled,
@@ -77,10 +78,12 @@ export const RoomMatchWaitingRoom: React.FC<Props> = () => {
             codeList={code.codes}
             onSelect={onChangeSelectedCode}
             onClose={closeCodeSelectModal}
+            onStartToEdit={onStartToEditCode}
             selected={selectedCode}
             onReady={() => {
               if (!ready) readyBtnHandler();
             }}
+            startToEditBtnDisabled={readyBtnDisabled}
             readyBtnDisabled={readyBtnDisabled}
           />
         )}

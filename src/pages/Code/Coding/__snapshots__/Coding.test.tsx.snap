@@ -10,13 +10,13 @@ Array [
       showUnity={true}
     />
     <Styled(Component)
-      to="/"
+      to=""
     >
       <IconButton
         Icon={[Function]}
       />
       <span>
-        モード選択に戻る
+        
       </span>
     </Styled(Component)>
     <styled.div

@@ -98,7 +98,7 @@ export const Title = styled.div`
 
 export const CodeLabel = styled.label`
   display: block;
-  height: 56px;
+  min-height: 56px;
   padding: 0 32px 0;
   width: 100%;
 
@@ -117,6 +117,7 @@ export const CodeLabel = styled.label`
 `;
 
 export const CodeInput = styled.input`
+  height:100%;
   display: none;
   &:checked + label {
     border: 3px solid ${BLUE_50};

@@ -117,7 +117,7 @@ export const CodeLabel = styled.label`
 `;
 
 export const CodeInput = styled.input`
-  height:100%;
+  height: 100%;
   display: none;
   &:checked + label {
     border: 3px solid ${BLUE_50};

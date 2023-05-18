@@ -1,5 +1,11 @@
 import { useUserAPI } from "hooks/UserAPIHooks/userAPIHooks";
-import { RefObject, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEventHandler,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateUserDisplayName } from "services/user/user";
@@ -9,7 +15,8 @@ export type IResponse = {
   error: string | undefined;
   nameInputRef: RefObject<HTMLInputElement>;
   startBtnHandler: () => void;
-  nameInputHandler: () => void;
+  nameInputChangeHandler: () => void;
+  nameInputKeydownHandler: KeyboardEventHandler<HTMLInputElement>;
   blackLinkButtonHandler: () => void;
   btnDisabled: boolean;
 };
@@ -34,11 +41,19 @@ export const useSetNameState = (): IResponse => {
       setErrorDisplay("値を入力してください");
     }
   };
-  const nameInputHandler = () => {
+  const nameInputChangeHandler = () => {
     if (nameInputRef.current?.value === "") {
       setBtnDisabled(true);
     } else {
       setBtnDisabled(false);
+    }
+  };
+  const nameInputKeydownHandler: KeyboardEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    // enterで送信
+    if (!e.nativeEvent.isComposing && e.key === "Enter") {
+      _changeNameHandler();
     }
   };
   const blackLinkButtonHandler = () => {
@@ -49,7 +64,8 @@ export const useSetNameState = (): IResponse => {
     error: errorDisplay,
     nameInputRef,
     startBtnHandler: _changeNameHandler,
-    nameInputHandler,
+    nameInputChangeHandler,
+    nameInputKeydownHandler,
     blackLinkButtonHandler,
     btnDisabled,
   };

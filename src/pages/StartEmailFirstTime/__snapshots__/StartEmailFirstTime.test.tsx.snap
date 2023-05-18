@@ -16,12 +16,15 @@ Array [
         modalTitle="アカウントを作る"
       >
         <styled.input
+          autoFocus={true}
           onChange={[MockFunction]}
+          onKeyDown={[MockFunction]}
           placeholder="メールアドレス"
           type="email"
         />
         <styled.input
           onChange={[MockFunction]}
+          onKeyDown={[MockFunction]}
           placeholder="パスワード"
           type="password"
         />

@@ -61,7 +61,7 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   }
-  console.log(code?.step);
+
   return (
     <CodingStyle>
       <Background color="blue" />

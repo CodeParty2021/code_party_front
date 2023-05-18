@@ -8,6 +8,7 @@ import { useResult } from "hooks/ResultHooks/useResult";
 import { useDummyLoading } from "hooks/DummyLoadingHooks/useDummyLoading";
 import { useMonacoEditor } from "hooks/MonacoEditorHooks/useMonacoEditor";
 import { PanelState } from "../components/LogPanel/LogPanel";
+import { useDelayedExecution } from "hooks/DelayedExecutionHooks/useDelayedExecution";
 
 export type RunResponse = {
   unityURL: string;
@@ -289,6 +290,18 @@ export const useCodingState = (): IResponse => {
       "_blank"
     );
   };
+
+  // コードの自動保存処理
+  const { execDelayed } = useDelayedExecution(1000); // 一秒間隔で自動保存
+  useEffect(() => {
+    const codeId = codeState.code?.id;
+    if (codeId) {
+      execDelayed(() => {
+        saveCode();
+      });
+    }
+  }, [codeState.code?.codeContent]);
+
   return {
     state: {
       showTurnLog,

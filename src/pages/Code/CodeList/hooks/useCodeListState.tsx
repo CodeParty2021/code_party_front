@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 import { isUser } from "services/user/user";
@@ -26,6 +26,15 @@ export const useCodeListState = (): IResponse => {
   const [codes, setCodes] = useState<CodeType[]>([]);
   const [error, setError] = useState<AxiosError | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const sortedCodes = useMemo(() => {
+    return codes.sort((a, b) => {
+      const aKey = new Date(a.updatedAt).getTime();
+      const bKey = new Date(b.updatedAt).getTime();
+      return bKey - aKey;
+    });
+  }, [codes]);
+
   useEffect(() => {
     setLoading(true);
     if (user) {
@@ -70,7 +79,7 @@ export const useCodeListState = (): IResponse => {
   return {
     loading,
     error,
-    codes,
+    codes: sortedCodes,
     newCodeButtonHandler: _newCodeButtonHandler,
     deleteHandler: _deleteHandler,
     backHandler: backHandler,

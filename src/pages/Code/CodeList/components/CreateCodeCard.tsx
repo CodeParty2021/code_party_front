@@ -17,6 +17,7 @@ const RobotLinkStyle = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   background-color: ${GRAY_10};
   border: 1px solid ${GRAY_20};
@@ -39,6 +40,7 @@ const Label = styled.div`
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;
+
 const RobotImage = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,6 +52,7 @@ const RobotImage = styled.div`
   width: 378px;
   height: 252px;
 `;
+
 const Frame = styled.div`
   display: flex;
   flex-direction: row;
@@ -70,6 +73,7 @@ const Frame = styled.div`
 const PlusIcon = styled(IconCircle)`
   z-index: 10;
 `;
+
 const AlgoFront = styled(Algo)`
   z-index: 10;
 `;

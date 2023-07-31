@@ -14,7 +14,7 @@ const state: IResponse = {
   roomIdRef: { current: null },
   createRoomHandler: () => {},
   createRoomDisabled: false,
-  enterRoomHandler: () => {},
+  enterRoomHandler: async () => {},
   enterRoomDisabled: false,
   backButtonHandler: () => {},
 };

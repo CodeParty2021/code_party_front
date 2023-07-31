@@ -2,6 +2,7 @@
 
 exports[`<Avatar /> snapshot test 1`] = `
 .c2 {
+  display: block;
   width: 32px;
   height: 38px;
 }
@@ -10,31 +11,71 @@ exports[`<Avatar /> snapshot test 1`] = `
   display: block;
   width: 54px;
   height: 54px;
-  border-radius: 50%;
-  border: 3px solid #FFFFFF;
-  background-color: #EAEBF1;
-  background-size: cover;
-  overflow: hidden;
+  padding: 1px;
   position: relative;
-  border-color: #FFFFFF;
+}
+
+.c0 .avatar_main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 2px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   background-color: #EAEBF1;
 }
 
-.c0 .c1 {
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
-
-.c0 .c1 {
+.c0 .avatar_main .c1 {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
   fill: #8A9CFF;
 }
 
-.c0 .c1 {
+.c0 .avatar_main .avatar_img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.c0 .avatar_circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  border: 3px solid #FFFFFF;
+}
+
+.c0 .avatar_main {
+  background: #EBEEFF;
+}
+
+.c0 .avatar_main {
+  background-color: #EAEBF1;
+}
+
+.c0 .avatar_main .c1 {
   fill: #A2AAC2;
+}
+
+.c0 .avatar_circle {
+  border-color: #FFFFFF;
 }
 
 <div
@@ -42,10 +83,17 @@ exports[`<Avatar /> snapshot test 1`] = `
   color="default"
   type="anonymous"
 >
-  <svg
-    class="c1 c2"
-    xlink="http://www.w3.org/1999/xlink"
-    xmlns="http://www.w3.org/2000/svg"
+  <div
+    class="avatar_main"
+  >
+    <svg
+      class="c1 c2"
+      xlink="http://www.w3.org/1999/xlink"
+      xmlns="http://www.w3.org/2000/svg"
+    />
+  </div>
+  <div
+    class="avatar_circle"
   />
 </div>
 `;

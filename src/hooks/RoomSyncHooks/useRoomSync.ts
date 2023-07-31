@@ -14,6 +14,7 @@ import {
   addActionAsync,
   destroyRoomAsync,
   getRoomAsync,
+  getMemberCountAsync,
   initMemberAsync,
   pushRoomAsync,
   removeActionAsync,
@@ -34,6 +35,11 @@ import {
 } from "services/RoomSync/DBListener/DBListener";
 import { User } from "services/user/user";
 import { RootState } from "store";
+
+/**
+ * ルームに入れるメンバー数の上限
+ */
+const MAX_MEMBER_COUNT = 4;
 
 export const useRoomSync = () => {
   const room = useSelector((state: RootState) => state.room);
@@ -170,12 +176,15 @@ export const enterRoomAsync = (
 ): ThunkResult<void> => {
   return async (dispatch: any) => {
     if (roomId == "") throw new Error(`roomId is empty`);
-    const data = await getRoomAsync(roomId);
-    //ルームが存在したら入室処理
-    if (data) {
-      dispatch(_enterRoomAsync(roomId, user));
-    } else {
+    const room = await getRoomAsync(roomId);
+    const memberCount = await getMemberCountAsync(roomId);
+    //ルームが存在し、満員でないなら入室処理
+    if (!room || !memberCount) {
       throw new Error(`roomId is not found`);
+    } else if (memberCount >= MAX_MEMBER_COUNT) {
+      throw new Error(`room is full`);
+    } else {
+      dispatch(_enterRoomAsync(roomId, user));
     }
   };
 };

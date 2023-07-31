@@ -1,6 +1,12 @@
 import { getAuth } from "firebase/auth";
 import { useFirebaseAuth } from "hooks/FirebaseAuthHooks/useFirebaseAuthHooks";
-import { RefObject, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEventHandler,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signOutAsync } from "services/user/user";
@@ -16,6 +22,7 @@ export type IResponse = {
   startBtnHandler: () => void;
   btnDisabled: boolean;
   backLinkButtonHandler: () => void;
+  enterSubmitHandler: KeyboardEventHandler<HTMLInputElement>;
 };
 
 export const useStartState = (): IResponse => {
@@ -38,6 +45,10 @@ export const useStartState = (): IResponse => {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    emailInputRef.current?.focus();
+  }, [emailInputRef.current]);
+
   const _updateBtnDisabledState = () => {
     if (
       emailInputRef.current?.value === "" ||
@@ -57,7 +68,7 @@ export const useStartState = (): IResponse => {
     setLoading(true);
     const email = emailInputRef.current?.value as string;
     const password = passwordInputRef.current?.value as string;
-    console.log(email, password);
+
     await signInWithEmail({
       email,
       password,
@@ -66,6 +77,13 @@ export const useStartState = (): IResponse => {
       setLoading(false);
     });
     setLoading(false);
+  };
+
+  const enterSubmitHandler: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    // enterで送信
+    if (!e.nativeEvent.isComposing && e.key === "Enter") {
+      startBtnHandler();
+    }
   };
 
   if (isLogin && auth.currentUser && !auth.currentUser?.isAnonymous) {
@@ -82,5 +100,6 @@ export const useStartState = (): IResponse => {
     startBtnHandler,
     backLinkButtonHandler,
     btnDisabled,
+    enterSubmitHandler,
   };
 };

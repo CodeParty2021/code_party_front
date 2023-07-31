@@ -8,6 +8,7 @@ import { useResult } from "hooks/ResultHooks/useResult";
 import { useDummyLoading } from "hooks/DummyLoadingHooks/useDummyLoading";
 import { useMonacoEditor } from "hooks/MonacoEditorHooks/useMonacoEditor";
 import { PanelState } from "../components/LogPanel/LogPanel";
+import { useDelayedExecution } from "hooks/DelayedExecutionHooks/useDelayedExecution";
 
 export type RunResponse = {
   unityURL: string;
@@ -52,6 +53,11 @@ const initialState: CodeState = {
   buttonType: "hidden",
 };
 
+type BackLinkState = {
+  label: string;
+  route: string;
+};
+
 export type IResponse = {
   // 状態変数
   /** ページの状態 */
@@ -86,7 +92,7 @@ export type IResponse = {
   toggleLogHandler: () => void;
   toggleSettingHandler: () => void;
   closePanelHandler: () => void;
-  backLinkRoute: string;
+  backLinkState: BackLinkState;
   changeStep: (step: number) => void;
   linkToNotion: () => void;
 };
@@ -95,18 +101,35 @@ export const useCodingState = (): IResponse => {
   // コードID取得
   const { codeId, beforePage } = useParams<string>();
 
-  const [backLinkRoute, setBackLinkRoute] = useState<string>("");
+  const [backLinkState, setBackLinkState] = useState<BackLinkState>({
+    label: "モード選択に戻る",
+    route: "/event/select-mode",
+  });
+
+  // ボタンがクリックされたか
+  const [hasClicked, setHasClicked] = useState<boolean>(false);
 
   useEffect(() => {
-    setBackLinkRoute(
-      beforePage == "eventAI"
-        ? "/event/select-ai"
-        : beforePage == "codes"
-        ? "/codes"
-        : beforePage == "eventTrain"
-        ? "/event/select-mode"
-        : ""
-    );
+    switch (beforePage) {
+      case "eventAI":
+        setBackLinkState({ label: "AI選択に戻る", route: "/event/select-ai" });
+        break;
+      case "codes":
+        setBackLinkState({ label: "コード一覧に戻る", route: "/codes" });
+        break;
+      case "eventTrain":
+        setBackLinkState({
+          label: "モード選択に戻る",
+          route: "/event/select-mode",
+        });
+        break;
+      case "selectCode":
+        setBackLinkState({
+          label: "待機部屋に戻る",
+          route: "/room-match/waiting-room?modal=on",
+        });
+        break;
+    }
   }, []);
 
   // hooksの宣言
@@ -223,7 +246,7 @@ export const useCodingState = (): IResponse => {
   /**
    * ボタンを押した時のコールバック
    */
-  const buttonHandler = useMemo(
+  const clickEventHandler = useMemo(
     () =>
       buttonType === "toGame"
         ? execCode
@@ -232,6 +255,19 @@ export const useCodingState = (): IResponse => {
         : undefined,
     [buttonType, execCode, toEditorButtonHandler]
   );
+
+  // clickEventHandlerを1回だけ実行する
+  const buttonHandler = () => {
+    if (!clickEventHandler || hasClicked) return;
+    setHasClicked(true);
+
+    clickEventHandler();
+  };
+
+  // コード画面/ゲーム画面切り替え時にリセットして押せるように
+  useEffect(() => {
+    setHasClicked(false);
+  }, [buttonType]);
 
   /**
    * パネルの表示切り替えコールバック
@@ -254,6 +290,18 @@ export const useCodingState = (): IResponse => {
       "_blank"
     );
   };
+
+  // コードの自動保存処理
+  const { execDelayed } = useDelayedExecution(1000); // 一秒間隔で自動保存
+  useEffect(() => {
+    const codeId = codeState.code?.id;
+    if (codeId) {
+      execDelayed(() => {
+        saveCode();
+      });
+    }
+  }, [codeState.code?.codeContent]);
+
   return {
     state: {
       showTurnLog,
@@ -272,7 +320,7 @@ export const useCodingState = (): IResponse => {
     unityContext,
     buttonHandler,
     toggleLogHandler,
-    backLinkRoute,
+    backLinkState,
     toggleSettingHandler,
     showSetting,
     closePanelHandler,

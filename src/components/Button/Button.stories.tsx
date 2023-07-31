@@ -34,6 +34,13 @@ MediumPink.args = {
   size: "M",
 };
 
+export const Medium2Black = Template.bind({});
+Medium2Black.args = {
+  ...Default.args,
+  color: "black",
+  size: "M2",
+};
+
 export const SmallGreen = Template.bind({});
 SmallGreen.args = {
   ...Default.args,

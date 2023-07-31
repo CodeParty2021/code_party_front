@@ -25,9 +25,6 @@ const RobotLinkStyle = styled.div`
 
   background-color: ${GRAY_10};
   border: 1px solid ${GRAY_20};
-  &:hover {
-    background-color: #f0f0f0;
-  }
   padding: 32px;
   ${FlexGap({ gap: "35px" })}
 `;
@@ -44,6 +41,7 @@ const Label = styled.div`
 
   transform: matrix(1, 0, -0.08, 1, 0, 0);
 `;
+
 const RobotImage = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,6 +53,7 @@ const RobotImage = styled.div`
   width: 378px;
   height: 252px;
 `;
+
 const Frame = styled.div`
   display: flex;
   flex-direction: row;
@@ -75,9 +74,11 @@ const Frame = styled.div`
 const MissionNumberFront = styled(MissionNumber)`
   z-index: 10;
 `;
+
 const AlgoFront = styled(Algo)`
   z-index: 10;
 `;
+
 const ButtonBox = styled.div`
   display: flex;
   width: 100%;

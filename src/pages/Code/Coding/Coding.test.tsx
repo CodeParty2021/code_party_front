@@ -73,7 +73,7 @@ const initialState: IResponse = {
   //     },
   //   ],
   // },
-  backLinkRoute: "/",
+  backLinkState: { label: "", route: "" },
   showSetting: false,
   toggleSettingHandler: jest.fn(),
   closePanelHandler: jest.fn(),

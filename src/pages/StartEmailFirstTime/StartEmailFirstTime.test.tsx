@@ -17,6 +17,7 @@ const initialState: IResponse = {
   startBtnHandler: jest.fn(),
   btnDisabled: false,
   backLinkButtonHandler: jest.fn(),
+  enterSubmitHandler: jest.fn(),
 };
 
 describe("<StartEmailFirstTime />", () => {

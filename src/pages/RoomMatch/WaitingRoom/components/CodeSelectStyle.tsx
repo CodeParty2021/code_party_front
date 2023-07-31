@@ -7,6 +7,7 @@ import {
   GRAY_90,
   WHITE,
 } from "styles/colors";
+import { FlexGap } from "styles/FlexGap/FlexGap";
 
 export const BackBlur = styled.div`
   position: absolute;
@@ -97,7 +98,7 @@ export const Title = styled.div`
 
 export const CodeLabel = styled.label`
   display: block;
-  height: 56px;
+  min-height: 56px;
   padding: 0 32px 0;
   width: 100%;
 
@@ -116,6 +117,7 @@ export const CodeLabel = styled.label`
 `;
 
 export const CodeInput = styled.input`
+  height: 100%;
   display: none;
   &:checked + label {
     border: 3px solid ${BLUE_50};
@@ -126,6 +128,7 @@ export const BottomPanel = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  ${FlexGap({ gap: "16px", direction: "row" })}
 `;
 
 export const Close = styled.div`

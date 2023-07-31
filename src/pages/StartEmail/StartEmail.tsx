@@ -18,6 +18,7 @@ export const StartEmail: React.FC = () => {
     startBtnHandler,
     backLinkButtonHandler,
     btnDisabled,
+    enterSubmitHandler,
   } = useStartState();
   return loading ? (
     <Loading />
@@ -34,13 +35,16 @@ export const StartEmail: React.FC = () => {
         <TextInput
           ref={emailRef}
           type="email"
+          autoFocus={true}
           onChange={emailChangeHandler}
+          onKeyDown={enterSubmitHandler}
           placeholder="メールアドレス"
         ></TextInput>
         <TextInput
           ref={passwordRef}
           type="password"
           onChange={passwordChangeHandler}
+          onKeyDown={enterSubmitHandler}
           placeholder="パスワード"
         ></TextInput>
         <Button

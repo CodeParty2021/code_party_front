@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { axiosWithIdToken } from "axios_config";
 import { useState } from "react";
+import { CodeAPIErrorResponseType, isCodeAPIErrorResponseType } from "./errors";
 
 export type IState = {
   data?: SimulationResult;
@@ -16,6 +17,10 @@ export type SimulationResult = {
   unityUrl: string;
   jsonId: string;
 };
+
+// エラーレスポンス
+export type RunCodeErrorResponseType = CodeAPIErrorResponseType;
+export const isRunCodeErrorResponseType = isCodeAPIErrorResponseType;
 
 export const useRunCodes = (): IResponse => {
   const [res, setRes] = useState<IState>({

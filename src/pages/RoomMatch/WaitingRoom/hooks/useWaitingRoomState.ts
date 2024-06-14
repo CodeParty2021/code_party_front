@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
 import { CodeType, useFetchCodes } from "hooks/CodeAPIHooks/useFetchCodes";
@@ -35,8 +35,12 @@ export type IResponse = {
     codes: CodeType[];
     loading: boolean;
   };
-  selectedCodeId: string;
-  onChangeSelectedCodeId: (codeId: string) => void;
+  selectedCode: CodeType | null;
+  onChangeSelectedCode: (code: CodeType) => void;
+  onStartToEditCode: () => void;
+  showCodeSelectModal: boolean;
+  openCodeSelectModal: () => void;
+  closeCodeSelectModal: () => void;
 };
 
 export const useWaitingRoomState = (): IResponse => {
@@ -52,18 +56,24 @@ export const useWaitingRoomState = (): IResponse => {
   const [preRoomStatus, setPreRoomStatus] = useState<"waiting" | "watching">(
     "watching"
   );
-  const [selectedCodeId, setSelectedCodeId] = useState("");
+  const [selectedCode, setSelectedCode] = useState<CodeType | null>(null);
   const [ready, setReady] = useState(false);
   const [readyBtnDisabled, setReadyBtnDisabled] = useState(true);
   const [startBtnDisabled, setStartBtnDisabled] = useState(true);
   const [isCopyBtnClicked, setIsCopyBtnClicked] = useState(false);
   let { user } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const dummyUser: UserState = {
     displayName: "",
     status: "disconnect",
     ready: false,
   };
+
+  const modalOn = useMemo(
+    () => (searchParams.get("modal") === "on" ? true : false),
+    []
+  );
 
   // ユーザ状態を更新
   useEffect(() => {
@@ -82,10 +92,10 @@ export const useWaitingRoomState = (): IResponse => {
   // 準備ボタンの有効化
   useEffect(() => {
     //コードが選択されたら準備完了ボタンを押せるようにする
-    if (selectedCodeId != "") {
+    if (selectedCode != null) {
       setReadyBtnDisabled(false);
     }
-  }, [selectedCodeId]);
+  }, [selectedCode]);
 
   // ルームステータスがwaitingからwatchingになったら観戦画面に遷移
   useEffect(() => {
@@ -101,9 +111,16 @@ export const useWaitingRoomState = (): IResponse => {
   useEffect(() => {
     updateMember({
       ready: ready,
-      codeId: selectedCodeId,
+      codeId: selectedCode ? selectedCode.id : "",
     });
   }, [ready]);
+
+  // クエリパラメータにmodal=onを渡されたらモーダルを表示
+  useEffect(() => {
+    if (modalOn) {
+      setShowCodeSelectModal(true);
+    }
+  }, [modalOn]);
 
   // ホストの処理
   useEffect(() => {
@@ -162,8 +179,14 @@ export const useWaitingRoomState = (): IResponse => {
     });
   };
 
-  const _onChangeSelectedCodeId = (codeId: string) => {
-    setSelectedCodeId(codeId);
+  const _onChangeSelectedCode = (code: CodeType) => {
+    setSelectedCode(code);
+  };
+
+  const _onStartToEditCode = () => {
+    if (selectedCode) {
+      navigate(`/free-coding/${selectedCode.id}/selectCode`);
+    }
   };
 
   //invitationURLのコピーボタン
@@ -176,6 +199,16 @@ export const useWaitingRoomState = (): IResponse => {
   };
   const _kickUserBtnHandler = (userId: string) => {
     updateOtherMember(userId, { status: "kicking" });
+  };
+
+  //モーダル表示非表示
+  const [showCodeSelectModal, setShowCodeSelectModal] =
+    useState<boolean>(false);
+  const openCodeSelectModal = () => {
+    setShowCodeSelectModal(true);
+  };
+  const closeCodeSelectModal = () => {
+    setShowCodeSelectModal(false);
   };
 
   return {
@@ -207,7 +240,11 @@ export const useWaitingRoomState = (): IResponse => {
       codes: codes,
       loading: loading,
     },
-    selectedCodeId: selectedCodeId,
-    onChangeSelectedCodeId: _onChangeSelectedCodeId,
+    selectedCode: selectedCode,
+    onChangeSelectedCode: _onChangeSelectedCode,
+    onStartToEditCode: _onStartToEditCode,
+    showCodeSelectModal,
+    openCodeSelectModal,
+    closeCodeSelectModal,
   };
 };

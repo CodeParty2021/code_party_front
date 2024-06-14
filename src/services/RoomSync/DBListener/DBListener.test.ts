@@ -111,7 +111,7 @@ describe("Test Cases for Reducers of DBListener", () => {
     it("正常系", async () => {
       await store.dispatch(startRoomDBSync("roomId"));
       expect(onValueMock).toBeCalledTimes(1);
-      expect(onValueMock.mock.calls[0][0]).toBe("/RoomApp/rooms/roomId"); //第一引数
+      expect(onValueMock.mock.calls[0][0]).toBe("/RoomApp/rooms/R00M1D"); //第一引数
     });
 
     it("異常系１（ルームIDが空文字列の場合）", async () => {
@@ -140,13 +140,13 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(onChildChangedMock).toBeCalledTimes(1);
       expect(onChildMovedMock).toBeCalledTimes(1);
       expect(onChildRemovedMock).toBeCalledTimes(1);
-      expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/members/R00M1D"); //第一引数
       expect(onChildChangedMock.mock.calls[0][0]).toBe(
-        "/RoomApp/members/roomId"
+        "/RoomApp/members/R00M1D"
       ); //第一引数
-      expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/members/roomId"); //第一引数
+      expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/members/R00M1D"); //第一引数
       expect(onChildRemovedMock.mock.calls[0][0]).toBe(
-        "/RoomApp/members/roomId"
+        "/RoomApp/members/R00M1D"
       ); //第一引数
     });
 
@@ -185,13 +185,13 @@ describe("Test Cases for Reducers of DBListener", () => {
       expect(onChildChangedMock).toBeCalledTimes(1);
       expect(onChildMovedMock).toBeCalledTimes(1);
       expect(onChildRemovedMock).toBeCalledTimes(1);
-      expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildAddedMock.mock.calls[0][0]).toBe("/RoomApp/actions/R00M1D"); //第一引数
       expect(onChildChangedMock.mock.calls[0][0]).toBe(
-        "/RoomApp/actions/roomId"
+        "/RoomApp/actions/R00M1D"
       ); //第一引数
-      expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/actions/roomId"); //第一引数
+      expect(onChildMovedMock.mock.calls[0][0]).toBe("/RoomApp/actions/R00M1D"); //第一引数
       expect(onChildRemovedMock.mock.calls[0][0]).toBe(
-        "/RoomApp/actions/roomId"
+        "/RoomApp/actions/R00M1D"
       ); //第一引数
     });
 
@@ -226,7 +226,7 @@ describe("Test Cases for Reducers of DBListener", () => {
   describe("onDisconnectのテスト", () => {
     it("setUserStateOnDisconnect", () => {
       setUserStateOnDisconnect("roomId", "userId", users["userId"]);
-      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/R00M1D/userId");
       expect(disconnectFunc.set).lastCalledWith(users["userId"]);
     });
     it("updateUserStateOnDisconnect", () => {
@@ -235,7 +235,7 @@ describe("Test Cases for Reducers of DBListener", () => {
         status: "disconnect",
         codeId: null,
       });
-      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/R00M1D/userId");
       expect(disconnectFunc.update).lastCalledWith({
         displayName: "update user",
         status: "disconnect",
@@ -244,7 +244,7 @@ describe("Test Cases for Reducers of DBListener", () => {
     });
     it("removeUserStateOnDisconnect", () => {
       removeUserStateOnDisconnect("roomId", "userId");
-      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/R00M1D/userId");
       expect(disconnectFunc.remove).toBeCalledTimes(1);
     });
     it("setUserStateWithPriorityOnDisconnect", () => {
@@ -254,12 +254,12 @@ describe("Test Cases for Reducers of DBListener", () => {
         users["userId"],
         1
       );
-      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/R00M1D/userId");
       expect(disconnectFunc.setWithPriority).lastCalledWith(users["userId"], 1);
     });
     it("cancelUserStateOnDisconnect", () => {
       cancelUserStateOnDisconnect("roomId", "userId");
-      expect(onDisconnect).lastCalledWith("/RoomApp/members/roomId/userId");
+      expect(onDisconnect).lastCalledWith("/RoomApp/members/R00M1D/userId");
       expect(disconnectFunc.cancel).toBeCalledTimes(1);
     });
   });

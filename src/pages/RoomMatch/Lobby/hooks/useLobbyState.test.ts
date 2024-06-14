@@ -71,44 +71,44 @@ describe("useLobbyState", () => {
     expect(initialRoomSyncState.createRoom).toBeCalledTimes(1);
   });
 
-  it("exec enterRoomHandler 正常系", () => {
+  it("exec enterRoomHandler 正常系", async () => {
     const mRef = { current: { value: "roomId" } };
     useRefMock.mockReturnValue(mRef);
     initialRoomSyncState.enterRoom.mockResolvedValue({});
 
     const { result } = renderHook(() => useLobbyState());
     const { enterRoomHandler } = result.current;
-    act(() => {
-      enterRoomHandler();
+    await act(async () => {
+      await enterRoomHandler();
     });
     expect(result.current.errorMessage).toBe("");
     expect(initialRoomSyncState.enterRoom).toBeCalledTimes(1);
     expect(initialRoomSyncState.enterRoom).toHaveBeenCalledWith("roomId");
   });
 
-  it("exec enterRoomHandler 不正入力", () => {
+  it("exec enterRoomHandler 不正入力", async () => {
     const mRef = { current: { value: 0 } };
     useRefMock.mockReturnValue(mRef);
     initialRoomSyncState.enterRoom.mockResolvedValue({});
 
     const { result } = renderHook(() => useLobbyState());
     const { enterRoomHandler } = result.current;
-    act(() => {
-      enterRoomHandler();
+    await act(async () => {
+      await enterRoomHandler();
     });
     expect(result.current.errorMessage).toBe("入力が不正です。");
     expect(initialRoomSyncState.enterRoom).toBeCalledTimes(0);
   });
 
-  it("exec enterRoomHandler 空入力", () => {
+  it("exec enterRoomHandler 空入力", async () => {
     const mRef = { current: { value: "" } };
     useRefMock.mockReturnValue(mRef);
     initialRoomSyncState.enterRoom.mockResolvedValue({});
 
     const { result } = renderHook(() => useLobbyState());
     const { enterRoomHandler } = result.current;
-    act(() => {
-      enterRoomHandler();
+    await act(async () => {
+      await enterRoomHandler();
     });
     expect(result.current.errorMessage).toBe("値を入力してください。");
     expect(initialRoomSyncState.enterRoom).toBeCalledTimes(0);

@@ -6,7 +6,7 @@ import { Icon16 } from "types/utils";
 
 export type ButtonStyleProps = {
   color?: "black" | "blue" | "pink" | "green" | "white";
-  size?: "S" | "M" | "L";
+  size?: "S" | "M" | "M2" | "L";
   status?: "default" | "disabled";
 };
 
@@ -97,6 +97,18 @@ const mStyle = css`
   }
 `;
 
+const m2Style = css`
+  border-radius: 16px;
+  padding-bottom: 6px;
+  font-size: 24px;
+
+  .frame {
+    border-radius: 16px;
+    padding: 12px 40px;
+    ${FlexGap({ gap: "10px", direction: "column" })}
+  }
+`;
+
 const lStyle = css`
   border-radius: 24px;
   padding-bottom: 8px;
@@ -138,6 +150,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
 
   ${({ size }) => size == "S" && sStyle}
   ${({ size }) => size == "M" && mStyle}
+  ${({ size }) => size == "M2" && m2Style}
   ${({ size }) => size == "L" && lStyle}
 
   ${({ status }) => status == "disabled" && disabledStyle}

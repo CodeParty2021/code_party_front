@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useWaitingRoomState } from "./useWaitingRoomState";
 import { useRoomSync } from "hooks/RoomSyncHooks/useRoomSync";
@@ -16,6 +16,7 @@ const useRoomSyncMock = useRoomSync as jest.Mock;
 const useNavigateMock = useNavigate as jest.Mock;
 const useFetchCodesMock = useFetchCodes as jest.Mock;
 const useSelectorMock = useSelector as jest.Mock;
+const useSearchParamsMock = useSearchParams as jest.Mock;
 
 const users: { [id: string]: UserState } = {
   userid1: {
@@ -62,18 +63,18 @@ const initialRoomSyncState = {
   updateOtherMember: jest.fn(),
   exitRoom: jest.fn(),
 };
-
+const code1 = {
+  id: "codeid1",
+  codeContent: "print('hello')",
+  createdAt: "2022-02-16T05:05:46.315585+09:00",
+  updatedAt: "2022-02-16T06:33:00.058575+09:00",
+  language: "1",
+  step: "15",
+  user: "userid1",
+};
 const initialFetchCodesState: IResponse = {
   data: [
-    {
-      id: "codeid1",
-      codeContent: "print('hello')",
-      createdAt: "2022-02-16T05:05:46.315585+09:00",
-      updatedAt: "2022-02-16T06:33:00.058575+09:00",
-      language: "1",
-      step: "15",
-      user: "userid1",
-    },
+    code1,
     {
       id: "codeid2",
       codeContent: "alert('hello')",
@@ -107,6 +108,11 @@ describe("useWaitingRoomState", () => {
       unRegisterObserver: null,
       loading: false,
     });
+    useSearchParamsMock.mockReturnValue([
+      {
+        get: (paramName: string) => (paramName === "modal" ? "on" : undefined),
+      },
+    ]);
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -146,11 +152,11 @@ describe("useWaitingRoomState", () => {
 
   it("コードが選択されたら準備ボタンが有効化される", () => {
     const { result } = renderHook(() => useWaitingRoomState());
-    const { onChangeSelectedCodeId } = result.current;
+    const { onChangeSelectedCode } = result.current;
     //実行前はボタンが無効化状態
     expect(result.current.readyBtnDisabled).toBe(true);
     act(() => {
-      onChangeSelectedCodeId("codeId1");
+      onChangeSelectedCode(code1);
     });
     //実行後はボタンが有効化
     expect(result.current.readyBtnDisabled).toBe(false);
@@ -279,18 +285,18 @@ describe("useWaitingRoomState", () => {
   it("exec onChangeSelectedCodeId", () => {
     const { result } = renderHook(() => useWaitingRoomState());
 
-    const { onChangeSelectedCodeId } = result.current;
+    const { onChangeSelectedCode } = result.current;
 
     //初期値を確認
-    expect(result.current.selectedCodeId).toBe("");
+    expect(result.current.selectedCode).toBe(null);
 
     //ボタン押下
     act(() => {
-      onChangeSelectedCodeId("codeid1");
+      onChangeSelectedCode(code1);
     });
 
     //反映されたことを確認
-    expect(result.current.selectedCodeId).toBe("codeid1");
+    expect(result.current.selectedCode).toBe(code1);
   });
 
   it("exec kickUserBtnHandler", () => {
@@ -446,5 +452,38 @@ describe("useWaitingRoomState", () => {
 
   describe("isCopyBtnClicked", () => {
     // TODO コピー部分のテストを書きたかったが難しかったため挫折...
+  });
+
+  describe("ページ開始時にモーダルが開かれているかどうか", () => {
+    describe("modal=onがGETクエリに指定された場合", () => {
+      beforeEach(() => {
+        useSearchParamsMock.mockReturnValue([
+          {
+            get: (paramName: string) =>
+              paramName === "modal" ? "on" : undefined,
+          },
+        ]);
+      });
+
+      it("モーダルが開かれている", () => {
+        const { result } = renderHook(() => useWaitingRoomState());
+        expect(result.current.showCodeSelectModal).toBe(true);
+      });
+    });
+
+    describe("modal=onがない場合", () => {
+      beforeEach(() => {
+        useSearchParamsMock.mockReturnValue([
+          {
+            get: () => undefined,
+          },
+        ]);
+      });
+
+      it("モーダルが開かれていない", () => {
+        const { result } = renderHook(() => useWaitingRoomState());
+        expect(result.current.showCodeSelectModal).toBe(false);
+      });
+    });
   });
 });

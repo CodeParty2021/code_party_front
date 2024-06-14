@@ -44,7 +44,6 @@ export const SelectMode: React.FC<Props> = () => {
                   オンライン対戦することが出来ます。
                 </DescriptionText>
               }
-              disabled={true}
               icon="sword"
               onClick={beginRoomMatchHandler}
             ></ModeSelectCard>

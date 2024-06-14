@@ -10,13 +10,13 @@ Array [
       showUnity={true}
     />
     <Styled(Component)
-      to="/"
+      to=""
     >
       <IconButton
         Icon={[Function]}
       />
       <span>
-        モード選択に戻る
+        
       </span>
     </Styled(Component)>
     <styled.div
@@ -94,6 +94,10 @@ Array [
       <Styled(Tab)
         onClick={[MockFunction]}
         value="SETTING"
+      />
+      <Styled(Tab)
+        onClick={[MockFunction]}
+        value="HELP"
       />
     </styled.div>
   </styled.div>,

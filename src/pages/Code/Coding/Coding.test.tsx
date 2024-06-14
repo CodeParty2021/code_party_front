@@ -73,13 +73,14 @@ const initialState: IResponse = {
   //     },
   //   ],
   // },
-  backLinkRoute: "/",
+  backLinkState: { label: "", route: "" },
   showSetting: false,
   toggleSettingHandler: jest.fn(),
   closePanelHandler: jest.fn(),
   panelState: "log",
   changeStep: jest.fn(),
   error: undefined,
+  linkToNotion: jest.fn(),
 };
 
 describe("<CodeCoding />", () => {

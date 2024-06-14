@@ -51,10 +51,11 @@ export const CodeCoding: React.FC<Props> = () => {
     toggleSettingHandler,
     closePanelHandler,
     changeStep,
-    // その他
-    backLinkRoute,
+    linkToNotion,
     //エラーレスポンス
     error,
+    // その他
+    backLinkState,
   } = useCodingState();
   if (loading) {
     return (
@@ -63,13 +64,14 @@ export const CodeCoding: React.FC<Props> = () => {
       </div>
     );
   }
+
   return (
     <CodingStyle>
       <Background color="blue" />
       <WhiteBackground showUnity={showUnity} />
-      <BackLink to={backLinkRoute}>
+      <BackLink to={backLinkState.route}>
         <IconButton Icon={ArrowLeft} />
-        <span>モード選択に戻る</span>
+        <span>{backLinkState.label}</span>
       </BackLink>
       <ContainerWrap show={showLog || showSetting}>
         <ContainerMain>
@@ -147,6 +149,7 @@ export const CodeCoding: React.FC<Props> = () => {
         {" "}
         <TabStyle value="LOG" onClick={toggleLogHandler} />
         <TabStyle value="SETTING" onClick={toggleSettingHandler} />
+        <TabStyle value="HELP" onClick={linkToNotion} />
       </TabWrap>
     </CodingStyle>
   );

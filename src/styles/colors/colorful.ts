@@ -1,3 +1,4 @@
+export const TURQUOISE_00 = "#F5FFFF";
 export const TURQUOISE_10 = "#ECFDFF";
 export const TURQUOISE_20 = "#D2F7F9";
 export const TURQUOISE_30 = "#A7ECF1";
@@ -9,6 +10,7 @@ export const TURQUOISE_80 = "#1B7A98";
 export const TURQUOISE_90 = "#0A5D7B";
 export const TURQUOISE_100 = "#064560";
 
+export const LEAF_00 = "#FBFFF5";
 export const LEAF_10 = "#F3FFE0";
 export const LEAF_20 = "#E6F9C8";
 export const LEAF_30 = "#CEF297";
@@ -20,6 +22,7 @@ export const LEAF_80 = "#488E0B";
 export const LEAF_90 = "#327307";
 export const LEAF_100 = "#1F5606";
 
+export const ORANGE_00 = "#FFFCF5";
 export const ORANGE_10 = "#FFF7E6";
 export const ORANGE_20 = "#FFEEC7";
 export const ORANGE_30 = "#FEDEA0";
@@ -31,6 +34,7 @@ export const ORANGE_80 = "#BF6618";
 export const ORANGE_90 = "#9B5017";
 export const ORANGE_100 = "#733B0D";
 
+export const PINK_00 = "#FFFAFE";
 export const PINK_10 = "#FFF0FD";
 export const PINK_20 = "#FFDBF9";
 export const PINK_30 = "#FFBDF2";
@@ -42,6 +46,7 @@ export const PINK_80 = "#C51694";
 export const PINK_90 = "#9F1478";
 export const PINK_100 = "#78115C";
 
+export const BLUE_00 = "#F5F7FF";
 export const BLUE_10 = "#EBEEFF";
 export const BLUE_20 = "#D2DBFF";
 export const BLUE_30 = "#B3BFFF";
@@ -53,6 +58,7 @@ export const BLUE_80 = "#2C34CE";
 export const BLUE_90 = "#2428AE";
 export const BLUE_100 = "#20237E";
 
+export const PURPLE_00 = "#F9F5FF";
 export const PURPLE_10 = "#F3EBFF";
 export const PURPLE_20 = "#E8DBFF";
 export const PURPLE_30 = "#D6C2FF";
@@ -64,6 +70,7 @@ export const PURPLE_80 = "#5C2EE5";
 export const PURPLE_90 = "#471DC3";
 export const PURPLE_100 = "#391797";
 
+export const GREEN_00 = "#F0FFF6";
 export const GREEN_10 = "#E1FEED";
 export const GREEN_20 = "#BDFAD5";
 export const GREEN_30 = "#8CEDB0";
@@ -75,6 +82,7 @@ export const GREEN_80 = "#1E8045";
 export const GREEN_90 = "#1E6E41";
 export const GREEN_100 = "#164A2E";
 
+export const RED_00 = "#FFFAFB";
 export const RED_10 = "#FFF0F2";
 export const RED_20 = "#FFDBE0";
 export const RED_30 = "#FCBAC3";

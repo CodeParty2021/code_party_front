@@ -39,6 +39,7 @@ exports[`<AlgoEditor /> snapshot test 1`] = `
   border-radius: 48px;
   -webkit-transition: border-radius 0.5s ease;
   transition: border-radius 0.5s ease;
+  pointer-events: all;
   -webkit-align-self: stretch;
   -ms-flex-item-align: stretch;
   align-self: stretch;

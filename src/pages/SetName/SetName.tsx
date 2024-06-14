@@ -23,7 +23,8 @@ export const SetName: React.FC<Props> = () => {
     loading,
     nameInputRef,
     startBtnHandler,
-    nameInputHandler,
+    nameInputChangeHandler,
+    nameInputKeydownHandler,
     blackLinkButtonHandler,
     btnDisabled,
   } = useSetNameState();
@@ -59,7 +60,9 @@ export const SetName: React.FC<Props> = () => {
           <NameInput
             ref={nameInputRef}
             type="text"
-            onChange={nameInputHandler}
+            autoFocus={true}
+            onChange={nameInputChangeHandler}
+            onKeyDown={nameInputKeydownHandler}
           ></NameInput>
           <Button
             onClick={startBtnHandler}

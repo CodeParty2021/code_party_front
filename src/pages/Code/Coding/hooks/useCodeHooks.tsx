@@ -187,7 +187,7 @@ export const useCodingState = (): IResponse => {
     if (resultState.isFailed) {
       setSwitchDisplay("message");
       setMessageType("error");
-      setShowTurnLog(false);
+      setShowTurnLog(true); // エラー内容を見せるためにログを開く
     }
   }, [resultState.isFailed]);
 

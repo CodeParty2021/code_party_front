@@ -26,6 +26,7 @@ import { IconButton } from "components/IconButton/IconButton";
 import { ArrowLeft } from "components/icons";
 import { Loading } from "pages/Loading/Loading";
 import { SettingItems } from "./components/SettingItem/SettingItems";
+import { LogError } from "./components/LogError/LogError";
 type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
@@ -96,7 +97,7 @@ export const CodeCoding: React.FC<Props> = () => {
           />
         </ContainerMain>
         <LogPanel onCloseButtonClick={closePanelHandler} state={panelState}>
-          {panelState == "log" && <>{error}</>}
+          {panelState == "log" && error && <LogError>{error}</LogError>}
           {turnLog &&
             panelState == "log" &&
             turnLog.map((turn, index) => {

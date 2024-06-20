@@ -1,0 +1,21 @@
+FROM python:3.9
+
+WORKDIR /runner
+
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update -y
+RUN pip install --upgrade pip && \
+  pip install pipenv
+
+RUN rm -rf /runner
+
+RUN git clone https://github.com/CodeParty2021/code_party_runner.git /runner
+
+RUN pipenv install
+
+RUN echo "if [[ -z \"\${VIRTUAL_ENV}\" ]]; then" >> /root/.bashrc && \
+  echo "source \$(pipenv --venv)/bin/activate" >> /root/.bashrc && \
+  echo "fi"                                    >> /root/.bashrc
+
+CMD ["pipenv", "run", "python", "run.py"]

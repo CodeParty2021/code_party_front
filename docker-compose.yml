@@ -42,6 +42,18 @@ services:
       #- 8085:8085 # Cloud Pub/Sub
       - 4400:4400 # Emuylator Hub
       - 4500:4500 # Other reserved ports
+  runner:
+    container_name: code_party_runner
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile.runner
+    volumes:
+      - runner:/runner
+    tty: true
+    working_dir: /runner
+    command: pipenv run python run.py
+    ports:
+      - 8888:8888
   frontend:
     container_name: code_party_frontend
     env_file:
@@ -63,6 +75,7 @@ services:
     links:
       - backend
       - firebase
+      - runner
   storybook:
     container_name: code_party_storybook
     env_file:
@@ -83,4 +96,5 @@ services:
 volumes:
   backend:
   firebase:
+  runner:
   node_modules:

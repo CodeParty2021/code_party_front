@@ -94,6 +94,8 @@ export type IResponse = {
   closePanelHandler: () => void;
   backLinkState: BackLinkState;
   changeStep: (step: number) => void;
+  /** エラーレスポンス */
+  error: string | undefined;
   linkToNotion: () => void;
 };
 
@@ -140,7 +142,7 @@ export const useCodingState = (): IResponse => {
     saveCode,
     changeStep,
   } = useCode(codeId);
-  const { resultState, testCode, reset } = useResult();
+  const { resultState, testCode, reset, error } = useResult();
   const { dummyLoadingState, startDummyLoad } = useDummyLoading(5000);
   const { monacoEditorState, handleEditorDidMount } = useMonacoEditor();
   const { unityContext, unityStatus, startGame } = useUnityGame("SquarePaint");
@@ -209,7 +211,7 @@ export const useCodingState = (): IResponse => {
     if (resultState.isFailed) {
       setSwitchDisplay("message");
       setMessageType("error");
-      setShowTurnLog(false);
+      setShowTurnLog(true); // エラー内容を見せるためにログを開く
     }
   }, [resultState.isFailed]);
 
@@ -315,6 +317,7 @@ export const useCodingState = (): IResponse => {
     showLog: showTurnLog,
     showMessage: switchDisplay === "message" || loading,
     code: codeState.code,
+    error,
     turnLog: resultState.simulationJson?.turn,
     handleEditorDidMount,
     unityContext,

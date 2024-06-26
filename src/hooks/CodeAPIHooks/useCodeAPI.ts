@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useState } from "react";
 import { axiosWithIdToken } from "axios_config";
+import { CodeAPIErrorResponseType, isCodeAPIErrorResponseType } from "./errors";
 
 export type IResponse = {
   loading: boolean;
@@ -133,6 +134,10 @@ export type PlayerState = {
 export const isPlayerState = (instance: any): instance is PlayerState => {
   return instance !== undefined && "print" in instance;
 };
+
+export type TestCodeErrorResponseType = CodeAPIErrorResponseType;
+
+export const isTestCodeErrorResponseType = isCodeAPIErrorResponseType;
 
 export const useCodeAPI = (): IResponse => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -364,8 +369,19 @@ export const useCodeAPI = (): IResponse => {
         })
         .catch((err) => {
           setLoading(false);
-          setError(`testCodeAPIError${err}`);
-          return rejects(new Error(error));
+          const errorResponse = err.response;
+
+          // 既知のエラー内容の場合
+          if (isTestCodeErrorResponseType(errorResponse)) {
+            const detail = errorResponse.data.detail;
+            setError(detail);
+            return rejects(detail);
+          } else {
+            setError(errorResponse?.data?.detail || "不明のエラー");
+            return rejects(
+              new Error(errorResponse?.data?.detail || errorResponse)
+            );
+          }
         });
     });
   };

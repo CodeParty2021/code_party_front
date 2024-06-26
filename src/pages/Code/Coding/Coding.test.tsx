@@ -79,6 +79,7 @@ const initialState: IResponse = {
   closePanelHandler: jest.fn(),
   panelState: "log",
   changeStep: jest.fn(),
+  error: undefined,
   linkToNotion: jest.fn(),
 };
 

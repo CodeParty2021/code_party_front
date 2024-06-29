@@ -1,3 +1,9 @@
+export const INITIAL_CODE = `
+# ロボットの名前
+def select(turn, field, me, others):
+  return 4
+`;
+
 export const EVENT1ON1_INIT_CODE = `
 #ロボットの名前
 """
@@ -49,25 +55,4 @@ def select(turn, field, me, others):
     30: 4,
   }
   return meirei[turn]
-`;
-
-export const BASIC_INIT_CODE = `
-#ロボットの名前
-"""
- ロボットは4番の位置にいて、次のターンそれぞれの番号のところにいどうするよ！
-     0
-     ↑
- 3 ← 4 → 1
-     ↓
-     2
-
- 0 => 上にすすむよ!
- 1 => 右にすすむよ!
- 2 => 下にすすむよ!
- 3 => 左にすすむよ!
- 4 => そのまま止まるよ！
-"""
-
-def select(turn, field, me, others):
-  return 0
 `;

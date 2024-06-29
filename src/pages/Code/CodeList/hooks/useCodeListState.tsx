@@ -5,7 +5,7 @@ import { RootState } from "store";
 import { isUser } from "services/user/user";
 import { useNavigate } from "react-router-dom";
 import { CodeType, useCodeAPI } from "hooks/CodeAPIHooks/useCodeAPI";
-import { EVENT1ON1_INIT_CODE } from "pages/Code/assets/InitCodes";
+import { INITIAL_CODE } from "pages/Code/assets/InitCodes";
 
 export type IResponse = {
   codes: CodeType[];
@@ -53,7 +53,7 @@ export const useCodeListState = (): IResponse => {
   const _newCodeButtonHandler = async () => {
     let codeId: string;
     if (isUser(user)) {
-      const code = await createCode(EVENT1ON1_INIT_CODE, FREE_STEP_ID, "1");
+      const code = await createCode(INITIAL_CODE, FREE_STEP_ID, "1");
       codeId = code.id;
       navigate(`/free-coding/${codeId}/codes`);
     }

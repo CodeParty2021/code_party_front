@@ -1,24 +1,34 @@
 import Times from "components/icons/Times";
-import React from "react";
+import React, { ReactNode, forwardRef, useImperativeHandle } from "react";
 import {
   IconButtonStyle,
   LogPanelStyle,
   LogPanelStyleProps,
   PlanetPictureStyle,
 } from "./LogPanelStyle";
+import { LogPanelRef, useLogPanel } from "./hooks/useLogPanel";
 
 export type PanelState = "log" | "setting";
 type Props = LogPanelStyleProps & {
   onCloseButtonClick?: React.MouseEventHandler<HTMLButtonElement>;
   state: PanelState;
+  children?: ReactNode;
 };
 
-export const LogPanel: React.FC<Props> = ({
-  onCloseButtonClick,
-  state,
-  children,
-  ...styleProps
-}) => {
+export const LogPanel = forwardRef<LogPanelRef, Props>(function LogPanel(
+  { onCloseButtonClick, state, children, ...styleProps },
+  ref
+) {
+  const { scrollRef, scrollTo } = useLogPanel();
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      scrollTo,
+    }),
+    [scrollTo]
+  );
+
   return (
     <LogPanelStyle {...styleProps}>
       <div className="logpanel_smoke" />
@@ -29,7 +39,9 @@ export const LogPanel: React.FC<Props> = ({
         </div>
         <span className="logpanel_title">{state}</span>
       </div>
-      <div className="logpanel_container_main">{children}</div>
+      <div className="logpanel_container_main" ref={scrollRef}>
+        {children}
+      </div>
     </LogPanelStyle>
   );
-};
+});

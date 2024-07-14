@@ -1,8 +1,10 @@
 import styled, { css } from "styled-components";
-import { GRAY_90 } from "styles/colors";
+import { GRAY_90, ORANGE_30, ORANGE_50, ORANGE_80 } from "styles/colors";
 import { FlexGap } from "styles/FlexGap/FlexGap";
 
-export type LogItemStyleProps = {};
+export type LogItemStyleProps = {
+  state?: "default" | "active";
+};
 
 const defaultStyle = css`
   display: flex;
@@ -35,11 +37,27 @@ const defaultStyle = css`
     flex-grow: 1;
     flex-shrink: 1;
     word-break: break-all;
+    white-space: pre-wrap;
+  }
+`;
+
+const activeStyle = css`
+  position: relative;
+  color: ${ORANGE_80};
+  background-color: ${ORANGE_30}50;
+  border-radius: 8px;
+
+  .logitem_bar {
+    background: ${ORANGE_50};
   }
 `;
 
 export const LogItemStyle = styled.div<LogItemStyleProps>`
   ${defaultStyle}
+
+  ${({ state }) => state === "active" && activeStyle}
 `;
 
-LogItemStyle.defaultProps = {};
+LogItemStyle.defaultProps = {
+  state: "default",
+};

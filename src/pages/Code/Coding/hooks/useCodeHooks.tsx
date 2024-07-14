@@ -1,4 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { UnityContext } from "react-unity-webgl";
 import { useNavigate, useParams } from "react-router-dom";
 import { CodeType, TurnState } from "hooks/CodeAPIHooks/useCodeAPI";
@@ -9,6 +16,9 @@ import { useDummyLoading } from "hooks/DummyLoadingHooks/useDummyLoading";
 import { useMonacoEditor } from "hooks/MonacoEditorHooks/useMonacoEditor";
 import { PanelState } from "../components/LogPanel/LogPanel";
 import { useDelayedExecution } from "hooks/DelayedExecutionHooks/useDelayedExecution";
+import { LogPanelRef } from "../components/LogPanel/hooks/useLogPanel";
+import { useMaxValue } from "hooks/Utils/useMaxValue";
+import { usePreviousNonNull } from "hooks/Utils/usePreviousNonNull";
 
 export type RunResponse = {
   unityURL: string;
@@ -80,6 +90,8 @@ export type IResponse = {
   code?: CodeType;
   /** ターン毎に出力されたログ */
   turnLog?: TurnState[];
+  currentTurn: number | undefined;
+  logPanelRef: RefObject<LogPanelRef>;
   /** Editorへの参照 */
   handleEditorDidMount: (editor: any, _monaco: any) => void;
   /** unityへの参照 */
@@ -98,6 +110,8 @@ export type IResponse = {
   error: string | undefined;
   linkToNotion: () => void;
 };
+
+export const LOG_ID_PREFIX = "log_";
 
 export const useCodingState = (): IResponse => {
   // コードID取得
@@ -190,6 +204,28 @@ export const useCodingState = (): IResponse => {
     [unityStatus.isLoading, switchDisplay]
   );
 
+  // 最終実行ターンの保持
+  const { currentMax: lastTurnNum, reset: resetLastTurnNum } = useMaxValue(
+    unityStatus.turnNum
+  );
+
+  // NOTE: エディタモードになるとログ情報がリセットされるので保持する
+  const [turnLogs, resetTurnLogs] = usePreviousNonNull(
+    () => resultState.simulationJson?.turn,
+    [resultState.simulationJson?.turn],
+    [] // 初期値
+  );
+
+  // 表示ログ
+  const displayedLogs = useMemo<TurnState[]>(() => {
+    // エラー時：表示しない
+    if (resultState.isFailed) return [];
+    // エディタモード：全ログ表示
+    else if (switchDisplay === "editor") return turnLogs;
+    // それ以外：最終実行ターンまで表示
+    else return turnLogs.slice(0, lastTurnNum);
+  }, [resultState, switchDisplay, turnLogs, lastTurnNum]);
+
   // 初期処理
   useEffect(() => {
     startDummyLoad();
@@ -212,6 +248,7 @@ export const useCodingState = (): IResponse => {
       setSwitchDisplay("message");
       setMessageType("error");
       setShowTurnLog(true); // エラー内容を見せるためにログを開く
+      resetTurnLogs(); // NOTE: エラー時はログをリセットする
     }
   }, [resultState.isFailed]);
 
@@ -242,6 +279,7 @@ export const useCodingState = (): IResponse => {
     if (codeId) {
       await saveCode();
       await testCode(codeId);
+      resetLastTurnNum(); // NOTE: ターン1から開始
     }
   }, [codeState, updateCodeOnlyFront, saveCode, testCode]);
 
@@ -304,6 +342,23 @@ export const useCodingState = (): IResponse => {
     }
   }, [codeState.code?.codeContent]);
 
+  // ターン切り替え時に自動スクロール
+  const [currentTurn, setCurrentTurn] = useState<number>();
+  const logPanelRef = useRef<LogPanelRef>(null);
+  useEffect(() => {
+    // 描画後にスクロール処理をしたいので、10ms寝かせてから実行する
+    setTimeout(() => {
+      const nextTurn =
+        switchDisplay === "editor" ? undefined : unityStatus.turnNum;
+      setCurrentTurn(nextTurn);
+
+      const logPanelInstance = logPanelRef.current;
+      if (!logPanelInstance || !nextTurn) return;
+
+      logPanelInstance.scrollTo(LOG_ID_PREFIX + nextTurn.toString());
+    }, 10);
+  }, [switchDisplay, unityStatus.turnNum]);
+
   return {
     state: {
       showTurnLog,
@@ -318,7 +373,9 @@ export const useCodingState = (): IResponse => {
     showMessage: switchDisplay === "message" || loading,
     code: codeState.code,
     error,
-    turnLog: resultState.simulationJson?.turn,
+    turnLog: displayedLogs,
+    currentTurn,
+    logPanelRef,
     handleEditorDidMount,
     unityContext,
     buttonHandler,

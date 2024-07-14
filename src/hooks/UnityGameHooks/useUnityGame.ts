@@ -31,6 +31,10 @@ export type UnityStatus = {
    */
   isRunning: boolean;
   /**
+   * 現在表示されているターン数
+   */
+  turnNum: number;
+  /**
    * Unityで実行中のゲーム
    */
   gameType: "SquarePaint";
@@ -40,6 +44,7 @@ const initUnityStatus: UnityStatus = {
   isLoading: true,
   loadingProgression: 0,
   isRunning: false,
+  turnNum: 0,
   gameType: "SquarePaint",
 };
 
@@ -68,7 +73,11 @@ export const useUnityGame = (
    * Unityのゲームが終了したタイミングで呼ばれるコールバック関数
    * 基本的にはisRunningを使用すること
    */
-  onGameOver?: () => void
+  onGameOver?: () => void,
+  /**
+   * Unityのターンが変更されるごとに呼ばれる
+   */
+  onTurnChanged?: (turnNum: number) => void
 ): IResponse => {
   const [unityStatus, setUnityStatus] = useState<UnityStatus>({
     ...initUnityStatus,
@@ -98,6 +107,14 @@ export const useUnityGame = (
         isRunning: false,
       }));
       if (onGameOver) onGameOver();
+    });
+
+    unityContext.on("OnTurnChanged", function (turnNum: number) {
+      setUnityStatus((current) => ({
+        ...current,
+        turnNum,
+      }));
+      if (onTurnChanged) onTurnChanged(turnNum);
     });
   }, [unityContext, onLoading, onGameOver]);
 

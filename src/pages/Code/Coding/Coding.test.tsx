@@ -40,6 +40,8 @@ const initialState: IResponse = {
       players: [{ print: "aaa" }, { print: "bbb" }],
     },
   ],
+  logPanelRef: { current: null },
+  currentTurn: 0,
   handleEditorDidMount: jest.fn(),
   // closeEditorButtonHandler: jest.fn(),
   unityContext: new UnityContext({

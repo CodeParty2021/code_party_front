@@ -69,24 +69,27 @@ Array [
           value="ゲーム画面で確認"
         />
       </styled.div>
-      <LogPanel
+      <ForwardRef(LogPanel)
         onCloseButtonClick={[MockFunction]}
         state="log"
       >
         <LogItem
+          id="log_1"
           log="aaa"
+          state="default"
           turnNum={1}
         />
         <LogItem
+          id="log_2"
           log="aaa"
+          state="default"
           turnNum={2}
         />
-      </LogPanel>
+      </ForwardRef(LogPanel)>
     </styled.div>
     <styled.div
       show={true}
     >
-       
       <Styled(Tab)
         onClick={[MockFunction]}
         value="LOG"

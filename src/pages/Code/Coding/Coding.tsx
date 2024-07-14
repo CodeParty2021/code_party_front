@@ -1,5 +1,5 @@
 import React from "react";
-import { useCodingState } from "./hooks/useCodeHooks";
+import { LOG_ID_PREFIX, useCodingState } from "./hooks/useCodeHooks";
 
 import {
   AlgoEditorStyle,
@@ -26,6 +26,7 @@ import { IconButton } from "components/IconButton/IconButton";
 import { ArrowLeft } from "components/icons";
 import { Loading } from "pages/Loading/Loading";
 import { SettingItems } from "./components/SettingItem/SettingItems";
+import { LogError } from "./components/LogError/LogError";
 type Props = {};
 
 export const CodeCoding: React.FC<Props> = () => {
@@ -42,6 +43,8 @@ export const CodeCoding: React.FC<Props> = () => {
     // データ
     code,
     turnLog,
+    logPanelRef,
+    currentTurn,
     handleEditorDidMount,
     unityContext,
     // コールバック関数
@@ -51,6 +54,8 @@ export const CodeCoding: React.FC<Props> = () => {
     closePanelHandler,
     changeStep,
     linkToNotion,
+    //エラーレスポンス
+    error,
     // その他
     backLinkState,
   } = useCodingState();
@@ -95,13 +100,26 @@ export const CodeCoding: React.FC<Props> = () => {
             onClick={buttonHandler}
           />
         </ContainerMain>
-        <LogPanel onCloseButtonClick={closePanelHandler} state={panelState}>
+        <LogPanel
+          onCloseButtonClick={closePanelHandler}
+          state={panelState}
+          ref={logPanelRef}
+        >
+          {panelState == "log" && error && <LogError>{error}</LogError>}
           {turnLog &&
             panelState == "log" &&
             turnLog.map((turn, index) => {
               const log = turn.players[0].print;
               if (log) {
-                return <LogItem key={index} turnNum={index + 1} log={log} />;
+                return (
+                  <LogItem
+                    key={index}
+                    id={LOG_ID_PREFIX + (index + 1).toString()}
+                    turnNum={index + 1}
+                    log={log}
+                    state={currentTurn === index + 1 ? "active" : "default"}
+                  />
+                );
               }
             })}
           {code && panelState == "setting" && (
@@ -142,7 +160,6 @@ export const CodeCoding: React.FC<Props> = () => {
         </LogPanel>
       </ContainerWrap>
       <TabWrap show={!(showLog || showSetting)}>
-        {" "}
         <TabStyle value="LOG" onClick={toggleLogHandler} />
         <TabStyle value="SETTING" onClick={toggleSettingHandler} />
         <TabStyle value="HELP" onClick={linkToNotion} />

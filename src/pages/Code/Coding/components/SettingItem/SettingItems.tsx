@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { BLUE_50 } from "styles/colors";
 
@@ -45,8 +45,8 @@ export const SettingItems: React.FC<Props> = ({
 }) => {
   return (
     <>
-      {robotProperty.map((robot) => (
-        <>
+      {robotProperty.map((robot, index) => (
+        <Fragment key={index}>
           <CodeInput
             type="radio"
             name="codes"
@@ -60,7 +60,7 @@ export const SettingItems: React.FC<Props> = ({
           <CodeLabel key={robot.step} htmlFor={robot.step + ""}>
             {robot.name}
           </CodeLabel>
-        </>
+        </Fragment>
       ))}
     </>
   );

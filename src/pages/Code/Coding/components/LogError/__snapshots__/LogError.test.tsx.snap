@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LogError /> snapshot test 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding: 10px;
+  color: #C41C3B;
+  line-height: 160%;
+  background: #FFDBE050;
+  border: 2px solid #F45D71;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.c0 .log_error_label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+<div
+  class="c0"
+>
+  <span
+    class="log_error_label"
+  >
+    エラーがおきました！
+  </span>
+  <span>
+    syntax error occurred!
+  </span>
+</div>
+`;

@@ -40,6 +40,8 @@ const initialState: IResponse = {
       players: [{ print: "aaa" }, { print: "bbb" }],
     },
   ],
+  logPanelRef: { current: null },
+  currentTurn: 0,
   handleEditorDidMount: jest.fn(),
   // closeEditorButtonHandler: jest.fn(),
   unityContext: new UnityContext({
@@ -79,6 +81,7 @@ const initialState: IResponse = {
   closePanelHandler: jest.fn(),
   panelState: "log",
   changeStep: jest.fn(),
+  error: undefined,
   linkToNotion: jest.fn(),
 };
 

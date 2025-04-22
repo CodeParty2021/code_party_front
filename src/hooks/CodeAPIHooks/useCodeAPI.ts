@@ -42,7 +42,6 @@ export const isCodeType = (instance: any): instance is CodeType => {
     instance !== undefined &&
     "id" in instance &&
     "codeContent" in instance &&
-    "language" in instance &&
     "updatedAt" in instance &&
     "createdAt" in instance &&
     "user" in instance &&
